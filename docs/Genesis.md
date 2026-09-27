@@ -208,3 +208,43 @@ through the types alone. Named rather than built (§34).
   („Das ist ein Office-Paket, zum Beispiel Microsoft Office."), and a type nobody has entered a
   product for would have produced „zum Beispiel ." — worse than not asking.
 
+## The part-of relation, and why it sits on the TYPE (2026-09-27)
+
+*„MS-Word ist ein Textprogramm von MS; Textprogramme sind Teil von Office-Paketen; das
+Office-Paket von MS heißt MS-Office."* Three facts, and only the middle one was missing. Put
+the relation on the TYPE and the chain closes by itself: nobody enters that Word is in
+Microsoft Office, because Word is a word processor, a word processor is part of an office
+suite, and Microsoft's office suite is Microsoft Office.
+
+On the product it would have been the same fact written once per product, and wrong the day
+somebody adds a word processor and forgets the edge.
+
+**The hardware family is what the relation was really wanted for.** `Prozessor`,
+`Arbeitsspeicher`, `Massenspeicher`, `Bildschirm`, `Akku` — all part of a `Gerät`, and the
+middle two are the commonest confusion in the whole inventory: both are „Speicher" in German,
+and „mein Speicher ist voll" is nearly always the one while „der Rechner ist langsam" is
+nearly always the other. Each purpose sentence is written to make exactly that difference:
+*hält, woran gerade gearbeitet wird, und ist nach dem Ausschalten wieder leer* against
+*bewahrt Dateien auf, sodass sie nach dem Ausschalten noch da sind*.
+
+None of them has a product, and that is not a gap: a processor is a kind everybody meets and
+nobody buys under a household name, and this model gives a product a manufacturer. As types
+they work; as products they could not have been entered without inventing facts. It cost one
+extra question type — `purpose_plain`, the purpose question without the „zum Beispiel" clause,
+chosen for exactly the types that have no example.
+
+### The genitive, and what had to be stored for it
+
+The first draft wrote „steckt in einem Office-Paket" — dative, and wrong: *„Nein, Teil EINES
+(GENITIV)"*. The article derives from the gender like the other two. The noun's own ending
+does **not**: „Office-Pakets" takes an -s, „Suchmaschine" takes nothing, and the rule that
+decides has exceptions. A rule with exceptions would put a wrong sentence in front of a
+learner, so the genitive form is STORED on the language row beside the gender.
+
+### And a capital letter that may only sometimes be applied
+
+„ein Prozessor ist Teil eines Geräts." opens lower-case, because the article is derived and
+not written in the phrase. Capitalising the first letter fixes it — and would break
+„iPhone ist ein Gerät von Apple." into „IPhone". So the rule fires only when the phrase itself
+opens with an article placeholder, which is a property of the phrase and can be read off it.
+

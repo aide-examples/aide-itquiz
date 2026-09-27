@@ -25,12 +25,14 @@
   {
     "name": "Word processor",
     "purpose": "Writes and formats documents that are meant to be read as pages",
-    "note": "Confused with the office suite it usually arrives in"
+    "note": "Confused with the office suite it usually arrives in",
+    "part_of": "Office suite"
   },
   {
     "name": "Spreadsheet",
     "purpose": "Holds numbers in a grid and calculates with them",
-    "note": "The second thing in nearly every office suite, and the reason the suite is not a word processor"
+    "note": "The second thing in nearly every office suite, and the reason the suite is not a word processor",
+    "part_of": "Office suite"
   },
   {
     "name": "Office suite",
@@ -41,5 +43,35 @@
     "name": "Messenger",
     "purpose": "Carries messages between people who each have it installed",
     "note": "Three of them in this inventory from three different makers — a good place to see that the maker is not the thing"
+  },
+  {
+    "name": "Processor",
+    "purpose": "Carries out the steps a program is made of — the part that actually computes",
+    "part_of": "Device",
+    "note": "Named as if it were the whole machine: „ein schneller Rechner“ usually means this one part"
+  },
+  {
+    "name": "Working memory",
+    "purpose": "Holds what is being worked on right now, and is empty again after the device is switched off",
+    "part_of": "Device",
+    "note": "Half of the commonest confusion in this whole inventory — both it and the storage are called „Speicher“ in German"
+  },
+  {
+    "name": "Storage medium",
+    "purpose": "Keeps files so they are still there after the device has been switched off",
+    "part_of": "Device",
+    "note": "The other half: „mein Speicher ist voll“ is nearly always this one, and „der Rechner ist langsam“ nearly always the other"
+  },
+  {
+    "name": "Screen",
+    "purpose": "Shows what the device puts out, and takes the touches on it as input",
+    "part_of": "Device",
+    "note": "On a phone it is also the keyboard, which is why a broken one takes the whole device with it"
+  },
+  {
+    "name": "Battery",
+    "purpose": "Stores electricity so the device runs without a cable",
+    "part_of": "Device",
+    "note": "The one part that wears out by being used normally, which no other part in this list does"
   }
 ]

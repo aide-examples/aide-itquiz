@@ -18,7 +18,7 @@ saying what each one does is the one thing that might.
 |--------|-------------|
 | [Company](classes/Company.md) | An outfit that makes things. Here so a maker can be told apart from the thing it makes — the confusion behind „Google" meaning four different things. |
 | [ProductType](classes/ProductType.md) | A KIND of thing, and its purpose. The English wording lives here. |
-| [ProductTypeText](classes/ProductTypeText.md) | The same kind in another language, plus the grammatical gender. A missing row is not an error: it means the English term is used in that language too, which is true of a good many IT words. |
+| [ProductTypeText](classes/ProductTypeText.md) | The same kind in another language, plus what the language needs to build a correct sentence about it: the grammatical gender, and the genitive form where the noun inflects. A missing row is not an error: it means the English term is used in that language too, which is true of a good many IT words. |
 | [Product](classes/Product.md) | One actual thing, of one kind, from one maker. |
 </div>
 

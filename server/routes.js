@@ -70,6 +70,12 @@ function sample(rows, n) {
 
 const DEFINITE = { m: 'der', f: 'die', n: 'das' };
 const INDEFINITE = { m: 'ein', f: 'eine', n: 'ein' };
+// German genitive article. The part-of sentence wants „Teil EINES Office-Pakets", and the
+// case cannot be avoided by rewording without making the sentence worse. The ARTICLE derives
+// from the gender like the other two; the noun's own ending does NOT — it follows a rule with
+// exceptions, so it is stored on the language row (`ProductTypeText.genitive`) rather than
+// guessed. A rule with exceptions would put a wrong sentence in front of a learner.
+const GENITIVE = { m: 'eines', f: 'einer', n: 'eines' };
 
 module.exports = function registerSystemRoutes(app, deps) {
   const { theLogger, appDir, authMiddleware, requireEntityVerb } = deps;
@@ -91,8 +97,8 @@ module.exports = function registerSystemRoutes(app, deps) {
   async function facts() {
     const eng = engine();
     const [types, texts, products, companies, templates, phrases] = await Promise.all([
-      eng.query('SELECT id, name, purpose FROM product_type WHERE id > 1'),
-      eng.query('SELECT product_type_id, language, name, purpose, gender FROM product_type_text WHERE id > 1'),
+      eng.query('SELECT id, name, purpose, part_of_id FROM product_type WHERE id > 1'),
+      eng.query('SELECT product_type_id, language, name, purpose, gender, genitive FROM product_type_text WHERE id > 1'),
       eng.query('SELECT id, name, product_type_id, manufacturer_id FROM product WHERE id > 1'),
       eng.query('SELECT id, name FROM company WHERE id > 1'),
       eng.query('SELECT id, key, subject_kind, object_kind, answer_kind FROM question_template WHERE id > 1'),
@@ -116,8 +122,23 @@ module.exports = function registerSystemRoutes(app, deps) {
 
   /** The grammatical gender of a type's noun in one language, or null. */
   function gender(f, type, lang) {
+    return sprachfeld(f, type, lang, 'gender');
+  }
+
+  /**
+   * A field that exists ONLY on the language row — gender, genitive. Unlike `word()` there is
+   * no parent to fall back to: the English row has no grammatical gender to lend, and a
+   * missing value means „this language does not inflect that", not „look upstairs".
+   *
+   * @param {any} f - the facts
+   * @param {any} type - the ProductType row
+   * @param {string} lang
+   * @param {string} feld
+   * @returns {string|null}
+   */
+  function sprachfeld(f, type, lang, feld) {
     const child = f.texts.find((t) => t.product_type_id === type.id && t.language === lang);
-    return (child && child.gender) || null;
+    return (child && child[feld]) || null;
   }
 
   /**
@@ -143,14 +164,28 @@ module.exports = function registerSystemRoutes(app, deps) {
       // not before.
       const a = v.gender ? INDEFINITE[v.gender] : (lang === 'en' && label ? (/^[aeiou]/i.test(label) ? 'an' : 'a') : '');
       const der = v.gender ? DEFINITE[v.gender] : (lang === 'en' && label ? 'the' : '');
+      // English inflects neither, so the genitive placeholder renders „a word processor"
+      // there — one phrase, both languages.
+      const gen = v.gender ? `${GENITIVE[v.gender]} ${v.genitive || label}` : (a ? `${a} ${label}` : label);
       out = out.split(`{${role}}`).join(label);
       out = out.split(`{der_${role}}`).join(der);
       out = out.split(`{ein_${role}}`).join(a);
+      out = out.split(`{genitiv_${role}}`).join(gen);
     }
     // Collapse runs of SPACES — an empty article placeholder leaves two — but never the
     // newline: a phrase uses it to put an explanatory lead-in on a line of its own, and
     // `\s` would have swallowed exactly that. Spaces hugging a newline go with it.
-    return out.replace(/[^\S\n]{2,}/g, ' ').replace(/[^\S\n]*\n[^\S\n]*/g, '\n').trim();
+    out = out.replace(/[^\S\n]{2,}/g, ' ').replace(/[^\S\n]*\n[^\S\n]*/g, '\n').trim();
+
+    // A sentence that OPENS with an article opens with a lower-case word — „ein Prozessor ist
+    // Teil eines Geräts." Capitalised here rather than in the phrase, because the article is
+    // not in the phrase: it is derived from the gender.
+    //
+    // Only then, and that restriction is the whole point: a phrase that opens with a NAME must
+    // be left alone. `iPhone ist ein Gerät von Apple.` is correct as written, and a blanket
+    // capital would make it `IPhone` — a rule that fixes one sentence by breaking another.
+    if (/^\{(ein|der|genitiv)_/.test(text)) out = out.charAt(0).toUpperCase() + out.slice(1);
+    return out;
   }
 
   /**
@@ -173,7 +208,7 @@ module.exports = function registerSystemRoutes(app, deps) {
     // Deliberately the FIRST and not a random one: a reader who meets the same question
     // twice should meet the same example, or the example becomes noise.
     const exampleOf = (t) => f.products.find((x) => x.product_type_id === t.id) || { name: '' };
-    const typed = (t) => ({ label: word(f, t, lang, 'name'), gender: gender(f, t, lang) });
+    const typed = (t) => ({ label: word(f, t, lang, 'name'), gender: gender(f, t, lang), genitive: sprachfeld(f, t, lang, 'genitive') });
 
     if (template.key === 'manufacturer') {
       const p = any(f.products.filter((x) => x.manufacturer_id && x.product_type_id));
@@ -242,6 +277,42 @@ module.exports = function registerSystemRoutes(app, deps) {
         // The question was the purpose, so naming the type says only what was asked. A
         // thing the reader has actually held is the fact that lands.
         _explanation: fill(phrase.explanation, { answer: typed(t), example: named(exampleOf(t)) }, lang),
+      };
+    }
+
+    if (template.key === 'part_of') {
+      const t = any(f.types.filter((x) => x.part_of_id && f.types.some((y) => y.id === x.part_of_id)));
+      if (!t) return null;
+      const ganz = f.types.find((y) => y.id === t.part_of_id);
+      const wrong = sample(f.types.filter((x) => x.id !== ganz.id && x.id !== t.id), 3);
+      if (wrong.length < 2) return null;
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'ProductType', id: t.id },
+        object: null,
+        text: fill(phrase.text, { subject: typed(t) }, lang),
+        options: [ganz, ...wrong].map((x) => word(f, x, lang, 'name')),
+        _correct: word(f, ganz, lang, 'name'),
+        _explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(ganz) }, lang),
+      };
+    }
+
+    if (template.key === 'purpose_plain') {
+      // Deliberately the COMPLEMENT of `purpose`: that one needs an example product, this one
+      // is for the kinds that have none. Disjoint by construction, so the two never compete
+      // for the same type and the plainer sentence never displaces the richer one.
+      const t = any(f.types.filter((x) => word(f, x, lang, 'purpose') && !exampleOf(x).name));
+      if (!t) return null;
+      const wrong = sample(f.types.filter((x) => x.id !== t.id), 3);
+      if (wrong.length < 2) return null;
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'ProductType', id: t.id },
+        object: null,
+        text: fill(phrase.text, { subject: { label: word(f, t, lang, 'purpose') } }, lang),
+        options: [t, ...wrong].map((x) => word(f, x, lang, 'name')),
+        _correct: word(f, t, lang, 'name'),
+        _explanation: fill(phrase.explanation, { answer: typed(t) }, lang),
       };
     }
 
@@ -430,7 +501,7 @@ module.exports = function registerSystemRoutes(app, deps) {
     const phrase = f.phrases.find((p) => p.template_id === template.id && p.language === lang)
       || f.phrases.find((p) => p.template_id === template.id && p.language === 'en');
     if (!phrase) return null;
-    const typed = (t) => ({ label: word(f, t, lang, 'name'), gender: gender(f, t, lang) });
+    const typed = (t) => ({ label: word(f, t, lang, 'name'), gender: gender(f, t, lang), genitive: sprachfeld(f, t, lang, 'genitive') });
 
     if (template.key === 'manufacturer') {
       const p = prod(subject && subject.id); if (!p) return null;
@@ -460,6 +531,21 @@ module.exports = function registerSystemRoutes(app, deps) {
         correct: word(f, t, lang, 'name'),
         explanation: fill(phrase.explanation,
           { answer: typed(t), example: { label: (beispiel && beispiel.name) || '' } }, lang),
+      };
+    }
+    if (template.key === 'part_of') {
+      const t = type(subject && subject.id); if (!t) return null;
+      const ganz = f.types.find((y) => y.id === t.part_of_id); if (!ganz) return null;
+      return {
+        correct: word(f, ganz, lang, 'name'),
+        explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(ganz) }, lang),
+      };
+    }
+    if (template.key === 'purpose_plain') {
+      const t = type(subject && subject.id); if (!t) return null;
+      return {
+        correct: word(f, t, lang, 'name'),
+        explanation: fill(phrase.explanation, { answer: typed(t) }, lang),
       };
     }
     if (template.key === 'is_a') {

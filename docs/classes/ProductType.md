@@ -5,6 +5,26 @@
 
 A KIND of thing — browser, search engine, spider, operating system. Its `purpose` is the sentence that separates them.
 
+## Why `part_of` sits on the TYPE and not on the product
+
+*„MS-Word ist ein Textprogramm von MS; Textprogramme sind Teil von Office-Paketen; das
+Office-Paket von MS heißt MS-Office."* Three facts, and only the middle one is new — the
+other two the model already holds. Put the part-relation on the TYPE and the chain closes by
+itself: nobody has to enter that Word is in Microsoft Office, because Word is a word
+processor, a word processor is part of an office suite, and Microsoft's office suite is
+Microsoft Office.
+
+On the product it would have been the same fact written once per product, and wrong the day
+somebody adds a word processor and forgets the edge. On the type it is one row and it holds
+for everything of that kind, including what is entered tomorrow (§48 — the model carries the
+fact, so nobody sweeps).
+
+It also reaches where products do not exist. A `Prozessor`, an `Arbeitsspeicher`, a
+`Bildschirm` are kinds a layperson meets constantly and can name — but there is no single
+product of them with a household name, and this model gives a product a manufacturer. As
+types with a `part_of` they are fully usable; as products they could not have been entered at
+all without inventing facts.
+
 ## The three sentences the whole system rests on
 
 A KIND of thing — browser, search engine, spider, operating system. This is where the whole system earns its keep: the confusions it exists to dissolve are confusions between types, and `purpose` is the sentence that separates them.
@@ -21,6 +41,7 @@ No wrong statement is stored anywhere. A reader who believes a browser and a sea
 [
 {"name":"name","type":"string","unique":true,"label":true,"description":"What this kind of thing is called","example":"Browser"},
 {"name":"purpose","type":"string","description":"What it is FOR, in one sentence a layperson understands — the load-bearing field of this system","example":"Displays web pages"},
+{"name":"part_of","type":"ProductType","optional":true,"description":"The KIND this kind is a part of — a word processor is part of an office suite, a processor is part of a device. A statement about kinds, not about two particular things, so it holds for every product of the type without anybody entering it twice","example":"Office suite"},
 {"name":"note","type":"string","optional":true,"description":"A true remark worth showing after an answer — including how this type is commonly confused with another, stated as an observation about people and never as a fact about the thing","example":"Many people set a search engine as their browser's home page, which is why the two seem to be one"}
 ]
 ```

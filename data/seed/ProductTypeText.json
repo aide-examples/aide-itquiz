@@ -5,7 +5,8 @@
     "name": "Browser",
     "purpose": "Zeigt Webseiten an",
     "note": "Viele stellen eine Suchmaschine als Startseite des Browsers ein — daher wirken die beiden wie ein Ding",
-    "gender": "m"
+    "gender": "m",
+    "genitive": "Browsers"
   },
   {
     "product_type": "Search engine",
@@ -21,28 +22,32 @@
     "name": "Spider",
     "purpose": "Geht Webseiten durch und baut daraus das Verzeichnis, das eine Suchmaschine führt",
     "note": "Niemand benutzt einen Spider unmittelbar; er arbeitet für die Suchmaschine, der er gehört",
-    "gender": "m"
+    "gender": "m",
+    "genitive": "Spiders"
   },
   {
     "product_type": "Operating system",
     "language": "de",
     "name": "Betriebssystem",
     "purpose": "Lässt ein Gerät und die Programme darauf laufen",
-    "gender": "n"
+    "gender": "n",
+    "genitive": "Betriebssystems"
   },
   {
     "product_type": "Device",
     "language": "de",
     "name": "Gerät",
     "purpose": "Das Ding, das man in der Hand hält oder vor sich stehen hat",
-    "gender": "n"
+    "gender": "n",
+    "genitive": "Geräts"
   },
   {
     "product_type": "Word processor",
     "language": "de",
     "name": "Textprogramm",
     "purpose": "Schreibt und gestaltet Dokumente, die als Seiten gelesen werden",
-    "gender": "n"
+    "gender": "n",
+    "genitive": "Textprogramms"
   },
   {
     "product_type": "Spreadsheet",
@@ -56,13 +61,55 @@
     "language": "de",
     "name": "Office-Paket",
     "purpose": "Bündelt mehrere Programme, die zusammen verkauft und installiert werden — meist ein Textprogramm, eine Tabellenkalkulation und ein Präsentationsprogramm",
-    "gender": "n"
+    "gender": "n",
+    "genitive": "Office-Pakets"
   },
   {
     "product_type": "Messenger",
     "language": "de",
     "name": "Messenger",
     "purpose": "Befördert Nachrichten zwischen Menschen, die ihn beide installiert haben",
-    "gender": "m"
+    "gender": "m",
+    "genitive": "Messengers"
+  },
+  {
+    "product_type": "Processor",
+    "language": "de",
+    "name": "Prozessor",
+    "gender": "m",
+    "purpose": "Führt die Schritte aus, aus denen ein Programm besteht — der Teil, der wirklich rechnet",
+    "genitive": "Prozessors"
+  },
+  {
+    "product_type": "Working memory",
+    "language": "de",
+    "name": "Arbeitsspeicher",
+    "gender": "m",
+    "purpose": "Hält, woran gerade gearbeitet wird, und ist nach dem Ausschalten wieder leer",
+    "genitive": "Arbeitsspeichers"
+  },
+  {
+    "product_type": "Storage medium",
+    "language": "de",
+    "name": "Massenspeicher",
+    "gender": "m",
+    "purpose": "Bewahrt Dateien auf, sodass sie nach dem Ausschalten noch da sind",
+    "genitive": "Massenspeichers"
+  },
+  {
+    "product_type": "Screen",
+    "language": "de",
+    "name": "Bildschirm",
+    "gender": "m",
+    "purpose": "Zeigt, was das Gerät ausgibt, und nimmt die Berührungen darauf als Eingabe",
+    "genitive": "Bildschirms"
+  },
+  {
+    "product_type": "Battery",
+    "language": "de",
+    "name": "Akku",
+    "gender": "m",
+    "purpose": "Speichert Strom, damit das Gerät ohne Kabel läuft",
+    "genitive": "Akkus"
   }
 ]
