@@ -1,7 +1,45 @@
 [
-  { "name": "Browser", "purpose": "Displays web pages", "note": "Many people set a search engine as their browser's home page, which is why the two seem to be one thing" },
-  { "name": "Search engine", "purpose": "Keeps an index of web pages and finds pages in it — and is itself a website", "note": "It is reached THROUGH a browser, the way a shop is reached through a door" },
-  { "name": "Spider", "purpose": "Walks web pages and builds the index a search engine keeps", "note": "Nobody uses a spider directly; it works for the search engine that owns it" },
-  { "name": "Operating system", "purpose": "Runs a device and the programs on it" },
-  { "name": "Device", "purpose": "The physical thing you hold or sit in front of" }
+  {
+    "name": "Browser",
+    "purpose": "Displays web pages",
+    "note": "Many people set a search engine as their browser's home page, which is why the two seem to be one thing"
+  },
+  {
+    "name": "Search engine",
+    "purpose": "Keeps an index of web pages and finds pages in it — and is itself a website",
+    "note": "It is reached THROUGH a browser, the way a shop is reached through a door"
+  },
+  {
+    "name": "Spider",
+    "purpose": "Walks web pages and builds the index a search engine keeps",
+    "note": "Nobody uses a spider directly; it works for the search engine that owns it"
+  },
+  {
+    "name": "Operating system",
+    "purpose": "Runs a device and the programs on it"
+  },
+  {
+    "name": "Device",
+    "purpose": "The physical thing you hold or sit in front of"
+  },
+  {
+    "name": "Word processor",
+    "purpose": "Writes and formats documents that are meant to be read as pages",
+    "note": "Confused with the office suite it usually arrives in"
+  },
+  {
+    "name": "Spreadsheet",
+    "purpose": "Holds numbers in a grid and calculates with them",
+    "note": "The second thing in nearly every office suite, and the reason the suite is not a word processor"
+  },
+  {
+    "name": "Office suite",
+    "purpose": "Bundles several programs that are sold and installed as one — typically a word processor, a spreadsheet and a presentation program",
+    "note": "The whole point of having this type: a suite is not any of the things inside it, and that is what makes „ist MS-Office ein Textprogramm?“ a real question"
+  },
+  {
+    "name": "Messenger",
+    "purpose": "Carries messages between people who each have it installed",
+    "note": "Three of them in this inventory from three different makers — a good place to see that the maker is not the thing"
+  }
 ]

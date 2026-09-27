@@ -156,3 +156,44 @@ button appeared under „then enter password below" and waited for a password th
 longer has. Filed as aide-rap#494; until it is decided there, one of the two columns, never
 both.
 
+## The second batch of facts — office and messengers (2026-09-27)
+
+Seven things were asked for: *Textprogramm, Tabellenkalkulation, MS-Office, Open Office,
+Signal, Telegram, WhatsApp.* Two of them are TYPES, five are PRODUCTS, and the products
+needed two types nobody named — `Office suite` and `Messenger`.
+
+**The office suite is the point of the batch.** MS-Office is neither a word processor nor a
+spreadsheet; it is a bundle containing both. That makes „Ist MS-Office ein Textprogramm?" a
+real question with a real answer, and it is the first confusion in this system that is about
+a WHOLE and its PARTS rather than about a thing and its maker.
+
+**Telegram is the sharpest row in the inventory.** The company and the product carry the same
+name, so the explanation reads „Telegram ist ein Messenger von Telegram." It looks odd, and
+that oddness IS the lesson — it is the maker/thing confusion in its purest form, and no other
+row in the model shows it so plainly.
+
+Four products were added beyond the seven asked for: Word, Excel, OpenOffice Writer and
+OpenOffice Calc. Without them the two new types would have had no product at all — no
+example to name in an explanation, and no „Wie heißt das Textprogramm von Microsoft?" to ask.
+They are the minimum that makes the requested types usable, and they are named here so they
+can be removed if they were not wanted.
+
+### The barrel that was NOT opened
+
+**A product being PART OF another product.** Word is in Microsoft Office; the model cannot say
+so. It would make a fifth question type possible („Wozu gehört Word?", „Ist Word dasselbe wie
+MS-Office?") and it is a genuine relationship, not a workaround. It is also a new concept in
+the model, and the batch works without it: the suite/part distinction is already teachable
+through the types alone. Named rather than built (§34).
+
+### Two guards this batch made necessary
+
+- **A question must have ONE answer.** „Wie heißt das Textprogramm von Microsoft?" has one
+  today and would have two the moment a second is entered — the generator would then ask a
+  question with two right answers while the judge names the first, and a player would be told
+  their correct answer is wrong. The builder now only picks a (maker, type) pair that is
+  unique in the facts. Nothing in the model forbids the second product, so the question checks.
+- **A type with no product is not asked about.** The `purpose` explanation names an example
+  („Das ist ein Office-Paket, zum Beispiel Microsoft Office."), and a type nobody has entered a
+  product for would have produced „zum Beispiel ." — worse than not asking.
+

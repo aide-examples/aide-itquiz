@@ -1,6 +1,34 @@
 [
-  { "name": "Google", "note": "One of the largest IT suppliers; makes far more than the search engine it is known for" },
-  { "name": "Mozilla", "note": "A non-profit foundation rather than a company in the usual sense" },
-  { "name": "Microsoft", "note": "Makes an operating system, a browser and a search engine — a good reason not to equate a maker with one kind of thing" },
-  { "name": "Apple", "note": "Makes devices, an operating system and a browser" }
+  {
+    "name": "Google",
+    "note": "One of the largest IT suppliers; makes far more than the search engine it is known for"
+  },
+  {
+    "name": "Mozilla",
+    "note": "A non-profit foundation rather than a company in the usual sense"
+  },
+  {
+    "name": "Microsoft",
+    "note": "Makes an operating system, a browser and a search engine — a good reason not to equate a maker with one kind of thing"
+  },
+  {
+    "name": "Apple",
+    "note": "Makes devices, an operating system and a browser"
+  },
+  {
+    "name": "Apache Software Foundation",
+    "note": "A foundation, not a firm — the same distinction Mozilla already makes in this list, and a reason a maker is not always a company"
+  },
+  {
+    "name": "Signal Foundation",
+    "note": "A non-profit; the thing it makes is often named as if it were the organisation"
+  },
+  {
+    "name": "Telegram",
+    "note": "Company and product carry the SAME name — the sharpest case of the confusion this system is about"
+  },
+  {
+    "name": "Meta",
+    "note": "Owns WhatsApp, and is itself better known under the name of another of its products"
+  }
 ]

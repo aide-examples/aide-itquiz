@@ -172,7 +172,7 @@ module.exports = function registerSystemRoutes(app, deps) {
     // One product of a kind, for an explanation that wants something the reader has held.
     // Deliberately the FIRST and not a random one: a reader who meets the same question
     // twice should meet the same example, or the example becomes noise.
-    const exampleOf = (t) => f.products.find((x) => x.product_type_id === t.id);
+    const exampleOf = (t) => f.products.find((x) => x.product_type_id === t.id) || { name: '' };
     const typed = (t) => ({ label: word(f, t, lang, 'name'), gender: gender(f, t, lang) });
 
     if (template.key === 'manufacturer') {
@@ -197,7 +197,15 @@ module.exports = function registerSystemRoutes(app, deps) {
     }
 
     if (template.key === 'product_of_company') {
-      const p = any(f.products.filter((x) => x.manufacturer_id && x.product_type_id));
+      // Only a pair that is UNIQUE may be asked about. „Wie heißt das Textprogramm von
+      // Microsoft?" has one answer today, and would have two the day a second one is
+      // entered — the question would then have two right answers while `judge` names the
+      // first, and a player would be told their correct answer is wrong. Nothing else in
+      // the model forbids the second product, so the question has to check.
+      const einmalig = f.products.filter((x) => x.manufacturer_id && x.product_type_id
+        && f.products.filter((y) => y.manufacturer_id === x.manufacturer_id
+          && y.product_type_id === x.product_type_id).length === 1);
+      const p = any(einmalig);
       if (!p) return null;
       const t = typeOf(p), c = makerOf(p);
       if (!t || !c) return null;
@@ -218,7 +226,9 @@ module.exports = function registerSystemRoutes(app, deps) {
     }
 
     if (template.key === 'purpose') {
-      const t = any(f.types.filter((x) => word(f, x, lang, 'purpose')));
+      // A type needs a purpose to be asked about AND a product to be illustrated with —
+      // the explanation names an example, and „zum Beispiel ." is worse than no question.
+      const t = any(f.types.filter((x) => word(f, x, lang, 'purpose') && exampleOf(x)));
       if (!t) return null;
       const wrong = sample(f.types.filter((x) => x.id !== t.id), 3);
       if (wrong.length < 2) return null;
@@ -231,7 +241,7 @@ module.exports = function registerSystemRoutes(app, deps) {
         _correct: word(f, t, lang, 'name'),
         // The question was the purpose, so naming the type says only what was asked. A
         // thing the reader has actually held is the fact that lands.
-        _explanation: fill(phrase.explanation, { answer: typed(t), example: named(exampleOf(t) || { name: '' }) }, lang),
+        _explanation: fill(phrase.explanation, { answer: typed(t), example: named(exampleOf(t)) }, lang),
       };
     }
 

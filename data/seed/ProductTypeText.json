@@ -36,5 +36,33 @@
     "name": "Gerät",
     "purpose": "Das Ding, das man in der Hand hält oder vor sich stehen hat",
     "gender": "n"
+  },
+  {
+    "product_type": "Word processor",
+    "language": "de",
+    "name": "Textprogramm",
+    "purpose": "Schreibt und gestaltet Dokumente, die als Seiten gelesen werden",
+    "gender": "n"
+  },
+  {
+    "product_type": "Spreadsheet",
+    "language": "de",
+    "name": "Tabellenkalkulation",
+    "purpose": "Hält Zahlen in einem Raster und rechnet damit",
+    "gender": "f"
+  },
+  {
+    "product_type": "Office suite",
+    "language": "de",
+    "name": "Office-Paket",
+    "purpose": "Bündelt mehrere Programme, die zusammen verkauft und installiert werden — meist ein Textprogramm, eine Tabellenkalkulation und ein Präsentationsprogramm",
+    "gender": "n"
+  },
+  {
+    "product_type": "Messenger",
+    "language": "de",
+    "name": "Messenger",
+    "purpose": "Befördert Nachrichten zwischen Menschen, die ihn beide installiert haben",
+    "gender": "m"
   }
 ]

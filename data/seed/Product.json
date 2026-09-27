@@ -1,12 +1,99 @@
 [
-  { "name": "Chrome", "product_type": "Browser", "manufacturer": "Google" },
-  { "name": "Firefox", "product_type": "Browser", "manufacturer": "Mozilla" },
-  { "name": "Edge", "product_type": "Browser", "manufacturer": "Microsoft" },
-  { "name": "Safari", "product_type": "Browser", "manufacturer": "Apple" },
-  { "name": "Google Search", "product_type": "Search engine", "manufacturer": "Google", "note": "A website you visit with a browser — not the browser itself" },
-  { "name": "Bing", "product_type": "Search engine", "manufacturer": "Microsoft" },
-  { "name": "Googlebot", "product_type": "Spider", "manufacturer": "Google", "note": "Builds the index that Google Search reads from" },
-  { "name": "Android", "product_type": "Operating system", "manufacturer": "Google" },
-  { "name": "Windows", "product_type": "Operating system", "manufacturer": "Microsoft" },
-  { "name": "iPhone", "product_type": "Device", "manufacturer": "Apple" }
+  {
+    "name": "Chrome",
+    "product_type": "Browser",
+    "manufacturer": "Google"
+  },
+  {
+    "name": "Firefox",
+    "product_type": "Browser",
+    "manufacturer": "Mozilla"
+  },
+  {
+    "name": "Edge",
+    "product_type": "Browser",
+    "manufacturer": "Microsoft"
+  },
+  {
+    "name": "Safari",
+    "product_type": "Browser",
+    "manufacturer": "Apple"
+  },
+  {
+    "name": "Google Search",
+    "product_type": "Search engine",
+    "manufacturer": "Google",
+    "note": "A website you visit with a browser — not the browser itself"
+  },
+  {
+    "name": "Bing",
+    "product_type": "Search engine",
+    "manufacturer": "Microsoft"
+  },
+  {
+    "name": "Googlebot",
+    "product_type": "Spider",
+    "manufacturer": "Google",
+    "note": "Builds the index that Google Search reads from"
+  },
+  {
+    "name": "Android",
+    "product_type": "Operating system",
+    "manufacturer": "Google"
+  },
+  {
+    "name": "Windows",
+    "product_type": "Operating system",
+    "manufacturer": "Microsoft"
+  },
+  {
+    "name": "iPhone",
+    "product_type": "Device",
+    "manufacturer": "Apple"
+  },
+  {
+    "name": "Microsoft Word",
+    "product_type": "Word processor",
+    "manufacturer": "Microsoft"
+  },
+  {
+    "name": "Microsoft Excel",
+    "product_type": "Spreadsheet",
+    "manufacturer": "Microsoft"
+  },
+  {
+    "name": "Microsoft Office",
+    "product_type": "Office suite",
+    "manufacturer": "Microsoft"
+  },
+  {
+    "name": "OpenOffice Writer",
+    "product_type": "Word processor",
+    "manufacturer": "Apache Software Foundation"
+  },
+  {
+    "name": "OpenOffice Calc",
+    "product_type": "Spreadsheet",
+    "manufacturer": "Apache Software Foundation"
+  },
+  {
+    "name": "Apache OpenOffice",
+    "product_type": "Office suite",
+    "manufacturer": "Apache Software Foundation"
+  },
+  {
+    "name": "Signal",
+    "product_type": "Messenger",
+    "manufacturer": "Signal Foundation"
+  },
+  {
+    "name": "Telegram",
+    "product_type": "Messenger",
+    "manufacturer": "Telegram"
+  },
+  {
+    "name": "WhatsApp",
+    "product_type": "Messenger",
+    "manufacturer": "Meta"
+  }
 ]
