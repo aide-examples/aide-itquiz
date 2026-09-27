@@ -15,13 +15,13 @@
     "template": "product_of_company",
     "language": "de",
     "text": "Wie heißt {der_object} {object} von {subject}?",
-    "explanation": "{answer} ist {der_object} {object} von {subject}. Was {ein_object} {object} tut: {purpose}."
+    "explanation": "{answer} ist {der_object} {object} von {subject}.\n*Was {ein_object} {object} tut:* {purpose}."
   },
   {
     "template": "product_of_company",
     "language": "en",
     "text": "What is the {object} made by {subject} called?",
-    "explanation": "{answer} is the {object} made by {subject}. What {ein_object} {object} does: {purpose}."
+    "explanation": "{answer} is the {object} made by {subject}.\n*What {ein_object} {object} does:* {purpose}."
   },
   {
     "template": "purpose",

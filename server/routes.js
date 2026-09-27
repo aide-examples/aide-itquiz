@@ -147,7 +147,10 @@ module.exports = function registerSystemRoutes(app, deps) {
       out = out.split(`{der_${role}}`).join(der);
       out = out.split(`{ein_${role}}`).join(a);
     }
-    return out.replace(/\s{2,}/g, ' ').trim();
+    // Collapse runs of SPACES — an empty article placeholder leaves two — but never the
+    // newline: a phrase uses it to put an explanatory lead-in on a line of its own, and
+    // `\s` would have swallowed exactly that. Spaces hugging a newline go with it.
+    return out.replace(/[^\S\n]{2,}/g, ' ').replace(/[^\S\n]*\n[^\S\n]*/g, '\n').trim();
   }
 
   /**

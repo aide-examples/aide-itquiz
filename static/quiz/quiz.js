@@ -44,6 +44,32 @@
 
   const $ = (id) => /** @type {HTMLElement} */ (document.getElementById(id));
 
+  /**
+   * Render an explanation.
+   *
+   * A phrase is DATA — an operator writes it in the Question-phrases table — so it is
+   * escaped first and only then given the two marks it is allowed to carry:
+   *
+   *   a newline   → a line break
+   *   *…*         → italics
+   *
+   * Two, and closed. The italics exist for one job: an explanatory lead-in to supplementary
+   * information („Was ein Browser tut:") belongs on a line of its own and set apart, so the
+   * eye can tell the answer from the aside. Anything wider would be a markup language in a
+   * database column, and the escape is what keeps a phrase from becoming a script.
+   *
+   * @param {string} text
+   * @returns {string} HTML, safe to assign
+   */
+  function renderExplanation(text) {
+    const esc = String(text ?? '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    return esc
+      .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+      .replace(/\n/g, '<br>');
+  }
+
   const state = {
     lang: (navigator.language || 'en').slice(0, 2) === 'de' ? 'de' : 'en',
     question: null,
@@ -60,7 +86,7 @@
     // Clearing as well as hiding. The hiding is the mechanism; this decides what a FAILURE
     // of it looks like — an empty line rather than the previous question's answer, which is
     // the shape the bug had: right markup, wrong sentence, nothing to see in any log.
-    $('q-explain').textContent = '';
+    $('q-explain').innerHTML = '';
     $('q-note').hidden = true;
     $('q-options').innerHTML = '';
     $('q-text').textContent = '…';
@@ -138,7 +164,7 @@
           if (b.textContent.replace(/^\d+\.\s/, '') === verdict.correct) b.classList.add('is-right');
         });
       }
-      $('q-explain').textContent = verdict.explanation || '';
+      $('q-explain').innerHTML = renderExplanation(verdict.explanation);
       $('q-verdict').hidden = false;
       $('q-next').focus();
     } catch (_) {
@@ -146,7 +172,7 @@
       // impersonation report looked like from the outside — „it does not work", with nothing
       // said. Re-enable, and say that the check failed.
       buttons.forEach((b) => { b.disabled = false; });
-      $('q-explain').textContent = words().failed;
+      $('q-explain').textContent = words().failed;   // a chrome word, not a phrase — no markup
       $('q-verdict').hidden = false;
     }
   }

@@ -43,6 +43,39 @@ no second phrasing to keep in step with the first.
 The example is deliberately the **first** product of its kind, not a random one: a reader who
 meets the same question twice should meet the same example, or the example is noise.
 
+## The two marks a phrase may carry, and no more
+
+A phrase is data: an operator writes it in the Question-phrases table, and the page escapes it
+before doing anything else. On top of that escape it honours exactly two marks:
+
+| Mark | Becomes | What it is for |
+|---|---|---|
+| a newline | a line break | putting a supplement on a line of its own |
+| `*…*` | *italics* | setting an explanatory lead-in apart from the answer |
+
+Which is one form, really:
+
+> Android is the Operating system made by Google.
+> *What an Operating system does:* Runs a device and the programs on it.
+
+**Why both, and why only these.** An explanation that carries a second fact (§ *An explanation
+carries a FACT, not a moral*) has two parts doing different jobs — the answer, and the aside
+that teaches. Run together they read as one sentence and the aside is lost in it; set apart,
+the eye finds each in one pass. The architect asked for exactly this on 2026-09-27:
+„Erklärende Einleitungen zu ergänzenden Informationen ('Was ein xxx tut:') sollten kursiv
+gesetzt sein und in einer neuen Zeile beginnen."
+
+Two marks and no more, because the alternative is a markup language living in a database
+column — and because the escape that runs first is the only thing keeping a phrase from
+becoming a script. Whoever needs a third mark should ask whether the phrase is doing a job
+that belongs to the page.
+
+**A trap this opened, recorded so it is not re-opened.** The server collapses runs of
+whitespace when it fills a phrase — an article placeholder that renders empty leaves two
+spaces. `\s` includes the newline, so the first version of that collapse quietly ate the line
+break the phrase had just declared. It now collapses spaces only, and trims the spaces that
+hug a newline rather than the newline itself.
+
 ## The placeholders, and the articles that had to join them
 
 The wording of one [QuestionTemplate](QuestionTemplate.md) in one language.
