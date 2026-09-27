@@ -13,7 +13,11 @@ true and cannot all be true of one thing, and sorts it out themselves.
 
 ## Answering questions
 
-Sign in and the quiz opens by itself — there is nothing to navigate to. One question at a time,
+**Signing in is one tap.** Your name stands on the login screen with your own symbol;
+touch it and you are in. There is no password — a player account can read the facts
+everybody sees and nothing else, so there would be nothing for one to guard.
+
+The quiz then opens by itself — there is nothing to navigate to. One question at a time,
 with two to four answers. Pick one and you are told at once whether it was right, and why, in
 one sentence.
 

@@ -132,3 +132,27 @@ is exactly where a layperson's confusion sits, without the system ever holding a
 Per user, and nothing more: which question was asked, when, what was answered, whether it was
 right. No score, no leaderboard — the brief says so, and a history is what lets the app avoid
 repeating itself.
+
+## How a player signs in — a tap, and no password at all
+
+`anna` carries a symbol (`_users.avatar` = 🦉) and no password. The `player` role is flagged
+`_roles.passwordless`, her account says `sign_in = passwordless`, and the login screen offers
+her as a **Quick login** button that signs her in and drops her straight into the quiz through
+the login action.
+
+**Why no password, on an account that has real data behind it.** There is nothing to protect
+on a player account that a password would protect. The role holds read on six fact tables that
+every player sees anyway, `admin: false`, and no permission at all on `AskedQuestion` — the one
+thing that is personal, and the one thing the entity permissions deliberately do not grant. The
+history is reachable only through the system route, which takes the owner from the session. So
+the password would guard nothing and cost the very audience this system is for a step they
+often cannot take: someone who mixes up a browser and a search engine is not helped by being
+asked to type a credential on a phone.
+
+**`picker_order` must stay empty on such an account**, and this is not obvious. The account
+picker and the quick login render into the same section of the login dialog, fire-and-forget,
+so the one whose request answers last wins — a race, not a precedence. With both set, the
+button appeared under „then enter password below" and waited for a password the account no
+longer has. Filed as aide-rap#494; until it is decided there, one of the two columns, never
+both.
+
