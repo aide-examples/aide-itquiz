@@ -167,10 +167,21 @@ spreadsheet; it is a bundle containing both. That makes „Ist MS-Office ein Tex
 real question with a real answer, and it is the first confusion in this system that is about
 a WHOLE and its PARTS rather than about a thing and its maker.
 
-**Telegram is the sharpest row in the inventory.** The company and the product carry the same
-name, so the explanation reads „Telegram ist ein Messenger von Telegram." It looks odd, and
-that oddness IS the lesson — it is the maker/thing confusion in its purest form, and no other
-row in the model shows it so plainly.
+**Telegram is the sharpest row in the inventory**, and it had to be renamed to stay usable.
+The firm and the app carry the same name, so the explanation first read „Telegram ist ein
+Messenger von Telegram." — the maker/thing confusion in its purest form, and unreadable as a
+sentence. The company row is now `Telegram (company)`.
+
+The suffix is a **disambiguation of this inventory, not part of the name**, and the three
+candidates were not equivalent. „Telegram Ltd" and „Telegram AG" would each assert a legal
+form, and this system's first rule is that no row states something unchecked — the entity is
+in fact Telegram FZ-LLC / Telegram Messenger Inc., which is not written here because it was
+not verified from a source. „(company)" claims nothing, and the `note` on the row says why it
+is there.
+
+Renaming left an orphan: the merge load inserts the new name and keeps the old row, which
+then had no products and would still have been offered as a wrong answer beside its own
+successor. It was deleted through the service, not the table (§51).
 
 Four products were added beyond the seven asked for: Word, Excel, OpenOffice Writer and
 OpenOffice Calc. Without them the two new types would have had no product at all — no
