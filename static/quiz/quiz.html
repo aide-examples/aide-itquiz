@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>itquiz</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+<header class="q-head">
+  <span class="q-mark" aria-hidden="true">🧩</span>
+  <span class="q-title">itquiz</span>
+  <div class="q-lang" role="group" aria-label="Language">
+    <button type="button" class="q-lang-btn" data-lang="de">DE</button>
+    <button type="button" class="q-lang-btn" data-lang="en">EN</button>
+  </div>
+  <span class="q-score" id="q-score" aria-live="polite"></span>
+</header>
+
+<main class="q-main">
+  <p class="q-text" id="q-text">…</p>
+  <div class="q-options" id="q-options"></div>
+  <div class="q-verdict" id="q-verdict" hidden>
+    <p class="q-explain" id="q-explain"></p>
+    <button type="button" class="q-next" id="q-next">…</button>
+  </div>
+</main>
+
+<script src="quiz.js"></script>
+</body>
+</html>

@@ -3,8 +3,11 @@
 [LABEL=name]
 [PLURAL=de:Hersteller en:Companies]
 
-Whoever makes a product. A layperson confuses the maker with the thing it makes — *„Ist Mozilla
-ein Browser?"* — so the maker has to be its own record, never a string on the product.
+Whoever makes a product — its own record, never a string on the product, because a layperson confuses the maker with the thing it makes.
+
+## About
+
+Whoever makes a product. A layperson confuses the maker with the thing it makes — *„Ist Mozilla ein Browser?"* — so the maker has to be its own record, never a string on the product.
 
 ## Attributes
 

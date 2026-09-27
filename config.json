@@ -31,12 +31,54 @@
             "password": "4f6420a8b3d7b39457638dfa674d94c3a93acc5bde41323eb06d7ab1224395de"
         },
 
+        // The player role, and what it may read.
+        //
+        // `AskedQuestion` is deliberately ABSENT from this list. One player must
+        // not be able to read another's history through /api/entities, and no
+        // create permission can express "only your own row" — so the log is
+        // written by the system route, which takes the owner from the session.
+        // Same seam, same reason, as aide-lerntrainer.
+        "systemRoles": [
+            {
+                "name": "player",
+                "displayName": "Player",
+                "description": "Answers questions and sees nothing but the quiz. The facts are readable; the history of who was asked what is not.",
+                "permissions": {
+                    "entities": {
+                        "Company": "r",
+                        "ProductType": "r",
+                        "ProductTypeText": "r",
+                        "Product": "r",
+                        "QuestionTemplate": "r",
+                        "QuestionPhrase": "r"
+                    },
+                    "views": {},
+                    "processes": {},
+                    "admin": false
+                },
+                "sortOrder": 20
+            }
+        ],
+        // A player signs in and lands IN THE QUIZ, not in a CRUD table. The
+        // whole point of the system is that it works for someone who would not
+        // know what an entity is.
+        "loginActions": {
+            "player": {
+                "handler": "sys/quiz/quiz.html",
+                "mode": "fullPage",
+                "label": "Quiz"
+            }
+        },
         "sessionTimeoutInactive": 3600,
         "sessionTimeoutAbsolute": 86400
     },
 
     "docsEditable": true,
     "helpEditable": true,
+
+    // Where this system's own CRs live — without it the footer 🐛 anchor is never
+    // built, so the tracker is reachable from nowhere in the running system.
+    "githubRepo": "aide-examples/aide-itquiz",
 
     "pwa": {
         "enabled": true,

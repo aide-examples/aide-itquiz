@@ -27,7 +27,7 @@
     "template": "purpose",
     "language": "de",
     "text": "Wie nennt man ein Ding, das Folgendes tut: {subject}?",
-    "explanation": "Das nennt man {ein_answer} {answer}."
+    "explanation": "Das ist {ein_answer} {answer}."
   },
   {
     "template": "purpose",

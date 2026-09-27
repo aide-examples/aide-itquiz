@@ -3,17 +3,15 @@
 [LABEL=concat(user, ' · ', template_id)]
 [PLURAL=de:Gestellte Fragen en:Asked questions]
 
+What one learner was asked, and how it went. One row per question shown — the whole memory of the app.
+
+## Why no score, and why real foreign keys
+
 What one learner was asked, and how it went. One row per question shown — the app's whole memory.
 
-**No score, no leaderboard.** The brief is explicit, and the history exists for a different
-reason: so the app does not ask again what it has just asked, and so a learner can see what they
-keep getting wrong.
+**No score, no leaderboard.** The brief is explicit, and the history exists for a different reason: so the app does not ask again what it has just asked, and so a learner can see what they keep getting wrong.
 
-**The records are held by real foreign keys, one optional column per possible target**
-(`subject_product`, `subject_product_type`, `subject_company`) with an `AtMostOne` constraint —
-RAP's polymorphic reference. Not a `kind + id` pair: that would have no referential integrity,
-so a deleted product would leave a log row pointing at a number, and the history would quietly
-start lying (see `rap:features/polymorphic-references.md`).
+**The records are held by real foreign keys, one optional column per possible target** (`subject_product`, `subject_product_type`, `subject_company`) with an `AtMostOne` constraint — RAP's polymorphic reference. Not a `kind + id` pair: that would have no referential integrity, so a deleted product would leave a log row pointing at a number, and the history would quietly start lying (see `rap:features/polymorphic-references.md`).
 
 ## Attributes
 

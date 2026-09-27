@@ -3,18 +3,17 @@
 [LABEL=name]
 [PLURAL=de:Arten en:Product types]
 
-A KIND of thing — browser, search engine, spider, operating system. This is where the whole
-system earns its keep: the confusions it exists to dissolve are confusions between types, and
-`purpose` is the sentence that separates them.
+A KIND of thing — browser, search engine, spider, operating system. Its `purpose` is the sentence that separates them.
+
+## The three sentences the whole system rests on
+
+A KIND of thing — browser, search engine, spider, operating system. This is where the whole system earns its keep: the confusions it exists to dissolve are confusions between types, and `purpose` is the sentence that separates them.
 
 Three of those sentences, as the architect wrote them:
 
-> **Browser** — displays web pages.
-> **Search engine** — keeps an index of web pages, and is itself a website.
-> **Spider** — walks web pages and builds the index a search engine keeps.
+> **Browser** — displays web pages. > **Search engine** — keeps an index of web pages, and is itself a website. > **Spider** — walks web pages and builds the index a search engine keeps.
 
-No wrong statement is stored anywhere. A reader who believes a browser and a search engine are
-the same thing meets three correct sentences that cannot all be true of one thing.
+No wrong statement is stored anywhere. A reader who believes a browser and a search engine are the same thing meets three correct sentences that cannot all be true of one thing.
 
 ## Attributes
 

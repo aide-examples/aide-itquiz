@@ -3,8 +3,11 @@
 [LABEL=name]
 [PLURAL=de:Produkte en:Products]
 
-A concrete thing somebody made: Chrome, Firefox, Google Search, Googlebot, Android. It has
-exactly one type and exactly one maker, and those two facts produce most of the questions.
+A concrete thing somebody made: Chrome, Firefox, Google Search, Googlebot, Android. Exactly one type, exactly one maker.
+
+## About
+
+A concrete thing somebody made: Chrome, Firefox, Google Search, Googlebot, Android. It has exactly one type and exactly one maker, and those two facts produce most of the questions.
 
 ## Attributes
 

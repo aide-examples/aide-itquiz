@@ -1,0 +1,131 @@
+/* itquiz — the page a player sees, and the only one they see.
+ *
+ * Built for a phone held in one hand: one question fills the screen, the options
+ * are full-width targets, and nothing needs a precise tap. It reflows to a
+ * desktop window by capping its own width, not by changing layout.
+ *
+ * Every rule that sets a background also sets its foreground, and the reverse
+ * (§49): a colour that only looks right because something else supplies the
+ * other half stops looking right the day that something else changes. */
+
+:root {
+  --ink: #1e1b4b;
+  --paper: #eef2ff;
+  --brand: #4338ca;
+  --brand-ink: #ffffff;
+  --card: #ffffff;
+  --line: #c7d2fe;
+  --right: #16a34a;
+  --wrong: #dc2626;
+  --muted: #4c4a7a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e0e7ff;
+    --paper: #1e1b4b;
+    --brand: #818cf8;
+    --brand-ink: #10102e;
+    --card: #2a2660;
+    --line: #4c4a9a;
+    --muted: #a5b4fc;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.q-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1rem;
+  padding-top: max(0.7rem, env(safe-area-inset-top));
+  background: var(--brand);
+  color: var(--brand-ink);
+}
+
+.q-mark { font-size: 1.3rem; }
+.q-title { font-weight: 700; letter-spacing: 0.02em; }
+.q-lang { margin-left: auto; display: flex; gap: 0.25rem; }
+
+.q-lang-btn {
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: var(--brand-ink);
+  cursor: pointer;
+}
+.q-lang-btn:hover { background: rgba(255, 255, 255, 0.18); color: var(--brand-ink); }
+.q-lang-btn[aria-pressed="true"] { background: var(--brand-ink); color: var(--brand); }
+.q-lang-btn:focus-visible { outline: 2px solid var(--brand-ink); outline-offset: 2px; }
+
+.q-score { font-variant-numeric: tabular-nums; font-size: 0.85rem; opacity: 0.9; }
+
+.q-main {
+  flex: 1;
+  width: 100%;
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 1.25rem 1rem;
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.q-text {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.q-options { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.q-option {
+  font: inherit;
+  text-align: left;
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+  min-height: 3rem;
+}
+.q-option:hover:not(:disabled) { border-color: var(--brand); }
+.q-option:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+.q-option:disabled { cursor: default; }
+.q-option.is-right { border-color: var(--right); background: var(--right); color: #ffffff; }
+.q-option.is-wrong { border-color: var(--wrong); background: var(--wrong); color: #ffffff; }
+
+.q-verdict { display: flex; flex-direction: column; gap: 0.8rem; }
+.q-explain { margin: 0; color: var(--muted); }
+
+.q-next {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.8rem 1rem;
+  border-radius: 0.75rem;
+  border: none;
+  background: var(--brand);
+  color: var(--brand-ink);
+  cursor: pointer;
+  min-height: 3rem;
+}
+.q-next:hover { filter: brightness(1.08); }
+.q-next:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }

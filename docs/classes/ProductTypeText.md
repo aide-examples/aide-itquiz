@@ -3,21 +3,15 @@
 [LABEL=concat(product_type_id, ' · ', language)]
 [PLURAL=de:Übersetzungen en:Translations]
 
-What a [ProductType](ProductType.md) is called in one language, and what its purpose reads like
-there.
+The same kind in another language, plus the grammatical gender. A missing row falls back to the English parent.
 
-**Only this entity has translations, and the reason is grammatical rather than technical.**
-`Product` and `Company` carry PROPER NAMES — Chrome is Chrome in every language, Google is
-Google. `ProductType` carries COMMON NOUNS — *browser*, *search engine*, *spider* — and those
-are the words the learner is here to sort out. A German question that reads „Wie heißt der
-**Search engine** von Microsoft?" teaches the wrong thing in the middle of teaching the right
-one; it was the first sentence the generator produced, and it is why this entity exists.
+## Why only this entity has translations
 
-**English stays on the parent.** The model is English like every repo artefact (§31), so
-`ProductType.name` remains the label everywhere RAP shows a record — the data-model diagram, the
-FK picker, the CRUD list. A translation is an ADDITION, and a language with no row falls back to
-the parent: a missing German term shows the English one, which is legible, rather than an empty
-question, which is not.
+What a [ProductType](ProductType.md) is called in one language, and what its purpose reads like there.
+
+**Only this entity has translations, and the reason is grammatical rather than technical.** `Product` and `Company` carry PROPER NAMES — Chrome is Chrome in every language, Google is Google. `ProductType` carries COMMON NOUNS — *browser*, *search engine*, *spider* — and those are the words the learner is here to sort out. A German question that reads „Wie heißt der **Search engine** von Microsoft?" teaches the wrong thing in the middle of teaching the right one; it was the first sentence the generator produced, and it is why this entity exists.
+
+**English stays on the parent.** The model is English like every repo artefact (§31), so `ProductType.name` remains the label everywhere RAP shows a record — the data-model diagram, the FK picker, the CRUD list. A translation is an ADDITION, and a language with no row falls back to the parent: a missing German term shows the English one, which is legible, rather than an empty question, which is not.
 
 ## Attributes
 
