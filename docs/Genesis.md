@@ -42,10 +42,22 @@ two *categories*, and only a model that knows the categories can produce it.
 > so wichtig (HighScores etc.). Man sollte aber je User nachhalten, was man ihn gefragt hat, und
 > was er richtig und falsch beantwortet hat.
 
-**One line of the brief is not a fact but a misconception**, and that is the most important
-thing in it: *„Ein anderer Name für Browser ist Suchmaschine"* is **false**, and it is exactly
-the kind of sentence the app exists to correct. The model therefore has to be able to hold a
-wrong belief as such — not merely the true statements.
+**One line of the brief is false**, and the decision taken on it shapes the whole system:
+*„Ein anderer Name für Browser ist Suchmaschine"* is not a fact and does **not** enter the
+model. The architect's ruling (2026-09-27):
+
+> Wir lassen das ganze Thema Irrtümer und Verwechslung weg. Wir erfassen nur korrekte Fakten.
+> […] Viele Leute stellen als HOMEPAGE des Browsers eine bestimmte Search-Engine ein, und
+> dadurch verschmelzen Browser und Search Engine in ihrer Wahrnehmung. Wir machen uns diese
+> Gleichsetzung nicht zu eigen, aber thematisieren sie möglicherweise durch unsere Fakten und
+> durch Fragen, die wir daraus ableiten.
+
+So there is no `Misconception` entity and no wrong statement anywhere in the store. The
+confusion lives in the READER, and the cure is a correct fact that distinguishes the two
+things — *a browser displays pages, a search engine is an index of pages and is itself a
+website* — plus a question that makes the distinction visible. A model that carried errors
+would have to be trusted to say which of its rows are true, and that trust is the one thing a
+teaching system cannot ask for.
 
 ## 3 · Use cases (F-Contract opens with these — CLAUDE.md §5)
 
@@ -65,11 +77,58 @@ wrong belief as such — not merely the true statements.
 | Gaming | no high scores, no leaderboard; per-user history of asked/right/wrong instead |
 | Device | phone first |
 
-## 5 · Open — to be decided before the model is written
+## 5 · The model, as decided (2026-09-27)
 
-1. **How a fact is carried**: typed entities with foreign keys, a subject–predicate–object
-   table, or typed entities plus declared question templates.
-2. **How a confusion is carried**: distractors drawn from sibling categories automatically, or
-   a declared pair ("these two are confused, and here is why they differ").
-3. **How wide the first slice is**: browsers and their makers only, or devices and platforms
-   from the start.
+**Typed entities plus declared question templates** — not a triple store. The reason is not
+taste: „Ist Chrome eine Plattform?" is a question about a TYPE, and only a model that knows
+types can answer it without comparing strings. RAP's editor, its foreign keys and its data-model
+diagram then show the subject matter itself, which is what a teaching system should look like
+from the inside as well.
+
+### Three entities carry the facts
+
+| Entity | What it is | Attributes a first pass names |
+|---|---|---|
+| **Company** | who makes things | `name`, `icon` (medium), `note` |
+| **Category** | what KIND of thing something is — Browser, Suchmaschine, Spider, Betriebssystem, Gerät | `name`, `purpose` (one sentence: *what it is for*), `note` |
+| **Item** | the concrete thing — Chrome, Firefox, Google Suche, Googlebot, Android | `name`, `category` → Category, `maker` → Company, `icon` (medium), `note` |
+
+`Category.purpose` is the load-bearing field. It is what makes „Wie nennt man ein Ding, mit dem
+man Webseiten betrachtet?" answerable, and it is where the distinctions that matter are written:
+
+> **Browser** — zeigt Webseiten an.
+> **Suchmaschine** — führt ein Verzeichnis von Webseiten und ist selbst eine Website.
+> **Spider** — durchsucht Webseiten und baut daraus das Verzeichnis einer Suchmaschine.
+
+Three correct sentences, and the confusion they dissolve is never named.
+
+### Questions come from declared templates, not from code
+
+| Template | Question | Answer | Distractors |
+|---|---|---|---|
+| `Item.maker` | Wer ist der Hersteller von **{item}**? | its Company | other Companies |
+| `Item.category` | Wie heißt **der {category} von {company}**? | the Item | Items of other categories |
+| `Category.purpose` | Wie nennt man ein Ding, das **{purpose}**? | the Category | other Categories |
+| `Item.category` (yes/no) | Ist **{item}** ein **{category}**? | ja / nein | a category the item does NOT have |
+
+Every one of the architect's five example questions is produced by one of these four, and a new
+kind of question is a row rather than a commit. The distractors come from the same level of the
+model — other companies for a maker question, other categories for a category question — which
+is exactly where a layperson's confusion sits, without the system ever holding a wrong sentence.
+
+### What is deliberately NOT in the first slice (§34, §43)
+
+- **A relation between categories** („ein Spider erzeugt den Verzeichnis einer Suchmaschine" as
+  a modelled link rather than a sentence in `purpose`). The prose carries it for now; the day a
+  question needs to walk from one category to another, it earns its own entity.
+- **The homepage observation** („viele stellen eine Suchmaschine als Startseite ein"). A true
+  and useful fact, and it belongs — as a `note`, not as a fifth entity.
+- Devices and platforms. The model already fits them (`Category` = Gerät, Betriebssystem);
+  the first slice stays with browsers, search engines, spiders and their makers, because that
+  is the confusion the architect actually described.
+
+### What the app remembers
+
+Per user, and nothing more: which question was asked, when, what was answered, whether it was
+right. No score, no leaderboard — the brief says so, and a history is what lets the app avoid
+repeating itself.
