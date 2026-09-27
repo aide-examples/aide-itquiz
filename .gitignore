@@ -25,6 +25,11 @@ data/rap.sqlite
 data/rap.sqlite-wal
 data/rap.sqlite-shm
 data/server.lock
+# Laufzeit-Protokolle, die der Server neben die Datenbank legt. Einzeln benannt statt
+# `data/*.log`, damit sichtbar bleibt, WAS dort entsteht — eine Positivliste schützt hier
+# nichts, eine benannte Ausnahme erklärt sich.
+data/impersonation.log
+data/login-failures.log
 data/media/
 data/extern/
 data/backup/
