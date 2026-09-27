@@ -11,8 +11,14 @@ config.local.json
 # Runtime
 logs/
 node_modules/
-docs/layout/
 docs/reports/
+
+# NOT `docs/layout/` wholesale. The curated data-model diagram is shareable
+# documentation — a contributor must see the same layout after a pull, not a default
+# auto-arrangement. So the editor's saved positions and the rendered SVGs the data-model
+# view serves are TRACKED; only the heavy regenerable exports stay out.
+docs/layout/EntityCards.*
+docs/layout/*.drawio
 
 # The database and everything the server rebuilds from the seed and the manifests
 data/rap.sqlite

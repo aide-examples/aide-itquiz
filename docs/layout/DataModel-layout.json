@@ -1,0 +1,123 @@
+{
+  "classes": {
+    "AskedQuestion": {
+      "x": 340,
+      "y": 60
+    },
+    "Company": {
+      "x": 80,
+      "y": 160
+    },
+    "Product": {
+      "x": 150,
+      "y": 380
+    },
+    "ProductType": {
+      "x": 480,
+      "y": 570
+    },
+    "ProductTypeText": {
+      "x": 660,
+      "y": 550
+    },
+    "QuestionPhrase": {
+      "x": 620,
+      "y": 250
+    },
+    "QuestionTemplate": {
+      "x": 530,
+      "y": 60
+    },
+    "Audit": {
+      "x": 40,
+      "y": 590,
+      "folder": "f1"
+    },
+    "BackgroundTask": {
+      "x": 40,
+      "y": 620,
+      "folder": "f1"
+    },
+    "Feed": {
+      "x": 40,
+      "y": 650,
+      "folder": "f1"
+    },
+    "ImportMapping": {
+      "x": 40,
+      "y": 680,
+      "folder": "f1"
+    },
+    "Loadtest": {
+      "x": 40,
+      "y": 710,
+      "folder": "f1"
+    },
+    "Media": {
+      "x": 40,
+      "y": 740,
+      "folder": "f1"
+    },
+    "MediaGroup": {
+      "x": 40,
+      "y": 770,
+      "folder": "f1"
+    },
+    "MediaGroupMember": {
+      "x": 40,
+      "y": 800,
+      "folder": "f1"
+    },
+    "Process": {
+      "x": 210,
+      "y": 590,
+      "folder": "f1"
+    },
+    "Proposal": {
+      "x": 210,
+      "y": 620,
+      "folder": "f1"
+    },
+    "SchemaHistory": {
+      "x": 210,
+      "y": 650,
+      "folder": "f1"
+    },
+    "Sequence": {
+      "x": 210,
+      "y": 680,
+      "folder": "f1"
+    },
+    "UsageCatalog": {
+      "x": 210,
+      "y": 710,
+      "folder": "f1"
+    },
+    "UsageEvent": {
+      "x": 210,
+      "y": 740,
+      "folder": "f1"
+    },
+    "UsageStats": {
+      "x": 210,
+      "y": 770,
+      "folder": "f1"
+    },
+    "WorkerStats": {
+      "x": 210,
+      "y": 800,
+      "folder": "f1"
+    }
+  },
+  "canvas": {
+    "width": 821.201171875,
+    "height": 888
+  },
+  "stubLevel": 4,
+  "stubs": {
+    "ProductTypeText.product_type": false,
+    "Product.product_type": false,
+    "AskedQuestion.subject_product_type": false,
+    "AskedQuestion.object_product_type": false
+  }
+}
