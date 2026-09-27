@@ -79,7 +79,7 @@
   <text x="485" y="610.2" font-family="Arial, sans-serif" font-size="12" fill="#555">A KIND of thing — browser,</text>
   <text x="485" y="626.2" font-family="Arial, sans-serif" font-size="12" fill="#555">search engine, spider,</text>
   <text x="485" y="642.2" font-family="Arial, sans-serif" font-size="12" fill="#555">operating system. Its</text>
-  <text x="485" y="658.2" font-family="Arial, sans-serif" font-size="12" fill="#555">`purpose` is the sentence</text>
+  <text x="485" y="658.2" font-family="Arial, sans-serif" font-size="12" fill="#555">purpose is the sentence</text>
   <text x="485" y="674.2" font-family="Arial, sans-serif" font-size="12" fill="#555">that separates them.</text>
   <rect x="660" y="550" width="160" height="128" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
   <rect x="660" y="550" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-ProductTypeText)"/>
