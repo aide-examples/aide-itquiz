@@ -5,7 +5,25 @@
  * itquiz system routes — the seam the quiz page attaches to.
  *
  *   GET  /api/sys/itquiz/question   one question, worded in the asked language
- *   POST /api/sys/itquiz/answer     judge it, and record that it was asked
+ *   GET  /api/sys/itquiz/verdict    what the right answer was — a READ, nothing is stored
+ *   POST /api/sys/itquiz/answer     record that it was asked, and how it went
+ *
+ * ── Why judging and recording are two calls ─────────────────────────────────
+ *
+ * Because they are two different acts, and the framework's own rules make the difference
+ * visible: an ADMIN LOOKING THROUGH A PLAYER'S EYES (impersonation) is capped read-only by a
+ * chokepoint that refuses every mutating `/api/` method. With judging behind the POST, taking
+ * anna's role produced a quiz where clicking an answer did nothing at all — the report that
+ * led to this split.
+ *
+ * So the verdict is a GET: it computes the truth from the facts and stores nothing, which is
+ * what a GET means. The POST records. An admin in someone else's seat therefore plays the
+ * whole quiz and sees every explanation; only the log entry is refused, which is exactly
+ * right — nothing false should land in the history of the person being looked at.
+ *
+ * The POST re-judges rather than believing the body. Same `judge()` either way, so there is
+ * one implementation and no drift; what it buys is that a page cannot record a wrong answer
+ * as correct (§3).
  *
  * ── Why these exist, rather than plain CRUD ──────────────────────────────────
  *
@@ -279,7 +297,66 @@ module.exports = function registerSystemRoutes(app, deps) {
       }
     });
 
-  // ── The answer, judged and recorded ────────────────────────────────────────
+  /**
+   * Everything both the verdict and the recording need: the template, the truth recomputed
+   * from the facts, and how the pick compares to it.
+   *
+   * One function because the POST must not believe what the GET told the page — it derives
+   * the quality itself from the same records. Two copies of that derivation would be two
+   * answers to one question, and they would drift (§17).
+   *
+   * @param {any} payload - `{ template, language, subject, object, chosen }`, from a body or a query
+   * @returns {Promise<{error?: string, status?: number, template?: any, truth?: any, quality?: string}>}
+   */
+  async function assess(payload) {
+    const { template: key, language, subject, object, chosen } = payload || {};
+    const f = await facts();
+    const template = f.templates.find((t) => t.key === key);
+    if (!template) return { status: 400, error: `unknown template ${key}` };
+
+    const truth = judge(f, template, language, subject, object);
+    if (!truth) return { status: 400, error: 'the question no longer matches the facts' };
+
+    const quality = chosen == null ? 'skipped' : (chosen === truth.correct ? 'correct' : 'wrong');
+    return { template, truth, quality };
+  }
+
+  /** The two records a question was about, as the log's polymorphic columns spell them. */
+  function roleColumns(subject, object) {
+    const col = (role, r) => (r ? { Product: `${role}_product_id`, ProductType: `${role}_product_type_id`, Company: `${role}_company_id` }[r.kind] : null);
+    const out = {};
+    if (subject) out[col('subject', subject)] = subject.id;
+    if (object) out[col('object', object)] = object.id;
+    return out;
+  }
+
+  // ── The verdict: a READ, so it survives a read-only session ────────────────
+  //
+  // Query parameters rather than a body, because that is what a GET carries. `subject` and
+  // `object` travel as JSON in one parameter each — they are the records the question was
+  // about, and spelling them out as `subject_kind` + `subject_id` would invent a second
+  // vocabulary for something the question endpoint already returns in one piece.
+  app.get('/api/sys/itquiz/verdict',
+    authMiddleware, requireEntityVerb('ProductType', 'r'),
+    async (req, res) => {
+      try {
+        const parse = (v) => (v ? JSON.parse(String(v)) : null);
+        const r = await assess({
+          template: req.query.template,
+          language: req.query.language,
+          subject: parse(req.query.subject),
+          object: parse(req.query.object),
+          chosen: req.query.chosen == null ? null : String(req.query.chosen),
+        });
+        if (r.error) return res.status(r.status || 400).json({ error: r.error });
+        return res.json({ quality: r.quality, correct: r.truth.correct, explanation: r.truth.explanation });
+      } catch (err) {
+        theLogger.error('itquiz: verdict failed', { error: err.message });
+        return res.status(500).json({ error: err.message });
+      }
+    });
+
+  // ── The recording ─────────────────────────────────────────────────────────
   app.post('/api/sys/itquiz/answer',
     authMiddleware, requireEntityVerb('ProductType', 'r'),
     async (req, res) => {
@@ -289,17 +366,10 @@ module.exports = function registerSystemRoutes(app, deps) {
         // can reach it, and an unauthenticated write is a bug, not a guest.
         if (!username) return res.status(403).json({ error: 'not signed in' });
 
-        const { template: key, language, subject, object, chosen } = req.body || {};
-        const f = await facts();
-        const template = f.templates.find((t) => t.key === key);
-        if (!template) return res.status(400).json({ error: `unknown template ${key}` });
-
-        // Recompute the truth from the facts, rather than trusting the page.
-        const truth = judge(f, template, language, subject, object);
-        if (!truth) return res.status(400).json({ error: 'the question no longer matches the facts' });
-
-        const quality = chosen == null ? 'skipped' : (chosen === truth.correct ? 'correct' : 'wrong');
-        const col = (role, r) => (r ? { Product: `${role}_product_id`, ProductType: `${role}_product_type_id`, Company: `${role}_company_id` }[r.kind] : null);
+        const { language, subject, object, chosen } = req.body || {};
+        const r = await assess(req.body);
+        if (r.error) return res.status(r.status || 400).json({ error: r.error });
+        const { template, truth, quality } = r;
 
         const row = {
           user: username,
@@ -308,9 +378,8 @@ module.exports = function registerSystemRoutes(app, deps) {
           asked_at: nowTs(),
           quality,
           given_answer: chosen == null ? null : String(chosen),
+          ...roleColumns(subject, object),
         };
-        if (subject) row[col('subject', subject)] = subject.id;
-        if (object) row[col('object', object)] = object.id;
 
         // The same context the user's own path builds (GenericCrudRouter
         // `buildContext`) — `changedBy` above all. The first version passed
@@ -324,7 +393,7 @@ module.exports = function registerSystemRoutes(app, deps) {
           changedBy: username,
         });
 
-        return res.json({ quality, correct: truth.correct, explanation: truth.explanation });
+        return res.json({ recorded: true, quality, correct: truth.correct, explanation: truth.explanation });
       } catch (err) {
         theLogger.error('itquiz: answer failed', { error: err.message });
         return res.status(500).json({ error: err.message });
@@ -396,5 +465,5 @@ module.exports = function registerSystemRoutes(app, deps) {
     return null;
   }
 
-  theLogger.info('itquiz routes registered', { routes: ['GET /api/sys/itquiz/question', 'POST /api/sys/itquiz/answer'] });
+  theLogger.info('itquiz routes registered', { routes: ['GET /api/sys/itquiz/question', 'GET /api/sys/itquiz/verdict', 'POST /api/sys/itquiz/answer'] });
 };

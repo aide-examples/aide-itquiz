@@ -114,7 +114,14 @@ body {
 .q-option.is-wrong { border-color: var(--wrong); background: var(--wrong); color: #ffffff; }
 
 .q-verdict { display: flex; flex-direction: column; gap: 0.8rem; }
+/* An author `display` beats the browser's `[hidden] { display: none }`, so the rule above
+   silently disabled the `hidden` attribute on this element: the verdict of the PREVIOUS
+   question stayed on screen under the new one. Nothing errors, and the page looks fine —
+   it just answers a question nobody asked any more. Whoever sets `display` on an element
+   that is also toggled with `hidden` owes it this line. */
+.q-verdict[hidden] { display: none; }
 .q-explain { margin: 0; color: var(--muted); }
+.q-note { margin: 0; font-size: 0.85rem; color: var(--muted); font-style: italic; }
 
 .q-next {
   font: inherit;

@@ -17,8 +17,20 @@
 
 (() => {
   const CHROME = {
-    de: { next: 'Weiter', right: 'Richtig', wrong: 'Falsch', score: (r, n) => `${r}/${n}`, empty: 'Es lässt sich gerade keine Frage bilden.' },
-    en: { next: 'Next', right: 'Correct', wrong: 'Wrong', score: (r, n) => `${r}/${n}`, empty: 'No question can be built right now.' },
+    de: {
+      next: 'Weiter', right: 'Richtig', wrong: 'Falsch',
+      score: (r, n) => `${r}/${n}`,
+      empty: 'Es lässt sich gerade keine Frage bilden.',
+      notRecorded: 'Stellvertreter-Modus: diese Antwort wird nicht mitgeschrieben.',
+      failed: 'Die Antwort konnte nicht geprüft werden.',
+    },
+    en: {
+      next: 'Next', right: 'Correct', wrong: 'Wrong',
+      score: (r, n) => `${r}/${n}`,
+      empty: 'No question can be built right now.',
+      notRecorded: 'Impersonation: this answer is not being recorded.',
+      failed: 'The answer could not be checked.',
+    },
   };
 
   // The page is served under <base>/sys/quiz/, so the API is two levels up. A leading
@@ -27,6 +39,7 @@
   // `test-system-api-paths` cannot check, and a 404 in a page nobody looks at is exactly
   // what that detector exists to catch.
   const QUESTION_URL = '../../api/sys/itquiz/question';
+  const VERDICT_URL = '../../api/sys/itquiz/verdict';
   const ANSWER_URL = '../../api/sys/itquiz/answer';
 
   const $ = (id) => /** @type {HTMLElement} */ (document.getElementById(id));
@@ -44,6 +57,11 @@
   /** Fetch the next question and paint it. */
   async function next() {
     $('q-verdict').hidden = true;
+    // Clearing as well as hiding. The hiding is the mechanism; this decides what a FAILURE
+    // of it looks like — an empty line rather than the previous question's answer, which is
+    // the shape the bug had: right markup, wrong sentence, nothing to see in any log.
+    $('q-explain').textContent = '';
+    $('q-note').hidden = true;
     $('q-options').innerHTML = '';
     $('q-text').textContent = '…';
     try {
@@ -88,18 +106,25 @@
     if (!q) return;
     const buttons = /** @type {NodeListOf<HTMLButtonElement>} */ ($('q-options').querySelectorAll('.q-option'));
     buttons.forEach((b) => { b.disabled = true; });
+    const payload = { template: q.template, language: q.language, subject: q.subject, object: q.object, chosen };
     try {
-      const r = await fetch(ANSWER_URL, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          template: q.template, language: q.language,
-          subject: q.subject, object: q.object, chosen,
-        }),
+      // The verdict first, and as a GET. It is a read — the server computes the truth from
+      // the facts and stores nothing — and being a read is what lets it work in a session
+      // that may not write: an admin looking through a player's eyes is capped read-only by
+      // the framework, and with the judging behind the POST that admin got a quiz where
+      // clicking an answer did nothing at all.
+      const qs = new URLSearchParams({
+        template: q.template, language: q.language, chosen: String(chosen),
+        subject: JSON.stringify(q.subject), object: JSON.stringify(q.object),
       });
+      const r = await fetch(`${VERDICT_URL}?${qs}`, { credentials: 'same-origin' });
       if (!r.ok) throw new Error(String(r.status));
       const verdict = await r.json();
+
+      // Then the recording, which may legitimately be refused. A 403 here means the session
+      // is read-only, and that is not an error to hide from the player: the answer counted
+      // on screen and did not count in the history, and only saying so keeps the two honest.
+      recordAnswer(payload);
 
       state.asked += 1;
       if (verdict.quality === 'correct') state.right += 1;
@@ -117,8 +142,36 @@
       $('q-verdict').hidden = false;
       $('q-next').focus();
     } catch (_) {
+      // Do NOT fail silently: a disabled row of buttons and no verdict is exactly what the
+      // impersonation report looked like from the outside — „it does not work", with nothing
+      // said. Re-enable, and say that the check failed.
       buttons.forEach((b) => { b.disabled = false; });
+      $('q-explain').textContent = words().failed;
+      $('q-verdict').hidden = false;
     }
+  }
+
+  /**
+   * Write the answer to the player's history — separately, and never blocking the verdict.
+   *
+   * The server re-judges the payload rather than trusting what the page was told, so this
+   * carries the same fields as the verdict call and no `quality`. A refusal is reported in
+   * one line under the explanation instead of being swallowed.
+   */
+  function recordAnswer(payload) {
+    fetch(ANSWER_URL, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).then((res) => {
+      if (res.ok) return;
+      $('q-note').textContent = res.status === 403 ? words().notRecorded : `HTTP ${res.status}`;
+      $('q-note').hidden = false;
+    }).catch((e) => {
+      $('q-note').textContent = String(e.message || e);
+      $('q-note').hidden = false;
+    });
   }
 
   /** Paint the language buttons from the state, so the two cannot disagree. */
