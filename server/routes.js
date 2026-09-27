@@ -148,12 +148,18 @@ module.exports = function registerSystemRoutes(app, deps) {
     const typeOf = (p) => f.types.find((t) => t.id === p.product_type_id);
     const makerOf = (p) => f.companies.find((c) => c.id === p.manufacturer_id);
     const named = (row) => ({ label: row.name });
+    // One product of a kind, for an explanation that wants something the reader has held.
+    // Deliberately the FIRST and not a random one: a reader who meets the same question
+    // twice should meet the same example, or the example becomes noise.
+    const exampleOf = (t) => f.products.find((x) => x.product_type_id === t.id);
     const typed = (t) => ({ label: word(f, t, lang, 'name'), gender: gender(f, t, lang) });
 
     if (template.key === 'manufacturer') {
-      const p = any(f.products.filter((x) => x.manufacturer_id));
+      const p = any(f.products.filter((x) => x.manufacturer_id && x.product_type_id));
       if (!p) return null;
       const right = makerOf(p);
+      const own = typeOf(p);
+      if (!own) return null;
       const wrong = sample(f.companies.filter((c) => c.id !== right.id), 3);
       if (wrong.length < 2) return null;
       return {
@@ -163,7 +169,9 @@ module.exports = function registerSystemRoutes(app, deps) {
         text: fill(phrase.text, { subject: named(p) }, lang),
         options: [right, ...wrong].map((c) => c.name),
         _correct: right.name,
-        _explanation: fill(phrase.explanation, { subject: named(p), answer: named(right) }, lang),
+        // The `type` role carries the fact the maxim used to stand in for — see
+        // QuestionPhrase.md, "An explanation carries a fact, not a moral".
+        _explanation: fill(phrase.explanation, { subject: named(p), answer: named(right), type: typed(own) }, lang),
       };
     }
 
@@ -181,7 +189,10 @@ module.exports = function registerSystemRoutes(app, deps) {
         text: fill(phrase.text, { subject: named(c), object: typed(t) }, lang),
         options: [p, ...wrong].map((x) => x.name),
         _correct: p.name,
-        _explanation: fill(phrase.explanation, { subject: named(c), object: typed(t), answer: named(p) }, lang),
+        // The question already named the type AND the maker, so the answer alone adds
+        // nothing beyond itself. What the reader does not have is what the type is FOR.
+        _explanation: fill(phrase.explanation,
+          { subject: named(c), object: typed(t), answer: named(p), purpose: { label: word(f, t, lang, 'purpose') } }, lang),
       };
     }
 
@@ -197,7 +208,9 @@ module.exports = function registerSystemRoutes(app, deps) {
         text: fill(phrase.text, { subject: { label: word(f, t, lang, 'purpose') } }, lang),
         options: [t, ...wrong].map((x) => word(f, x, lang, 'name')),
         _correct: word(f, t, lang, 'name'),
-        _explanation: fill(phrase.explanation, { answer: typed(t) }, lang),
+        // The question was the purpose, so naming the type says only what was asked. A
+        // thing the reader has actually held is the fact that lands.
+        _explanation: fill(phrase.explanation, { answer: typed(t), example: named(exampleOf(t) || { name: '' }) }, lang),
       };
     }
 
@@ -220,7 +233,10 @@ module.exports = function registerSystemRoutes(app, deps) {
         text: fill(phrase.text, { subject: named(p), object: typed(asked) }, lang),
         options: [yes, no],
         _correct: truthful ? yes : no,
-        _explanation: fill(phrase.explanation, { subject: named(p), answer: typed(own) }, lang),
+        // On a "no" the right type IS the new fact; on a "yes" it merely repeats the
+        // question, so the maker carries the sentence in both cases.
+        _explanation: fill(phrase.explanation,
+          { subject: named(p), answer: typed(own), maker: named(makerOf(p) || { name: '' }) }, lang),
       };
     }
 
@@ -337,18 +353,32 @@ module.exports = function registerSystemRoutes(app, deps) {
     if (template.key === 'manufacturer') {
       const p = prod(subject && subject.id); if (!p) return null;
       const c = comp(p.manufacturer_id); if (!c) return null;
-      return { correct: c.name, explanation: fill(phrase.explanation, { subject: { label: p.name }, answer: { label: c.name } }, lang) };
+      const own = type(p.product_type_id); if (!own) return null;
+      return {
+        correct: c.name,
+        explanation: fill(phrase.explanation,
+          { subject: { label: p.name }, answer: { label: c.name }, type: typed(own) }, lang),
+      };
     }
     if (template.key === 'product_of_company') {
       const c = comp(subject && subject.id), t = type(object && object.id);
       if (!c || !t) return null;
       const p = f.products.find((x) => x.manufacturer_id === c.id && x.product_type_id === t.id);
       if (!p) return null;
-      return { correct: p.name, explanation: fill(phrase.explanation, { subject: { label: c.name }, object: typed(t), answer: { label: p.name } }, lang) };
+      return {
+        correct: p.name,
+        explanation: fill(phrase.explanation,
+          { subject: { label: c.name }, object: typed(t), answer: { label: p.name }, purpose: { label: word(f, t, lang, 'purpose') } }, lang),
+      };
     }
     if (template.key === 'purpose') {
       const t = type(subject && subject.id); if (!t) return null;
-      return { correct: word(f, t, lang, 'name'), explanation: fill(phrase.explanation, { answer: typed(t) }, lang) };
+      const beispiel = f.products.find((x) => x.product_type_id === t.id);
+      return {
+        correct: word(f, t, lang, 'name'),
+        explanation: fill(phrase.explanation,
+          { answer: typed(t), example: { label: (beispiel && beispiel.name) || '' } }, lang),
+      };
     }
     if (template.key === 'is_a') {
       const p = prod(subject && subject.id), asked = type(object && object.id);
@@ -356,9 +386,11 @@ module.exports = function registerSystemRoutes(app, deps) {
       const own = type(p.product_type_id); if (!own) return null;
       const yes = lang === 'de' ? 'Ja' : 'Yes';
       const no = lang === 'de' ? 'Nein' : 'No';
+      const hersteller = comp(p.manufacturer_id);
       return {
         correct: asked.id === own.id ? yes : no,
-        explanation: fill(phrase.explanation, { subject: { label: p.name }, answer: typed(own) }, lang),
+        explanation: fill(phrase.explanation,
+          { subject: { label: p.name }, answer: typed(own), maker: { label: (hersteller && hersteller.name) || '' } }, lang),
       };
     }
     return null;
