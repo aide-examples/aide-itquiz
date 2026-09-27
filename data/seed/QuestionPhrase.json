@@ -14,8 +14,8 @@
   {
     "template": "product_of_company",
     "language": "de",
-    "text": "Wie heißt der {object} von {subject}?",
-    "explanation": "{answer} ist der {object} von {subject}."
+    "text": "Wie heißt {der_object} {object} von {subject}?",
+    "explanation": "{answer} ist {der_object} {object} von {subject}."
   },
   {
     "template": "product_of_company",
@@ -27,24 +27,24 @@
     "template": "purpose",
     "language": "de",
     "text": "Wie nennt man ein Ding, das Folgendes tut: {subject}?",
-    "explanation": "Das nennt man {answer}."
+    "explanation": "Das nennt man {ein_answer} {answer}."
   },
   {
     "template": "purpose",
     "language": "en",
     "text": "What do you call a thing that does this: {subject}?",
-    "explanation": "That is called a {answer}."
+    "explanation": "That is {ein_answer} {answer}."
   },
   {
     "template": "is_a",
     "language": "de",
-    "text": "Ist {subject} ein {object}?",
-    "explanation": "{subject} ist ein {answer}."
+    "text": "Ist {subject} {ein_object} {object}?",
+    "explanation": "{subject} ist {ein_answer} {answer}."
   },
   {
     "template": "is_a",
     "language": "en",
-    "text": "Is {subject} a {object}?",
-    "explanation": "{subject} is a {answer}."
+    "text": "Is {subject} {ein_object} {object}?",
+    "explanation": "{subject} is {ein_answer} {answer}."
   }
 ]

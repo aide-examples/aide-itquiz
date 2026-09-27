@@ -37,3 +37,18 @@ skipped one as if it had been failed.
 | correct | Correct | #16a34a | Answered correctly |
 | wrong | Wrong | #dc2626 | Answered incorrectly |
 | skipped | Skipped | #9ca3af | Shown, not answered |
+
+### Gender
+
+Grammatical gender of a common noun, for the languages that have one. English rows leave it
+empty; a German question needs it, because „ein Suchmaschine" is wrong in a way that teaches
+carelessness in the middle of teaching a distinction.
+
+Both articles are DERIVED from it rather than stored: definite der/die/das and indefinite
+ein/eine/ein. Storing the two separately would let them disagree about one noun.
+
+| Internal | External | Description |
+|----------|----------|-------------|
+| m | maskulin | der Browser, ein Browser |
+| f | feminin | die Suchmaschine, eine Suchmaschine |
+| n | neutrum | das Gerät, ein Gerät |

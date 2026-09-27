@@ -1,0 +1,40 @@
+[
+  {
+    "product_type": "Browser",
+    "language": "de",
+    "name": "Browser",
+    "purpose": "Zeigt Webseiten an",
+    "note": "Viele stellen eine Suchmaschine als Startseite des Browsers ein — daher wirken die beiden wie ein Ding",
+    "gender": "m"
+  },
+  {
+    "product_type": "Search engine",
+    "language": "de",
+    "name": "Suchmaschine",
+    "purpose": "Führt ein Verzeichnis von Webseiten und findet Seiten darin — und ist selbst eine Website",
+    "note": "Man erreicht sie DURCH einen Browser, so wie man ein Geschäft durch eine Tür erreicht",
+    "gender": "f"
+  },
+  {
+    "product_type": "Spider",
+    "language": "de",
+    "name": "Spider",
+    "purpose": "Geht Webseiten durch und baut daraus das Verzeichnis, das eine Suchmaschine führt",
+    "note": "Niemand benutzt einen Spider unmittelbar; er arbeitet für die Suchmaschine, der er gehört",
+    "gender": "m"
+  },
+  {
+    "product_type": "Operating system",
+    "language": "de",
+    "name": "Betriebssystem",
+    "purpose": "Lässt ein Gerät und die Programme darauf laufen",
+    "gender": "n"
+  },
+  {
+    "product_type": "Device",
+    "language": "de",
+    "name": "Gerät",
+    "purpose": "Das Ding, das man in der Hand hält oder vor sich stehen hat",
+    "gender": "n"
+  }
+]

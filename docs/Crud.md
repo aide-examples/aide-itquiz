@@ -5,6 +5,7 @@ Which entities the selector offers, in which order.
 ## Facts
 
 - ProductType
+- ProductTypeText
 - Product
 - Company
 

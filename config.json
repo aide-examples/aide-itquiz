@@ -43,8 +43,9 @@
         "name": "itquiz — IT-Begriffe sortieren",
         "short_name": "itquiz",
         "description": "A quiz that helps a layperson sort out IT terms that get mixed up",
-        "theme_color": "#2563eb",
-        "icon192": "icons/icon-192.png",
-        "icon512": "icons/icon-512.png"
+        "theme_color": "#4338ca",
+        "background_color": "#eef2ff",
+        "icon192": "/icons/icon-192.png",
+        "icon512": "/icons/icon-512.png"
     }
 }

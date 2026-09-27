@@ -11,7 +11,12 @@ A question is the one thing a learner actually reads, so it exists once per lang
 set is meant to grow.
 
 The text carries the role placeholders `{subject}` and `{object}`; anything else in it is
-prose. A phrase whose placeholders do not match its template's declared roles is a defect the
+prose. A language with grammatical gender also has `{der_object}` and `{ein_object}` — the
+definite and indefinite article of whatever noun lands in `{object}`, derived from the gender on
+[ProductTypeText](ProductTypeText.md). They were added the moment the German phrasings produced
+„Wie heißt **der** Suchmaschine" and „Ist Chrome **ein** Suchmaschine": a quiz that teaches a
+distinction while getting the article wrong undermines itself. An English phrase simply does not
+use them. A phrase whose placeholders do not match its template's declared roles is a defect the
 generator can see, which is the point of declaring the roles at all.
 
 ## Attributes

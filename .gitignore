@@ -1,0 +1,25 @@
+# What is RUNTIME stays out; what is DATA travels with the repo.
+#
+# Written 2026-09-27, after the first three commits had already taken the live
+# database, the logs and the server lock with them — a new system starts with a
+# running instance beside it, so the omission is invisible until the first
+# `git status` after a restart shows a modified `.sqlite`.
+
+# Installation, not system: engine access and the session secret
+config.local.json
+
+# Runtime
+logs/
+node_modules/
+docs/layout/
+docs/reports/
+
+# The database and everything the server rebuilds from the seed and the manifests
+data/rap.sqlite
+data/rap.sqlite-wal
+data/rap.sqlite-shm
+data/server.lock
+data/media/
+data/extern/
+data/backup/
+data/snapshot/

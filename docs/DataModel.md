@@ -6,11 +6,17 @@ itquiz holds facts about IT things, and derives its questions from them.
 
 ### Facts
 
-The subject matter. Three entities, and the whole didactic weight sits on one field —
+The subject matter. Four entities, and the whole didactic weight sits on one field —
 `ProductType.purpose`, the sentence that says what a kind of thing is FOR.
+
+The parent carries the English wording; `ProductTypeText` carries a translation per
+language, and a missing one falls back to the parent. It also carries the grammatical
+gender, because without it a German question says „ein Suchmaschine“ and undermines
+the very distinction it is teaching.
 
 - Company
 - ProductType
+- ProductTypeText
 - Product
 
 ### Questions
