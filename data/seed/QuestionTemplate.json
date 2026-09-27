@@ -1,0 +1,6 @@
+[
+  { "key": "manufacturer", "subject_kind": "Product", "answer_kind": "Company", "note": "Separates the maker from the thing made" },
+  { "key": "product_of_company", "subject_kind": "Company", "object_kind": "ProductType", "answer_kind": "Product", "note": "Ties a thing to both its maker and its kind" },
+  { "key": "purpose", "subject_kind": "ProductType", "answer_kind": "ProductType", "note": "Asks for the kind by what it is FOR — the question the whole system is built around" },
+  { "key": "is_a", "subject_kind": "Product", "object_kind": "ProductType", "note": "Yes or no: does this thing have that type? The distractor is a type it does NOT have" }
+]

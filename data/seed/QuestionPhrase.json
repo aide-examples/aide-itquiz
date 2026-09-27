@@ -1,0 +1,50 @@
+[
+  {
+    "template": "manufacturer",
+    "language": "de",
+    "text": "Wer stellt {subject} her?",
+    "explanation": "{subject} wird von {answer} hergestellt. Der Hersteller ist nicht dasselbe wie das Ding, das er herstellt."
+  },
+  {
+    "template": "manufacturer",
+    "language": "en",
+    "text": "Who makes {subject}?",
+    "explanation": "{subject} is made by {answer}. A maker is not the same thing as the thing it makes."
+  },
+  {
+    "template": "product_of_company",
+    "language": "de",
+    "text": "Wie heißt der {object} von {subject}?",
+    "explanation": "{answer} ist der {object} von {subject}."
+  },
+  {
+    "template": "product_of_company",
+    "language": "en",
+    "text": "What is the {object} made by {subject} called?",
+    "explanation": "{answer} is the {object} made by {subject}."
+  },
+  {
+    "template": "purpose",
+    "language": "de",
+    "text": "Wie nennt man ein Ding, das Folgendes tut: {subject}?",
+    "explanation": "Das nennt man {answer}."
+  },
+  {
+    "template": "purpose",
+    "language": "en",
+    "text": "What do you call a thing that does this: {subject}?",
+    "explanation": "That is called a {answer}."
+  },
+  {
+    "template": "is_a",
+    "language": "de",
+    "text": "Ist {subject} ein {object}?",
+    "explanation": "{subject} ist ein {answer}."
+  },
+  {
+    "template": "is_a",
+    "language": "en",
+    "text": "Is {subject} a {object}?",
+    "explanation": "{subject} is a {answer}."
+  }
+]

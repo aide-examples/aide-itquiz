@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "/home/gero/aide-examples/aide-rap/app/systems/itquiz/logs/.ff40e74e56863b5fa644d145441f867745b2623b-audit.json",
+    "files": [
+        {
+            "date": 1790488249337,
+            "name": "/home/gero/aide-examples/aide-rap/app/systems/itquiz/logs/rejections-2026-09-27.log",
+            "hash": "40d18f8e87d4b15a16631d094ae74e649e5c42cd04d394f29817263e3032046b"
+        }
+    ],
+    "hashType": "sha256"
+}

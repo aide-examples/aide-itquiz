@@ -1,0 +1,7 @@
+[
+  { "name": "Browser", "purpose": "Displays web pages", "note": "Many people set a search engine as their browser's home page, which is why the two seem to be one thing" },
+  { "name": "Search engine", "purpose": "Keeps an index of web pages and finds pages in it — and is itself a website", "note": "It is reached THROUGH a browser, the way a shop is reached through a door" },
+  { "name": "Spider", "purpose": "Walks web pages and builds the index a search engine keeps", "note": "Nobody uses a spider directly; it works for the search engine that owns it" },
+  { "name": "Operating system", "purpose": "Runs a device and the programs on it" },
+  { "name": "Device", "purpose": "The physical thing you hold or sit in front of" }
+]

@@ -1,0 +1,50 @@
+{
+    // =========================================================================
+    // itquiz — a quiz against the confusions a layperson carries.
+    //
+    // The facts are stored correct and nothing else: a browser displays pages, a
+    // search engine keeps an index and is itself a website, a spider builds that
+    // index. No wrong sentence lives anywhere in the store — the confusion is in
+    // the reader, and the cure is a correct fact plus a question that makes the
+    // distinction visible. Decided at genesis (docs/Genesis.md § 2).
+    //
+    // The MODEL is English like every repo artefact; only the question texts are
+    // multilingual, because they are the one thing a learner reads.
+    // =========================================================================
+
+    // Next free port after gametracker (18393). `--aitest` overrides to 18349.
+    "port": 18394,
+    "log_level": "INFO",
+
+    "titleHtml": "<span style='color:#9ca3af; font-size:0.9em'>🧩 <b>ITQUIZ</b> — Begriffe der IT, sortiert</span>",
+
+    "auth": {
+        "enabled": true,
+        "mode": "users",
+
+        // Per-user history is the point of the system, so there is a real account
+        // per learner from the start — a role trias would make every learner the
+        // same person and the history meaningless.
+        "initialAdmin": {
+            "username": "admin",
+            "displayName": "Administrator",
+            "password": "4f6420a8b3d7b39457638dfa674d94c3a93acc5bde41323eb06d7ab1224395de"
+        },
+
+        "sessionTimeoutInactive": 3600,
+        "sessionTimeoutAbsolute": 86400
+    },
+
+    "docsEditable": true,
+    "helpEditable": true,
+
+    "pwa": {
+        "enabled": true,
+        "name": "itquiz — IT-Begriffe sortieren",
+        "short_name": "itquiz",
+        "description": "A quiz that helps a layperson sort out IT terms that get mixed up",
+        "theme_color": "#2563eb",
+        "icon192": "icons/icon-192.png",
+        "icon512": "icons/icon-512.png"
+    }
+}
