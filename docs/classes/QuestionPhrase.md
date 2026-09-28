@@ -43,6 +43,59 @@ no second phrasing to keep in step with the first.
 The example is deliberately the **first** product of its kind, not a random one: a reader who
 meets the same question twice should meet the same example, or the example is noise.
 
+## A „no" says WHY, and the model already knows
+
+A correct „no" leaves the reader exactly where their confusion was. *„Ist Apache OpenOffice ein
+Textprogramm?"* — no, it is an office suite. True, and it does not say what a word processor and
+an office suite have to do with each other, which is the thing worth learning.
+
+The model holds that relation in `ProductType.part_of`, so the sentence is **derived, never
+written**. Two shapes, and they are mutually exclusive:
+
+| The two types stand as | The sentence |
+|---|---|
+| one is part of the other | *Ein Textprogramm ist Teil eines Office-Pakets.* |
+| both parts of a third | *Ein Textprogramm und eine Tabellenkalkulation sind beide Teil eines Office-Pakets — Geschwister unter einem Dach, nicht dasselbe Ding.* |
+| nothing in particular | nothing — there is no true sentence to add |
+
+The **part** shape reads the same from either end. Asked *„Textprogramm"* about an office suite
+or *„Office-Paket"* about a word processor, the answer is the same sentence, because the
+relation is the fact and the question only chose which end to enter it from.
+
+The **sibling** shape is the commoner one and was added a day later, on the architect's
+prompting — the first version stayed silent on *„Ist OpenOffice Calc ein Textprogramm?"*,
+where spreadsheet and word processor are not parts of each other but of the same suite.
+
+Both are **optional clauses**, so neither needs to know about the verdict: on a *yes* the two
+types are the same type, no relation exists between a thing and itself, and the clause removes
+itself. That is the shape to aim for — a rule that falls out rather than one that is switched
+on.
+
+> *Lehrgeld, the same hour:* the sibling test was written as „same parent" and shipped *„Ein
+> Textprogramm und ein Textprogramm sind beide Teil eines Office-Pakets."* On a yes the two
+> types ARE the same one, which is trivially its own sibling. The part rule gets that for free
+> — a thing is not part of itself — and this one has to say so. Found by running the case, not
+> by reading the code.
+
+## Context is welcome; a moral is not
+
+The rule at the top of this file forbids restating the question as a lesson. It does **not**
+forbid helping the reader build a picture — the two are easy to confuse and the difference is
+worth stating, because the architect asked for more of the second on 2026-09-28: 🇩🇪 *„Alles was
+dem Menschen hilft, Kontext aufzubauen, was Metaphern enthält usw. ist willkommen."*
+
+A **moral** tells the reader what they were supposed to conclude: *„Der Hersteller ist nicht
+dasselbe wie das Ding."* It adds nothing, because it is the question read backwards.
+
+**Context** gives them somewhere to put the fact: a whole it belongs to, a sibling it stands
+beside, what the kind is for, an example they have held. *„Geschwister unter einem Dach"* is a
+metaphor and it earns its place — it names a relation the reader can carry to the next pair
+they meet, which a bare *„beide sind Teil eines Office-Pakets"* does not.
+
+The test is unchanged and still decides it: **strike out the answer. Is anything left the
+reader did not already know?** A metaphor passes when it makes a real relation graspable, and
+fails when it decorates one they have just been told.
+
 ## The two marks a phrase may carry, and no more
 
 A phrase is data: an operator writes it in the Question-phrases table, and the page escapes it

@@ -39,13 +39,13 @@
     "template": "is_a",
     "language": "de",
     "text": "Ist {subject} {ein_object} {object}?",
-    "explanation": "{subject} ist {ein_answer} {answer} von {maker}.[[\n*{ein_part} {part} ist Teil {genitiv_whole}.*]]"
+    "explanation": "{subject} ist {ein_answer} {answer} von {maker}.[[\n*{ein_part} {part} ist Teil {genitiv_whole}.*]][[\n*{ein_object} {object} und {ein_answer} {answer} sind beide Teil {genitiv_shared} — Geschwister unter einem Dach, nicht dasselbe Ding.*]]"
   },
   {
     "template": "is_a",
     "language": "en",
     "text": "Is {subject} {ein_object} {object}?",
-    "explanation": "{subject} is {ein_answer} {answer} made by {maker}.[[\n*{ein_part} {part} is part of {genitiv_whole}.*]]"
+    "explanation": "{subject} is {ein_answer} {answer} made by {maker}.[[\n*{ein_part} {part} is part of {genitiv_whole}.*]][[\n*{ein_object} {object} and {ein_answer} {answer} are both parts of {genitiv_shared} — siblings under one roof, not the same thing.*]]"
   },
   {
     "template": "part_of",

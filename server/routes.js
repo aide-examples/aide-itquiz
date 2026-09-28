@@ -733,6 +733,27 @@ module.exports = function registerSystemRoutes(app, deps) {
       const whole = own.part_of_id === asked.id ? asked
         : asked.part_of_id === own.id ? own : null;
       const part = whole ? (whole.id === asked.id ? own : asked) : null;
+      // SIBLINGS — the other shape the same „no" can have, and the commoner one.
+      //
+      // „Ist OpenOffice Calc ein Textprogramm?" — no, it is a spreadsheet. Neither is part of
+      // the other, so the rule above stays silent, and yet the reader is standing in front of
+      // exactly the relation that would settle it: both are parts of the same whole. The model
+      // holds that too; it simply holds it as a shared parent rather than as a link between
+      // the two.
+      //
+      // Mutually exclusive with the pair above — a type cannot both contain another and stand
+      // beside it under a third — so the two clauses never fire together and neither needs to
+      // know about the other.
+      //
+      // The `own.id !== asked.id` is the one that is easy to leave out, and it was: on a YES
+      // the two types are the SAME type, which is trivially its own sibling, and the sentence
+      // came out as „Ein Textprogramm und ein Textprogramm sind beide Teil eines
+      // Office-Pakets." Every clause here has to earn its place on a NO as well as a yes, and
+      // the part/whole rule gets this for free (a thing is not part of itself) while this one
+      // has to say so.
+      const shared = !whole && own.id !== asked.id
+        && own.part_of_id && own.part_of_id === asked.part_of_id
+        ? type(own.part_of_id) : null;
       return {
         correct: asked.id === own.id ? yes : no,
         // „Yes" has no face, so the picture is the SUBJECT's — the thing the sentence is
@@ -744,8 +765,12 @@ module.exports = function registerSystemRoutes(app, deps) {
           subject: { label: p.name },
           answer: typed(own),
           maker: { label: (maker && maker.name) || '' },
+          // The asked type under the question's own name for it, so a phrase can talk about
+          // the thing the reader named without a second vocabulary for it.
+          object: typed(asked),
           part: part ? typed(part) : { label: '' },
           whole: whole ? typed(whole) : { label: '' },
+          shared: shared ? typed(shared) : { label: '' },
         }, lang),
       };
     }
