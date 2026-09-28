@@ -24,27 +24,36 @@ listing it in every view that shows one.
 a kind with no group produces `_label2 = null`, so the line is simply absent rather than empty.
 The purpose won because it is what this system is for; flipping it is one line in the class.
 
-## Two things it does not hide, and they are the tree's own vocabulary
+## Two things this view asked for, and got — in the framework
 
-An FK node captions itself with the **field name and the target entity**:
-`product_type: Word processor (ProductType)`. In the long form that caption sits above a table
-and reads as a heading; here it is the whole line, and it is three quarters technical. The
-label is right, the frame around it is not.
+Both were findings of building it, both were the renderer's rather than this template's, and both
+were filed and closed as [aide-rap#499](https://github.com/aide-examples/aide-rap/issues/499).
+They are recorded here because this is the view that surfaced them, and because what they changed
+is exactly what makes the compact form carry its weight.
 
-And `[LABEL2=purpose]` does **not** reach these nodes — a kind shows its purpose under its name
-in an FK dropdown and in the detail panel, but not here. Measured, not assumed; it is why the
-compact form carries less than it could.
+**The caption lost its redundant half.** An FK node used to read
+`product_type: Word processor (ProductType)` — the label right, and two of three parts frame. The
+parenthetical is now dropped where the field name already says the type, matched
+case-insensitively with separators and a trailing `_id` ignored, and then by equality. So
+`product_type` loses its `(ProductType)` while `manufacturer` keeps its `(Company)` — the maker
+is not the thing, which is the question this system asks. And `part_of` keeps its `(ProductType)`,
+because the name is the relation, not the type.
 
-Both are the renderer's, not the template's, and both are filed together as
-[aide-rap#499](https://github.com/aide-examples/aide-rap/issues/499) — together, because either
-one alone leaves this form worse than the table it replaces: without the subtitle a compact node
-says less than a table, and with it but without the caption fixed it says more in a line that is
-still mostly punctuation.
+Where the parenthetical goes, a small **➤** takes its place. That was Gero's correction and it
+closed a hole the shortening had opened: a detail node's label toggles the node rather than
+navigating, so the type in parentheses had been the only way out.
 
-The second one turned out to be [#498](https://github.com/aide-examples/aide-rap/issues/498) one
-field over, in the same two functions: `GET /api/entities/ProductType` answers with `_label` and
-`_label2`, the same record inside `GET /api/views/<detail>` with `_label` alone. A value the row
-already carries, dropped on the way out.
+**`[LABEL2=purpose]` now reaches these nodes.** It was
+[#498](https://github.com/aide-examples/aide-rap/issues/498) one field over, in the same two
+functions: `GET /api/entities/ProductType` answered with `_label` and `_label2`, the same record
+inside `GET /api/views/<detail>` with `_label` alone. A value the row already carried, dropped on
+the way out. So a kind now shows its purpose under its name here as it does in an FK dropdown —
+and in this shape the subtitle is the only attribute visible without naming one, which is most of
+the reason to choose it.
+
+A third thing came along with them: a back-reference group in a detail tree had no ➤ to the full
+table, while the schema-derived group has had one for a long time. The two headers render
+identically, so the absence read as a group without an arrow rather than a path with no way out.
 
 ## What it cannot do, and why
 
