@@ -138,6 +138,42 @@ module.exports = function registerSystemRoutes(app, deps) {
   }
 
   /**
+   * What an explanation offers ABOUT the things it names: a face, an article, a way in.
+   *
+   * All three answer one question — *which record is this sentence about?* — so they are
+   * decided once, from one list, instead of three times per template. Before this there were
+   * three parallel expressions in each of seven branches, each repeating the same preference
+   * order, and a fourth surface would have made it four (§17: the drift starts at the second
+   * copy, not at the third).
+   *
+   * The list is in order of PREFERENCE, and it is a list because a sentence names more than
+   * one thing. „Edge ist ein Browser von Microsoft" is about Microsoft — but Microsoft has no
+   * logo, and Edge's icon is still the face of something the sentence just said. Gero's
+   * observation, generalised: fall back along the sentence rather than show nothing.
+   *
+   * The three fall back INDEPENDENTLY. A record may have a picture and no article, or the
+   * other way round, and tying them together would mean losing one to keep the other.
+   *
+   * `focus` names a record for RAP's own deep link (`?crumbs=`) — kind and id, never a URL,
+   * because the framework owns that format. It takes the FIRST entry and does not fall back:
+   * a picture may come from further down the sentence without misleading anyone, but a door
+   * marked „look this up" has to open on the thing that was asked about.
+   *
+   * @param {Array<[string, any]>} about - `[[entityName, record], …]`, most relevant first
+   * @param {string} lang - the language the question is being asked in
+   * @returns {{image: string|null, article: object|null, focus: object|null}}
+   */
+  function context(about, lang) {
+    const present = about.filter(([, record]) => record);
+    const first = present[0];
+    return {
+      image: present.map(([, r]) => picture(r)).find(Boolean) || null,
+      article: present.map(([, r]) => article(r, lang)).find(Boolean) || null,
+      focus: first ? { kind: first[0], id: first[1].id } : null,
+    };
+  }
+
+  /**
    * The facts, as the question builder needs them. Small enough to read whole on
    * every question — five types and ten products today, and a quiz that grew to
    * thousands of rows would want a different picker anyway, not a cached one.
@@ -559,6 +595,9 @@ module.exports = function registerSystemRoutes(app, deps) {
           // `{lang, title}`, never a URL — the client hands both to the framework's
           // `wikipediaRef`, which is the one thing that knows how an article is addressed.
           article: r.truth.article || null,
+          // `{kind, id}`, and for the same reason: RAP owns the `?crumbs=` format, so the
+          // quiz names the RECORD and the page builds the link from it.
+          focus: r.truth.focus || null,
         });
       } catch (err) {
         theLogger.error('itquiz: verdict failed', { error: err.message });
@@ -635,13 +674,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       const own = type(p.product_type_id); if (!own) return null;
       return {
         correct: c.name,
-        // The maker's mark first — a reader recognises a logo long before a name, which is
-        // half of what this quiz is about. But the sentence names TWO things („Edge ist ein
-        // Browser von Microsoft"), so where the maker has no logo the PRODUCT's face is still
-        // the face of something the sentence just said. Gero's observation, and it generalises:
-        // fall back along the sentence rather than showing nothing.
-        image: picture(c) || picture(p),
-        article: article(c, lang) || article(p, lang),
+        ...context([['Company', c], ['Product', p]], lang),
         explanation: fill(phrase.explanation,
           { subject: { label: p.name }, answer: { label: c.name }, type: typed(own) }, lang),
       };
@@ -653,8 +686,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       if (!p) return null;
       return {
         correct: p.name,
-        image: picture(p) || picture(t),
-        article: article(p, lang) || article(t, lang),
+        ...context([['Product', p], ['ProductType', t]], lang),
         explanation: fill(phrase.explanation,
           { subject: { label: c.name }, object: typed(t), answer: { label: p.name }, purpose: { label: word(f, t, lang, 'purpose') } }, lang),
       };
@@ -664,8 +696,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       const beispiel = f.products.find((x) => x.product_type_id === t.id);
       return {
         correct: word(f, t, lang, 'name'),
-        image: picture(t),
-        article: article(t, lang),
+        ...context([['ProductType', t]], lang),
         explanation: fill(phrase.explanation,
           { answer: typed(t), example: { label: (beispiel && beispiel.name) || '' } }, lang),
       };
@@ -678,7 +709,11 @@ module.exports = function registerSystemRoutes(app, deps) {
       const t = type(subject && subject.id); if (!t) return null;
       return {
         correct: word(f, t, lang, 'name'),
-        article: article(t, lang),
+        // No picture — the picture WAS the question — but `context` supplies one anyway and
+        // the caller below drops it. Keeping the three together is worth more than saving a
+        // string, because the next template gets all three by writing one line.
+        ...context([['ProductType', t]], lang),
+        image: null,
         explanation: fill(phrase.explanation, {
           answer: typed(t),
           purpose: { label: word(f, t, lang, 'purpose') },
@@ -692,7 +727,8 @@ module.exports = function registerSystemRoutes(app, deps) {
       if (!t || !c) return null;
       return {
         correct: p.name,
-        article: article(p, lang) || article(t, lang),
+        ...context([['Product', p], ['ProductType', t]], lang),
+        image: null,
         explanation: fill(phrase.explanation,
           { type: typed(t), maker: { label: c.name }, answer: { label: p.name } }, lang),
       };
@@ -702,8 +738,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       const ganz = f.types.find((y) => y.id === t.part_of_id); if (!ganz) return null;
       return {
         correct: word(f, ganz, lang, 'name'),
-        image: picture(ganz),
-        article: article(ganz, lang),
+        ...context([['ProductType', ganz]], lang),
         explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(ganz) }, lang),
       };
     }
@@ -756,11 +791,10 @@ module.exports = function registerSystemRoutes(app, deps) {
         ? type(own.part_of_id) : null;
       return {
         correct: asked.id === own.id ? yes : no,
-        // „Yes" has no face, so the picture is the SUBJECT's — the thing the sentence is
-        // about. The rule everywhere here is the same one: show what the explanation talks
-        // about, which for a yes/no question is not the answer.
-        image: picture(p) || picture(own),
-        article: article(p, lang) || article(own, lang),
+        // „Yes" has no face, so the subject leads — the thing the sentence is about. The
+        // rule everywhere here is the same one: offer what the explanation TALKS about, which
+        // for a yes/no question is not the answer.
+        ...context([['Product', p], ['ProductType', own]], lang),
         explanation: fill(phrase.explanation, {
           subject: { label: p.name },
           answer: typed(own),

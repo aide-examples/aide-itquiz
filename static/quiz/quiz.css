@@ -191,3 +191,34 @@ body {
 /* An author `display` on `.q-verdict` beats the UA's `[hidden]`, so every element inside it
    that is toggled with `hidden` has to say so itself — twice learnt in this file already. */
 .q-source[hidden] { display: none; }
+
+/* The two buttons under a verdict. A row where there is room, stacked where there is not —
+   on a phone a half-width button pair is two cramped targets instead of one good one, and
+   „Weiter" is pressed far more often, so it keeps the full width and the bottom position
+   (the thumb's place). */
+.q-after {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.q-look {
+  font: inherit;
+  padding: 0.8rem 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--line, #c9d2e8);
+  background: transparent;
+  color: var(--ink, #2b2f77);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.q-look:hover { background: rgba(0, 0, 0, 0.04); }
+
+.q-look[hidden] { display: none; }
+
+.q-after .q-next { flex: 1 1 auto; }
+
+@media (max-width: 780px) {
+  .q-after { flex-direction: column-reverse; }
+  .q-look { width: 100%; }
+}

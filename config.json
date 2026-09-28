@@ -66,7 +66,13 @@
             "player": {
                 "handler": "sys/quiz/quiz.html",
                 "mode": "fullPage",
-                "label": "Quiz"
+                "label": "Quiz",
+                // The quiz hands its player a link — „🔎 Im Katalog ansehen", at the record a
+                // question was about — and without this the new window would be redirected
+                // straight back into a second copy of the quiz (aide-rap#503). Only a load
+                // carrying `?crumbs=` passes; a bare `/` still lands here. What the player
+                // then sees is decided by the role's permissions, not by this line.
+                "deepLinkEscapes": true
             }
         },
         "sessionTimeoutInactive": 3600,

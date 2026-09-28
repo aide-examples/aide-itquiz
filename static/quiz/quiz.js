@@ -19,6 +19,11 @@
   const CHROME = {
     de: {
       next: 'Weiter', right: 'Richtig', wrong: 'Falsch',
+      look: '🔎 Im Katalog ansehen',
+      lookWindow: 'Öffnet den Katalog in einem eigenen Fenster, bei diesem Eintrag. '
+        + 'Das Fenster bleibt offen und springt bei der nächsten Frage weiter.',
+      lookTab: 'Öffnet den Katalog bei diesem Eintrag — in einem neuen Tab, '
+        + 'das Quiz bleibt daneben stehen.',
       score: (r, n) => `${r}/${n}`,
       empty: 'Es lässt sich gerade keine Frage bilden.',
       notRecorded: 'Stellvertreter-Modus: diese Antwort wird nicht mitgeschrieben.',
@@ -26,6 +31,10 @@
     },
     en: {
       next: 'Next', right: 'Correct', wrong: 'Wrong',
+      look: '🔎 Look it up',
+      lookWindow: 'Opens the catalogue in a window of its own, at this entry. The window '
+        + 'stays open and moves on with the next question.',
+      lookTab: 'Opens the catalogue at this entry, in a new tab — the quiz stays where it is.',
       score: (r, n) => `${r}/${n}`,
       empty: 'No question can be built right now.',
       notRecorded: 'Impersonation: this answer is not being recorded.',
@@ -43,6 +52,50 @@
   const ANSWER_URL = '../../api/sys/itquiz/answer';
 
   const $ = (id) => /** @type {HTMLElement} */ (document.getElementById(id));
+
+  /**
+   * Is this a screen a second WINDOW would be wrong on?
+   *
+   * Asked at the moment of the click, never at load: a tablet gets rotated, and a decision
+   * taken at boot would have the wrong answer for the rest of the session.
+   *
+   * @returns {boolean}
+   */
+  const narrow = () => window.matchMedia('(max-width: 780px)').matches;
+
+  /**
+   * Open the catalogue at one record — as a LINKED VIEW on a screen that has room for one,
+   * and as a plain tab on a phone.
+   *
+   * ── Both doors lead to the same place ─────────────────────────────────────────────────
+   * RAP reads `?crumbs=` — a base64 list of screens, `t` for the type, `e` for the entity,
+   * `r` for the record, `m` for the view mode. The quiz names the RECORD and the framework
+   * owns the format; this builds the one URL and nothing else knows it.
+   *
+   * ── Why two behaviours and not one ────────────────────────────────────────────────────
+   * On a wide screen a NAMED window is a linked view in RAP's own sense: the name is the
+   * entity, so the same window is reused and re-navigates with each question instead of
+   * leaving a pile of windows behind.
+   *
+   * On a phone that is exactly wrong — Gero's objection, and it is the deciding one: every
+   * kind of extra window is too cramped there, and what a phone wants is the normal UI, full
+   * screen, with its view selector. A plain tab gives that, and it gives it WITHOUT costing
+   * the current question: navigating this tab would end the quiz, and Back would come back to
+   * a fresh one.
+   *
+   * @param {{kind: string, id: any}} focus - what the question was about
+   * @returns {void}
+   */
+  function openCatalogue(focus) {
+    // `t:'r'` — a record screen. `m:'tree-h'` because a tree is what answers „how does this
+    // hang together", which is the question somebody pressing this button has.
+    const crumb = { t: 'r', e: focus.kind, r: focus.id, m: 'tree-h' };
+    const url = `../../?crumbs=${encodeURIComponent(btoa(JSON.stringify([crumb])))}`;
+    if (narrow()) { window.open(url, '_blank'); return; }
+    // The window NAME is the entity — that is what makes it a linked view rather than a tab,
+    // and what makes the second press reuse the first window.
+    window.open(url, focus.kind, 'width=1100,height=800');
+  }
 
   /**
    * Render an explanation.
@@ -75,6 +128,8 @@
     question: null,
     asked: 0,
     right: 0,
+    /** @type {{kind: string, id: any}|null} What the last verdict said it was about. */
+    focus: null,
   };
 
   /** The chrome words for the language in play. */
@@ -98,6 +153,8 @@
     $('q-answer-image').removeAttribute('src');
     $('q-source').hidden = true;
     $('q-source').innerHTML = '';
+    $('q-look').hidden = true;
+    state.focus = null;
     $('q-text').textContent = '…';
     try {
       const r = await fetch(`${QUESTION_URL}?lang=${state.lang}`, { credentials: 'same-origin' });
@@ -215,6 +272,17 @@
         source.hidden = true;
         source.innerHTML = '';
       }
+      // The way into the catalogue, at the record this question was about. Hidden when the
+      // server named none — which happens only where there is genuinely nothing to open.
+      const look = /** @type {HTMLButtonElement} */ ($('q-look'));
+      state.focus = verdict.focus || null;
+      if (state.focus) {
+        look.textContent = words().look;
+        look.title = words()[narrow() ? 'lookTab' : 'lookWindow'];
+        look.hidden = false;
+      } else {
+        look.hidden = true;
+      }
       $('q-verdict').hidden = false;
       $('q-next').focus();
     } catch (_) {
@@ -269,6 +337,7 @@
   });
 
   $('q-next').addEventListener('click', next);
+  $('q-look').addEventListener('click', () => { if (state.focus) openCatalogue(state.focus); });
 
   // Keyboard: the digits pick an option, Enter moves on. A quiz answered with
   // one hand on a keyboard should not need the mouse at all.
