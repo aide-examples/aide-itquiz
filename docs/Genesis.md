@@ -282,3 +282,39 @@ names them, which is the framework's own arrangement for seeded media.
   `Device` became „vereint Prozessor, Speicher und Bildschirm zu einer Maschine …", which
   teaches the part-whole relation in the same breath.
 
+
+## The third batch — what a phone actually carries (2026-09-28)
+
+Six kinds and seventeen products, asked for in one line: 🇩🇪 *„Ergänze die Wissensbasis um alle
+Standardtools, die man oft auf Handys findet: WhatsApp, Mail Client, KI-Agenten usw."*
+
+Mail client · AI assistant · map service · video platform · app store · cloud storage — and
+WhatsApp back under Messenger, which now holds three products from three different makers,
+exactly as that type's note had hoped for.
+
+**The AI assistants are the sharpest thing in the inventory.** *ChatGPT ist nicht OpenAI* and
+*Claude ist nicht Anthropic* is the confusion this system was built for, in the newest place a
+layperson meets it. Beside Telegram, where firm and app share one name, the inventory now holds
+both shapes of the same misunderstanding.
+
+**Every title was resolved against the live API before a row was written**, because the
+attribute descriptions promise *„exactly as the API resolves it"*. The check earned its keep
+five times over: `Virtueller Assistent` is a disambiguation page, `Onlinespeicher` and
+`Navigationssoftware` do not exist, four were redirects, and `de:Claude` reads as a given name
+and is in fact the language model — checked rather than assumed, two hours after the same guess
+went wrong.
+
+**The map service carries no article on purpose.** *Geodienst* is the data behind a map, not the
+app one opens. Third row to say so, after Telegram and Google Search, and the reason is the same
+each time: a reference that is merely close is worse than none.
+
+### Named as a later step, not built
+
+Devices beyond the six already modelled — **laser printer, inkjet printer, 3D printer,
+scanner** — were named on 2026-09-28 with an explicit *„irgendwann"*. They are a natural
+extension of the `Device` type and need nothing new: a kind, its German text with gender and
+genitive, a verified article, and products under it.
+
+Worth knowing before starting: a printer's makers (HP, Canon, Brother, Epson) are absent from
+the inventory, so that batch adds more companies than kinds — the opposite balance to this one,
+where three makers carried seventeen products.
