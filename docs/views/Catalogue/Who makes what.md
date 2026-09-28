@@ -24,6 +24,11 @@ than once above both. What it buys is that the tree states no relation the model
 `expand: 2` opens the makers and their products; the kind opens on a click, which is the
 moment the question *„und was ist das eigentlich?"* actually arises.
 
+**And one level further, where there is one.** A kind that is part of another kind shows it:
+`Microsoft Word` → `Word processor` → `Office suite`. The chain the whole model was built
+around, walkable in the tree — and it appears only for the kinds that have a `part_of`, which
+is the tree saying nothing where the model says nothing.
+
 The product row shows its **name and nothing else**. `icon` belonged there and was taken out
 again: no product carries a mark yet — a logo is a trademark and has to be supplied — so the
 column stood empty across every row, which is a column that says „there is nothing here" in
@@ -37,5 +42,6 @@ base: Company(ORDER BY name)
 expand: 2
 : name, note
   Product(ORDER BY name): name
-    product_type: name, purpose, part_of
+    product_type: name, purpose
+      part_of: name, purpose, part_of
 ```
