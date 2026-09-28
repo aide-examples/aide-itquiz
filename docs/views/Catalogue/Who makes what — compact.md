@@ -35,8 +35,16 @@ And `[LABEL2=purpose]` does **not** reach these nodes — a kind shows its purpo
 in an FK dropdown and in the detail panel, but not here. Measured, not assumed; it is why the
 compact form carries less than it could.
 
-Both are the renderer's, not the template's, and both are worth a look before this form is
-preferred over the long one.
+Both are the renderer's, not the template's, and both are filed together as
+[aide-rap#499](https://github.com/aide-examples/aide-rap/issues/499) — together, because either
+one alone leaves this form worse than the table it replaces: without the subtitle a compact node
+says less than a table, and with it but without the caption fixed it says more in a line that is
+still mostly punctuation.
+
+The second one turned out to be [#498](https://github.com/aide-examples/aide-rap/issues/498) one
+field over, in the same two functions: `GET /api/entities/ProductType` answers with `_label` and
+`_label2`, the same record inside `GET /api/views/<detail>` with `_label` alone. A value the row
+already carries, dropped on the way out.
 
 ## What it cannot do, and why
 
