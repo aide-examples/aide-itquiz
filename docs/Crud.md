@@ -11,11 +11,13 @@ group the selector shows them under.
 - ProductTypeText
 - Product
 - Company
+- FormatGroup
 - FileFormat
 - FormatSupport
 - Protocol
 - Connector
 - ConnectorPort
+- Concept
 
 ## Questions
 
