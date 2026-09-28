@@ -2,37 +2,37 @@
   {
     "name": "Google",
     "note": "One of the largest IT suppliers; makes far more than the search engine it is known for",
-    "wikipedia_de": "Google LLC",
-    "wikipedia_en": "Google"
+    "wikipedia_de": "de:Google LLC",
+    "wikipedia_en": "en:Google"
   },
   {
     "name": "Mozilla",
     "note": "A non-profit foundation rather than a company in the usual sense",
-    "wikipedia_de": "Mozilla",
-    "wikipedia_en": "Mozilla"
+    "wikipedia_de": "de:Mozilla",
+    "wikipedia_en": "en:Mozilla"
   },
   {
     "name": "Microsoft",
     "note": "Makes an operating system, a browser and a search engine — a good reason not to equate a maker with one kind of thing",
-    "wikipedia_de": "Microsoft",
-    "wikipedia_en": "Microsoft"
+    "wikipedia_de": "de:Microsoft",
+    "wikipedia_en": "en:Microsoft"
   },
   {
     "name": "Apple",
     "note": "Makes devices, an operating system and a browser",
-    "wikipedia_de": "Apple",
-    "wikipedia_en": "Apple Inc."
+    "wikipedia_de": "de:Apple",
+    "wikipedia_en": "en:Apple Inc."
   },
   {
     "name": "Apache Software Foundation",
     "note": "A foundation, not a firm — the same distinction Mozilla already makes in this list, and a reason a maker is not always a company",
-    "wikipedia_de": "Apache Software Foundation",
-    "wikipedia_en": "Apache Software Foundation"
+    "wikipedia_de": "de:Apache Software Foundation",
+    "wikipedia_en": "en:The Apache Software Foundation"
   },
   {
     "name": "Signal Foundation",
-    "note": "A non-profit; the thing it makes is often named as if it were the organisation",
-    "wikipedia_en": "Signal Foundation"
+    "note": "A non-profit; the thing it makes is often named as if it were the organisation. And it carries no German article for exactly that reason: de.wikipedia redirects „Signal Foundation\" to the article about the APP. A redirect is not always a canonical title — sometimes it is a change of category, and following it here would assert that the maker and the thing it makes are one page.",
+    "wikipedia_en": "en:Signal Foundation"
   },
   {
     "name": "Telegram (company)",
@@ -41,7 +41,7 @@
   {
     "name": "Wikimedia Foundation",
     "note": "A non-profit that runs Wikipedia and does not write it — the sharpest maker/thing case after Telegram, and the reason this one is in the inventory at all",
-    "wikipedia_de": "Wikimedia Foundation",
-    "wikipedia_en": "Wikimedia Foundation"
+    "wikipedia_de": "de:Wikimedia Foundation",
+    "wikipedia_en": "en:Wikimedia Foundation"
   }
 ]

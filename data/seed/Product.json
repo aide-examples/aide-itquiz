@@ -3,140 +3,140 @@
     "name": "Chrome",
     "product_type": "Browser",
     "manufacturer": "Google",
-    "wikipedia_de": "Google Chrome",
-    "wikipedia_en": "Google Chrome",
+    "wikipedia_de": "de:Google Chrome",
+    "wikipedia_en": "en:Google Chrome",
     "icon": "chrome.png"
   },
   {
     "name": "Firefox",
     "product_type": "Browser",
     "manufacturer": "Mozilla",
-    "wikipedia_de": "Mozilla Firefox",
-    "wikipedia_en": "Firefox",
+    "wikipedia_de": "de:Mozilla Firefox",
+    "wikipedia_en": "en:Firefox",
     "icon": "firefox.png"
   },
   {
     "name": "Edge",
     "product_type": "Browser",
     "manufacturer": "Microsoft",
-    "wikipedia_de": "Microsoft Edge",
-    "wikipedia_en": "Microsoft Edge",
+    "wikipedia_de": "de:Microsoft Edge",
+    "wikipedia_en": "en:Microsoft Edge",
     "icon": "edge.png"
   },
   {
     "name": "Safari",
     "product_type": "Browser",
     "manufacturer": "Apple",
-    "wikipedia_de": "Safari (Browser)",
-    "wikipedia_en": "Safari (web browser)"
+    "wikipedia_de": "de:Safari (Browser)",
+    "wikipedia_en": "en:Safari (web browser)"
   },
   {
     "name": "Google Search",
     "product_type": "Search engine",
     "manufacturer": "Google",
-    "note": "A website you visit with a browser — not the browser itself",
-    "wikipedia_de": "Google Suche",
-    "wikipedia_en": "Google Search"
+    "note": "A website you visit with a browser — not the browser itself. It carries no German article: de.wikipedia redirects „Google Suche\" to the article about the COMPANY, which is exactly the confusion this quiz asks about, so the field stays empty rather than asserting that the search engine and its maker are one page.",
+    "wikipedia_en": "en:Google Search"
   },
   {
     "name": "Bing",
     "product_type": "Search engine",
     "manufacturer": "Microsoft",
-    "wikipedia_en": "Microsoft Bing"
+    "wikipedia_en": "en:Microsoft Bing",
+    "wikipedia_de": "de:Microsoft Bing"
   },
   {
     "name": "Googlebot",
     "product_type": "Spider",
     "manufacturer": "Google",
     "note": "Builds the index that Google Search reads from",
-    "wikipedia_de": "Googlebot",
-    "wikipedia_en": "Googlebot"
+    "wikipedia_de": "de:Googlebot",
+    "wikipedia_en": "en:Googlebot"
   },
   {
     "name": "Android",
     "product_type": "Operating system",
     "manufacturer": "Google",
-    "wikipedia_de": "Android (Betriebssystem)",
-    "wikipedia_en": "Android (operating system)"
+    "wikipedia_de": "de:Android (Betriebssystem)",
+    "wikipedia_en": "en:Android (operating system)"
   },
   {
     "name": "Windows",
     "product_type": "Operating system",
     "manufacturer": "Microsoft",
-    "wikipedia_de": "Microsoft Windows",
-    "wikipedia_en": "Microsoft Windows"
+    "wikipedia_de": "de:Microsoft Windows",
+    "wikipedia_en": "en:Microsoft Windows"
   },
   {
     "name": "iPhone",
     "product_type": "Device",
     "manufacturer": "Apple",
-    "wikipedia_de": "IPhone",
-    "wikipedia_en": "IPhone"
+    "wikipedia_de": "de:IPhone",
+    "wikipedia_en": "en:IPhone"
   },
   {
     "name": "Microsoft Word",
     "product_type": "Word processor",
     "manufacturer": "Microsoft",
-    "wikipedia_de": "Microsoft Word",
-    "wikipedia_en": "Microsoft Word",
+    "wikipedia_de": "de:Microsoft Word",
+    "wikipedia_en": "en:Microsoft Word",
     "icon": "microsoft-word.png"
   },
   {
     "name": "Microsoft Excel",
     "product_type": "Spreadsheet",
     "manufacturer": "Microsoft",
-    "wikipedia_de": "Microsoft Excel",
-    "wikipedia_en": "Microsoft Excel",
+    "wikipedia_de": "de:Microsoft Excel",
+    "wikipedia_en": "en:Microsoft Excel",
     "icon": "microsoft-excel.png"
   },
   {
     "name": "Microsoft Office",
     "product_type": "Office suite",
     "manufacturer": "Microsoft",
-    "wikipedia_de": "Microsoft Office",
-    "wikipedia_en": "Microsoft Office",
+    "wikipedia_de": "de:Microsoft Office",
+    "wikipedia_en": "en:Microsoft Office",
     "icon": "microsoft-office.png"
   },
   {
     "name": "OpenOffice Writer",
     "product_type": "Word processor",
     "manufacturer": "Apache Software Foundation",
-    "wikipedia_de": "Apache OpenOffice",
-    "wikipedia_en": "Apache OpenOffice"
+    "wikipedia_de": "de:Apache OpenOffice",
+    "wikipedia_en": "en:Apache OpenOffice"
   },
   {
     "name": "OpenOffice Calc",
     "product_type": "Spreadsheet",
     "manufacturer": "Apache Software Foundation",
-    "wikipedia_de": "Apache OpenOffice",
-    "wikipedia_en": "Apache OpenOffice"
+    "wikipedia_de": "de:Apache OpenOffice",
+    "wikipedia_en": "en:Apache OpenOffice"
   },
   {
     "name": "Apache OpenOffice",
     "product_type": "Office suite",
     "manufacturer": "Apache Software Foundation",
-    "wikipedia_de": "Apache OpenOffice",
-    "wikipedia_en": "Apache OpenOffice"
+    "wikipedia_de": "de:Apache OpenOffice",
+    "wikipedia_en": "en:Apache OpenOffice"
   },
   {
     "name": "Signal",
     "product_type": "Messenger",
     "manufacturer": "Signal Foundation",
-    "wikipedia_de": "Signal (Messenger)",
-    "wikipedia_en": "Signal (messaging app)"
+    "wikipedia_de": "de:Signal (Messenger)",
+    "wikipedia_en": "en:Signal (software)"
   },
   {
     "name": "Telegram",
     "product_type": "Messenger",
     "manufacturer": "Telegram (company)",
-    "wikipedia_de": "Telegram",
-    "wikipedia_en": "Telegram (software)"
+    "wikipedia_de": "de:Telegram",
+    "wikipedia_en": "en:Telegram (software)"
   },
   {
     "name": "Wikipedia",
     "product_type": "Online encyclopedia",
     "manufacturer": "Wikimedia Foundation",
-    "wikipedia_de": "Wikipedia",
-    "wikipedia_en": "Wikipedia"
+    "wikipedia_de": "de:Wikipedia",
+    "wikipedia_en": "en:Wikipedia"
   }
 ]
