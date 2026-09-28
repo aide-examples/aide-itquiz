@@ -3,89 +3,124 @@
     "name": "Browser",
     "purpose": "displays web pages",
     "note": "Many people set a search engine as their browser's home page, which is why the two seem to be one thing",
-    "icon": "browser.svg"
+    "icon": "browser.svg",
+    "wikipedia_de": "Webbrowser",
+    "wikipedia_en": "Web browser"
   },
   {
     "name": "Search engine",
     "purpose": "keeps an index of web pages and finds pages in it — and is itself a website",
     "note": "It is reached THROUGH a browser, the way a shop is reached through a door",
-    "icon": "search-engine.svg"
+    "icon": "search-engine.svg",
+    "wikipedia_de": "Suchmaschine",
+    "wikipedia_en": "Search engine"
   },
   {
     "name": "Spider",
     "purpose": "walks web pages and builds the index a search engine keeps",
     "note": "Nobody uses a spider directly; it works for the search engine that owns it",
-    "icon": "spider.svg"
+    "icon": "spider.svg",
+    "wikipedia_de": "Webcrawler",
+    "wikipedia_en": "Web crawler"
   },
   {
     "name": "Operating system",
     "purpose": "runs a device and the programs on it",
-    "icon": "operating-system.svg"
+    "icon": "operating-system.svg",
+    "wikipedia_de": "Betriebssystem",
+    "wikipedia_en": "Operating system"
   },
   {
     "name": "Device",
     "purpose": "brings processor, memory and screen together into one machine you hold or sit in front of",
-    "icon": "device.svg"
+    "icon": "device.svg",
+    "wikipedia_de": "Computer",
+    "wikipedia_en": "Computer"
   },
   {
     "name": "Word processor",
     "purpose": "writes and formats documents that are meant to be read as pages",
     "note": "Confused with the office suite it usually arrives in",
     "part_of": "Office suite",
-    "icon": "word-processor.svg"
+    "icon": "word-processor.svg",
+    "wikipedia_de": "Textverarbeitung",
+    "wikipedia_en": "Word processor"
   },
   {
     "name": "Spreadsheet",
     "purpose": "holds numbers in a grid and calculates with them",
     "note": "The second thing in nearly every office suite, and the reason the suite is not a word processor",
     "part_of": "Office suite",
-    "icon": "spreadsheet.svg"
+    "icon": "spreadsheet.svg",
+    "wikipedia_de": "Tabellenkalkulation",
+    "wikipedia_en": "Spreadsheet"
   },
   {
     "name": "Office suite",
     "purpose": "bundles several programs that are sold and installed as one — typically a word processor, a spreadsheet and a presentation program",
     "note": "The whole point of having this type: a suite is not any of the things inside it, and that is what makes „ist MS-Office ein Textprogramm?“ a real question",
-    "icon": "office-suite.svg"
+    "icon": "office-suite.svg",
+    "wikipedia_de": "Office-Paket",
+    "wikipedia_en": "Productivity software"
   },
   {
     "name": "Messenger",
     "purpose": "carries messages between people who each have it installed",
     "note": "Three of them in this inventory from three different makers — a good place to see that the maker is not the thing",
-    "icon": "messenger.svg"
+    "icon": "messenger.svg",
+    "wikipedia_de": "Instant Messaging",
+    "wikipedia_en": "Instant messaging"
   },
   {
     "name": "Processor",
     "purpose": "carries out the steps a program is made of — the part that actually computes",
     "part_of": "Device",
     "note": "Named as if it were the whole machine: „ein schneller Rechner“ usually means this one part",
-    "icon": "processor.svg"
+    "icon": "processor.svg",
+    "wikipedia_de": "Hauptprozessor",
+    "wikipedia_en": "Central processing unit"
   },
   {
     "name": "Working memory",
     "purpose": "holds what is being worked on right now, and is empty again after the device is switched off",
     "part_of": "Device",
     "note": "Half of the commonest confusion in this whole inventory — both it and the storage are called „Speicher“ in German",
-    "icon": "working-memory.svg"
+    "icon": "working-memory.svg",
+    "wikipedia_de": "Arbeitsspeicher",
+    "wikipedia_en": "Random-access memory"
   },
   {
     "name": "Storage medium",
     "purpose": "keeps files so they are still there after the device has been switched off",
     "part_of": "Device",
     "note": "The other half: „mein Speicher ist voll“ is nearly always this one, and „der Rechner ist langsam“ nearly always the other",
-    "icon": "storage-medium.svg"
+    "icon": "storage-medium.svg",
+    "wikipedia_de": "Massenspeicher",
+    "wikipedia_en": "Computer data storage"
   },
   {
     "name": "Screen",
     "purpose": "shows what the device puts out, and takes the touches on it as input",
     "part_of": "Device",
     "note": "On a phone it is also the keyboard, which is why a broken one takes the whole device with it",
-    "icon": "screen.svg"
+    "icon": "screen.svg",
+    "wikipedia_de": "Bildschirm",
+    "wikipedia_en": "Computer monitor"
   },
   {
     "name": "Battery",
     "purpose": "stores electricity so the device runs without a cable",
     "part_of": "Device",
     "note": "The one part that wears out by being used normally, which no other part in this list does",
-    "icon": "battery.svg"
+    "icon": "battery.svg",
+    "wikipedia_de": "Akkumulator",
+    "wikipedia_en": "Rechargeable battery"
+  },
+  {
+    "name": "Online encyclopedia",
+    "purpose": "collects knowledge in articles that its readers write and correct themselves",
+    "note": "A website, not a program — and therefore the counterpart to the search engine: one FINDS pages, this one IS a page",
+    "wikipedia_de": "Onlineenzyklopädie",
+    "wikipedia_en": "Online encyclopedia"
   }
 ]

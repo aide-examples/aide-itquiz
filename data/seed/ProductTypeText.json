@@ -111,5 +111,13 @@
     "gender": "m",
     "purpose": "speichert Strom, damit das Gerät ohne Kabel läuft",
     "genitive": "Akkus"
+  },
+  {
+    "product_type": "Online encyclopedia",
+    "language": "de",
+    "name": "Onlinelexikon",
+    "purpose": "sammelt Wissen in Artikeln, die die Leser selbst schreiben und berichtigen",
+    "gender": "n",
+    "genitive": "Onlinelexikons"
   }
 ]

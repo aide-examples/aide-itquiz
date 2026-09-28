@@ -2,98 +2,141 @@
   {
     "name": "Chrome",
     "product_type": "Browser",
-    "manufacturer": "Google"
+    "manufacturer": "Google",
+    "wikipedia_de": "Google Chrome",
+    "wikipedia_en": "Google Chrome",
+    "icon": "chrome.png"
   },
   {
     "name": "Firefox",
     "product_type": "Browser",
-    "manufacturer": "Mozilla"
+    "manufacturer": "Mozilla",
+    "wikipedia_de": "Mozilla Firefox",
+    "wikipedia_en": "Firefox",
+    "icon": "firefox.png"
   },
   {
     "name": "Edge",
     "product_type": "Browser",
-    "manufacturer": "Microsoft"
+    "manufacturer": "Microsoft",
+    "wikipedia_de": "Microsoft Edge",
+    "wikipedia_en": "Microsoft Edge",
+    "icon": "edge.png"
   },
   {
     "name": "Safari",
     "product_type": "Browser",
-    "manufacturer": "Apple"
+    "manufacturer": "Apple",
+    "wikipedia_de": "Safari (Browser)",
+    "wikipedia_en": "Safari (web browser)"
   },
   {
     "name": "Google Search",
     "product_type": "Search engine",
     "manufacturer": "Google",
-    "note": "A website you visit with a browser — not the browser itself"
+    "note": "A website you visit with a browser — not the browser itself",
+    "wikipedia_de": "Google Suche",
+    "wikipedia_en": "Google Search"
   },
   {
     "name": "Bing",
     "product_type": "Search engine",
-    "manufacturer": "Microsoft"
+    "manufacturer": "Microsoft",
+    "wikipedia_en": "Microsoft Bing"
   },
   {
     "name": "Googlebot",
     "product_type": "Spider",
     "manufacturer": "Google",
-    "note": "Builds the index that Google Search reads from"
+    "note": "Builds the index that Google Search reads from",
+    "wikipedia_de": "Googlebot",
+    "wikipedia_en": "Googlebot"
   },
   {
     "name": "Android",
     "product_type": "Operating system",
-    "manufacturer": "Google"
+    "manufacturer": "Google",
+    "wikipedia_de": "Android (Betriebssystem)",
+    "wikipedia_en": "Android (operating system)"
   },
   {
     "name": "Windows",
     "product_type": "Operating system",
-    "manufacturer": "Microsoft"
+    "manufacturer": "Microsoft",
+    "wikipedia_de": "Microsoft Windows",
+    "wikipedia_en": "Microsoft Windows"
   },
   {
     "name": "iPhone",
     "product_type": "Device",
-    "manufacturer": "Apple"
+    "manufacturer": "Apple",
+    "wikipedia_de": "IPhone",
+    "wikipedia_en": "IPhone"
   },
   {
     "name": "Microsoft Word",
     "product_type": "Word processor",
-    "manufacturer": "Microsoft"
+    "manufacturer": "Microsoft",
+    "wikipedia_de": "Microsoft Word",
+    "wikipedia_en": "Microsoft Word",
+    "icon": "microsoft-word.png"
   },
   {
     "name": "Microsoft Excel",
     "product_type": "Spreadsheet",
-    "manufacturer": "Microsoft"
+    "manufacturer": "Microsoft",
+    "wikipedia_de": "Microsoft Excel",
+    "wikipedia_en": "Microsoft Excel",
+    "icon": "microsoft-excel.png"
   },
   {
     "name": "Microsoft Office",
     "product_type": "Office suite",
-    "manufacturer": "Microsoft"
+    "manufacturer": "Microsoft",
+    "wikipedia_de": "Microsoft Office",
+    "wikipedia_en": "Microsoft Office",
+    "icon": "microsoft-office.png"
   },
   {
     "name": "OpenOffice Writer",
     "product_type": "Word processor",
-    "manufacturer": "Apache Software Foundation"
+    "manufacturer": "Apache Software Foundation",
+    "wikipedia_de": "Apache OpenOffice",
+    "wikipedia_en": "Apache OpenOffice"
   },
   {
     "name": "OpenOffice Calc",
     "product_type": "Spreadsheet",
-    "manufacturer": "Apache Software Foundation"
+    "manufacturer": "Apache Software Foundation",
+    "wikipedia_de": "Apache OpenOffice",
+    "wikipedia_en": "Apache OpenOffice"
   },
   {
     "name": "Apache OpenOffice",
     "product_type": "Office suite",
-    "manufacturer": "Apache Software Foundation"
+    "manufacturer": "Apache Software Foundation",
+    "wikipedia_de": "Apache OpenOffice",
+    "wikipedia_en": "Apache OpenOffice"
   },
   {
     "name": "Signal",
     "product_type": "Messenger",
-    "manufacturer": "Signal Foundation"
+    "manufacturer": "Signal Foundation",
+    "wikipedia_de": "Signal (Messenger)",
+    "wikipedia_en": "Signal (messaging app)"
   },
   {
     "name": "Telegram",
     "product_type": "Messenger",
-    "manufacturer": "Telegram (company)"
+    "manufacturer": "Telegram (company)",
+    "wikipedia_de": "Telegram",
+    "wikipedia_en": "Telegram (software)"
   },
   {
-    "name": "WhatsApp",
-    "product_type": "Messenger",
-    "manufacturer": "Meta"
+    "name": "Wikipedia",
+    "product_type": "Online encyclopedia",
+    "manufacturer": "Wikimedia Foundation",
+    "wikipedia_de": "Wikipedia",
+    "wikipedia_en": "Wikipedia"
   }
 ]
