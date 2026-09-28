@@ -11,6 +11,9 @@ group the selector shows them under.
 - ProductTypeText
 - Product
 - Company
+- FileFormat
+- FormatSupport
+- Protocol
 
 ## Questions
 

@@ -1,15 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 821.201171875 1008" width="821.201171875" height="1008">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 934.5068359375 1008" width="934.5068359375" height="1008">
   <defs>
     <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
       <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
     </marker>
-    <clipPath id="clip-AskedQuestion"><rect x="340" y="60" width="118.9306640625" height="224" rx="3"/></clipPath>
-    <clipPath id="clip-Company"><rect x="80" y="160" width="84" height="80" rx="3"/></clipPath>
-    <clipPath id="clip-Product"><rect x="150" y="380" width="84" height="112" rx="3"/></clipPath>
-    <clipPath id="clip-ProductType"><rect x="480" y="570" width="87.37109375" height="80" rx="3"/></clipPath>
-    <clipPath id="clip-ProductTypeText"><rect x="660" y="550" width="111.201171875" height="128" rx="3"/></clipPath>
-    <clipPath id="clip-QuestionPhrase"><rect x="620" y="250" width="111.201171875" height="96" rx="3"/></clipPath>
-    <clipPath id="clip-QuestionTemplate"><rect x="530" y="60" width="126.7236328125" height="112" rx="3"/></clipPath>
+    <clipPath id="clip-AskedQuestion"><rect x="660" y="300" width="118.9306640625" height="224" rx="3"/></clipPath>
+    <clipPath id="clip-Company"><rect x="760" y="120" width="124.5068359375" height="112" rx="3"/></clipPath>
+    <clipPath id="clip-FileFormat"><rect x="60" y="70" width="124.5068359375" height="144" rx="3"/></clipPath>
+    <clipPath id="clip-FormatSupport"><rect x="270" y="60" width="110.048828125" height="96" rx="3"/></clipPath>
+    <clipPath id="clip-Product"><rect x="500" y="60" width="124.5068359375" height="144" rx="3"/></clipPath>
+    <clipPath id="clip-ProductType"><rect x="390" y="280" width="124.5068359375" height="144" rx="3"/></clipPath>
+    <clipPath id="clip-ProductTypeText"><rect x="240" y="220" width="111.201171875" height="144" rx="3"/></clipPath>
+    <clipPath id="clip-QuestionPhrase"><rect x="70" y="240" width="111.201171875" height="96" rx="3"/></clipPath>
+    <clipPath id="clip-QuestionTemplate"><rect x="170" y="400" width="126.7236328125" height="112" rx="3"/></clipPath>
     <clipPath id="clip-Audit"><rect x="40" y="590" width="130.044921875" height="24" rx="3"/></clipPath>
     <clipPath id="clip-BackgroundTask"><rect x="40" y="620" width="130.044921875" height="24" rx="3"/></clipPath>
     <clipPath id="clip-Feed"><rect x="40" y="650" width="130.044921875" height="24" rx="3"/></clipPath>
@@ -27,93 +29,125 @@
     <clipPath id="clip-UsageStats"><rect x="210" y="770" width="90" height="24" rx="3"/></clipPath>
     <clipPath id="clip-WorkerStats"><rect x="210" y="800" width="90" height="24" rx="3"/></clipPath>
   </defs>
-  <rect width="821.201171875" height="1008" fill="white"/>
+  <rect width="934.5068359375" height="1008" fill="white"/>
 
   <!-- Relationships -->
-  <path d="M 458.9306640625 128 L 483.9306640625 128 L 530 122.94812930861389" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 340 224 L 315 224 L 224.49056603773585 380" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 458.9306640625 256 L 483.9306640625 256 L 519.1934697210452 570" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 340 192 L 315 192 L 164 198.25906735751295" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 340 240 L 315 240 L 227.14285714285714 380" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 458.9306640625 272 L 483.9306640625 272 L 518.9808270155326 570" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 340 208 L 315 208 L 164 201.74093264248705" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 234 480 L 259 480 L 480 588.5438942140954" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 150 416 L 125 416 L 122.55555555555556 240" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 660 618 L 635 618 L 567.37109375 613.1396136367624" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 620 286 L 595 286 L 593.9014533547794 172" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 660 464 L 635 464 L 296.7236328125 457.26206758210697" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 660 336 L 635 336 L 587.9286822150735 204" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 660 400 L 635 400 L 514.5068359375 368.3514087611719" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 778.9306640625 368 L 803.9306640625 368 L 816.9092814127604 232" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 660 352 L 635 352 L 586.0613902698864 204" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 660 416 L 635 416 L 514.5068359375 373.8018783482292" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 778.9306640625 384 L 803.9306640625 384 L 817.3203688401443 232" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 380.048828125 128 L 405.048828125 128 L 500 130.41598981224084" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 270 144 L 245 144 L 184.5068359375 143.01434055333453" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 500 192 L 475 192 L 462.4893798828125 280" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 624.5068359375 176 L 649.5068359375 176 L 760 176" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 514.5068359375 316 A 18 18 0 0 0 514.5068359375 280" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 351.201171875 352 L 376.201171875 352 L 390 352" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 181.201171875 324 L 206.201171875 324 L 221.83911872632575 400" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
 
   <!-- Class boxes -->
   <rect x="26" y="576" width="288" height="262" fill="none" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="6,4" rx="6"/>
-  <rect x="340" y="60" width="118.9306640625" height="224" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="340" y="60" width="118.9306640625" height="24" fill="#DCFCE7" clip-path="url(#clip-AskedQuestion)"/>
-  <text x="399.46533203125" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">AskedQuestion</text>
-  <line x1="340" y1="84" x2="458.9306640625" y2="84" stroke="#333" stroke-width="1"/>
-  <text x="345" y="99.5" font-family="Arial, sans-serif" font-size="10" fill="#000">user: user</text>
-  <text x="345" y="115.5" font-family="Arial, sans-serif" font-size="10" fill="#000">language: Language</text>
-  <text x="345" y="131.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">template</text>
-  <text x="345" y="147.5" font-family="Arial, sans-serif" font-size="10" fill="#000">asked_at: timestamp</text>
-  <text x="345" y="163.5" font-family="Arial, sans-serif" font-size="10" fill="#000">quality: AnswerQuality</text>
-  <text x="345" y="179.5" font-family="Arial, sans-serif" font-size="10" fill="#000">given_answer: string</text>
-  <text x="345" y="195.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">subject_company</text>
-  <text x="345" y="211.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">object_company</text>
-  <text x="345" y="227.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">subject_product</text>
-  <text x="345" y="243.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">object_product</text>
-  <text x="345" y="259.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">subject_product_type</text>
-  <text x="345" y="275.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">object_product_type</text>
-  <rect x="80" y="160" width="84" height="80" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="80" y="160" width="84" height="24" fill="#E0E7FF" clip-path="url(#clip-Company)"/>
-  <text x="122" y="176" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Company</text>
-  <line x1="80" y1="184" x2="164" y2="184" stroke="#333" stroke-width="1"/>
-  <text x="85" y="199.5" font-family="Arial, sans-serif" font-size="10" fill="#000">name: string</text>
-  <line x1="85" y1="201.5" x2="140.0244140625" y2="201.5" stroke="#000" stroke-width="1"/>
-  <text x="85" y="215.5" font-family="Arial, sans-serif" font-size="10" fill="#000">logo: media</text>
-  <text x="85" y="231.5" font-family="Arial, sans-serif" font-size="10" fill="#000">note: string</text>
-  <rect x="150" y="380" width="84" height="112" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="150" y="380" width="84" height="24" fill="#E0E7FF" clip-path="url(#clip-Product)"/>
-  <text x="192" y="396" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Product</text>
-  <line x1="150" y1="404" x2="234" y2="404" stroke="#333" stroke-width="1"/>
-  <text x="155" y="419.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">manufacturer</text>
-  <text x="155" y="435.5" font-family="Arial, sans-serif" font-size="10" fill="#000">name: string</text>
-  <line x1="155" y1="437.5" x2="210.0244140625" y2="437.5" stroke="#000" stroke-width="1"/>
-  <text x="155" y="451.5" font-family="Arial, sans-serif" font-size="10" fill="#000">icon: media</text>
-  <text x="155" y="467.5" font-family="Arial, sans-serif" font-size="10" fill="#000">note: string</text>
-  <text x="155" y="483.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">product_type</text>
-  <rect x="480" y="570" width="87.37109375" height="80" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="480" y="570" width="87.37109375" height="24" fill="#E0E7FF" clip-path="url(#clip-ProductType)"/>
-  <text x="523.685546875" y="586" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">ProductType</text>
-  <line x1="480" y1="594" x2="567.37109375" y2="594" stroke="#333" stroke-width="1"/>
-  <text x="485" y="609.5" font-family="Arial, sans-serif" font-size="10" fill="#000">name: string</text>
-  <line x1="485" y1="611.5" x2="540.0244140625" y2="611.5" stroke="#000" stroke-width="1"/>
-  <text x="485" y="625.5" font-family="Arial, sans-serif" font-size="10" fill="#000">purpose: string</text>
-  <text x="485" y="641.5" font-family="Arial, sans-serif" font-size="10" fill="#000">note: string</text>
-  <rect x="660" y="550" width="111.201171875" height="128" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="660" y="550" width="111.201171875" height="24" fill="#E0E7FF" clip-path="url(#clip-ProductTypeText)"/>
-  <text x="715.6005859375" y="566" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">ProductTypeText</text>
-  <line x1="660" y1="574" x2="771.201171875" y2="574" stroke="#333" stroke-width="1"/>
-  <text x="665" y="589.5" font-family="Arial, sans-serif" font-size="10" fill="#000">language: Language</text>
-  <text x="665" y="605.5" font-family="Arial, sans-serif" font-size="10" fill="#000">name: string</text>
-  <text x="665" y="621.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">product_type</text>
-  <text x="665" y="637.5" font-family="Arial, sans-serif" font-size="10" fill="#000">purpose: string</text>
-  <text x="665" y="653.5" font-family="Arial, sans-serif" font-size="10" fill="#000">gender: Gender</text>
-  <text x="665" y="669.5" font-family="Arial, sans-serif" font-size="10" fill="#000">note: string</text>
-  <rect x="620" y="250" width="111.201171875" height="96" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="620" y="250" width="111.201171875" height="24" fill="#FEF3C7" clip-path="url(#clip-QuestionPhrase)"/>
-  <text x="675.6005859375" y="266" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">QuestionPhrase</text>
-  <line x1="620" y1="274" x2="731.201171875" y2="274" stroke="#333" stroke-width="1"/>
-  <text x="625" y="289.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">template</text>
-  <text x="625" y="305.5" font-family="Arial, sans-serif" font-size="10" fill="#000">language: Language</text>
-  <text x="625" y="321.5" font-family="Arial, sans-serif" font-size="10" fill="#000">text: string</text>
-  <text x="625" y="337.5" font-family="Arial, sans-serif" font-size="10" fill="#000">explanation: string</text>
-  <rect x="530" y="60" width="126.7236328125" height="112" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="530" y="60" width="126.7236328125" height="24" fill="#FEF3C7" clip-path="url(#clip-QuestionTemplate)"/>
-  <text x="593.36181640625" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">QuestionTemplate</text>
-  <line x1="530" y1="84" x2="656.7236328125" y2="84" stroke="#333" stroke-width="1"/>
-  <text x="535" y="99.5" font-family="Arial, sans-serif" font-size="10" fill="#000">key: string</text>
-  <line x1="535" y1="101.5" x2="580.5712890625" y2="101.5" stroke="#000" stroke-width="1"/>
-  <text x="535" y="115.5" font-family="Arial, sans-serif" font-size="10" fill="#000">subject_kind: EntityKind</text>
-  <text x="535" y="131.5" font-family="Arial, sans-serif" font-size="10" fill="#000">object_kind: EntityKind</text>
-  <text x="535" y="147.5" font-family="Arial, sans-serif" font-size="10" fill="#000">answer_kind: EntityKind</text>
-  <text x="535" y="163.5" font-family="Arial, sans-serif" font-size="10" fill="#000">note: string</text>
+  <rect x="660" y="300" width="118.9306640625" height="224" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="660" y="300" width="118.9306640625" height="24" fill="#DCFCE7" clip-path="url(#clip-AskedQuestion)"/>
+  <text x="719.46533203125" y="316" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">AskedQuestion</text>
+  <line x1="660" y1="324" x2="778.9306640625" y2="324" stroke="#333" stroke-width="1"/>
+  <text x="665" y="339.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">subject_product</text>
+  <text x="665" y="355.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">object_product</text>
+  <text x="665" y="371.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">subject_company</text>
+  <text x="665" y="387.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">object_company</text>
+  <text x="665" y="403.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">subject_product_type</text>
+  <text x="665" y="419.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">object_product_type</text>
+  <text x="665" y="435.5" font-family="Arial, sans-serif" font-size="10" fill="#000">user: user</text>
+  <text x="665" y="451.5" font-family="Arial, sans-serif" font-size="10" fill="#000">language: Language</text>
+  <text x="665" y="467.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">template</text>
+  <text x="665" y="483.5" font-family="Arial, sans-serif" font-size="10" fill="#000">asked_at: timestamp</text>
+  <text x="665" y="499.5" font-family="Arial, sans-serif" font-size="10" fill="#000">quality: AnswerQuality</text>
+  <text x="665" y="515.5" font-family="Arial, sans-serif" font-size="10" fill="#000">given_answer: string</text>
+  <rect x="760" y="120" width="124.5068359375" height="112" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="760" y="120" width="124.5068359375" height="24" fill="#E0E7FF" clip-path="url(#clip-Company)"/>
+  <text x="822.25341796875" y="136" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Company</text>
+  <line x1="760" y1="144" x2="884.5068359375" y2="144" stroke="#333" stroke-width="1"/>
+  <text x="765" y="159.5" font-family="Arial, sans-serif" font-size="10" fill="#000">name: string</text>
+  <line x1="765" y1="161.5" x2="820.0244140625" y2="161.5" stroke="#000" stroke-width="1"/>
+  <text x="765" y="175.5" font-family="Arial, sans-serif" font-size="10" fill="#000">logo: media</text>
+  <text x="765" y="191.5" font-family="Arial, sans-serif" font-size="10" fill="#000">wikipedia_de: wikipedia</text>
+  <text x="765" y="207.5" font-family="Arial, sans-serif" font-size="10" fill="#000">wikipedia_en: wikipedia</text>
+  <text x="765" y="223.5" font-family="Arial, sans-serif" font-size="10" fill="#000">note: longString</text>
+  <rect x="60" y="70" width="124.5068359375" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="60" y="70" width="124.5068359375" height="24" fill="#E0E7FF" clip-path="url(#clip-FileFormat)"/>
+  <text x="122.25341796875" y="86" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">FileFormat</text>
+  <line x1="60" y1="94" x2="184.5068359375" y2="94" stroke="#333" stroke-width="1"/>
+  <text x="65" y="109.5" font-family="Arial, sans-serif" font-size="10" fill="#000">name: string</text>
+  <line x1="65" y1="111.5" x2="120.0244140625" y2="111.5" stroke="#000" stroke-width="1"/>
+  <text x="65" y="125.5" font-family="Arial, sans-serif" font-size="10" fill="#000">extension: string</text>
+  <text x="65" y="141.5" font-family="Arial, sans-serif" font-size="10" fill="#000">purpose: longString</text>
+  <text x="65" y="157.5" font-family="Arial, sans-serif" font-size="10" fill="#000">icon: media</text>
+  <text x="65" y="173.5" font-family="Arial, sans-serif" font-size="10" fill="#000">wikipedia_de: wikipedia</text>
+  <text x="65" y="189.5" font-family="Arial, sans-serif" font-size="10" fill="#000">wikipedia_en: wikipedia</text>
+  <text x="65" y="205.5" font-family="Arial, sans-serif" font-size="10" fill="#000">note: longString</text>
+  <rect x="270" y="60" width="110.048828125" height="96" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="270" y="60" width="110.048828125" height="24" fill="#E0E7FF" clip-path="url(#clip-FormatSupport)"/>
+  <text x="325.0244140625" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">FormatSupport</text>
+  <line x1="270" y1="84" x2="380.048828125" y2="84" stroke="#333" stroke-width="1"/>
+  <text x="275" y="99.5" font-family="Arial, sans-serif" font-size="10" fill="#000">support: FileSupport</text>
+  <text x="275" y="115.5" font-family="Arial, sans-serif" font-size="10" fill="#000">note: longString</text>
+  <text x="275" y="131.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">product</text>
+  <text x="275" y="147.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">format</text>
+  <rect x="500" y="60" width="124.5068359375" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="500" y="60" width="124.5068359375" height="24" fill="#E0E7FF" clip-path="url(#clip-Product)"/>
+  <text x="562.25341796875" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Product</text>
+  <line x1="500" y1="84" x2="624.5068359375" y2="84" stroke="#333" stroke-width="1"/>
+  <text x="505" y="99.5" font-family="Arial, sans-serif" font-size="10" fill="#000">name: string</text>
+  <line x1="505" y1="101.5" x2="560.0244140625" y2="101.5" stroke="#000" stroke-width="1"/>
+  <text x="505" y="115.5" font-family="Arial, sans-serif" font-size="10" fill="#000">icon: media</text>
+  <text x="505" y="131.5" font-family="Arial, sans-serif" font-size="10" fill="#000">wikipedia_de: wikipedia</text>
+  <text x="505" y="147.5" font-family="Arial, sans-serif" font-size="10" fill="#000">wikipedia_en: wikipedia</text>
+  <text x="505" y="163.5" font-family="Arial, sans-serif" font-size="10" fill="#000">note: longString</text>
+  <text x="505" y="179.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">manufacturer</text>
+  <text x="505" y="195.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">product_type</text>
+  <rect x="390" y="280" width="124.5068359375" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="390" y="280" width="124.5068359375" height="24" fill="#E0E7FF" clip-path="url(#clip-ProductType)"/>
+  <text x="452.25341796875" y="296" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">ProductType</text>
+  <line x1="390" y1="304" x2="514.5068359375" y2="304" stroke="#333" stroke-width="1"/>
+  <text x="395" y="319.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">part_of</text>
+  <text x="395" y="335.5" font-family="Arial, sans-serif" font-size="10" fill="#000">name: string</text>
+  <line x1="395" y1="337.5" x2="450.0244140625" y2="337.5" stroke="#000" stroke-width="1"/>
+  <text x="395" y="351.5" font-family="Arial, sans-serif" font-size="10" fill="#000">purpose: longString</text>
+  <text x="395" y="367.5" font-family="Arial, sans-serif" font-size="10" fill="#000">icon: media</text>
+  <text x="395" y="383.5" font-family="Arial, sans-serif" font-size="10" fill="#000">wikipedia_de: wikipedia</text>
+  <text x="395" y="399.5" font-family="Arial, sans-serif" font-size="10" fill="#000">wikipedia_en: wikipedia</text>
+  <text x="395" y="415.5" font-family="Arial, sans-serif" font-size="10" fill="#000">note: longString</text>
+  <rect x="240" y="220" width="111.201171875" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="240" y="220" width="111.201171875" height="24" fill="#E0E7FF" clip-path="url(#clip-ProductTypeText)"/>
+  <text x="295.6005859375" y="236" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">ProductTypeText</text>
+  <line x1="240" y1="244" x2="351.201171875" y2="244" stroke="#333" stroke-width="1"/>
+  <text x="245" y="259.5" font-family="Arial, sans-serif" font-size="10" fill="#000">language: Language</text>
+  <text x="245" y="275.5" font-family="Arial, sans-serif" font-size="10" fill="#000">name: string</text>
+  <text x="245" y="291.5" font-family="Arial, sans-serif" font-size="10" fill="#000">purpose: longString</text>
+  <text x="245" y="307.5" font-family="Arial, sans-serif" font-size="10" fill="#000">genitive: string</text>
+  <text x="245" y="323.5" font-family="Arial, sans-serif" font-size="10" fill="#000">gender: Gender</text>
+  <text x="245" y="339.5" font-family="Arial, sans-serif" font-size="10" fill="#000">note: longString</text>
+  <text x="245" y="355.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">product_type</text>
+  <rect x="70" y="240" width="111.201171875" height="96" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="70" y="240" width="111.201171875" height="24" fill="#FEF3C7" clip-path="url(#clip-QuestionPhrase)"/>
+  <text x="125.6005859375" y="256" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">QuestionPhrase</text>
+  <line x1="70" y1="264" x2="181.201171875" y2="264" stroke="#333" stroke-width="1"/>
+  <text x="75" y="279.5" font-family="Arial, sans-serif" font-size="10" fill="#000">language: Language</text>
+  <text x="75" y="295.5" font-family="Arial, sans-serif" font-size="10" fill="#000">text: longString</text>
+  <text x="75" y="311.5" font-family="Arial, sans-serif" font-size="10" fill="#000">explanation: text</text>
+  <text x="75" y="327.5" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#000">template</text>
+  <rect x="170" y="400" width="126.7236328125" height="112" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="170" y="400" width="126.7236328125" height="24" fill="#FEF3C7" clip-path="url(#clip-QuestionTemplate)"/>
+  <text x="233.36181640625" y="416" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">QuestionTemplate</text>
+  <line x1="170" y1="424" x2="296.7236328125" y2="424" stroke="#333" stroke-width="1"/>
+  <text x="175" y="439.5" font-family="Arial, sans-serif" font-size="10" fill="#000">key: string</text>
+  <line x1="175" y1="441.5" x2="220.5712890625" y2="441.5" stroke="#000" stroke-width="1"/>
+  <text x="175" y="455.5" font-family="Arial, sans-serif" font-size="10" fill="#000">subject_kind: EntityKind</text>
+  <text x="175" y="471.5" font-family="Arial, sans-serif" font-size="10" fill="#000">object_kind: EntityKind</text>
+  <text x="175" y="487.5" font-family="Arial, sans-serif" font-size="10" fill="#000">answer_kind: EntityKind</text>
+  <text x="175" y="503.5" font-family="Arial, sans-serif" font-size="10" fill="#000">note: longString</text>
   <rect x="40" y="590" width="130.044921875" height="24" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
   <rect x="40" y="590" width="130.044921875" height="24" fill="#9ca3af" clip-path="url(#clip-Audit)"/>
   <text x="105.0224609375" y="606" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Audit</text>
@@ -171,24 +205,26 @@
   <text x="160" y="908" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Enums:</text>
   <rect x="201.9013671875" y="899" width="46.52197265625" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
   <text x="204.9013671875" y="907" font-family="Arial, sans-serif" font-size="9">EntityKind</text>
-  <rect x="253.42333984375" y="899" width="46.04296875" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="256.42333984375" y="907" font-family="Arial, sans-serif" font-size="9">Language</text>
-  <rect x="304.46630859375" y="899" width="64.02099609375" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="307.46630859375" y="907" font-family="Arial, sans-serif" font-size="9">AnswerQuality</text>
-  <rect x="373.4873046875" y="899" width="36.01904296875" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="376.4873046875" y="907" font-family="Arial, sans-serif" font-size="9">Gender</text>
-  <rect x="414.50634765625" y="899" width="51.52734375" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="417.50634765625" y="907" font-family="Arial, sans-serif" font-size="9">AuditAction</text>
-  <rect x="471.03369140625" y="899" width="90.55078125" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="474.03369140625" y="907" font-family="Arial, sans-serif" font-size="9">BackgroundTaskKind</text>
-  <rect x="566.58447265625" y="899" width="93.55224609375" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="569.58447265625" y="907" font-family="Arial, sans-serif" font-size="9">BackgroundTaskState</text>
-  <rect x="665.13671875" y="899" width="64.025390625" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="668.13671875" y="907" font-family="Arial, sans-serif" font-size="9">ProcessStatus</text>
-  <rect x="734.162109375" y="899" width="66.53466796875" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="737.162109375" y="907" font-family="Arial, sans-serif" font-size="9">ProposalAction</text>
-  <rect x="805.69677734375" y="899" width="67.03564453125" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="808.69677734375" y="907" font-family="Arial, sans-serif" font-size="9">ProposalStatus</text>
+  <rect x="253.42333984375" y="899" width="52.02392578125" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="256.42333984375" y="907" font-family="Arial, sans-serif" font-size="9">FileSupport</text>
+  <rect x="310.447265625" y="899" width="46.04296875" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="313.447265625" y="907" font-family="Arial, sans-serif" font-size="9">Language</text>
+  <rect x="361.490234375" y="899" width="64.02099609375" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="364.490234375" y="907" font-family="Arial, sans-serif" font-size="9">AnswerQuality</text>
+  <rect x="430.51123046875" y="899" width="36.01904296875" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="433.51123046875" y="907" font-family="Arial, sans-serif" font-size="9">Gender</text>
+  <rect x="471.5302734375" y="899" width="51.52734375" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="474.5302734375" y="907" font-family="Arial, sans-serif" font-size="9">AuditAction</text>
+  <rect x="528.0576171875" y="899" width="90.55078125" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="531.0576171875" y="907" font-family="Arial, sans-serif" font-size="9">BackgroundTaskKind</text>
+  <rect x="623.6083984375" y="899" width="93.55224609375" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="626.6083984375" y="907" font-family="Arial, sans-serif" font-size="9">BackgroundTaskState</text>
+  <rect x="722.16064453125" y="899" width="64.025390625" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="725.16064453125" y="907" font-family="Arial, sans-serif" font-size="9">ProcessStatus</text>
+  <rect x="791.18603515625" y="899" width="66.53466796875" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="794.18603515625" y="907" font-family="Arial, sans-serif" font-size="9">ProposalAction</text>
+  <rect x="862.720703125" y="899" width="67.03564453125" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="865.720703125" y="907" font-family="Arial, sans-serif" font-size="9">ProposalStatus</text>
   <rect x="20" y="918" width="14" height="14" fill="#FEF3C7" stroke="#333" stroke-width="1"/>
   <text x="40" y="928" font-family="Arial, sans-serif" font-size="11">Questions</text>
   <rect x="20" y="938" width="14" height="14" fill="#DCFCE7" stroke="#333" stroke-width="1"/>
@@ -197,7 +233,7 @@
   <text x="40" y="968" font-family="Arial, sans-serif" font-size="11">System</text>
 
   <!-- Watermark -->
-  <text x="806.201171875" y="888" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">AI for Development Engineers</text>
-  <text x="806.201171875" y="902" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">Rapid Application Prototype <tspan fill="#0066cc">(http://github.com/aide-examples)</tspan></text>
-  <text x="806.201171875" y="916" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">27. September 2026</text>
+  <text x="919.5068359375" y="888" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">AI for Development Engineers</text>
+  <text x="919.5068359375" y="902" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">Rapid Application Prototype <tspan fill="#0066cc">(http://github.com/aide-examples)</tspan></text>
+  <text x="919.5068359375" y="916" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">28. September 2026</text>
 </svg>

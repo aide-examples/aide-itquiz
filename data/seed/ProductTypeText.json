@@ -167,5 +167,45 @@
     "purpose": "bewahrt Dateien auf dem Computer eines anderen auf, damit jedes deiner Geräte sie erreicht",
     "gender": "m",
     "genitive": "Onlinespeichers"
+  },
+  {
+    "product_type": "Media player",
+    "language": "de",
+    "name": "Medienspieler",
+    "purpose": "spielt eine Ton- oder Videodatei ab, womit sie auch aufgenommen wurde",
+    "gender": "m",
+    "genitive": "Medienspielers"
+  },
+  {
+    "product_type": "File manager",
+    "language": "de",
+    "name": "Dateimanager",
+    "purpose": "zeigt, was auf einem Gerät liegt, als Ordner und Dateien, und lässt dich verschieben, kopieren und löschen",
+    "gender": "m",
+    "genitive": "Dateimanagers"
+  },
+  {
+    "product_type": "Document viewer",
+    "language": "de",
+    "name": "Dokumentenbetrachter",
+    "purpose": "öffnet ein Dokument und zeigt es an, ohne es ändern zu können",
+    "gender": "m",
+    "genitive": "Dokumentenbetrachters"
+  },
+  {
+    "product_type": "Barcode scanner",
+    "language": "de",
+    "name": "Barcode-Scanner",
+    "purpose": "liest die Striche oder Quadrate auf einem Etikett und macht wieder die Nummer oder Adresse daraus, für die sie stehen",
+    "gender": "m",
+    "genitive": "Barcode-Scanners"
+  },
+  {
+    "product_type": "Network storage",
+    "language": "de",
+    "name": "Netzwerkspeicher",
+    "purpose": "bewahrt Dateien auf einem eigenen Kasten im Haus auf, erreichbar von jedem Gerät im Netz",
+    "gender": "m",
+    "genitive": "Netzwerkspeichers"
   }
 ]

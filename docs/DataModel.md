@@ -20,6 +20,9 @@ saying what each one does is the one thing that might.
 | [ProductType](classes/ProductType.md) | A KIND of thing, and its purpose. The English wording lives here. |
 | [ProductTypeText](classes/ProductTypeText.md) | The same kind in another language, plus what the language needs to build a correct sentence about it: the grammatical gender, and the genitive form where the noun inflects. A missing row is not an error: it means the English term is used in that language too, which is true of a good many IT words. |
 | [Product](classes/Product.md) | One actual thing, of one kind, from one maker. |
+| [FileFormat](classes/FileFormat.md) | A KIND of file, known by the letters after the dot. The other half of what a layperson gets wrong: not what a thing IS, but what it can OPEN. |
+| [Protocol](classes/Protocol.md) | An AGREEMENT two programs follow so they can talk — HTTP, HTTPS, MQTT, SIP. Its own entity and not a kind of format: a program *opens* a file and *speaks* a protocol, and one table with a discriminator is what the architecture guideline warns against. |
+| [FormatSupport](classes/FormatSupport.md) | What one program can do with one kind of file — view or edit. An entity and not a bare junction, because *what* it can do is the fact the questions are built on. |
 </div>
 
 ### Questions

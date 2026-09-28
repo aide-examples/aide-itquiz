@@ -1,0 +1,92 @@
+[
+  {
+    "name": "PDF",
+    "extension": ".pdf",
+    "long_name": "Portable Document Format",
+    "purpose": "holds a document that looks the same everywhere it is opened, whoever opens it",
+    "wikipedia_de": "de:Portable Document Format",
+    "wikipedia_en": "en:PDF",
+    "note": "People say „ein PDF\" for any document they cannot change, which is most of what the format is known for — and the reason it exists: it was made so a page would print the same on any machine"
+  },
+  {
+    "name": "ODF",
+    "extension": ".odt",
+    "long_name": "OpenDocument Format",
+    "purpose": "holds a text document in a format nobody owns, so any office program may read and write it",
+    "wikipedia_de": "de:OpenDocument",
+    "wikipedia_en": "en:OpenDocument",
+    "note": "The extension says .odt for a text and .ods for a spreadsheet — one family, several endings, which is why the family has its own name"
+  },
+  {
+    "name": "DOCX",
+    "extension": ".docx",
+    "long_name": "Office Open XML Document",
+    "purpose": "holds a text document in the format Microsoft Word writes",
+    "wikipedia_de": "de:Office Open XML",
+    "wikipedia_en": "en:Office Open XML",
+    "note": "The x at the end arrived in 2007 and means the file is a zipped folder of XML — the older .doc was one opaque lump, which is why old files sometimes will not open"
+  },
+  {
+    "name": "HTML",
+    "extension": ".html",
+    "long_name": "Hypertext Markup Language",
+    "purpose": "holds a web page — the text together with marks saying what is a heading, a link, a picture",
+    "wikipedia_de": "de:Hypertext Markup Language",
+    "wikipedia_en": "en:HTML",
+    "note": "A file a person almost never has on their own machine and meets constantly all the same: every page in the browser is one, delivered rather than stored"
+  },
+  {
+    "name": "JPEG",
+    "extension": ".jpg",
+    "long_name": "Joint Photographic Experts Group",
+    "purpose": "holds a photo, made smaller by throwing away detail the eye barely notices",
+    "wikipedia_de": "de:JPEG",
+    "wikipedia_en": "en:JPEG",
+    "note": "Named after the committee that agreed it, not after anything in the picture — one of the abbreviations whose long form explains nothing at all"
+  },
+  {
+    "name": "PNG",
+    "extension": ".png",
+    "long_name": "Portable Network Graphics",
+    "purpose": "holds a picture without throwing anything away, and can leave parts of it transparent",
+    "wikipedia_de": "de:Portable Network Graphics",
+    "wikipedia_en": "en:PNG",
+    "note": "The transparent part is why logos are PNGs and photos are JPEGs — a difference people meet without ever being told it"
+  },
+  {
+    "name": "MP3",
+    "extension": ".mp3",
+    "long_name": "MPEG-1 Audio Layer III",
+    "purpose": "holds music or speech, made small enough to carry thousands of them",
+    "wikipedia_de": "de:MP3",
+    "wikipedia_en": "en:MP3",
+    "note": "For a while the word meant the player rather than the format — „ein MP3\" was a device you clipped to your belt"
+  },
+  {
+    "name": "MP4",
+    "extension": ".mp4",
+    "long_name": "MPEG-4 Part 14",
+    "purpose": "holds a video together with its sound",
+    "wikipedia_de": "de:MP4",
+    "wikipedia_en": "en:MP4 file format",
+    "note": "Not „MP3 for video\", although the names invite it: MP4 is a container that holds several streams, while MP3 is one kind of sound"
+  },
+  {
+    "name": "CSV",
+    "extension": ".csv",
+    "long_name": "Comma-Separated Values",
+    "purpose": "holds a table as plain text, one row per line and the columns divided by a character",
+    "wikipedia_de": "de:CSV (Dateiformat)",
+    "wikipedia_en": "en:Comma-separated values",
+    "note": "The comma is in the name and is a semicolon in half of Europe, because the comma is already the decimal point there — the commonest reason a CSV opens as one long column"
+  },
+  {
+    "name": "EPUB",
+    "extension": ".epub",
+    "long_name": "Electronic Publication",
+    "purpose": "holds a book whose text reflows to fit whatever it is read on",
+    "wikipedia_de": "de:EPUB",
+    "wikipedia_en": "en:EPUB",
+    "note": "The difference from a PDF is the whole point: a PDF keeps the page, an EPUB keeps the text and lets the page follow the screen"
+  }
+]

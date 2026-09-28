@@ -1,0 +1,42 @@
+[
+  {
+    "name": "HTTP",
+    "long_name": "Hypertext Transfer Protocol",
+    "purpose": "carries web pages from a server to a browser — the agreement every page in the address bar arrives under",
+    "wikipedia_de": "de:Hypertext Transfer Protocol",
+    "wikipedia_en": "en:HTTP",
+    "note": "The four letters at the front of an address are this, which is why a browser puts them there when nobody types them"
+  },
+  {
+    "name": "HTTPS",
+    "long_name": "Hypertext Transfer Protocol Secure",
+    "purpose": "carries the same pages as HTTP, encrypted, so nobody on the way can read along or change anything",
+    "wikipedia_de": "de:Hypertext Transfer Protocol Secure",
+    "wikipedia_en": "en:HTTPS",
+    "note": "The padlock in the browser bar is this protocol and nothing else: it says the line is private, never that the site is honest. A fraudulent shop can have a perfectly good padlock"
+  },
+  {
+    "name": "MQTT",
+    "long_name": "Message Queuing Telemetry Transport",
+    "purpose": "carries tiny messages between devices that report something — a thermometer, a light switch, a door contact",
+    "wikipedia_de": "de:MQTT",
+    "wikipedia_en": "en:MQTT",
+    "note": "The one on this list a person never types. It is here because it is what „smart home\" is made of underneath, and because it shows a protocol does not have to involve a browser at all"
+  },
+  {
+    "name": "SIP",
+    "long_name": "Session Initiation Protocol",
+    "purpose": "sets up a call over the internet — who is calling whom, and on which line the voice will travel",
+    "wikipedia_de": "de:Session Initiation Protocol",
+    "wikipedia_en": "en:Session Initiation Protocol",
+    "note": "People say VOIP for this, and VOIP is not a protocol but a purpose — telephoning over the internet. SIP arranges the call, another protocol carries the voice. The habit of reaching for the roomier drawer is worth noticing in oneself"
+  },
+  {
+    "name": "SMTP",
+    "long_name": "Simple Mail Transfer Protocol",
+    "purpose": "carries a mail from the sender's server to the recipient's",
+    "wikipedia_de": "de:Simple Mail Transfer Protocol",
+    "wikipedia_en": "en:Simple Mail Transfer Protocol",
+    "note": "Nobody meets this directly — mail simply arrives. It is in for the reader who has seen the four letters in a settings dialog and would like them to mean something"
+  }
+]

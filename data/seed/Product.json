@@ -258,5 +258,54 @@
     "manufacturer": "Microsoft",
     "wikipedia_de": "de:Microsoft OneDrive",
     "wikipedia_en": "en:OneDrive"
+  },
+  {
+    "name": "VLC",
+    "product_type": "Media player",
+    "manufacturer": "VideoLAN",
+    "wikipedia_de": "de:VLC media player",
+    "wikipedia_en": "en:VLC media player"
+  },
+  {
+    "name": "Windows Media Player",
+    "product_type": "Media player",
+    "manufacturer": "Microsoft",
+    "wikipedia_de": "de:Windows Media Player",
+    "wikipedia_en": "en:Windows Media Player"
+  },
+  {
+    "name": "Windows Explorer",
+    "product_type": "File manager",
+    "manufacturer": "Microsoft",
+    "wikipedia_de": "de:Windows-Explorer",
+    "wikipedia_en": "en:File Explorer"
+  },
+  {
+    "name": "Finder",
+    "product_type": "File manager",
+    "manufacturer": "Apple",
+    "wikipedia_en": "en:Finder (software)",
+    "note": "No German article of its own: de.wikipedia has none under any title checked, and pointing at a neighbouring one would assert something unverified"
+  },
+  {
+    "name": "Acrobat Reader",
+    "product_type": "Document viewer",
+    "manufacturer": "Adobe",
+    "wikipedia_de": "de:Adobe Acrobat",
+    "wikipedia_en": "en:Adobe Acrobat"
+  },
+  {
+    "name": "Preview",
+    "product_type": "Document viewer",
+    "manufacturer": "Apple",
+    "wikipedia_de": "de:Vorschau (Software)",
+    "wikipedia_en": "en:Preview (Apple)"
+  },
+  {
+    "name": "Google Lens",
+    "product_type": "Barcode scanner",
+    "manufacturer": "Google",
+    "wikipedia_de": "de:Google Lens",
+    "wikipedia_en": "en:Google Lens"
   }
 ]

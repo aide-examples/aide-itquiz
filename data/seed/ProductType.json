@@ -160,5 +160,39 @@
     "purpose": "keeps files on somebody else’s computer so every device of yours can reach them",
     "wikipedia_de": "de:Filehosting",
     "wikipedia_en": "en:Cloud storage"
+  },
+  {
+    "name": "Media player",
+    "purpose": "plays a sound or a video file, whatever it was recorded with",
+    "wikipedia_de": "de:Mediaplayer",
+    "wikipedia_en": "en:Media player software"
+  },
+  {
+    "name": "File manager",
+    "purpose": "shows what is on a device as folders and files, and lets you move, copy and delete them",
+    "note": "The one program almost nobody names, because on every system it is simply „the window that opens“",
+    "wikipedia_de": "de:Dateimanager",
+    "wikipedia_en": "en:File manager"
+  },
+  {
+    "name": "Document viewer",
+    "purpose": "opens a document and shows it without being able to change it",
+    "note": "Asked for as „ODF-Viewer“ or „PDF-Viewer“ — but the format is not the kind: one viewer opens several formats, which is what FileFormat is in the model for",
+    "wikipedia_de": "de:Dateibetrachter",
+    "wikipedia_en": "en:File viewer"
+  },
+  {
+    "name": "Barcode scanner",
+    "purpose": "reads the stripes or squares on a label and turns them back into the number or address they stand for",
+    "note": "On a phone this is the camera, which is why most people have never installed one and still use one weekly",
+    "wikipedia_de": "de:Barcodelesegerät",
+    "wikipedia_en": "en:Barcode reader"
+  },
+  {
+    "name": "Network storage",
+    "purpose": "keeps files on a box of its own in the house, reachable from every device on the network",
+    "note": "Known by its abbreviation NAS. The bridge between the two kinds of storage a person knows: it is as reachable as a cloud drive and as local as a disk — the own cloud in the hallway",
+    "wikipedia_de": "de:Network Attached Storage",
+    "wikipedia_en": "en:Network-attached storage"
   }
 ]

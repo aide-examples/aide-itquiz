@@ -1,32 +1,32 @@
 {
   "classes": {
     "AskedQuestion": {
-      "x": 340,
-      "y": 60
+      "x": 660,
+      "y": 300
     },
     "Company": {
-      "x": 80,
-      "y": 160
+      "x": 760,
+      "y": 120
     },
     "Product": {
-      "x": 150,
-      "y": 380
+      "x": 500,
+      "y": 60
     },
     "ProductType": {
-      "x": 480,
-      "y": 570
+      "x": 390,
+      "y": 280
     },
     "ProductTypeText": {
-      "x": 660,
-      "y": 550
+      "x": 240,
+      "y": 220
     },
     "QuestionPhrase": {
-      "x": 620,
-      "y": 250
+      "x": 70,
+      "y": 240
     },
     "QuestionTemplate": {
-      "x": 530,
-      "y": 60
+      "x": 170,
+      "y": 400
     },
     "Audit": {
       "x": 40,
@@ -107,10 +107,18 @@
       "x": 210,
       "y": 800,
       "folder": "f1"
+    },
+    "FileFormat": {
+      "x": 60,
+      "y": 70
+    },
+    "FormatSupport": {
+      "x": 270,
+      "y": 60
     }
   },
   "canvas": {
-    "width": 821.201171875,
+    "width": 934.5068359375,
     "height": 888
   },
   "stubLevel": 4,

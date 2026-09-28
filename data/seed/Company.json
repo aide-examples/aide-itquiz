@@ -61,5 +61,17 @@
     "note": "Makes Claude. Same shape as OpenAI and ChatGPT: a maker nobody would guess from the product name",
     "wikipedia_de": "de:Anthropic",
     "wikipedia_en": "en:Anthropic"
+  },
+  {
+    "name": "VideoLAN",
+    "note": "A non-profit, like Mozilla and Apache — the third on this list, and the shape most people do not expect behind a program they use daily",
+    "wikipedia_de": "de:VideoLAN",
+    "wikipedia_en": "en:VideoLAN"
+  },
+  {
+    "name": "Adobe",
+    "note": "Invented the PDF and still makes the program most people reach for to read one — a maker whose name is less known than its format",
+    "wikipedia_de": "de:Adobe Inc.",
+    "wikipedia_en": "en:Adobe Inc."
   }
 ]

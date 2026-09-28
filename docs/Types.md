@@ -15,6 +15,24 @@ about the subject matter.
 | Product | Product | A concrete thing — Chrome, Google Search, Googlebot |
 | ProductType | Product type | A kind of thing — browser, search engine, spider |
 | Company | Company | Who makes it — Google, Mozilla |
+| FileFormat | File format | A kind of FILE — .pdf, .odt, .mp3 |
+| Protocol | Protocol | An agreement two programs follow — HTTP, MQTT |
+
+### FileSupport
+
+What a program can do with a file of a given format. Two values, and the order between them is a
+FACT the questions rely on: **`edit` implies `view`.** Nothing edits a file it cannot open, so a
+program declared as an editor answers „womit kann man das ansehen?" as well — and one row per
+product-and-format is therefore enough. Storing both would be storing the same fact twice, and
+the copy is what drifts (global CLAUDE.md §17).
+
+The order of the rows below is the order everywhere (aide-rap#288), and here it is also the
+strength: the later value contains the earlier one.
+
+| Internal | External | Description |
+|----------|----------|-------------|
+| view | View | Opens it and shows it. A PDF reader, a picture viewer, a media player |
+| edit | Edit | Opens it, changes it and writes it back — and therefore also shows it |
 
 ### Language
 

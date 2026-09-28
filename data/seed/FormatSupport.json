@@ -1,0 +1,36 @@
+[
+  { "product": "Chrome", "format": "PDF", "support": "view",
+    "note": "Every browser shows a PDF today, which is why hardly anybody installs a reader any more" },
+  { "product": "Chrome", "format": "HTML", "support": "view" },
+  { "product": "Chrome", "format": "JPEG", "support": "view" },
+  { "product": "Chrome", "format": "PNG", "support": "view" },
+
+  { "product": "Firefox", "format": "PDF", "support": "view" },
+  { "product": "Firefox", "format": "HTML", "support": "view" },
+  { "product": "Edge", "format": "PDF", "support": "view" },
+  { "product": "Edge", "format": "HTML", "support": "view" },
+  { "product": "Safari", "format": "HTML", "support": "view" },
+
+  { "product": "Microsoft Word", "format": "DOCX", "support": "edit",
+    "note": "The format Word writes, which is why it carries Word's own name in its long form" },
+  { "product": "Microsoft Word", "format": "PDF", "support": "view" },
+  { "product": "Microsoft Word", "format": "ODF", "support": "edit" },
+  { "product": "Microsoft Excel", "format": "CSV", "support": "edit",
+    "note": "The commonest place people meet a CSV — and the commonest place one arrives as a single column, because the separator is a semicolon here and a comma there" },
+
+  { "product": "OpenOffice Writer", "format": "ODF", "support": "edit" },
+  { "product": "OpenOffice Writer", "format": "DOCX", "support": "edit" },
+  { "product": "OpenOffice Calc", "format": "CSV", "support": "edit" },
+
+  { "product": "Acrobat Reader", "format": "PDF", "support": "view",
+    "note": "The program the format was made for, from the firm that invented it" },
+  { "product": "Preview", "format": "PDF", "support": "edit" },
+  { "product": "Preview", "format": "JPEG", "support": "edit" },
+  { "product": "Preview", "format": "PNG", "support": "edit" },
+
+  { "product": "VLC", "format": "MP3", "support": "view" },
+  { "product": "VLC", "format": "MP4", "support": "view",
+    "note": "Known for playing whatever is handed to it, which is why it is on so many machines beside whatever came with the system" },
+  { "product": "Windows Media Player", "format": "MP3", "support": "view" },
+  { "product": "Windows Media Player", "format": "MP4", "support": "view" }
+]
