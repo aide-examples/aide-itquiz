@@ -1,17 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 970 1008" width="970" height="1008">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 1026" width="1180" height="1026">
   <defs>
     <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
       <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
     </marker>
-    <clipPath id="clip-AskedQuestion"><rect x="660" y="300" width="160" height="224" rx="3"/></clipPath>
-    <clipPath id="clip-Company"><rect x="760" y="120" width="160" height="144" rx="3"/></clipPath>
-    <clipPath id="clip-FileFormat"><rect x="60" y="70" width="160" height="144" rx="3"/></clipPath>
-    <clipPath id="clip-FormatSupport"><rect x="270" y="60" width="160" height="144" rx="3"/></clipPath>
-    <clipPath id="clip-Product"><rect x="500" y="60" width="160" height="144" rx="3"/></clipPath>
-    <clipPath id="clip-ProductType"><rect x="390" y="280" width="160" height="144" rx="3"/></clipPath>
-    <clipPath id="clip-ProductTypeText"><rect x="240" y="220" width="160" height="144" rx="3"/></clipPath>
-    <clipPath id="clip-QuestionPhrase"><rect x="70" y="240" width="160" height="96" rx="3"/></clipPath>
-    <clipPath id="clip-QuestionTemplate"><rect x="170" y="400" width="160" height="112" rx="3"/></clipPath>
+    <clipPath id="clip-AskedQuestion"><rect x="680" y="300" width="160" height="224" rx="3"/></clipPath>
+    <clipPath id="clip-Company"><rect x="780" y="80" width="160" height="144" rx="3"/></clipPath>
+    <clipPath id="clip-Concept"><rect x="390" y="650" width="160" height="176" rx="3"/></clipPath>
+    <clipPath id="clip-Connector"><rect x="570" y="670" width="160" height="160" rx="3"/></clipPath>
+    <clipPath id="clip-ConnectorPort"><rect x="500" y="560" width="160" height="80" rx="3"/></clipPath>
+    <clipPath id="clip-FileFormat"><rect x="30" y="70" width="160" height="176" rx="3"/></clipPath>
+    <clipPath id="clip-FormatGroup"><rect x="120" y="370" width="160" height="112" rx="3"/></clipPath>
+    <clipPath id="clip-FormatSupport"><rect x="230" y="60" width="160" height="144" rx="3"/></clipPath>
+    <clipPath id="clip-Product"><rect x="600" y="20" width="160" height="144" rx="3"/></clipPath>
+    <clipPath id="clip-ProductType"><rect x="420" y="360" width="160" height="144" rx="3"/></clipPath>
+    <clipPath id="clip-ProductTypeText"><rect x="260" y="200" width="160" height="144" rx="3"/></clipPath>
+    <clipPath id="clip-Protocol"><rect x="950" y="130" width="160" height="144" rx="3"/></clipPath>
+    <clipPath id="clip-QuestionPhrase"><rect x="850" y="760" width="160" height="96" rx="3"/></clipPath>
+    <clipPath id="clip-QuestionTemplate"><rect x="760" y="610" width="160" height="112" rx="3"/></clipPath>
+    <clipPath id="clip-Translation"><rect x="970" y="340" width="160" height="224" rx="3"/></clipPath>
     <clipPath id="clip-Audit"><rect x="40" y="590" width="130.044921875" height="24" rx="3"/></clipPath>
     <clipPath id="clip-BackgroundTask"><rect x="40" y="620" width="130.044921875" height="24" rx="3"/></clipPath>
     <clipPath id="clip-Feed"><rect x="40" y="650" width="130.044921875" height="24" rx="3"/></clipPath>
@@ -29,111 +35,182 @@
     <clipPath id="clip-UsageStats"><rect x="210" y="770" width="90" height="24" rx="3"/></clipPath>
     <clipPath id="clip-WorkerStats"><rect x="210" y="800" width="90" height="24" rx="3"/></clipPath>
   </defs>
-  <rect width="970" height="1008" fill="white"/>
+  <rect width="1180" height="1026" fill="white"/>
 
   <!-- Relationships -->
-  <path d="M 660 464 L 635 464 L 330 457.6623376623377" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 660 336 L 635 336 L 599.4117647058823 204" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 660 400 L 635 400 L 550 375.27272727272725" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 820 368 L 845 368 L 842.0454545454545 264" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 660 352 L 635 352 L 598 204" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 660 416 L 635 416 L 550 383.030303030303" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 820 384 L 845 384 L 841.875 264" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 430 128 L 455 128 L 500 129.44" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 270 144 L 245 144 L 220 143.52380952380952" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 500 192 L 475 192 L 472.25 280" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 660 176 L 685 176 L 760 183.74193548387098" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 550 316 A 18 18 0 0 0 550 280" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 400 352 L 425 352 L 470 352" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 230 324 L 255 324 L 252.12121212121212 400" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 840 512 L 865 512 L 849.0909090909091 610" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 680 336 L 655 336 L 672.6229508196722 164" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 680 432 L 655 432 L 580 432" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 840 368 L 865 368 L 861.6666666666666 224" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 680 352 L 655 352 L 673.0769230769231 164" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 680 448 L 655 448 L 580 440.258064516129" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 840 384 L 865 384 L 861.551724137931 224" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 550 686 A 18 18 0 0 0 550 650" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 500 596 L 475 596 L 489.0243902439024 504" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 660 612 L 685 612 L 670.2898550724638 670" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 190 234 L 215 234 L 204.375 370" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 390 96 L 415 96 L 600 93.20754716981132" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 230 144 L 205 144 L 190 146.21052631578948" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 600 152 L 575 152 L 519.2857142857143 360" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 760 136 L 785 136 L 860 152" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 580 396 A 18 18 0 0 0 580 360" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 420 332 L 445 332 L 460.4 360" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 850 796 L 825 796 L 833.5384615384615 722" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 970 436 L 950 436" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+  <text x="947" y="439" text-anchor="end" font-family="Arial, sans-serif" font-size="8" fill="#999">ProductType</text>
+  <path d="M 970 372 L 950 372" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+  <text x="947" y="375" text-anchor="end" font-family="Arial, sans-serif" font-size="8" fill="#999">FileFormat</text>
+  <path d="M 970 420 L 950 420" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+  <text x="947" y="423" text-anchor="end" font-family="Arial, sans-serif" font-size="8" fill="#999">FormatGroup</text>
+  <path d="M 970 388 L 950 388" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+  <text x="947" y="391" text-anchor="end" font-family="Arial, sans-serif" font-size="8" fill="#999">Protocol</text>
+  <path d="M 970 548 L 950 548" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+  <text x="947" y="551" text-anchor="end" font-family="Arial, sans-serif" font-size="8" fill="#999">Connector</text>
+  <path d="M 970 532 L 950 532" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+  <text x="947" y="535" text-anchor="end" font-family="Arial, sans-serif" font-size="8" fill="#999">Concept</text>
 
   <!-- Class boxes -->
   <rect x="26" y="576" width="288" height="262" fill="none" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="6,4" rx="6"/>
-  <rect x="660" y="300" width="160" height="224" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="660" y="300" width="160" height="24" fill="#DCFCE7" clip-path="url(#clip-AskedQuestion)"/>
-  <text x="740" y="316" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">AskedQuestion</text>
-  <line x1="660" y1="324" x2="820" y2="324" stroke="#333" stroke-width="1"/>
-  <text x="665" y="340.2" font-family="Arial, sans-serif" font-size="12" fill="#555">What one learner was</text>
-  <text x="665" y="356.2" font-family="Arial, sans-serif" font-size="12" fill="#555">asked, and how it went.</text>
-  <text x="665" y="372.2" font-family="Arial, sans-serif" font-size="12" fill="#555">One row per question</text>
-  <text x="665" y="388.2" font-family="Arial, sans-serif" font-size="12" fill="#555">shown — the whole</text>
-  <text x="665" y="404.2" font-family="Arial, sans-serif" font-size="12" fill="#555">memory of the app.</text>
-  <rect x="760" y="120" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="760" y="120" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-Company)"/>
-  <text x="840" y="136" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Company</text>
-  <line x1="760" y1="144" x2="920" y2="144" stroke="#333" stroke-width="1"/>
-  <text x="765" y="160.2" font-family="Arial, sans-serif" font-size="12" fill="#555">Whoever makes a product</text>
-  <text x="765" y="176.2" font-family="Arial, sans-serif" font-size="12" fill="#555">— its own record, never a</text>
-  <text x="765" y="192.2" font-family="Arial, sans-serif" font-size="12" fill="#555">string on the product,</text>
-  <text x="765" y="208.2" font-family="Arial, sans-serif" font-size="12" fill="#555">because a layperson</text>
-  <text x="765" y="224.2" font-family="Arial, sans-serif" font-size="12" fill="#555">confuses the maker with the</text>
-  <text x="765" y="240.2" font-family="Arial, sans-serif" font-size="12" fill="#555">thing it makes.</text>
-  <rect x="60" y="70" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="60" y="70" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-FileFormat)"/>
-  <text x="140" y="86" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">FileFormat</text>
-  <line x1="60" y1="94" x2="220" y2="94" stroke="#333" stroke-width="1"/>
-  <text x="65" y="110.2" font-family="Arial, sans-serif" font-size="12" fill="#555">A KIND of file, known to a</text>
-  <text x="65" y="126.2" font-family="Arial, sans-serif" font-size="12" fill="#555">layperson by the letters</text>
-  <text x="65" y="142.2" font-family="Arial, sans-serif" font-size="12" fill="#555">after the dot — and the</text>
-  <text x="65" y="158.2" font-family="Arial, sans-serif" font-size="12" fill="#555">second half of the confusion</text>
-  <text x="65" y="174.2" font-family="Arial, sans-serif" font-size="12" fill="#555">this system is about: what a</text>
-  <text x="65" y="190.2" font-family="Arial, sans-serif" font-size="12" fill="#555">thing IS versus what it can</text>
-  <text x="65" y="206.2" font-family="Arial, sans-serif" font-size="12" fill="#555">OPEN.</text>
-  <rect x="270" y="60" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="270" y="60" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-FormatSupport)"/>
-  <text x="350" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">FormatSupport</text>
-  <line x1="270" y1="84" x2="430" y2="84" stroke="#333" stroke-width="1"/>
-  <text x="275" y="100.2" font-family="Arial, sans-serif" font-size="12" fill="#555">What one program can do</text>
-  <text x="275" y="116.2" font-family="Arial, sans-serif" font-size="12" fill="#555">with one kind of file — the</text>
-  <text x="275" y="132.2" font-family="Arial, sans-serif" font-size="12" fill="#555">fact behind „womit kann</text>
-  <text x="275" y="148.2" font-family="Arial, sans-serif" font-size="12" fill="#555">man eine .pdf ansehen?&quot;,</text>
-  <text x="275" y="164.2" font-family="Arial, sans-serif" font-size="12" fill="#555">and the reason that</text>
-  <text x="275" y="180.2" font-family="Arial, sans-serif" font-size="12" fill="#555">question has several right</text>
-  <text x="275" y="196.2" font-family="Arial, sans-serif" font-size="12" fill="#555">answers.</text>
-  <rect x="500" y="60" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="500" y="60" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-Product)"/>
-  <text x="580" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Product</text>
-  <line x1="500" y1="84" x2="660" y2="84" stroke="#333" stroke-width="1"/>
-  <text x="505" y="100.2" font-family="Arial, sans-serif" font-size="12" fill="#555">A concrete thing somebody</text>
-  <text x="505" y="116.2" font-family="Arial, sans-serif" font-size="12" fill="#555">made: Chrome, Firefox,</text>
-  <text x="505" y="132.2" font-family="Arial, sans-serif" font-size="12" fill="#555">Google Search, Googlebot,</text>
-  <text x="505" y="148.2" font-family="Arial, sans-serif" font-size="12" fill="#555">Android. Exactly one type,</text>
-  <text x="505" y="164.2" font-family="Arial, sans-serif" font-size="12" fill="#555">exactly one maker.</text>
-  <rect x="390" y="280" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="390" y="280" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-ProductType)"/>
-  <text x="470" y="296" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">ProductType</text>
-  <line x1="390" y1="304" x2="550" y2="304" stroke="#333" stroke-width="1"/>
-  <text x="395" y="320.2" font-family="Arial, sans-serif" font-size="12" fill="#555">A KIND of thing — browser,</text>
-  <text x="395" y="336.2" font-family="Arial, sans-serif" font-size="12" fill="#555">search engine, spider,</text>
-  <text x="395" y="352.2" font-family="Arial, sans-serif" font-size="12" fill="#555">operating system. Its</text>
-  <text x="395" y="368.2" font-family="Arial, sans-serif" font-size="12" fill="#555">purpose is the sentence</text>
-  <text x="395" y="384.2" font-family="Arial, sans-serif" font-size="12" fill="#555">that separates them.</text>
-  <rect x="240" y="220" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="240" y="220" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-ProductTypeText)"/>
-  <text x="320" y="236" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">ProductTypeText</text>
-  <line x1="240" y1="244" x2="400" y2="244" stroke="#333" stroke-width="1"/>
-  <text x="245" y="260.2" font-family="Arial, sans-serif" font-size="12" fill="#555">The same kind in another</text>
-  <text x="245" y="276.2" font-family="Arial, sans-serif" font-size="12" fill="#555">language, plus the</text>
-  <text x="245" y="292.2" font-family="Arial, sans-serif" font-size="12" fill="#555">grammatical gender. A</text>
-  <text x="245" y="308.2" font-family="Arial, sans-serif" font-size="12" fill="#555">missing row falls back to</text>
-  <text x="245" y="324.2" font-family="Arial, sans-serif" font-size="12" fill="#555">the English parent.</text>
-  <rect x="70" y="240" width="160" height="96" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="70" y="240" width="160" height="24" fill="#FEF3C7" clip-path="url(#clip-QuestionPhrase)"/>
-  <text x="150" y="256" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">QuestionPhrase</text>
-  <line x1="70" y1="264" x2="230" y2="264" stroke="#333" stroke-width="1"/>
-  <text x="75" y="280.2" font-family="Arial, sans-serif" font-size="12" fill="#555">The wording of one</text>
-  <text x="75" y="296.2" font-family="Arial, sans-serif" font-size="12" fill="#555">template in one language,</text>
-  <text x="75" y="312.2" font-family="Arial, sans-serif" font-size="12" fill="#555">with the placeholders its</text>
-  <text x="75" y="328.2" font-family="Arial, sans-serif" font-size="12" fill="#555">roles fill.</text>
-  <rect x="170" y="400" width="160" height="112" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="170" y="400" width="160" height="24" fill="#FEF3C7" clip-path="url(#clip-QuestionTemplate)"/>
-  <text x="250" y="416" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">QuestionTemplate</text>
-  <line x1="170" y1="424" x2="330" y2="424" stroke="#333" stroke-width="1"/>
-  <text x="175" y="440.2" font-family="Arial, sans-serif" font-size="12" fill="#555">One KIND of question,</text>
-  <text x="175" y="456.2" font-family="Arial, sans-serif" font-size="12" fill="#555">declared as data: which</text>
-  <text x="175" y="472.2" font-family="Arial, sans-serif" font-size="12" fill="#555">records fill its roles, and</text>
-  <text x="175" y="488.2" font-family="Arial, sans-serif" font-size="12" fill="#555">where the right answer</text>
-  <text x="175" y="504.2" font-family="Arial, sans-serif" font-size="12" fill="#555">comes from. No wording.</text>
+  <rect x="680" y="300" width="160" height="224" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="680" y="300" width="160" height="24" fill="#DCFCE7" clip-path="url(#clip-AskedQuestion)"/>
+  <text x="760" y="316" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">AskedQuestion</text>
+  <line x1="680" y1="324" x2="840" y2="324" stroke="#333" stroke-width="1"/>
+  <text x="685" y="340.2" font-family="Arial, sans-serif" font-size="12" fill="#555">What one learner was</text>
+  <text x="685" y="356.2" font-family="Arial, sans-serif" font-size="12" fill="#555">asked, and how it went.</text>
+  <text x="685" y="372.2" font-family="Arial, sans-serif" font-size="12" fill="#555">One row per question</text>
+  <text x="685" y="388.2" font-family="Arial, sans-serif" font-size="12" fill="#555">shown — the whole</text>
+  <text x="685" y="404.2" font-family="Arial, sans-serif" font-size="12" fill="#555">memory of the app.</text>
+  <rect x="780" y="80" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="780" y="80" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-Company)"/>
+  <text x="860" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Company</text>
+  <line x1="780" y1="104" x2="940" y2="104" stroke="#333" stroke-width="1"/>
+  <text x="785" y="120.2" font-family="Arial, sans-serif" font-size="12" fill="#555">Whoever makes a product</text>
+  <text x="785" y="136.2" font-family="Arial, sans-serif" font-size="12" fill="#555">— its own record, never a</text>
+  <text x="785" y="152.2" font-family="Arial, sans-serif" font-size="12" fill="#555">string on the product,</text>
+  <text x="785" y="168.2" font-family="Arial, sans-serif" font-size="12" fill="#555">because a layperson</text>
+  <text x="785" y="184.2" font-family="Arial, sans-serif" font-size="12" fill="#555">confuses the maker with the</text>
+  <text x="785" y="200.2" font-family="Arial, sans-serif" font-size="12" fill="#555">thing it makes.</text>
+  <rect x="390" y="650" width="160" height="176" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="390" y="650" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-Concept)"/>
+  <text x="470" y="666" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Concept</text>
+  <line x1="390" y1="674" x2="550" y2="674" stroke="#333" stroke-width="1"/>
+  <text x="395" y="690.2" font-family="Arial, sans-serif" font-size="12" fill="#555">Something a person meets</text>
+  <text x="395" y="706.2" font-family="Arial, sans-serif" font-size="12" fill="#555">every day and nobody</text>
+  <text x="395" y="722.2" font-family="Arial, sans-serif" font-size="12" fill="#555">manufactures — a web</text>
+  <text x="395" y="738.2" font-family="Arial, sans-serif" font-size="12" fill="#555">address, the part of it</text>
+  <text x="395" y="754.2" font-family="Arial, sans-serif" font-size="12" fill="#555">before the first slash, the</text>
+  <text x="395" y="770.2" font-family="Arial, sans-serif" font-size="12" fill="#555">dot-something at the end.</text>
+  <rect x="570" y="670" width="160" height="160" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="570" y="670" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-Connector)"/>
+  <text x="650" y="686" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Connector</text>
+  <line x1="570" y1="694" x2="730" y2="694" stroke="#333" stroke-width="1"/>
+  <text x="575" y="710.2" font-family="Arial, sans-serif" font-size="12" fill="#555">The shape of a plug and the</text>
+  <text x="575" y="726.2" font-family="Arial, sans-serif" font-size="12" fill="#555">socket it fits — the one</text>
+  <text x="575" y="742.2" font-family="Arial, sans-serif" font-size="12" fill="#555">standard in this system a</text>
+  <text x="575" y="758.2" font-family="Arial, sans-serif" font-size="12" fill="#555">person can hold in their</text>
+  <text x="575" y="774.2" font-family="Arial, sans-serif" font-size="12" fill="#555">hand and still not be able to</text>
+  <text x="575" y="790.2" font-family="Arial, sans-serif" font-size="12" fill="#555">name.</text>
+  <rect x="500" y="560" width="160" height="80" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="500" y="560" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-ConnectorPort)"/>
+  <text x="580" y="576" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">ConnectorPort</text>
+  <line x1="500" y1="584" x2="660" y2="584" stroke="#333" stroke-width="1"/>
+  <text x="505" y="600.2" font-family="Arial, sans-serif" font-size="12" fill="#555">One kind of device has one</text>
+  <text x="505" y="616.2" font-family="Arial, sans-serif" font-size="12" fill="#555">kind of socket — „ein</text>
+  <text x="505" y="632.2" font-family="Arial, sans-serif" font-size="12" fill="#555">Laptop hat HDMI&quot;.</text>
+  <rect x="30" y="70" width="160" height="176" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="30" y="70" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-FileFormat)"/>
+  <text x="110" y="86" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">FileFormat</text>
+  <line x1="30" y1="94" x2="190" y2="94" stroke="#333" stroke-width="1"/>
+  <text x="35" y="110.2" font-family="Arial, sans-serif" font-size="12" fill="#555">A KIND of file, known to a</text>
+  <text x="35" y="126.2" font-family="Arial, sans-serif" font-size="12" fill="#555">layperson by the letters</text>
+  <text x="35" y="142.2" font-family="Arial, sans-serif" font-size="12" fill="#555">after the dot — and the</text>
+  <text x="35" y="158.2" font-family="Arial, sans-serif" font-size="12" fill="#555">second half of the confusion</text>
+  <text x="35" y="174.2" font-family="Arial, sans-serif" font-size="12" fill="#555">this system is about: what a</text>
+  <text x="35" y="190.2" font-family="Arial, sans-serif" font-size="12" fill="#555">thing IS versus what it can</text>
+  <text x="35" y="206.2" font-family="Arial, sans-serif" font-size="12" fill="#555">OPEN.</text>
+  <rect x="120" y="370" width="160" height="112" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="120" y="370" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-FormatGroup)"/>
+  <text x="200" y="386" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">FormatGroup</text>
+  <line x1="120" y1="394" x2="280" y2="394" stroke="#333" stroke-width="1"/>
+  <text x="125" y="410.2" font-family="Arial, sans-serif" font-size="12" fill="#555">What a file format is a KIND</text>
+  <text x="125" y="426.2" font-family="Arial, sans-serif" font-size="12" fill="#555">of — a picture format, an</text>
+  <text x="125" y="442.2" font-family="Arial, sans-serif" font-size="12" fill="#555">audio format, a</text>
+  <text x="125" y="458.2" font-family="Arial, sans-serif" font-size="12" fill="#555">compression format.</text>
+  <rect x="230" y="60" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="230" y="60" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-FormatSupport)"/>
+  <text x="310" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">FormatSupport</text>
+  <line x1="230" y1="84" x2="390" y2="84" stroke="#333" stroke-width="1"/>
+  <text x="235" y="100.2" font-family="Arial, sans-serif" font-size="12" fill="#555">What one program can do</text>
+  <text x="235" y="116.2" font-family="Arial, sans-serif" font-size="12" fill="#555">with one kind of file — the</text>
+  <text x="235" y="132.2" font-family="Arial, sans-serif" font-size="12" fill="#555">fact behind „womit kann</text>
+  <text x="235" y="148.2" font-family="Arial, sans-serif" font-size="12" fill="#555">man eine .pdf ansehen?&quot;,</text>
+  <text x="235" y="164.2" font-family="Arial, sans-serif" font-size="12" fill="#555">and the reason that</text>
+  <text x="235" y="180.2" font-family="Arial, sans-serif" font-size="12" fill="#555">question has several right</text>
+  <text x="235" y="196.2" font-family="Arial, sans-serif" font-size="12" fill="#555">answers.</text>
+  <rect x="600" y="20" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="600" y="20" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-Product)"/>
+  <text x="680" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Product</text>
+  <line x1="600" y1="44" x2="760" y2="44" stroke="#333" stroke-width="1"/>
+  <text x="605" y="60.2" font-family="Arial, sans-serif" font-size="12" fill="#555">A concrete thing somebody</text>
+  <text x="605" y="76.2" font-family="Arial, sans-serif" font-size="12" fill="#555">made: Chrome, Firefox,</text>
+  <text x="605" y="92.2" font-family="Arial, sans-serif" font-size="12" fill="#555">Google Search, Googlebot,</text>
+  <text x="605" y="108.2" font-family="Arial, sans-serif" font-size="12" fill="#555">Android. Exactly one type,</text>
+  <text x="605" y="124.2" font-family="Arial, sans-serif" font-size="12" fill="#555">exactly one maker.</text>
+  <rect x="420" y="360" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="420" y="360" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-ProductType)"/>
+  <text x="500" y="376" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">ProductType</text>
+  <line x1="420" y1="384" x2="580" y2="384" stroke="#333" stroke-width="1"/>
+  <text x="425" y="400.2" font-family="Arial, sans-serif" font-size="12" fill="#555">A KIND of thing — browser,</text>
+  <text x="425" y="416.2" font-family="Arial, sans-serif" font-size="12" fill="#555">search engine, spider,</text>
+  <text x="425" y="432.2" font-family="Arial, sans-serif" font-size="12" fill="#555">operating system. Its</text>
+  <text x="425" y="448.2" font-family="Arial, sans-serif" font-size="12" fill="#555">purpose is the sentence</text>
+  <text x="425" y="464.2" font-family="Arial, sans-serif" font-size="12" fill="#555">that separates them.</text>
+  <rect x="260" y="200" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="260" y="200" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-ProductTypeText)"/>
+  <text x="340" y="216" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">ProductTypeText</text>
+  <line x1="260" y1="224" x2="420" y2="224" stroke="#333" stroke-width="1"/>
+  <text x="265" y="240.2" font-family="Arial, sans-serif" font-size="12" fill="#555">The same kind in another</text>
+  <text x="265" y="256.2" font-family="Arial, sans-serif" font-size="12" fill="#555">language, plus the</text>
+  <text x="265" y="272.2" font-family="Arial, sans-serif" font-size="12" fill="#555">grammatical gender. A</text>
+  <text x="265" y="288.2" font-family="Arial, sans-serif" font-size="12" fill="#555">missing row falls back to</text>
+  <text x="265" y="304.2" font-family="Arial, sans-serif" font-size="12" fill="#555">the English parent.</text>
+  <rect x="950" y="130" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="950" y="130" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-Protocol)"/>
+  <text x="1030" y="146" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Protocol</text>
+  <line x1="950" y1="154" x2="1110" y2="154" stroke="#333" stroke-width="1"/>
+  <text x="955" y="170.2" font-family="Arial, sans-serif" font-size="12" fill="#555">An agreement two</text>
+  <text x="955" y="186.2" font-family="Arial, sans-serif" font-size="12" fill="#555">programs follow so they can</text>
+  <text x="955" y="202.2" font-family="Arial, sans-serif" font-size="12" fill="#555">talk to each other — and</text>
+  <text x="955" y="218.2" font-family="Arial, sans-serif" font-size="12" fill="#555">almost always an</text>
+  <text x="955" y="234.2" font-family="Arial, sans-serif" font-size="12" fill="#555">abbreviation nobody has</text>
+  <text x="955" y="250.2" font-family="Arial, sans-serif" font-size="12" fill="#555">ever been told the long form</text>
+  <text x="955" y="266.2" font-family="Arial, sans-serif" font-size="12" fill="#555">of.</text>
+  <rect x="850" y="760" width="160" height="96" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="850" y="760" width="160" height="24" fill="#FEF3C7" clip-path="url(#clip-QuestionPhrase)"/>
+  <text x="930" y="776" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">QuestionPhrase</text>
+  <line x1="850" y1="784" x2="1010" y2="784" stroke="#333" stroke-width="1"/>
+  <text x="855" y="800.2" font-family="Arial, sans-serif" font-size="12" fill="#555">The wording of one</text>
+  <text x="855" y="816.2" font-family="Arial, sans-serif" font-size="12" fill="#555">template in one language,</text>
+  <text x="855" y="832.2" font-family="Arial, sans-serif" font-size="12" fill="#555">with the placeholders its</text>
+  <text x="855" y="848.2" font-family="Arial, sans-serif" font-size="12" fill="#555">roles fill.</text>
+  <rect x="760" y="610" width="160" height="112" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="760" y="610" width="160" height="24" fill="#FEF3C7" clip-path="url(#clip-QuestionTemplate)"/>
+  <text x="840" y="626" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">QuestionTemplate</text>
+  <line x1="760" y1="634" x2="920" y2="634" stroke="#333" stroke-width="1"/>
+  <text x="765" y="650.2" font-family="Arial, sans-serif" font-size="12" fill="#555">One KIND of question,</text>
+  <text x="765" y="666.2" font-family="Arial, sans-serif" font-size="12" fill="#555">declared as data: which</text>
+  <text x="765" y="682.2" font-family="Arial, sans-serif" font-size="12" fill="#555">records fill its roles, and</text>
+  <text x="765" y="698.2" font-family="Arial, sans-serif" font-size="12" fill="#555">where the right answer</text>
+  <text x="765" y="714.2" font-family="Arial, sans-serif" font-size="12" fill="#555">comes from. No wording.</text>
+  <rect x="970" y="340" width="160" height="224" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="970" y="340" width="160" height="24" fill="#FFFFFF" clip-path="url(#clip-Translation)"/>
+  <text x="1050" y="356" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Translation</text>
+  <line x1="970" y1="364" x2="1130" y2="364" stroke="#333" stroke-width="1"/>
+  <text x="975" y="380.2" font-family="Arial, sans-serif" font-size="12" fill="#555">One record&#39;s wording in one</text>
+  <text x="975" y="396.2" font-family="Arial, sans-serif" font-size="12" fill="#555">language — the noun, what</text>
+  <text x="975" y="412.2" font-family="Arial, sans-serif" font-size="12" fill="#555">it is for, and the grammar a</text>
+  <text x="975" y="428.2" font-family="Arial, sans-serif" font-size="12" fill="#555">correct sentence about it</text>
+  <text x="975" y="444.2" font-family="Arial, sans-serif" font-size="12" fill="#555">needs.</text>
   <rect x="40" y="590" width="130.044921875" height="24" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
   <rect x="40" y="590" width="130.044921875" height="24" fill="#9ca3af" clip-path="url(#clip-Audit)"/>
   <text x="105.0224609375" y="606" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Audit</text>
@@ -184,42 +261,42 @@
   <text x="255" y="816" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">WorkerStats</text>
 
   <!-- Legend -->
-  <text x="20" y="888" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Areas:</text>
-  <text x="160" y="888" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Types:</text>
-  <rect x="20" y="898" width="14" height="14" fill="#E0E7FF" stroke="#333" stroke-width="1"/>
-  <text x="40" y="908" font-family="Arial, sans-serif" font-size="11">Facts</text>
-  <text x="160" y="908" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Enums:</text>
-  <rect x="201.9013671875" y="899" width="46.52197265625" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="204.9013671875" y="907" font-family="Arial, sans-serif" font-size="9">EntityKind</text>
-  <rect x="253.42333984375" y="899" width="52.02392578125" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="256.42333984375" y="907" font-family="Arial, sans-serif" font-size="9">FileSupport</text>
-  <rect x="310.447265625" y="899" width="46.04296875" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="313.447265625" y="907" font-family="Arial, sans-serif" font-size="9">Language</text>
-  <rect x="361.490234375" y="899" width="64.02099609375" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="364.490234375" y="907" font-family="Arial, sans-serif" font-size="9">AnswerQuality</text>
-  <rect x="430.51123046875" y="899" width="36.01904296875" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="433.51123046875" y="907" font-family="Arial, sans-serif" font-size="9">Gender</text>
-  <rect x="471.5302734375" y="899" width="51.52734375" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="474.5302734375" y="907" font-family="Arial, sans-serif" font-size="9">AuditAction</text>
-  <rect x="528.0576171875" y="899" width="90.55078125" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="531.0576171875" y="907" font-family="Arial, sans-serif" font-size="9">BackgroundTaskKind</text>
-  <rect x="623.6083984375" y="899" width="93.55224609375" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="626.6083984375" y="907" font-family="Arial, sans-serif" font-size="9">BackgroundTaskState</text>
-  <rect x="722.16064453125" y="899" width="64.025390625" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="725.16064453125" y="907" font-family="Arial, sans-serif" font-size="9">ProcessStatus</text>
-  <rect x="791.18603515625" y="899" width="66.53466796875" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="794.18603515625" y="907" font-family="Arial, sans-serif" font-size="9">ProposalAction</text>
-  <rect x="862.720703125" y="899" width="67.03564453125" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="865.720703125" y="907" font-family="Arial, sans-serif" font-size="9">ProposalStatus</text>
-  <rect x="20" y="918" width="14" height="14" fill="#FEF3C7" stroke="#333" stroke-width="1"/>
-  <text x="40" y="928" font-family="Arial, sans-serif" font-size="11">Questions</text>
-  <rect x="20" y="938" width="14" height="14" fill="#DCFCE7" stroke="#333" stroke-width="1"/>
-  <text x="40" y="948" font-family="Arial, sans-serif" font-size="11">History</text>
-  <rect x="20" y="958" width="14" height="14" fill="#9ca3af" stroke="#333" stroke-width="1"/>
-  <text x="40" y="968" font-family="Arial, sans-serif" font-size="11">System</text>
+  <text x="20" y="906" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Areas:</text>
+  <text x="160" y="906" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Types:</text>
+  <rect x="20" y="916" width="14" height="14" fill="#E0E7FF" stroke="#333" stroke-width="1"/>
+  <text x="40" y="926" font-family="Arial, sans-serif" font-size="11">Facts</text>
+  <text x="160" y="926" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Enums:</text>
+  <rect x="201.9013671875" y="917" width="46.52197265625" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="204.9013671875" y="925" font-family="Arial, sans-serif" font-size="9">EntityKind</text>
+  <rect x="253.42333984375" y="917" width="52.02392578125" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="256.42333984375" y="925" font-family="Arial, sans-serif" font-size="9">FileSupport</text>
+  <rect x="310.447265625" y="917" width="46.04296875" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="313.447265625" y="925" font-family="Arial, sans-serif" font-size="9">Language</text>
+  <rect x="361.490234375" y="917" width="64.02099609375" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="364.490234375" y="925" font-family="Arial, sans-serif" font-size="9">AnswerQuality</text>
+  <rect x="430.51123046875" y="917" width="36.01904296875" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="433.51123046875" y="925" font-family="Arial, sans-serif" font-size="9">Gender</text>
+  <rect x="471.5302734375" y="917" width="51.52734375" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="474.5302734375" y="925" font-family="Arial, sans-serif" font-size="9">AuditAction</text>
+  <rect x="528.0576171875" y="917" width="90.55078125" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="531.0576171875" y="925" font-family="Arial, sans-serif" font-size="9">BackgroundTaskKind</text>
+  <rect x="623.6083984375" y="917" width="93.55224609375" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="626.6083984375" y="925" font-family="Arial, sans-serif" font-size="9">BackgroundTaskState</text>
+  <rect x="722.16064453125" y="917" width="64.025390625" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="725.16064453125" y="925" font-family="Arial, sans-serif" font-size="9">ProcessStatus</text>
+  <rect x="791.18603515625" y="917" width="66.53466796875" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="794.18603515625" y="925" font-family="Arial, sans-serif" font-size="9">ProposalAction</text>
+  <rect x="862.720703125" y="917" width="67.03564453125" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="865.720703125" y="925" font-family="Arial, sans-serif" font-size="9">ProposalStatus</text>
+  <rect x="20" y="936" width="14" height="14" fill="#FEF3C7" stroke="#333" stroke-width="1"/>
+  <text x="40" y="946" font-family="Arial, sans-serif" font-size="11">Questions</text>
+  <rect x="20" y="956" width="14" height="14" fill="#DCFCE7" stroke="#333" stroke-width="1"/>
+  <text x="40" y="966" font-family="Arial, sans-serif" font-size="11">History</text>
+  <rect x="20" y="976" width="14" height="14" fill="#9ca3af" stroke="#333" stroke-width="1"/>
+  <text x="40" y="986" font-family="Arial, sans-serif" font-size="11">System</text>
 
   <!-- Watermark -->
-  <text x="955" y="888" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">AI for Development Engineers</text>
-  <text x="955" y="902" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">Rapid Application Prototype <tspan fill="#0066cc">(http://github.com/aide-examples)</tspan></text>
-  <text x="955" y="916" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">28. September 2026</text>
+  <text x="1165" y="906" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">AI for Development Engineers</text>
+  <text x="1165" y="920" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">Rapid Application Prototype <tspan fill="#0066cc">(http://github.com/aide-examples)</tspan></text>
+  <text x="1165" y="934" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">28. September 2026</text>
 </svg>

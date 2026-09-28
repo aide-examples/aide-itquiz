@@ -159,7 +159,7 @@
     "template": "format_group",
     "language": "de",
     "text": "Was für eine Art von Format ist {subject}?",
-    "explanation": "{subject} ist ein {answer}.\n*Was {answer}e ausmacht:* {purpose}."
+    "explanation": "{subject} ist {ein_answer} {answer}.\n*Was {ein_answer} {answer} ausmacht:* {purpose}."
   },
   {
     "template": "format_group",
@@ -171,7 +171,7 @@
     "template": "concept_part_of",
     "language": "de",
     "text": "Wovon ist {subject} ein Teil?",
-    "explanation": "{subject} ist ein Teil von {answer}[[ — zum Beispiel {example}]]."
+    "explanation": "{subject} ist ein Teil {genitiv_answer}[[ — zum Beispiel {example}]]."
   },
   {
     "template": "concept_part_of",

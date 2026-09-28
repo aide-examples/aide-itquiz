@@ -73,7 +73,7 @@ const INDEFINITE = { m: 'ein', f: 'eine', n: 'ein' };
 // German genitive article. The part-of sentence wants „Teil EINES Office-Pakets", and the
 // case cannot be avoided by rewording without making the sentence worse. The ARTICLE derives
 // from the gender like the other two; the noun's own ending does NOT — it follows a rule with
-// exceptions, so it is stored on the language row (`ProductTypeText.genitive`) rather than
+// exceptions, so it is stored on the translation row (`Translation.genitive`) rather than
 // guessed. A rule with exceptions would put a wrong sentence in front of a learner.
 const GENITIVE = { m: 'eines', f: 'einer', n: 'eines' };
 // The personal pronoun, for „Das ist der Browser von Google. ER heißt Chrome." Third
@@ -236,10 +236,15 @@ module.exports = function registerSystemRoutes(app, deps) {
    */
   async function facts() {
     const eng = engine();
-    const [types, texts, products, companies, templates, phrases,
+    const [types, translations, products, companies, templates, phrases,
       formats, groups, protocols, connectors, concepts, supports] = await Promise.all([
       eng.query('SELECT id, name, purpose, part_of_id, icon, wikipedia_de, wikipedia_en FROM product_type WHERE id > 1'),
-      eng.query('SELECT product_type_id, language, name, purpose, gender, genitive FROM product_type_text WHERE id > 1'),
+      // ONE translation table for all six translated entities, a polymorphic reference: six real
+      // FK columns with `ExactlyOne` over them. Read whole like everything else here, and indexed
+      // in `wording()` rather than queried per lookup.
+      eng.query('SELECT product_type_id, file_format_id, format_group_id, protocol_id, '
+        + 'connector_id, concept_id, language, name, purpose, gender, genitive, note '
+        + 'FROM translation WHERE id > 1'),
       eng.query('SELECT id, name, product_type_id, manufacturer_id, icon, wikipedia_de, wikipedia_en FROM product WHERE id > 1'),
       eng.query('SELECT id, name, logo, wikipedia_de, wikipedia_en FROM company WHERE id > 1'),
       eng.query('SELECT id, key, subject_kind, object_kind, answer_kind FROM question_template WHERE id > 1'),
@@ -254,42 +259,104 @@ module.exports = function registerSystemRoutes(app, deps) {
       eng.query('SELECT id, name, abbreviation, long_name, purpose, example, part_of_id, wikipedia_de, wikipedia_en FROM concept WHERE id > 1'),
       eng.query('SELECT product_id, format_id, support FROM format_support WHERE id > 1'),
     ]);
-    return { types, texts, products, companies, templates, phrases,
+    return { types, translations, products, companies, templates, phrases,
       formats, groups, protocols, connectors, concepts, supports };
   }
 
   /**
-   * The word for a product type in one language, falling back to the parent.
+   * Which column of `translation` carries the reference, per entity kind.
    *
-   * The parent row holds the English wording; a `ProductTypeText` child holds a
-   * translation. A missing child is not an error — it means the English term is
-   * the one that is used in that language too, which is true of a good many IT
-   * words.
+   * The one place that knows the mapping. A seventh translated entity adds a line here and a
+   * column there, and every caller below inherits it — which is the whole reason the six
+   * translations are one table and not six (§17).
    */
-  function word(f, type, lang, field) {
-    const child = f.texts.find((t) => t.product_type_id === type.id && t.language === lang);
-    return (child && child[field]) || type[field];
-  }
+  const TRANSLATION_FK = {
+    ProductType: 'product_type_id',
+    FileFormat: 'file_format_id',
+    FormatGroup: 'format_group_id',
+    Protocol: 'protocol_id',
+    Connector: 'connector_id',
+    Concept: 'concept_id',
+  };
 
-  /** The grammatical gender of a type's noun in one language, or null. */
-  function gender(f, type, lang) {
-    return sprachfeld(f, type, lang, 'gender');
+  /**
+   * The translation row for one record in one language, or null.
+   *
+   * Looked up in an index built once per question rather than by scanning: with six kinds in one
+   * table a linear `find` per placeholder is a scan per word, and a question fills a dozen.
+   *
+   * @param {any} f - the facts
+   * @param {string} kind - an `EntityKind` value that has translations
+   * @param {any} record - the row of that kind
+   * @param {string} lang
+   * @returns {any|null}
+   */
+  function translationOf(f, kind, record, lang) {
+    if (!f._byTranslationKey) {
+      f._byTranslationKey = new Map();
+      for (const t of f.translations) {
+        for (const [k, col] of Object.entries(TRANSLATION_FK)) {
+          if (t[col]) f._byTranslationKey.set(`${k}/${t[col]}/${t.language}`, t);
+        }
+      }
+    }
+    if (!record || !TRANSLATION_FK[kind]) return null;
+    return f._byTranslationKey.get(`${kind}/${record.id}/${lang}`) || null;
   }
 
   /**
-   * A field that exists ONLY on the language row — gender, genitive. Unlike `word()` there is
-   * no parent to fall back to: the English row has no grammatical gender to lend, and a
-   * missing value means „this language does not inflect that", not „look upstairs".
+   * A field of a record in the reader's language, falling back to the record itself.
    *
-   * @param {any} f - the facts
-   * @param {any} type - the ProductType row
-   * @param {string} lang
-   * @param {string} feld
+   * `name`, `purpose` and `note` exist on both sides, so a missing translation is not an error:
+   * it means the English term is used in that language too, which is true of a good many IT
+   * words — „Browser", „Router", „PDF". The reader gets the English word, correctly, because
+   * nobody translates it either.
+   *
+   * @param {any} f @param {string} kind @param {any} record @param {string} lang
+   * @param {string} field
+   * @returns {any}
+   */
+  function word(f, kind, record, lang, field) {
+    const t = translationOf(f, kind, record, lang);
+    return (t && t[field]) || (record && record[field]);
+  }
+
+  /**
+   * A field that exists ONLY on the translation row — gender, genitive.
+   *
+   * Unlike `word()` there is nothing to fall back to: the English row has no grammatical gender
+   * to lend, and a missing value means „this language does not inflect that", not „look
+   * upstairs". Which is also why an absent genitive is correct for every feminine German noun
+   * and for all of English.
+   *
+   * @param {any} f @param {string} kind @param {any} record @param {string} lang
+   * @param {string} field
    * @returns {string|null}
    */
-  function sprachfeld(f, type, lang, feld) {
-    const child = f.texts.find((t) => t.product_type_id === type.id && t.language === lang);
-    return (child && child[feld]) || null;
+  function grammar(f, kind, record, lang, field) {
+    const t = translationOf(f, kind, record, lang);
+    return (t && t[field]) || null;
+  }
+
+  /**
+   * A record as a filled ROLE: its word in the reader's language plus the grammar a sentence
+   * about it needs. What `fill()` wants for `{role}`, `{der_role}`, `{ein_role}`,
+   * `{genitiv_role}` and `{er_role}`.
+   *
+   * One function for all six kinds. Before the translations were consolidated this existed
+   * twice, hard-wired to `ProductType`, in the two halves of this file — which is exactly how a
+   * German question ended up carrying an English explanation for the five kinds that had no
+   * translation table of their own.
+   *
+   * @param {any} f @param {string} kind @param {any} record @param {string} lang
+   * @returns {{label: string, gender: string|null, genitive: string|null}}
+   */
+  function said(f, kind, record, lang) {
+    return {
+      label: word(f, kind, record, lang, 'name') || '',
+      gender: grammar(f, kind, record, lang, 'gender'),
+      genitive: grammar(f, kind, record, lang, 'genitive'),
+    };
   }
 
   /**
@@ -406,7 +473,7 @@ module.exports = function registerSystemRoutes(app, deps) {
     const exampleOf = (t) => f.products.find((x) => x.product_type_id === t.id) || { name: '' };
     /** Every product of a kind, as the list an explanation names: „Chrome, Edge, Firefox, Safari". */
     const examplesOf = (t) => f.products.filter((x) => x.product_type_id === t.id).map((x) => x.name).join(', ');
-    const typed = (t) => ({ label: word(f, t, lang, 'name'), gender: gender(f, t, lang), genitive: sprachfeld(f, t, lang, 'genitive') });
+    const typed = (t) => said(f, 'ProductType', t, lang);
 
     if (template.key === 'manufacturer') {
       const p = any(f.products.filter((x) => x.manufacturer_id && x.product_type_id));
@@ -454,14 +521,14 @@ module.exports = function registerSystemRoutes(app, deps) {
         // The question already named the type AND the maker, so the answer alone adds
         // nothing beyond itself. What the reader does not have is what the type is FOR.
         _explanation: fill(phrase.explanation,
-          { subject: named(c), object: typed(t), answer: named(p), purpose: { label: word(f, t, lang, 'purpose') } }, lang),
+          { subject: named(c), object: typed(t), answer: named(p), purpose: { label: word(f, 'ProductType', t, lang, 'purpose') } }, lang),
       };
     }
 
     if (template.key === 'purpose') {
       // Every type with a purpose, whether or not it has a product: the example clause in
       // the phrase is optional and disappears by itself where there is none.
-      const t = any(f.types.filter((x) => word(f, x, lang, 'purpose')));
+      const t = any(f.types.filter((x) => word(f, 'ProductType', x, lang, 'purpose')));
       if (!t) return null;
       const wrong = sample(f.types.filter((x) => x.id !== t.id), 3);
       if (wrong.length < 2) return null;
@@ -469,9 +536,9 @@ module.exports = function registerSystemRoutes(app, deps) {
         template: template.key, language: lang,
         subject: { kind: 'ProductType', id: t.id },
         object: null,
-        text: fill(phrase.text, { subject: { label: word(f, t, lang, 'purpose') } }, lang),
-        options: [t, ...wrong].map((x) => word(f, x, lang, 'name')),
-        _correct: word(f, t, lang, 'name'),
+        text: fill(phrase.text, { subject: { label: word(f, 'ProductType', t, lang, 'purpose') } }, lang),
+        options: [t, ...wrong].map((x) => word(f, 'ProductType', x, lang, 'name')),
+        _correct: word(f, 'ProductType', t, lang, 'name'),
         // The question was the purpose, so naming the type says only what was asked. A
         // thing the reader has actually held is the fact that lands.
         _explanation: fill(phrase.explanation, { answer: typed(t), example: named(exampleOf(t)) }, lang),
@@ -481,7 +548,7 @@ module.exports = function registerSystemRoutes(app, deps) {
     if (template.key === 'what_kind') {
       // The picture IS the question, so a kind without one cannot be asked about — that is a
       // fact about the data, not an error, and the next template is tried instead.
-      const t = any(f.types.filter((x) => x.icon && word(f, x, lang, 'purpose')));
+      const t = any(f.types.filter((x) => x.icon && word(f, 'ProductType', x, lang, 'purpose')));
       if (!t) return null;
       const wrong = sample(f.types.filter((x) => x.id !== t.id), 3);
       if (wrong.length < 2) return null;
@@ -491,11 +558,11 @@ module.exports = function registerSystemRoutes(app, deps) {
         object: null,
         image: `api/media/${t.icon}/file`,
         text: fill(phrase.text, {}, lang),
-        options: [t, ...wrong].map((x) => word(f, x, lang, 'name')),
-        _correct: word(f, t, lang, 'name'),
+        options: [t, ...wrong].map((x) => word(f, 'ProductType', x, lang, 'name')),
+        _correct: word(f, 'ProductType', t, lang, 'name'),
         _explanation: fill(phrase.explanation, {
           answer: typed(t),
-          purpose: { label: word(f, t, lang, 'purpose') },
+          purpose: { label: word(f, 'ProductType', t, lang, 'purpose') },
           examples: { label: examplesOf(t) },
         }, lang),
       };
@@ -531,8 +598,8 @@ module.exports = function registerSystemRoutes(app, deps) {
         subject: { kind: 'ProductType', id: t.id },
         object: null,
         text: fill(phrase.text, { subject: typed(t) }, lang),
-        options: [ganz, ...wrong].map((x) => word(f, x, lang, 'name')),
-        _correct: word(f, ganz, lang, 'name'),
+        options: [ganz, ...wrong].map((x) => word(f, 'ProductType', x, lang, 'name')),
+        _correct: word(f, 'ProductType', ganz, lang, 'name'),
         _explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(ganz) }, lang),
       };
     }
@@ -586,7 +653,9 @@ module.exports = function registerSystemRoutes(app, deps) {
         _correct: x.long_name,
         _explanation: fill(phrase.explanation,
           { subject: { label: shortName(x) }, answer: { label: x.long_name },
-            purpose: { label: x.purpose } }, lang),
+            // The abbreviation and the long form are NOT translated — „DOCX" is DOCX and
+            // „Office Open XML" is the standard's own name. Only what it DOES is language.
+            purpose: { label: word(f, template.subject_kind, x, lang, 'purpose') } }, lang),
       };
     }
 
@@ -627,7 +696,10 @@ module.exports = function registerSystemRoutes(app, deps) {
         _correct: right.name,
         _explanation: fill(phrase.explanation,
           { subject: { label: fmt.extension }, answer: { label: right.name },
-            format: { label: fmt.name }, purpose: { label: fmt.purpose } }, lang),
+            // `answer` is a PRODUCT — a proper name, the same in every language (§ the reason
+            // only ProductType ever had a translation table).
+            format: { label: word(f, 'FileFormat', fmt, lang, 'name') },
+            purpose: { label: word(f, 'FileFormat', fmt, lang, 'purpose') } }, lang),
       };
     }
 
@@ -642,12 +714,17 @@ module.exports = function registerSystemRoutes(app, deps) {
         template: template.key, language: lang,
         subject: { kind: 'FileFormat', id: fmt.id },
         object: null,
-        text: fill(phrase.text, { subject: { label: fmt.name } }, lang),
-        options: [grp, ...wrong].map((g) => g.name),
-        _correct: grp.name,
+        text: fill(phrase.text, { subject: { label: word(f, 'FileFormat', fmt, lang, 'name') } }, lang),
+        // The OPTIONS are translated and so is `_correct`, through the same call — a list in
+        // one language whose right entry is in another answers itself.
+        options: [grp, ...wrong].map((g) => word(f, 'FormatGroup', g, lang, 'name')),
+        _correct: word(f, 'FormatGroup', grp, lang, 'name'),
         _explanation: fill(phrase.explanation,
-          { subject: { label: fmt.name }, answer: { label: grp.name },
-            purpose: { label: grp.purpose } }, lang),
+          { subject: { label: word(f, 'FileFormat', fmt, lang, 'name') },
+            // `said` and not a bare label: six of the seven groups are „ein Bildformat" and
+            // „Auszeichnungssprache" is „eine". A hard-coded article gets that one wrong.
+            answer: said(f, 'FormatGroup', grp, lang),
+            purpose: { label: word(f, 'FormatGroup', grp, lang, 'purpose') } }, lang),
       };
     }
 
@@ -662,11 +739,15 @@ module.exports = function registerSystemRoutes(app, deps) {
         template: template.key, language: lang,
         subject: { kind: 'Concept', id: c.id },
         object: null,
-        text: fill(phrase.text, { subject: { label: c.name } }, lang),
-        options: [whole, ...wrong].map((y) => y.name),
-        _correct: whole.name,
+        text: fill(phrase.text, { subject: { label: word(f, 'Concept', c, lang, 'name') } }, lang),
+        options: [whole, ...wrong].map((y) => word(f, 'Concept', y, lang, 'name')),
+        _correct: word(f, 'Concept', whole, lang, 'name'),
         _explanation: fill(phrase.explanation,
-          { subject: { label: c.name }, answer: { label: whole.name },
+          { subject: { label: word(f, 'Concept', c, lang, 'name') },
+            // The GENITIVE is why this is `said`: „Teil einer Webadresse", and the German
+            // phrase asks for `{genitiv_answer}`. Without it the sentence read „Domain ist
+            // ein Teil von Webadresse" — an article missing where German needs one.
+            answer: said(f, 'Concept', whole, lang),
             example: { label: whole.example || '' } }, lang),
       };
     }
@@ -844,7 +925,7 @@ module.exports = function registerSystemRoutes(app, deps) {
     const phrase = f.phrases.find((p) => p.template_id === template.id && p.language === lang)
       || f.phrases.find((p) => p.template_id === template.id && p.language === 'en');
     if (!phrase) return null;
-    const typed = (t) => ({ label: word(f, t, lang, 'name'), gender: gender(f, t, lang), genitive: sprachfeld(f, t, lang, 'genitive') });
+    const typed = (t) => said(f, 'ProductType', t, lang);
 
     if (template.key === 'manufacturer') {
       const p = prod(subject && subject.id); if (!p) return null;
@@ -869,14 +950,14 @@ module.exports = function registerSystemRoutes(app, deps) {
         correct: p.name,
         ...context([['Product', p], ['ProductType', t], ['Company', c]], lang),
         explanation: fill(phrase.explanation,
-          { subject: { label: c.name }, object: typed(t), answer: { label: p.name }, purpose: { label: word(f, t, lang, 'purpose') } }, lang),
+          { subject: { label: c.name }, object: typed(t), answer: { label: p.name }, purpose: { label: word(f, 'ProductType', t, lang, 'purpose') } }, lang),
       };
     }
     if (template.key === 'purpose') {
       const t = type(subject && subject.id); if (!t) return null;
       const beispiel = f.products.find((x) => x.product_type_id === t.id);
       return {
-        correct: word(f, t, lang, 'name'),
+        correct: word(f, 'ProductType', t, lang, 'name'),
         ...context([['ProductType', t], ['Product', beispiel]], lang),
         explanation: fill(phrase.explanation,
           { answer: typed(t), example: { label: (beispiel && beispiel.name) || '' } }, lang),
@@ -889,7 +970,7 @@ module.exports = function registerSystemRoutes(app, deps) {
     if (template.key === 'what_kind') {
       const t = type(subject && subject.id); if (!t) return null;
       return {
-        correct: word(f, t, lang, 'name'),
+        correct: word(f, 'ProductType', t, lang, 'name'),
         // No picture — the picture WAS the question — but `context` supplies one anyway and
         // the caller below drops it. Keeping the three together is worth more than saving a
         // string, because the next template gets all three by writing one line.
@@ -897,7 +978,7 @@ module.exports = function registerSystemRoutes(app, deps) {
         image: null,
         explanation: fill(phrase.explanation, {
           answer: typed(t),
-          purpose: { label: word(f, t, lang, 'purpose') },
+          purpose: { label: word(f, 'ProductType', t, lang, 'purpose') },
           examples: { label: f.products.filter((x) => x.product_type_id === t.id).map((x) => x.name).join(', ') },
         }, lang),
       };
@@ -918,7 +999,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       const t = type(subject && subject.id); if (!t) return null;
       const ganz = f.types.find((y) => y.id === t.part_of_id); if (!ganz) return null;
       return {
-        correct: word(f, ganz, lang, 'name'),
+        correct: word(f, 'ProductType', ganz, lang, 'name'),
         ...context([['ProductType', ganz], ['ProductType', t]], lang),
         explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(ganz) }, lang),
       };
@@ -1003,7 +1084,9 @@ module.exports = function registerSystemRoutes(app, deps) {
         ...context([[template.subject_kind, x]], lang),
         explanation: fill(phrase.explanation,
           { subject: { label: shortName(x) }, answer: { label: x.long_name },
-            purpose: { label: x.purpose } }, lang),
+            // The abbreviation and the long form are NOT translated — „DOCX" is DOCX and
+            // „Office Open XML" is the standard's own name. Only what it DOES is language.
+            purpose: { label: word(f, template.subject_kind, x, lang, 'purpose') } }, lang),
       };
     }
 
@@ -1027,7 +1110,10 @@ module.exports = function registerSystemRoutes(app, deps) {
         ...context([['Product', right], ['FileFormat', fmt]], lang),
         explanation: fill(phrase.explanation,
           { subject: { label: fmt.extension }, answer: { label: right.name },
-            format: { label: fmt.name }, purpose: { label: fmt.purpose } }, lang),
+            // `answer` is a PRODUCT — a proper name, the same in every language (§ the reason
+            // only ProductType ever had a translation table).
+            format: { label: word(f, 'FileFormat', fmt, lang, 'name') },
+            purpose: { label: word(f, 'FileFormat', fmt, lang, 'purpose') } }, lang),
       };
     }
 
@@ -1037,11 +1123,12 @@ module.exports = function registerSystemRoutes(app, deps) {
       const grp = f.groups.find((g) => g.id === fmt.group_id);
       if (!grp) return null;
       return {
-        correct: grp.name,
+        correct: word(f, 'FormatGroup', grp, lang, 'name'),
         ...context([['FileFormat', fmt], ['FormatGroup', grp]], lang),
         explanation: fill(phrase.explanation,
-          { subject: { label: fmt.name }, answer: { label: grp.name },
-            purpose: { label: grp.purpose } }, lang),
+          { subject: { label: word(f, 'FileFormat', fmt, lang, 'name') },
+            answer: said(f, 'FormatGroup', grp, lang),
+            purpose: { label: word(f, 'FormatGroup', grp, lang, 'purpose') } }, lang),
       };
     }
 
@@ -1051,10 +1138,11 @@ module.exports = function registerSystemRoutes(app, deps) {
       const whole = f.concepts.find((y) => y.id === c.part_of_id);
       if (!whole) return null;
       return {
-        correct: whole.name,
+        correct: word(f, 'Concept', whole, lang, 'name'),
         ...context([['Concept', whole], ['Concept', c]], lang),
         explanation: fill(phrase.explanation,
-          { subject: { label: c.name }, answer: { label: whole.name },
+          { subject: { label: word(f, 'Concept', c, lang, 'name') },
+            answer: said(f, 'Concept', whole, lang),
             example: { label: whole.example || '' } }, lang),
       };
     }

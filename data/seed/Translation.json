@@ -1,0 +1,464 @@
+[
+  {
+    "product_type": "Browser",
+    "language": "de",
+    "name": "Browser",
+    "purpose": "zeigt Webseiten an",
+    "gender": "m",
+    "genitive": "Browsers",
+    "note": "Viele stellen eine Suchmaschine als Startseite des Browsers ein — daher wirken die beiden wie ein Ding"
+  },
+  {
+    "product_type": "Search engine",
+    "language": "de",
+    "name": "Suchmaschine",
+    "purpose": "führt ein Verzeichnis von Webseiten und findet Seiten darin — und ist selbst eine Website",
+    "gender": "f",
+    "note": "Man erreicht sie DURCH einen Browser, so wie man ein Geschäft durch eine Tür erreicht"
+  },
+  {
+    "product_type": "Spider",
+    "language": "de",
+    "name": "Spider",
+    "purpose": "geht Webseiten durch und baut daraus das Verzeichnis, das eine Suchmaschine führt",
+    "gender": "m",
+    "genitive": "Spiders",
+    "note": "Niemand benutzt einen Spider unmittelbar; er arbeitet für die Suchmaschine, der er gehört"
+  },
+  {
+    "product_type": "Operating system",
+    "language": "de",
+    "name": "Betriebssystem",
+    "purpose": "lässt ein Gerät und die Programme darauf laufen",
+    "gender": "n",
+    "genitive": "Betriebssystems"
+  },
+  {
+    "product_type": "Device",
+    "language": "de",
+    "name": "Gerät",
+    "purpose": "vereint Prozessor, Speicher und Bildschirm zu einer Maschine, die man in der Hand hält oder vor sich stehen hat",
+    "gender": "n",
+    "genitive": "Geräts"
+  },
+  {
+    "product_type": "Word processor",
+    "language": "de",
+    "name": "Textprogramm",
+    "purpose": "schreibt und gestaltet Dokumente, die als Seiten gelesen werden",
+    "gender": "n",
+    "genitive": "Textprogramms"
+  },
+  {
+    "product_type": "Spreadsheet",
+    "language": "de",
+    "name": "Tabellenkalkulation",
+    "purpose": "hält Zahlen in einem Raster und rechnet damit",
+    "gender": "f"
+  },
+  {
+    "product_type": "Office suite",
+    "language": "de",
+    "name": "Office-Paket",
+    "purpose": "bündelt mehrere Programme, die zusammen verkauft und installiert werden — meist ein Textprogramm, eine Tabellenkalkulation und ein Präsentationsprogramm",
+    "gender": "n",
+    "genitive": "Office-Pakets"
+  },
+  {
+    "product_type": "Messenger",
+    "language": "de",
+    "name": "Messenger",
+    "purpose": "befördert Nachrichten zwischen Menschen, die ihn beide installiert haben",
+    "gender": "m",
+    "genitive": "Messengers"
+  },
+  {
+    "product_type": "Processor",
+    "language": "de",
+    "name": "Prozessor",
+    "purpose": "führt die Schritte aus, aus denen ein Programm besteht — der Teil, der wirklich rechnet",
+    "gender": "m",
+    "genitive": "Prozessors"
+  },
+  {
+    "product_type": "Working memory",
+    "language": "de",
+    "name": "Arbeitsspeicher",
+    "purpose": "hält, woran gerade gearbeitet wird, und ist nach dem Ausschalten wieder leer",
+    "gender": "m",
+    "genitive": "Arbeitsspeichers"
+  },
+  {
+    "product_type": "Storage medium",
+    "language": "de",
+    "name": "Massenspeicher",
+    "purpose": "bewahrt Dateien auf, sodass sie nach dem Ausschalten noch da sind",
+    "gender": "m",
+    "genitive": "Massenspeichers"
+  },
+  {
+    "product_type": "Screen",
+    "language": "de",
+    "name": "Bildschirm",
+    "purpose": "zeigt, was das Gerät ausgibt, und nimmt die Berührungen darauf als Eingabe",
+    "gender": "m",
+    "genitive": "Bildschirms"
+  },
+  {
+    "product_type": "Battery",
+    "language": "de",
+    "name": "Akku",
+    "purpose": "speichert Strom, damit das Gerät ohne Kabel läuft",
+    "gender": "m",
+    "genitive": "Akkus"
+  },
+  {
+    "product_type": "Online encyclopedia",
+    "language": "de",
+    "name": "Onlinelexikon",
+    "purpose": "sammelt Wissen in Artikeln, die die Leser selbst schreiben und berichtigen",
+    "gender": "n",
+    "genitive": "Onlinelexikons"
+  },
+  {
+    "product_type": "Mail client",
+    "language": "de",
+    "name": "E-Mail-Programm",
+    "purpose": "holt deine Post von einem Server und zeigt sie an, und schickt weg, was du schreibst",
+    "gender": "n",
+    "genitive": "E-Mail-Programms"
+  },
+  {
+    "product_type": "AI assistant",
+    "language": "de",
+    "name": "KI-Assistent",
+    "purpose": "antwortet in Sätzen, weil er an einer riesigen Menge Text trainiert wurde",
+    "gender": "m",
+    "genitive": "KI-Assistenten"
+  },
+  {
+    "product_type": "Map service",
+    "language": "de",
+    "name": "Kartendienst",
+    "purpose": "zeigt, wo etwas ist und wie man von einem zum anderen kommt",
+    "gender": "m",
+    "genitive": "Kartendienstes"
+  },
+  {
+    "product_type": "Video platform",
+    "language": "de",
+    "name": "Videoportal",
+    "purpose": "bewahrt Videos auf, die jeder hochladen und jeder ansehen darf",
+    "gender": "n",
+    "genitive": "Videoportals"
+  },
+  {
+    "product_type": "App store",
+    "language": "de",
+    "name": "App-Store",
+    "purpose": "ist der Ort, aus dem die Programme auf einem Handy kommen und an dem sie aktuell gehalten werden",
+    "gender": "m",
+    "genitive": "App-Stores"
+  },
+  {
+    "product_type": "Cloud storage",
+    "language": "de",
+    "name": "Onlinespeicher",
+    "purpose": "bewahrt Dateien auf dem Computer eines anderen auf, damit jedes deiner Geräte sie erreicht",
+    "gender": "m",
+    "genitive": "Onlinespeichers"
+  },
+  {
+    "product_type": "Media player",
+    "language": "de",
+    "name": "Medienspieler",
+    "purpose": "spielt eine Ton- oder Videodatei ab, womit sie auch aufgenommen wurde",
+    "gender": "m",
+    "genitive": "Medienspielers"
+  },
+  {
+    "product_type": "File manager",
+    "language": "de",
+    "name": "Dateimanager",
+    "purpose": "zeigt, was auf einem Gerät liegt, als Ordner und Dateien, und lässt dich verschieben, kopieren und löschen",
+    "gender": "m",
+    "genitive": "Dateimanagers"
+  },
+  {
+    "product_type": "Document viewer",
+    "language": "de",
+    "name": "Dokumentenbetrachter",
+    "purpose": "öffnet ein Dokument und zeigt es an, ohne es ändern zu können",
+    "gender": "m",
+    "genitive": "Dokumentenbetrachters"
+  },
+  {
+    "product_type": "Barcode scanner",
+    "language": "de",
+    "name": "Barcode-Scanner",
+    "purpose": "liest die Striche oder Quadrate auf einem Etikett und macht wieder die Nummer oder Adresse daraus, für die sie stehen",
+    "gender": "m",
+    "genitive": "Barcode-Scanners"
+  },
+  {
+    "product_type": "Network storage",
+    "language": "de",
+    "name": "Netzwerkspeicher",
+    "purpose": "bewahrt Dateien auf einem eigenen Kasten im Haus auf, erreichbar von jedem Gerät im Netz",
+    "gender": "m",
+    "genitive": "Netzwerkspeichers"
+  },
+  {
+    "file_format": "PDF",
+    "language": "de",
+    "name": "PDF",
+    "purpose": "hält ein Dokument so fest, dass es überall gleich aussieht, egal wer es öffnet"
+  },
+  {
+    "file_format": "ODF",
+    "language": "de",
+    "name": "ODF",
+    "purpose": "hält ein Textdokument in einem Format, das niemandem gehört, sodass jedes Office-Programm es lesen und schreiben darf"
+  },
+  {
+    "file_format": "DOCX",
+    "language": "de",
+    "name": "DOCX",
+    "purpose": "hält ein Textdokument in dem Format, das Microsoft Word schreibt"
+  },
+  {
+    "file_format": "HTML",
+    "language": "de",
+    "name": "HTML",
+    "purpose": "hält eine Webseite — den Text zusammen mit Marken, die sagen, was eine Überschrift, ein Link, ein Bild ist"
+  },
+  {
+    "file_format": "JPEG",
+    "language": "de",
+    "name": "JPEG",
+    "purpose": "hält ein Foto und macht es kleiner, indem es Feinheiten wegwirft, die das Auge kaum bemerkt"
+  },
+  {
+    "file_format": "PNG",
+    "language": "de",
+    "name": "PNG",
+    "purpose": "hält ein Bild, ohne etwas wegzuwerfen, und darf Teile davon durchsichtig lassen"
+  },
+  {
+    "file_format": "MP3",
+    "language": "de",
+    "name": "MP3",
+    "purpose": "hält Musik oder Sprache, klein genug, um Tausende davon mitzunehmen"
+  },
+  {
+    "file_format": "MP4",
+    "language": "de",
+    "name": "MP4",
+    "purpose": "hält ein Video zusammen mit seinem Ton"
+  },
+  {
+    "file_format": "CSV",
+    "language": "de",
+    "name": "CSV",
+    "purpose": "hält eine Tabelle als reinen Text, eine Zeile pro Datensatz und die Spalten durch ein Zeichen getrennt"
+  },
+  {
+    "file_format": "EPUB",
+    "language": "de",
+    "name": "EPUB",
+    "purpose": "hält ein Buch, dessen Text sich umbricht, damit er auf alles passt, worauf man ihn liest"
+  },
+  {
+    "file_format": "XML",
+    "language": "de",
+    "name": "XML",
+    "purpose": "hält Daten zusammen mit Marken, die jedes Stück benennen, sodass Mensch und Programm beide lesen können"
+  },
+  {
+    "file_format": "ZIP",
+    "language": "de",
+    "name": "ZIP",
+    "purpose": "hält mehrere Dateien in einer, macht sie kleiner und gibt sie genau so zurück, wie sie waren"
+  },
+  {
+    "file_format": "GZ",
+    "language": "de",
+    "name": "GZ",
+    "purpose": "macht EINE Datei kleiner, und nichts weiter — kein Ordner, keine zweite Datei"
+  },
+  {
+    "format_group": "Dokumentformat",
+    "language": "de",
+    "name": "Dokumentformat",
+    "purpose": "hält einen Text, der als Seiten gelesen werden soll, mit seinem Layout",
+    "gender": "n",
+    "genitive": "Dokumentformats"
+  },
+  {
+    "format_group": "Bildformat",
+    "language": "de",
+    "name": "Bildformat",
+    "purpose": "hält ein Bild, als Fotografie oder als Zeichnung",
+    "gender": "n",
+    "genitive": "Bildformats"
+  },
+  {
+    "format_group": "Audioformat",
+    "language": "de",
+    "name": "Audioformat",
+    "purpose": "hält Ton — Musik, Sprache, eine Aufnahme",
+    "gender": "n",
+    "genitive": "Audioformats"
+  },
+  {
+    "format_group": "Videoformat",
+    "language": "de",
+    "name": "Videoformat",
+    "purpose": "hält bewegte Bilder zusammen mit ihrem Ton",
+    "gender": "n",
+    "genitive": "Videoformats"
+  },
+  {
+    "format_group": "Kompressionsformat",
+    "language": "de",
+    "name": "Kompressionsformat",
+    "purpose": "macht eine oder mehrere Dateien kleiner und kann sie genau so zurückgeben, wie sie waren",
+    "gender": "n",
+    "genitive": "Kompressionsformats"
+  },
+  {
+    "format_group": "Auszeichnungssprache",
+    "language": "de",
+    "name": "Auszeichnungssprache",
+    "purpose": "hält Text zusammen mit Marken, die sagen, was jeder Teil IST — eine Überschrift, ein Link, eine Tabelle",
+    "gender": "f",
+    "note": "Die eine Gruppe hier, die kein „…format\" heißt — und deshalb die einzige, bei der „ein Bildformat\" zu „eine Auszeichnungssprache\" werden muss"
+  },
+  {
+    "format_group": "Tabellenformat",
+    "language": "de",
+    "name": "Tabellenformat",
+    "purpose": "hält Zeilen und Spalten — die Form, in der eine Tabellenkalkulation arbeitet",
+    "gender": "n",
+    "genitive": "Tabellenformats"
+  },
+  {
+    "protocol": "HTTP",
+    "language": "de",
+    "name": "HTTP",
+    "purpose": "bringt Webseiten von einem Server zu einem Browser — die Abmachung, auf der jede Seite in der Adressleiste beruht"
+  },
+  {
+    "protocol": "HTTPS",
+    "language": "de",
+    "name": "HTTPS",
+    "purpose": "bringt die gleichen Seiten wie HTTP, aber verschlüsselt, sodass niemand auf dem Weg mitlesen oder etwas verändern kann"
+  },
+  {
+    "protocol": "MQTT",
+    "language": "de",
+    "name": "MQTT",
+    "purpose": "bringt winzige Nachrichten zwischen Geräten hin und her, die etwas melden — ein Thermometer, eine Lampe, ein Zähler"
+  },
+  {
+    "protocol": "SIP",
+    "language": "de",
+    "name": "SIP",
+    "purpose": "baut ein Gespräch über das Internet auf — wer wen anruft, und über welche Leitung die Stimme dann läuft"
+  },
+  {
+    "protocol": "SMTP",
+    "language": "de",
+    "name": "SMTP",
+    "purpose": "bringt eine Mail vom Server des Absenders zum Server des Empfängers"
+  },
+  {
+    "connector": "HDMI",
+    "language": "de",
+    "name": "HDMI",
+    "purpose": "überträgt Bild und Ton über ein einziges Kabel, von einem Gerät zu einem Bildschirm"
+  },
+  {
+    "connector": "USB-C",
+    "language": "de",
+    "name": "USB-C",
+    "purpose": "überträgt Strom und Daten über ein kleines Kabel und passt in beiden Richtungen"
+  },
+  {
+    "connector": "USB-A",
+    "language": "de",
+    "name": "USB-A",
+    "purpose": "überträgt Strom und Daten — der rechteckige Stecker, der zwanzig Jahre lang an allem war"
+  },
+  {
+    "connector": "RJ45",
+    "language": "de",
+    "name": "RJ45",
+    "purpose": "überträgt eine Netzwerkverbindung über Kabel — das Kabel, mit dem ein Rechner am Router steckt"
+  },
+  {
+    "connector": "Klinke",
+    "language": "de",
+    "name": "Klinke",
+    "purpose": "überträgt Ton zu einem Kopfhörer oder von einem Mikrofon",
+    "gender": "f",
+    "note": "Der einzige Stecker in dieser Liste, dessen deutscher Name gebräuchlicher ist als der englische — „phone connector\" sagt hier niemand"
+  },
+  {
+    "connector": "Cinch",
+    "language": "de",
+    "name": "Cinch",
+    "purpose": "überträgt ein einzelnes analoges Signal — ein Stecker für den linken Ton, einer für den rechten, einer für das Bild",
+    "gender": "n"
+  },
+  {
+    "concept": "Webadresse",
+    "language": "de",
+    "name": "Webadresse",
+    "purpose": "benennt eine Seite im Web so genau, dass keine andere Seite auf der Welt dieselbe Adresse hat",
+    "gender": "f"
+  },
+  {
+    "concept": "Ressourcenkennung",
+    "language": "de",
+    "name": "Ressourcenkennung",
+    "purpose": "benennt ein Ding, ganz gleich ob damit auch gesagt wird, wo es zu finden ist — der weitere Begriff, von dem eine Webadresse ein Sonderfall ist",
+    "gender": "f"
+  },
+  {
+    "concept": "Domain",
+    "language": "de",
+    "name": "Domain",
+    "purpose": "benennt, wem ein Ort im Web gehört — der Teil einer Adresse zwischen den Schrägstrichen",
+    "gender": "f"
+  },
+  {
+    "concept": "Top-Level-Domain",
+    "language": "de",
+    "name": "Top-Level-Domain",
+    "purpose": "ist der letzte Teil einer Domain — das Punkt-Irgendwas, das sagt, welches Register den Namen führt",
+    "gender": "f"
+  },
+  {
+    "concept": "IP-Adresse",
+    "language": "de",
+    "name": "IP-Adresse",
+    "purpose": "ist die Nummer, unter der ein Gerät in einem Netz erreichbar ist — das, wozu eine Domain aufgelöst wird",
+    "gender": "f"
+  },
+  {
+    "concept": "Socket",
+    "language": "de",
+    "name": "Socket",
+    "purpose": "ist ein Ende einer Verbindung zwischen zwei Programmen — die Stelle, an der das eine sich in das andere einsteckt",
+    "gender": "m",
+    "genitive": "Sockets"
+  },
+  {
+    "concept": "VOIP",
+    "language": "de",
+    "name": "VOIP",
+    "purpose": "ist Telefonieren über das Internet statt über eine Telefonleitung",
+    "gender": "n"
+  }
+]

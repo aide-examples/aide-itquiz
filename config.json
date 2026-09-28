@@ -47,7 +47,7 @@
                     "entities": {
                         "Company": "r",
                         "ProductType": "r",
-                        "ProductTypeText": "r",
+                        "Translation": "r",
                         "Product": "r",
                         "QuestionTemplate": "r",
                         "QuestionPhrase": "r"

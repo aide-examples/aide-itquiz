@@ -1,32 +1,32 @@
 {
   "classes": {
     "AskedQuestion": {
-      "x": 660,
+      "x": 680,
       "y": 300
     },
     "Company": {
-      "x": 760,
-      "y": 120
+      "x": 780,
+      "y": 80
     },
     "Product": {
-      "x": 500,
-      "y": 60
+      "x": 600,
+      "y": 20
     },
     "ProductType": {
-      "x": 390,
-      "y": 280
+      "x": 420,
+      "y": 360
     },
     "ProductTypeText": {
-      "x": 240,
-      "y": 220
+      "x": 260,
+      "y": 200
     },
     "QuestionPhrase": {
-      "x": 70,
-      "y": 240
+      "x": 850,
+      "y": 760
     },
     "QuestionTemplate": {
-      "x": 170,
-      "y": 400
+      "x": 760,
+      "y": 610
     },
     "Audit": {
       "x": 40,
@@ -109,23 +109,53 @@
       "folder": "f1"
     },
     "FileFormat": {
-      "x": 60,
+      "x": 30,
       "y": 70
     },
     "FormatSupport": {
-      "x": 270,
+      "x": 230,
       "y": 60
+    },
+    "Concept": {
+      "x": 390,
+      "y": 650
+    },
+    "Connector": {
+      "x": 570,
+      "y": 670
+    },
+    "ConnectorPort": {
+      "x": 500,
+      "y": 560
+    },
+    "FormatGroup": {
+      "x": 120,
+      "y": 370
+    },
+    "Protocol": {
+      "x": 950,
+      "y": 130
+    },
+    "Translation": {
+      "x": 970,
+      "y": 340
     }
   },
   "canvas": {
-    "width": 934.5068359375,
-    "height": 888
+    "width": 1131.201171875,
+    "height": 906
   },
   "stubLevel": 4,
   "stubs": {
     "ProductTypeText.product_type": false,
     "Product.product_type": false,
     "AskedQuestion.subject_product_type": false,
-    "AskedQuestion.object_product_type": false
+    "AskedQuestion.object_product_type": false,
+    "Translation.concept": true,
+    "Translation.file_format": true,
+    "Translation.format_group": true,
+    "Translation.connector": true,
+    "Translation.protocol": true,
+    "ConnectorPort.product_type": false
   }
 }

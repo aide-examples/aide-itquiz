@@ -8,7 +8,6 @@ group the selector shows them under.
 ## Facts
 
 - ProductType
-- ProductTypeText
 - Product
 - Company
 - FormatGroup
@@ -18,6 +17,7 @@ group the selector shows them under.
 - Connector
 - ConnectorPort
 - Concept
+- Translation
 
 ## Questions
 
