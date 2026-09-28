@@ -119,5 +119,53 @@
     "purpose": "sammelt Wissen in Artikeln, die die Leser selbst schreiben und berichtigen",
     "gender": "n",
     "genitive": "Onlinelexikons"
+  },
+  {
+    "product_type": "Mail client",
+    "language": "de",
+    "name": "E-Mail-Programm",
+    "purpose": "holt deine Post von einem Server und zeigt sie an, und schickt weg, was du schreibst",
+    "gender": "n",
+    "genitive": "E-Mail-Programms"
+  },
+  {
+    "product_type": "AI assistant",
+    "language": "de",
+    "name": "KI-Assistent",
+    "purpose": "antwortet in Sätzen, weil er an einer riesigen Menge Text trainiert wurde",
+    "gender": "m",
+    "genitive": "KI-Assistenten"
+  },
+  {
+    "product_type": "Map service",
+    "language": "de",
+    "name": "Kartendienst",
+    "purpose": "zeigt, wo etwas ist und wie man von einem zum anderen kommt",
+    "gender": "m",
+    "genitive": "Kartendienstes"
+  },
+  {
+    "product_type": "Video platform",
+    "language": "de",
+    "name": "Videoportal",
+    "purpose": "bewahrt Videos auf, die jeder hochladen und jeder ansehen darf",
+    "gender": "n",
+    "genitive": "Videoportals"
+  },
+  {
+    "product_type": "App store",
+    "language": "de",
+    "name": "App-Store",
+    "purpose": "ist der Ort, aus dem die Programme auf einem Handy kommen und an dem sie aktuell gehalten werden",
+    "gender": "m",
+    "genitive": "App-Stores"
+  },
+  {
+    "product_type": "Cloud storage",
+    "language": "de",
+    "name": "Onlinespeicher",
+    "purpose": "bewahrt Dateien auf dem Computer eines anderen auf, damit jedes deiner Geräte sie erreicht",
+    "gender": "m",
+    "genitive": "Onlinespeichers"
   }
 ]

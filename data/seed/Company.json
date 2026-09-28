@@ -43,5 +43,23 @@
     "note": "A non-profit that runs Wikipedia and does not write it — the sharpest maker/thing case after Telegram, and the reason this one is in the inventory at all",
     "wikipedia_de": "de:Wikimedia Foundation",
     "wikipedia_en": "en:Wikimedia Foundation"
+  },
+  {
+    "name": "Meta",
+    "note": "Owns the messenger most phones carry — and is named nothing like it, which is the whole point of asking",
+    "wikipedia_de": "de:Meta Platforms",
+    "wikipedia_en": "en:Meta Platforms"
+  },
+  {
+    "name": "OpenAI",
+    "note": "Makes ChatGPT. The firm and the thing have different names, unlike Telegram — a useful contrast in one inventory",
+    "wikipedia_de": "de:OpenAI",
+    "wikipedia_en": "en:OpenAI"
+  },
+  {
+    "name": "Anthropic",
+    "note": "Makes Claude. Same shape as OpenAI and ChatGPT: a maker nobody would guess from the product name",
+    "wikipedia_de": "de:Anthropic",
+    "wikipedia_en": "en:Anthropic"
   }
 ]

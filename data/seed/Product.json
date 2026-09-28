@@ -138,5 +138,125 @@
     "manufacturer": "Wikimedia Foundation",
     "wikipedia_de": "de:Wikipedia",
     "wikipedia_en": "en:Wikipedia"
+  },
+  {
+    "name": "WhatsApp",
+    "product_type": "Messenger",
+    "manufacturer": "Meta",
+    "wikipedia_de": "de:WhatsApp",
+    "wikipedia_en": "en:WhatsApp"
+  },
+  {
+    "name": "Gmail",
+    "product_type": "Mail client",
+    "manufacturer": "Google",
+    "wikipedia_de": "de:Gmail",
+    "wikipedia_en": "en:Gmail"
+  },
+  {
+    "name": "Outlook",
+    "product_type": "Mail client",
+    "manufacturer": "Microsoft",
+    "wikipedia_de": "de:Microsoft Outlook",
+    "wikipedia_en": "en:Microsoft Outlook"
+  },
+  {
+    "name": "Apple Mail",
+    "product_type": "Mail client",
+    "manufacturer": "Apple",
+    "wikipedia_de": "de:Mail (Apple)",
+    "wikipedia_en": "en:Apple Mail"
+  },
+  {
+    "name": "Thunderbird",
+    "product_type": "Mail client",
+    "manufacturer": "Mozilla",
+    "wikipedia_de": "de:Mozilla Thunderbird",
+    "wikipedia_en": "en:Mozilla Thunderbird"
+  },
+  {
+    "name": "ChatGPT",
+    "product_type": "AI assistant",
+    "manufacturer": "OpenAI",
+    "wikipedia_de": "de:ChatGPT",
+    "wikipedia_en": "en:ChatGPT"
+  },
+  {
+    "name": "Claude",
+    "product_type": "AI assistant",
+    "manufacturer": "Anthropic",
+    "wikipedia_de": "de:Claude",
+    "wikipedia_en": "en:Claude (AI)"
+  },
+  {
+    "name": "Gemini",
+    "product_type": "AI assistant",
+    "manufacturer": "Google",
+    "wikipedia_de": "de:Google Gemini",
+    "wikipedia_en": "en:Google Gemini"
+  },
+  {
+    "name": "Copilot",
+    "product_type": "AI assistant",
+    "manufacturer": "Microsoft",
+    "wikipedia_de": "de:Microsoft Copilot",
+    "wikipedia_en": "en:Microsoft Copilot"
+  },
+  {
+    "name": "Google Maps",
+    "product_type": "Map service",
+    "manufacturer": "Google",
+    "wikipedia_de": "de:Google Maps",
+    "wikipedia_en": "en:Google Maps"
+  },
+  {
+    "name": "Apple Maps",
+    "product_type": "Map service",
+    "manufacturer": "Apple",
+    "wikipedia_de": "de:Apple Maps",
+    "wikipedia_en": "en:Apple Maps"
+  },
+  {
+    "name": "YouTube",
+    "product_type": "Video platform",
+    "manufacturer": "Google",
+    "wikipedia_de": "de:YouTube",
+    "wikipedia_en": "en:YouTube"
+  },
+  {
+    "name": "Google Play",
+    "product_type": "App store",
+    "manufacturer": "Google",
+    "wikipedia_de": "de:Google Play",
+    "wikipedia_en": "en:Google Play"
+  },
+  {
+    "name": "App Store",
+    "product_type": "App store",
+    "manufacturer": "Apple",
+    "wikipedia_de": "de:App Store (Apple)",
+    "wikipedia_en": "en:App Store (Apple)",
+    "note": "The one place in this inventory where the product and its kind are called almost the same, which is itself worth meeting"
+  },
+  {
+    "name": "Google Drive",
+    "product_type": "Cloud storage",
+    "manufacturer": "Google",
+    "wikipedia_de": "de:Google Drive",
+    "wikipedia_en": "en:Google Drive"
+  },
+  {
+    "name": "iCloud",
+    "product_type": "Cloud storage",
+    "manufacturer": "Apple",
+    "wikipedia_de": "de:ICloud",
+    "wikipedia_en": "en:ICloud"
+  },
+  {
+    "name": "OneDrive",
+    "product_type": "Cloud storage",
+    "manufacturer": "Microsoft",
+    "wikipedia_de": "de:Microsoft OneDrive",
+    "wikipedia_en": "en:OneDrive"
   }
 ]

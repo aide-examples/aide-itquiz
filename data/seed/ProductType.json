@@ -122,5 +122,43 @@
     "note": "A website, not a program — and therefore the counterpart to the search engine: one FINDS pages, this one IS a page",
     "wikipedia_de": "de:Onlinelexikon",
     "wikipedia_en": "en:Online encyclopedia"
+  },
+  {
+    "name": "Mail client",
+    "purpose": "fetches your mail from a server and shows it, and sends what you write",
+    "note": "On a phone it is usually the one the maker of the phone put there",
+    "wikipedia_de": "de:E-Mail-Programm",
+    "wikipedia_en": "en:Email client"
+  },
+  {
+    "name": "AI assistant",
+    "purpose": "answers in sentences, because it was trained on an enormous amount of text",
+    "note": "The newest kind here, and the one where maker and product are least alike: ChatGPT is not OpenAI and Claude is not Anthropic",
+    "wikipedia_de": "de:Chatbot",
+    "wikipedia_en": "en:Chatbot"
+  },
+  {
+    "name": "Map service",
+    "purpose": "shows where things are and how to get from one to the other",
+    "note": "Deliberately without a Wikipedia article: „Geodienst\" is the data behind a map, not the app one opens, and a reference that is merely close is worse than none"
+  },
+  {
+    "name": "Video platform",
+    "purpose": "keeps videos that anyone may upload and anyone may watch",
+    "wikipedia_de": "de:Videoportal",
+    "wikipedia_en": "en:Online video platform"
+  },
+  {
+    "name": "App store",
+    "purpose": "is where the programs on a phone come from, and where they are kept up to date",
+    "note": "Each phone maker has one, and it is one of the few kinds where the name of the thing barely differs from the name of the kind",
+    "wikipedia_de": "de:App Store",
+    "wikipedia_en": "en:App store"
+  },
+  {
+    "name": "Cloud storage",
+    "purpose": "keeps files on somebody else’s computer so every device of yours can reach them",
+    "wikipedia_de": "de:Filehosting",
+    "wikipedia_en": "en:Cloud storage"
   }
 ]
