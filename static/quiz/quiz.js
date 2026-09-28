@@ -86,6 +86,41 @@
    * @param {{kind: string, id: any}} focus - what the question was about
    * @returns {void}
    */
+  /**
+   * The cross-window selection channel, or null where it could not be loaded.
+   *
+   * The MOUNT is passed explicitly: the bus keys its channel on it so two RAP installations on
+   * one origin never cross-talk, and for the SHELL that key is `location.pathname`. This page
+   * sits two levels below the mount, so its own pathname would open a channel of its own and
+   * talk to nobody — silently, which is the worst way for a bus to fail (aide-rap#504).
+   *
+   * @type {any}
+   */
+  const theSelectionBus = typeof SelectionBus !== 'undefined'
+    ? new SelectionBus({ mount: new URL('../../', location.href).pathname })
+    : null;
+
+  /**
+   * Tell the other windows which records this answer is about.
+   *
+   * A linked view is bound to ONE entity by its window name, so every mention is published and
+   * each open window picks out its own. Nothing is published for a window that is not open —
+   * the browser does not deliver a broadcast back to its sender, and a message nobody listens
+   * for costs nothing.
+   *
+   * This is the half that makes the catalogue worth opening at all: pressed once, the window
+   * then follows the quiz by itself, and the reader reads instead of clicking.
+   *
+   * @param {Array<{kind: string, id: any}>} mentions - what the verdict said it names
+   * @returns {void}
+   */
+  function announce(mentions) {
+    if (!theSelectionBus || !mentions) return;
+    for (const m of mentions) {
+      if (m && m.kind && m.id != null) theSelectionBus.publish({ entity: m.kind, id: m.id });
+    }
+  }
+
   function openCatalogue(focus) {
     // `t:'r'` — a record screen. `m:'tree-h'` because a tree is what answers „how does this
     // hang together", which is the question somebody pressing this button has.
@@ -283,6 +318,10 @@
       } else {
         look.hidden = true;
       }
+      // After the verdict is on screen, not before: the broadcast is a consequence of the
+      // answer, and a window that re-navigates while this one is still assembling its own
+      // explanation would be reacting to something the reader cannot see yet.
+      announce(verdict.mentions);
       $('q-verdict').hidden = false;
       $('q-next').focus();
     } catch (_) {

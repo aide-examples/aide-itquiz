@@ -154,22 +154,40 @@ module.exports = function registerSystemRoutes(app, deps) {
    * The three fall back INDEPENDENTLY. A record may have a picture and no article, or the
    * other way round, and tying them together would mean losing one to keep the other.
    *
-   * `focus` names a record for RAP's own deep link (`?crumbs=`) — kind and id, never a URL,
-   * because the framework owns that format. It takes the FIRST entry and does not fall back:
-   * a picture may come from further down the sentence without misleading anyone, but a door
-   * marked „look this up" has to open on the thing that was asked about.
+   * `mentions` is the list itself as `{kind, id}` — every record the sentence names, in the
+   * same order. `focus` is its first entry and does not fall back: a picture may come from
+   * further down the sentence without misleading anyone, but a door marked „look this up" has
+   * to open on the thing that was asked about. Kind and id, never a URL or a query: RAP owns
+   * the `?crumbs=` format and the selection channel, and the quiz names records.
+   *
+   * The list earns its fourth use here. It began as the picture's preference order, took the
+   * article, then the deep link, and now the SELECTION broadcast — an open linked view follows
+   * an answer without anything being pressed. Four surfaces, one question: *which records is
+   * this sentence about?*
    *
    * @param {Array<[string, any]>} about - `[[entityName, record], …]`, most relevant first
    * @param {string} lang - the language the question is being asked in
-   * @returns {{image: string|null, article: object|null, focus: object|null}}
+   * @returns {{image: string|null, article: object|null, focus: object|null,
+   *   mentions: Array<{kind: string, id: any}>}}
    */
   function context(about, lang) {
     const present = about.filter(([, record]) => record);
-    const first = present[0];
+    // A record may be named twice by one sentence — „Telegram ist ein Messenger von Telegram"
+    // before the company was disambiguated, or a self-referential part_of. Publishing it twice
+    // is harmless but the list is also read by a human in a dump, so it is made distinct here.
+    const seen = new Set();
+    const mentions = [];
+    for (const [kind, r] of present) {
+      const key = `${kind}/${r.id}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      mentions.push({ kind, id: r.id });
+    }
     return {
       image: present.map(([, r]) => picture(r)).find(Boolean) || null,
       article: present.map(([, r]) => article(r, lang)).find(Boolean) || null,
-      focus: first ? { kind: first[0], id: first[1].id } : null,
+      focus: mentions[0] || null,
+      mentions,
     };
   }
 
@@ -598,6 +616,9 @@ module.exports = function registerSystemRoutes(app, deps) {
           // `{kind, id}`, and for the same reason: RAP owns the `?crumbs=` format, so the
           // quiz names the RECORD and the page builds the link from it.
           focus: r.truth.focus || null,
+          // Every record the sentence names, so an open linked view can follow the
+          // answer without anything being pressed (aide-rap#504). `focus` is its first.
+          mentions: r.truth.mentions || [],
         });
       } catch (err) {
         theLogger.error('itquiz: verdict failed', { error: err.message });
@@ -674,7 +695,10 @@ module.exports = function registerSystemRoutes(app, deps) {
       const own = type(p.product_type_id); if (!own) return null;
       return {
         correct: c.name,
-        ...context([['Company', c], ['Product', p]], lang),
+        // Everything the sentence names -- Edge, its kind, its maker -- in the order a
+        // reader meets them. The list drives four things now (see `context`), so a record
+        // left out here is one an open linked view will not follow.
+        ...context([['Company', c], ['Product', p], ['ProductType', own]], lang),
         explanation: fill(phrase.explanation,
           { subject: { label: p.name }, answer: { label: c.name }, type: typed(own) }, lang),
       };
@@ -686,7 +710,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       if (!p) return null;
       return {
         correct: p.name,
-        ...context([['Product', p], ['ProductType', t]], lang),
+        ...context([['Product', p], ['ProductType', t], ['Company', c]], lang),
         explanation: fill(phrase.explanation,
           { subject: { label: c.name }, object: typed(t), answer: { label: p.name }, purpose: { label: word(f, t, lang, 'purpose') } }, lang),
       };
@@ -696,7 +720,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       const beispiel = f.products.find((x) => x.product_type_id === t.id);
       return {
         correct: word(f, t, lang, 'name'),
-        ...context([['ProductType', t]], lang),
+        ...context([['ProductType', t], ['Product', beispiel]], lang),
         explanation: fill(phrase.explanation,
           { answer: typed(t), example: { label: (beispiel && beispiel.name) || '' } }, lang),
       };
@@ -727,7 +751,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       if (!t || !c) return null;
       return {
         correct: p.name,
-        ...context([['Product', p], ['ProductType', t]], lang),
+        ...context([['Product', p], ['ProductType', t], ['Company', c]], lang),
         image: null,
         explanation: fill(phrase.explanation,
           { type: typed(t), maker: { label: c.name }, answer: { label: p.name } }, lang),
@@ -738,7 +762,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       const ganz = f.types.find((y) => y.id === t.part_of_id); if (!ganz) return null;
       return {
         correct: word(f, ganz, lang, 'name'),
-        ...context([['ProductType', ganz]], lang),
+        ...context([['ProductType', ganz], ['ProductType', t]], lang),
         explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(ganz) }, lang),
       };
     }
@@ -794,7 +818,8 @@ module.exports = function registerSystemRoutes(app, deps) {
         // „Yes" has no face, so the subject leads — the thing the sentence is about. The
         // rule everywhere here is the same one: offer what the explanation TALKS about, which
         // for a yes/no question is not the answer.
-        ...context([['Product', p], ['ProductType', own]], lang),
+        ...context([['Product', p], ['ProductType', own], ['ProductType', asked],
+          ['Company', maker]], lang),
         explanation: fill(phrase.explanation, {
           subject: { label: p.name },
           answer: typed(own),
