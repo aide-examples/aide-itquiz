@@ -1,6 +1,7 @@
 # ProductType [asset_type]
 
 [LABEL=name]
+[LABEL2=purpose]
 [PLURAL=de:Arten en:Product types]
 
 A KIND of thing — browser, search engine, spider, operating system. Its `purpose` is the sentence that separates them.

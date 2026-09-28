@@ -43,5 +43,5 @@ expand: 2
 : name, note
   Product(ORDER BY name): name
     product_type: name, purpose
-      part_of: name, purpose, part_of
+      part_of: name, purpose
 ```
