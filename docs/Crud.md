@@ -2,6 +2,9 @@
 
 Which entities the selector offers, in which order.
 
+Views live beside this, one file per view under [views/](views/), the folder naming the
+group the selector shows them under.
+
 ## Facts
 
 - ProductType
