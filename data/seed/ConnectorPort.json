@@ -1,0 +1,17 @@
+[
+  { "product_type": "Device", "connector": "HDMI" },
+  { "product_type": "Device", "connector": "USB-C" },
+  { "product_type": "Device", "connector": "USB-A" },
+  { "product_type": "Device", "connector": "RJ45" },
+  { "product_type": "Device", "connector": "Klinke" },
+
+  { "product_type": "Screen", "connector": "HDMI" },
+  { "product_type": "Screen", "connector": "Klinke" },
+  { "product_type": "Screen", "connector": "Cinch" },
+
+  { "product_type": "Storage medium", "connector": "USB-A" },
+  { "product_type": "Storage medium", "connector": "USB-C" },
+
+  { "product_type": "Network storage", "connector": "RJ45" },
+  { "product_type": "Network storage", "connector": "USB-A" }
+]

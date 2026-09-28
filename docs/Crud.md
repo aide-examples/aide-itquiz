@@ -14,6 +14,8 @@ group the selector shows them under.
 - FileFormat
 - FormatSupport
 - Protocol
+- Connector
+- ConnectorPort
 
 ## Questions
 

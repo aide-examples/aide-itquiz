@@ -17,6 +17,7 @@ about the subject matter.
 | Company | Company | Who makes it — Google, Mozilla |
 | FileFormat | File format | A kind of FILE — .pdf, .odt, .mp3 |
 | Protocol | Protocol | An agreement two programs follow — HTTP, MQTT |
+| Connector | Connector | The shape of a plug and its socket — HDMI, USB-C |
 
 ### FileSupport
 

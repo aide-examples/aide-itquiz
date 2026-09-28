@@ -22,6 +22,8 @@ saying what each one does is the one thing that might.
 | [Product](classes/Product.md) | One actual thing, of one kind, from one maker. |
 | [FileFormat](classes/FileFormat.md) | A KIND of file, known by the letters after the dot. The other half of what a layperson gets wrong: not what a thing IS, but what it can OPEN. |
 | [Protocol](classes/Protocol.md) | An AGREEMENT two programs follow so they can talk — HTTP, HTTPS, MQTT, SIP. Its own entity and not a kind of format: a program *opens* a file and *speaks* a protocol, and one table with a discriminator is what the architecture guideline warns against. |
+| [Connector](classes/Connector.md) | The shape of a plug and the socket it fits — HDMI, USB-C, RJ45. The third standard after format and protocol, and the only one a person can hold in their hand while being unable to name it. |
+| [ConnectorPort](classes/ConnectorPort.md) | One kind of device has one kind of socket. A pure pairing — `[ASSOCIATION]`, unlike FormatSupport, which carries a fact of its own. |
 | [FormatSupport](classes/FormatSupport.md) | What one program can do with one kind of file — view or edit. An entity and not a bare junction, because *what* it can do is the fact the questions are built on. |
 </div>
 

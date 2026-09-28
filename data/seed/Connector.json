@@ -1,0 +1,56 @@
+[
+  {
+    "name": "HDMI",
+    "long_name": "High-Definition Multimedia Interface",
+    "purpose": "carries picture and sound over a single cable, from a device to a screen",
+    "looks_like": "a flat plug about two centimetres wide, slightly narrower on one side so it only goes in one way",
+    "wikipedia_de": "de:High Definition Multimedia Interface",
+    "wikipedia_en": "en:HDMI",
+    "note": "The one everybody recognises and few can name — „das flache breite\" is this in most households. Before it, picture and sound needed separate cables, which is the whole reason it exists"
+  },
+  {
+    "name": "USB-C",
+    "long_name": "Universal Serial Bus Type-C",
+    "purpose": "carries power and data over one small cable, and fits either way round",
+    "looks_like": "a small rounded oval, about eight millimetres wide, with no up or down",
+    "wikipedia_de": "de:USB-C",
+    "wikipedia_en": "en:USB-C",
+    "note": "The „fits either way round\" is the part people notice, and the reason the older rectangular USB was a running joke about needing three attempts"
+  },
+  {
+    "name": "USB-A",
+    "long_name": "Universal Serial Bus Type-A",
+    "purpose": "carries power and data — the rectangular plug that was on everything for twenty years",
+    "looks_like": "a flat rectangle about twelve millimetres wide, hollow on one side, and it does have an up and a down",
+    "wikipedia_de": "de:Universal Serial Bus",
+    "wikipedia_en": "en:USB",
+    "note": "Its article is about USB as a whole, because the shape is one of several in one standard — which is itself the point: „USB\" names the agreement, not the plug"
+  },
+  {
+    "name": "RJ45",
+    "long_name": "Registered Jack 45",
+    "purpose": "carries a wired network connection — the cable that plugs a computer into a router",
+    "looks_like": "a clear plastic plug a bit wider than a telephone plug, with a small clip on top that clicks",
+    "wikipedia_de": "de:Registered Jack",
+    "wikipedia_en": "en:Registered jack",
+    "note": "People call the cable „LAN-Kabel\" and the socket „Netzwerkbuchse\", and almost nobody says RJ45 — an abbreviation that survives on packaging and nowhere else"
+  },
+  {
+    "name": "Klinke",
+    "long_name": "Phone connector",
+    "purpose": "carries sound to headphones or from a microphone",
+    "looks_like": "a round metal pin with one or two black rings near the tip, 3.5 millimetres across",
+    "wikipedia_de": "de:Klinkenstecker",
+    "wikipedia_en": "en:Phone connector (audio)",
+    "note": "Older than everything else on this list by about a century: the shape comes from manual telephone exchanges, which is where the German name „Klinke\" is from"
+  },
+  {
+    "name": "Cinch",
+    "long_name": "RCA connector",
+    "purpose": "carries one analogue signal — one plug for the left sound, one for the right, one for the picture",
+    "looks_like": "a round plug with a metal pin in a metal ring, colour-coded red, white or yellow",
+    "wikipedia_de": "de:Cinch",
+    "wikipedia_en": "en:RCA connector",
+    "note": "The colours are the whole instruction: red and white are the two sides of the sound, yellow is the picture. One signal per cable is why there are three of them, and why HDMI replaced the lot"
+  }
+]
