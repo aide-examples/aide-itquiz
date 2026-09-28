@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>itquiz</title>
 <link rel="stylesheet" href="quiz.css">
+<!-- The hover card's own stylesheet, beside its component in the framework's `lib/`. Linked
+     here because this page never loads `rap.css` — without it the card renders as unstyled body
+     text at the foot of the document, which is how it first shipped. -->
+<link rel="stylesheet" href="../../static/rap/lib/wikipedia-card.css">
 </head>
 <body>
 <header class="q-head">
@@ -26,11 +30,22 @@
          screen reader that also heard „Chrome logo" would hear the answer twice. -->
     <img class="q-answer-image" id="q-answer-image" alt="" hidden>
     <p class="q-explain" id="q-explain"></p>
+    <!-- The Wikipedia link, filled by the verdict. It is written with RAP's own `wikipedia-ref`
+         class and data attributes, so the framework's hover card — a delegated listener, loaded
+         below — picks it up without this page knowing anything about it. -->
+    <p class="q-source" id="q-source" hidden></p>
     <p class="q-note" id="q-note" hidden></p>
     <button type="button" class="q-next" id="q-next">…</button>
   </div>
 </main>
 
+<!-- Two framework files, loaded BY URL rather than through the app bundle, which this page never
+     loads. `shared/utils/` ships with every deployment; `static/rap/lib/` is the documented home
+     for components an ACTION page reaches this way and `pack.sh` keeps it for that reason. The
+     card needs nothing else — it carries its own escape precisely so a page like this can use
+     it (aide-rap#501). -->
+<script src="../../shared/utils/wikipedia-ref.js"></script>
+<script src="../../static/rap/lib/wikipedia-card.js"></script>
 <script src="quiz.js"></script>
 </body>
 </html>

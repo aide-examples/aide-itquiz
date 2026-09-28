@@ -113,6 +113,31 @@ module.exports = function registerSystemRoutes(app, deps) {
   }
 
   /**
+   * The Wikipedia article for the thing an explanation is about — in the reader's language.
+   *
+   * A row carries `wikipedia_de` and `wikipedia_en`, each a value of RAP's `wikipedia` type:
+   * an article TITLE with its edition in front of it (`de:Webbrowser`). The reader's language
+   * is asked for first and the other is the fallback, because an inventory legitimately has
+   * one and not the other — „Bing" has no German article — and a reader who cannot read the
+   * edition that exists is still better off than one offered no link at all.
+   *
+   * Returned as `{lang, title}` and never as a URL: the address follows from those two, the
+   * framework's `wikipedia-ref` derives it, and a second builder of it here is precisely the
+   * drift that type was introduced to end (aide-rap#501).
+   *
+   * @param {any} record - a Product, ProductType or Company row
+   * @param {string} lang - the language the question is being asked in
+   * @returns {{lang: string, title: string}|null} null where the row names no article
+   */
+  function article(record, lang) {
+    const raw = (record && (lang === 'de' ? record.wikipedia_de : record.wikipedia_en))
+      || (record && (lang === 'de' ? record.wikipedia_en : record.wikipedia_de));
+    if (!raw) return null;
+    const m = String(raw).match(/^([a-z]{2,3}):(.+)$/);
+    return m ? { lang: m[1], title: m[2] } : { lang, title: String(raw) };
+  }
+
+  /**
    * The facts, as the question builder needs them. Small enough to read whole on
    * every question — five types and ten products today, and a quiz that grew to
    * thousands of rows would want a different picker anyway, not a cached one.
@@ -120,10 +145,10 @@ module.exports = function registerSystemRoutes(app, deps) {
   async function facts() {
     const eng = engine();
     const [types, texts, products, companies, templates, phrases] = await Promise.all([
-      eng.query('SELECT id, name, purpose, part_of_id, icon FROM product_type WHERE id > 1'),
+      eng.query('SELECT id, name, purpose, part_of_id, icon, wikipedia_de, wikipedia_en FROM product_type WHERE id > 1'),
       eng.query('SELECT product_type_id, language, name, purpose, gender, genitive FROM product_type_text WHERE id > 1'),
-      eng.query('SELECT id, name, product_type_id, manufacturer_id, icon FROM product WHERE id > 1'),
-      eng.query('SELECT id, name, logo FROM company WHERE id > 1'),
+      eng.query('SELECT id, name, product_type_id, manufacturer_id, icon, wikipedia_de, wikipedia_en FROM product WHERE id > 1'),
+      eng.query('SELECT id, name, logo, wikipedia_de, wikipedia_en FROM company WHERE id > 1'),
       eng.query('SELECT id, key, subject_kind, object_kind, answer_kind FROM question_template WHERE id > 1'),
       eng.query('SELECT template_id, language, text, explanation FROM question_phrase WHERE id > 1'),
     ]);
@@ -196,6 +221,32 @@ module.exports = function registerSystemRoutes(app, deps) {
       const leer = rollen.some((r) => !(roles[r] && String(roles[r].label || '').trim()));
       return leer ? '' : klausel;
     });
+    // A derived word that OPENS A SENTENCE is capitalised, and it is marked HERE — while the
+    // placeholders are still visible — because after substitution nothing distinguishes a
+    // derived article from a name that happens to stand in the same place.
+    //
+    // Until 2026-09-28 only the start of the whole PHRASE was covered, so „Das ist der
+    // Messenger von Signal Foundation. er heißt Signal." went out with a lower-case „er": the
+    // second sentence of a two-sentence phrase. Nothing errors, the sentence is otherwise
+    // right, and it took a reader to see it.
+    //
+    // The restriction that matters is unchanged, only its scope: `{ein_|der_|genitiv_|er_}`
+    // are always DERIVED words and never names, so `iPhone ist ein Gerät von Apple.` stays as
+    // written instead of becoming `IPhone` — a rule that fixed one sentence by breaking
+    // another. A bare `{role}` at a sentence start is left alone for that very reason.
+    //
+    // The `\*?` is not decoration. A phrase may open its second sentence with the italics mark
+    // — „…von Apache Software Foundation.\n*{ein_part} {part} ist Teil…" — and without it the
+    // mark stood between the sentence boundary and the placeholder, so the pass walked past
+    // and shipped „*ein Textprogramm ist Teil eines Office-Pakets.*". The one mark a phrase may
+    // carry is the one that has to be allowed through here.
+    out = out.replace(/(^|[.!?]["'»]?[^\S\n]+|\n[^\S\n]*)(\*?)\{(ein|der|genitiv|er)_([a-z_]+)\}/g,
+      (_all, before, mark, kind, role) =>
+        `${before}${mark}{${kind[0].toUpperCase()}${kind.slice(1)}_${role}}`);
+
+    /** @param {string} w */
+    const capitalised = (w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : w);
+
     for (const [role, v] of Object.entries(roles)) {
       const label = v.label ?? '';
       // English has no gender to store, and does not need one: its indefinite article
@@ -214,20 +265,19 @@ module.exports = function registerSystemRoutes(app, deps) {
       out = out.split(`{ein_${role}}`).join(a);
       out = out.split(`{genitiv_${role}}`).join(gen);
       out = out.split(`{er_${role}}`).join(es);
+      // The same four, capitalised — the marker pass above rewrote the ones that open a
+      // sentence. Spelled out rather than derived with a regex, so a placeholder that is NOT
+      // one of these four cannot be capitalised by accident.
+      out = out.split(`{Der_${role}}`).join(capitalised(der));
+      out = out.split(`{Ein_${role}}`).join(capitalised(a));
+      out = out.split(`{Genitiv_${role}}`).join(capitalised(gen));
+      out = out.split(`{Er_${role}}`).join(capitalised(es));
     }
     // Collapse runs of SPACES — an empty article placeholder leaves two — but never the
     // newline: a phrase uses it to put an explanatory lead-in on a line of its own, and
     // `\s` would have swallowed exactly that. Spaces hugging a newline go with it.
     out = out.replace(/[^\S\n]{2,}/g, ' ').replace(/[^\S\n]*\n[^\S\n]*/g, '\n').trim();
 
-    // A sentence that OPENS with an article opens with a lower-case word — „ein Prozessor ist
-    // Teil eines Geräts." Capitalised here rather than in the phrase, because the article is
-    // not in the phrase: it is derived from the gender.
-    //
-    // Only then, and that restriction is the whole point: a phrase that opens with a NAME must
-    // be left alone. `iPhone ist ein Gerät von Apple.` is correct as written, and a blanket
-    // capital would make it `IPhone` — a rule that fixes one sentence by breaking another.
-    if (/^\{(ein|der|genitiv)_/.test(text)) out = out.charAt(0).toUpperCase() + out.slice(1);
     return out;
   }
 
@@ -501,7 +551,15 @@ module.exports = function registerSystemRoutes(app, deps) {
           chosen: req.query.chosen == null ? null : String(req.query.chosen),
         });
         if (r.error) return res.status(r.status || 400).json({ error: r.error });
-        return res.json({ quality: r.quality, correct: r.truth.correct, explanation: r.truth.explanation, image: r.truth.image || null });
+        return res.json({
+          quality: r.quality,
+          correct: r.truth.correct,
+          explanation: r.truth.explanation,
+          image: r.truth.image || null,
+          // `{lang, title}`, never a URL — the client hands both to the framework's
+          // `wikipediaRef`, which is the one thing that knows how an article is addressed.
+          article: r.truth.article || null,
+        });
       } catch (err) {
         theLogger.error('itquiz: verdict failed', { error: err.message });
         return res.status(500).json({ error: err.message });
@@ -577,9 +635,13 @@ module.exports = function registerSystemRoutes(app, deps) {
       const own = type(p.product_type_id); if (!own) return null;
       return {
         correct: c.name,
-        // The maker's mark, where it has one. The reader recognises a logo long before a
-        // name — which is half of what this quiz is about.
-        image: picture(c),
+        // The maker's mark first — a reader recognises a logo long before a name, which is
+        // half of what this quiz is about. But the sentence names TWO things („Edge ist ein
+        // Browser von Microsoft"), so where the maker has no logo the PRODUCT's face is still
+        // the face of something the sentence just said. Gero's observation, and it generalises:
+        // fall back along the sentence rather than showing nothing.
+        image: picture(c) || picture(p),
+        article: article(c, lang) || article(p, lang),
         explanation: fill(phrase.explanation,
           { subject: { label: p.name }, answer: { label: c.name }, type: typed(own) }, lang),
       };
@@ -591,7 +653,8 @@ module.exports = function registerSystemRoutes(app, deps) {
       if (!p) return null;
       return {
         correct: p.name,
-        image: picture(p),
+        image: picture(p) || picture(t),
+        article: article(p, lang) || article(t, lang),
         explanation: fill(phrase.explanation,
           { subject: { label: c.name }, object: typed(t), answer: { label: p.name }, purpose: { label: word(f, t, lang, 'purpose') } }, lang),
       };
@@ -602,17 +665,20 @@ module.exports = function registerSystemRoutes(app, deps) {
       return {
         correct: word(f, t, lang, 'name'),
         image: picture(t),
+        article: article(t, lang),
         explanation: fill(phrase.explanation,
           { answer: typed(t), example: { label: (beispiel && beispiel.name) || '' } }, lang),
       };
     }
     // `what_kind` and `what_is_it` deliberately carry NO image: there the picture IS the
     // question, and showing it again under the answer would say nothing and take the room of
-    // something that does.
+    // something that does. The LINK still belongs — the reader has just learnt a word and the
+    // article is where they read on — which is why the two travel as separate fields.
     if (template.key === 'what_kind') {
       const t = type(subject && subject.id); if (!t) return null;
       return {
         correct: word(f, t, lang, 'name'),
+        article: article(t, lang),
         explanation: fill(phrase.explanation, {
           answer: typed(t),
           purpose: { label: word(f, t, lang, 'purpose') },
@@ -626,6 +692,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       if (!t || !c) return null;
       return {
         correct: p.name,
+        article: article(p, lang) || article(t, lang),
         explanation: fill(phrase.explanation,
           { type: typed(t), maker: { label: c.name }, answer: { label: p.name } }, lang),
       };
@@ -636,6 +703,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       return {
         correct: word(f, ganz, lang, 'name'),
         image: picture(ganz),
+        article: article(ganz, lang),
         explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(ganz) }, lang),
       };
     }
@@ -645,15 +713,40 @@ module.exports = function registerSystemRoutes(app, deps) {
       const own = type(p.product_type_id); if (!own) return null;
       const yes = lang === 'de' ? 'Ja' : 'Yes';
       const no = lang === 'de' ? 'Nein' : 'No';
-      const hersteller = comp(p.manufacturer_id);
+      const maker = comp(p.manufacturer_id);
+      // WHY the answer is no, where the model already knows.
+      //
+      // „Ist Apache OpenOffice ein Textprogramm?" — no, it is an office suite. Correct, and
+      // it leaves the reader exactly where their confusion was: the two ARE related, and the
+      // relation is the thing worth learning. `part_of` already holds it, so the sentence can
+      // be derived rather than written: one of the two types is part of the other.
+      //
+      // Both directions, and it is the same sentence either way. Asked „Textprogramm" about an
+      // office suite, or „Office-Paket" about a word processor — „Ein Textprogramm ist Teil
+      // eines Office-Pakets" is the answer to both, because the relation is the fact and the
+      // question only chose which end to enter it from.
+      //
+      // On a YES the two types are the same one, so no pair exists and the clause removes
+      // itself — the rule needs no test for the verdict it belongs to. Likewise where the two
+      // are simply unrelated („Ist Chrome ein Speichermedium?"), which is most of the time:
+      // there is nothing true to add and the explanation stays as it was.
+      const whole = own.part_of_id === asked.id ? asked
+        : asked.part_of_id === own.id ? own : null;
+      const part = whole ? (whole.id === asked.id ? own : asked) : null;
       return {
         correct: asked.id === own.id ? yes : no,
         // „Yes" has no face, so the picture is the SUBJECT's — the thing the sentence is
         // about. The rule everywhere here is the same one: show what the explanation talks
         // about, which for a yes/no question is not the answer.
-        image: picture(p),
-        explanation: fill(phrase.explanation,
-          { subject: { label: p.name }, answer: typed(own), maker: { label: (hersteller && hersteller.name) || '' } }, lang),
+        image: picture(p) || picture(own),
+        article: article(p, lang) || article(own, lang),
+        explanation: fill(phrase.explanation, {
+          subject: { label: p.name },
+          answer: typed(own),
+          maker: { label: (maker && maker.name) || '' },
+          part: part ? typed(part) : { label: '' },
+          whole: whole ? typed(whole) : { label: '' },
+        }, lang),
       };
     }
     return null;

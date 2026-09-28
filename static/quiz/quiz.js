@@ -96,6 +96,8 @@
     // explanation itself had, one element over.
     $('q-answer-image').hidden = true;
     $('q-answer-image').removeAttribute('src');
+    $('q-source').hidden = true;
+    $('q-source').innerHTML = '';
     $('q-text').textContent = '…';
     try {
       const r = await fetch(`${QUESTION_URL}?lang=${state.lang}`, { credentials: 'same-origin' });
@@ -192,6 +194,27 @@
         answerImage.hidden = true;
         answerImage.removeAttribute('src');
       }
+      // The article to read on in. The server names it as `{lang, title}` and `wikipediaRef`
+      // turns that into the address — this page does not build a wikipedia.org URL, because
+      // exactly one thing in the fleet is allowed to and it is not here (aide-rap#501).
+      //
+      // The markup is RAP's: `.wikipedia-ref` plus the two data attributes. `WikipediaCard` is
+      // a DELEGATED listener on `document`, so emitting the class is the whole of wiring the
+      // hover preview up — nothing here calls it, and nothing here can forget to.
+      const source = $('q-source');
+      const ref = verdict.article && WikipediaRef.wikipediaRef(
+        `${verdict.article.lang}:${verdict.article.title}`, state.lang);
+      if (ref) {
+        const esc = (/** @type {string} */ v) => v
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        source.innerHTML = `<a class="wikipedia-ref" href="${esc(ref.url)}" target="wikipedia"`
+          + ` rel="noopener" data-wp-lang="${esc(ref.lang)}" data-wp-title="${esc(ref.title)}">`
+          + `<img src="../../icons/wikipedia.svg" alt="" class="q-source-icon"> ${esc(ref.title)}</a>`;
+        source.hidden = false;
+      } else {
+        source.hidden = true;
+        source.innerHTML = '';
+      }
       $('q-verdict').hidden = false;
       $('q-next').focus();
     } catch (_) {
@@ -262,6 +285,11 @@
     const kept = localStorage.getItem('itquiz-lang');
     if (kept === 'de' || kept === 'en') state.lang = kept;
   } catch (_) { /* private window — the browser language stands */ }
+
+  // One delegated listener for every `.wikipedia-ref` this page will ever render. Guarded
+  // because the file is loaded by URL from the framework tree: on a deployment that ever
+  // stopped shipping it, the quiz must lose a hover card and not its next question.
+  if (typeof WikipediaCard !== 'undefined') WikipediaCard.init({ basePath: '../../' });
 
   paintLang();
   next();

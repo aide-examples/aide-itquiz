@@ -39,13 +39,13 @@
     "template": "is_a",
     "language": "de",
     "text": "Ist {subject} {ein_object} {object}?",
-    "explanation": "{subject} ist {ein_answer} {answer} von {maker}."
+    "explanation": "{subject} ist {ein_answer} {answer} von {maker}.[[\n*{ein_part} {part} ist Teil {genitiv_whole}.*]]"
   },
   {
     "template": "is_a",
     "language": "en",
     "text": "Is {subject} {ein_object} {object}?",
-    "explanation": "{subject} is {ein_answer} {answer} made by {maker}."
+    "explanation": "{subject} is {ein_answer} {answer} made by {maker}.[[\n*{ein_part} {part} is part of {genitiv_whole}.*]]"
   },
   {
     "template": "part_of",
