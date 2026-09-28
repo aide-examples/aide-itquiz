@@ -41,5 +41,53 @@
     "subject_kind": "Product",
     "answer_kind": "Product",
     "note": "Shows a PRODUCT's mark and asks what it is. Needs a picture on the product, which is a trademark and has to be supplied — no product carries one yet, so the question simply is not asked until one does"
+  },
+  {
+    "key": "stands_for_format",
+    "subject_kind": "FileFormat",
+    "answer_kind": "FileFormat",
+    "note": "What an abbreviation stands for. Four rows share ONE code branch, differing only in the pool `subject_kind` names — the template mechanism doing what it is for"
+  },
+  {
+    "key": "stands_for_protocol",
+    "subject_kind": "Protocol",
+    "answer_kind": "Protocol",
+    "note": "The same question over protocols"
+  },
+  {
+    "key": "stands_for_connector",
+    "subject_kind": "Connector",
+    "answer_kind": "Connector",
+    "note": "The same question over connectors — the standards a person can hold"
+  },
+  {
+    "key": "stands_for_concept",
+    "subject_kind": "Concept",
+    "answer_kind": "Concept",
+    "note": "The same question over the notions. Here the short form is a separate attribute: the name IS „Top-Level-Domain“ and the abbreviation people meet is TLD"
+  },
+  {
+    "key": "opens_format",
+    "subject_kind": "FileFormat",
+    "answer_kind": "Product",
+    "note": "Asked with the ENDING, which is the handle a person actually has. Only a format with exactly one able product may be asked, or the question has several right answers while the generator names one"
+  },
+  {
+    "key": "edits_format",
+    "subject_kind": "FileFormat",
+    "answer_kind": "Product",
+    "note": "The same with „bearbeiten“. The narrower one: an editor also opens, so the viewing question accepts more programs than this one"
+  },
+  {
+    "key": "format_group",
+    "subject_kind": "FileFormat",
+    "answer_kind": "FormatGroup",
+    "note": "Sorts a format into its kind — the question that turns ten formats into six ideas plus examples"
+  },
+  {
+    "key": "concept_part_of",
+    "subject_kind": "Concept",
+    "answer_kind": "Concept",
+    "note": "Walks the address apart: a TLD is part of a domain, a domain part of a web address. The same shape as `part_of` on ProductType, over a different entity"
   }
 ]

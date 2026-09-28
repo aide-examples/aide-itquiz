@@ -94,6 +94,44 @@ module.exports = function registerSystemRoutes(app, deps) {
   const engine = () => getAdapter();
 
   /**
+   * The pool of records that carry an abbreviation, for one entity kind.
+   *
+   * Four entities hold a short name and a long form — a file format, a protocol, a connector
+   * and a concept — and „wofür steht das?" is one question over all of them. The template row
+   * names the pool through `subject_kind`, so the branch stays one and a fifth entity that
+   * grows a `long_name` is a row rather than a commit (§48).
+   *
+   * Only rows that HAVE a long form: an abbreviation with nothing to expand into cannot be
+   * asked about, and that is a fact about the data rather than an error.
+   *
+   * @param {any} f - the facts
+   * @param {string} kind - an `EntityKind` value
+   * @returns {any[]} the records of that kind that carry a long form
+   */
+  function abbreviated(f, kind) {
+    const pools = {
+      FileFormat: f.formats, Protocol: f.protocols,
+      Connector: f.connectors, Concept: f.concepts,
+    };
+    return (pools[kind] || []).filter((x) => x.long_name);
+  }
+
+  /**
+   * What to SHOW as the abbreviation of such a record.
+   *
+   * A format, a protocol and a connector are called by their short form already — `name` IS
+   * „DOCX". A concept is not: its name is „Top-Level-Domain" and the abbreviation people meet
+   * is „TLD", which is why that entity carries both. Asking „wofür steht Top-Level-Domain?"
+   * would answer itself.
+   *
+   * @param {any} record - a row from `abbreviated`
+   * @returns {string}
+   */
+  function shortName(record) {
+    return record.abbreviation || record.name;
+  }
+
+  /**
    * The picture of the thing an explanation is about — or nothing.
    *
    * A Product and a ProductType keep theirs in `icon`, a Company in `logo`, and the reader
@@ -198,15 +236,26 @@ module.exports = function registerSystemRoutes(app, deps) {
    */
   async function facts() {
     const eng = engine();
-    const [types, texts, products, companies, templates, phrases] = await Promise.all([
+    const [types, texts, products, companies, templates, phrases,
+      formats, groups, protocols, connectors, concepts, supports] = await Promise.all([
       eng.query('SELECT id, name, purpose, part_of_id, icon, wikipedia_de, wikipedia_en FROM product_type WHERE id > 1'),
       eng.query('SELECT product_type_id, language, name, purpose, gender, genitive FROM product_type_text WHERE id > 1'),
       eng.query('SELECT id, name, product_type_id, manufacturer_id, icon, wikipedia_de, wikipedia_en FROM product WHERE id > 1'),
       eng.query('SELECT id, name, logo, wikipedia_de, wikipedia_en FROM company WHERE id > 1'),
       eng.query('SELECT id, key, subject_kind, object_kind, answer_kind FROM question_template WHERE id > 1'),
       eng.query('SELECT template_id, language, text, explanation FROM question_phrase WHERE id > 1'),
+      // The standards and the notions, added 2026-09-28. Each is small and read whole, for the
+      // same reason the first four are: a quiz that grew to thousands of rows would want a
+      // different picker anyway, not a cached one.
+      eng.query('SELECT id, name, extension, long_name, group_id, purpose, icon, wikipedia_de, wikipedia_en FROM file_format WHERE id > 1'),
+      eng.query('SELECT id, name, purpose, wikipedia_de, wikipedia_en FROM format_group WHERE id > 1'),
+      eng.query('SELECT id, name, long_name, purpose, wikipedia_de, wikipedia_en FROM protocol WHERE id > 1'),
+      eng.query('SELECT id, name, long_name, purpose, looks_like, icon, wikipedia_de, wikipedia_en FROM connector WHERE id > 1'),
+      eng.query('SELECT id, name, abbreviation, long_name, purpose, example, part_of_id, wikipedia_de, wikipedia_en FROM concept WHERE id > 1'),
+      eng.query('SELECT product_id, format_id, support FROM format_support WHERE id > 1'),
     ]);
-    return { types, texts, products, companies, templates, phrases };
+    return { types, texts, products, companies, templates, phrases,
+      formats, groups, protocols, connectors, concepts, supports };
   }
 
   /**
@@ -511,6 +560,114 @@ module.exports = function registerSystemRoutes(app, deps) {
         // question, so the maker carries the sentence in both cases.
         _explanation: fill(phrase.explanation,
           { subject: named(p), answer: typed(own), maker: named(makerOf(p) || { name: '' }) }, lang),
+      };
+    }
+
+    // ── The standards, added 2026-09-28 ────────────────────────────────────────────────
+    //
+    // One branch serves `stands_for_*` for FOUR entities, because the question is the same
+    // one — „wofür steht diese Abkürzung?" — and only the pool differs. The template row says
+    // which pool through `subject_kind`, so a fifth entity that carries a `long_name` is a
+    // row and not a commit, which is what the template mechanism is for (§48).
+    if (String(template.key).startsWith('stands_for')) {
+      const pool = abbreviated(f, template.subject_kind);
+      const x = any(pool);
+      if (!x) return null;
+      const wrong = sample(pool.filter((y) => y.id !== x.id), 3);
+      if (wrong.length < 2) return null;
+      return {
+        template: template.key, language: lang,
+        subject: { kind: template.subject_kind, id: x.id },
+        object: null,
+        text: fill(phrase.text, { subject: { label: shortName(x) } }, lang),
+        // The OPTIONS are long forms, so the distractors have to be long forms too — a list
+        // with one sentence and three words answers itself.
+        options: [x, ...wrong].map((y) => y.long_name),
+        _correct: x.long_name,
+        _explanation: fill(phrase.explanation,
+          { subject: { label: shortName(x) }, answer: { label: x.long_name },
+            purpose: { label: x.purpose } }, lang),
+      };
+    }
+
+    if (template.key === 'opens_format' || template.key === 'edits_format') {
+      // `edit` implies `view` (Types.md), so the OPENING question accepts an editor too while
+      // the editing one does not. That implication is the reason one row per pair is enough,
+      // and this is the only place it has to be spelled out.
+      const editing = template.key === 'edits_format';
+      const ableFor = (fmt) => f.supports.filter((s) => s.format_id === fmt.id
+        && (editing ? s.support === 'edit' : true));
+
+      // The FIRST version demanded a format with exactly one able product, borrowed from
+      // `product_of_company` — and it could never fire, because every format here is opened by
+      // several programs. That is not a gap in the data, it IS the subject: „womit kann man
+      // eine .pdf ansehen?" has six right answers, and not knowing that is the confusion.
+      //
+      // So the question is built the other way round. One able product is the answer, and the
+      // three distractors are drawn from the products that CANNOT open it — so the list has
+      // exactly one right entry by construction, whatever the data grows into. The answer
+      // travels as `object` for the verdict, which is the only thing `judge` cannot recompute:
+      // it can see WHICH products are able, not which of them this question named.
+      const askable = f.formats.filter((x) => ableFor(x).length >= 1
+        && f.products.length - ableFor(x).length >= 3);
+      const fmt = any(askable);
+      if (!fmt) return null;
+      const able = ableFor(fmt);
+      const ableIds = new Set(able.map((s) => s.product_id));
+      const right = f.products.find((x) => x.id === any(able).product_id);
+      if (!right) return null;
+      const wrong = sample(f.products.filter((x) => !ableIds.has(x.id)), 3);
+      if (wrong.length < 3) return null;
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'FileFormat', id: fmt.id },
+        object: { kind: 'Product', id: right.id },
+        text: fill(phrase.text, { subject: { label: fmt.extension } }, lang),
+        options: [right, ...wrong].map((x) => x.name),
+        _correct: right.name,
+        _explanation: fill(phrase.explanation,
+          { subject: { label: fmt.extension }, answer: { label: right.name },
+            format: { label: fmt.name }, purpose: { label: fmt.purpose } }, lang),
+      };
+    }
+
+    if (template.key === 'format_group') {
+      const fmt = any(f.formats.filter((x) => x.group_id));
+      if (!fmt) return null;
+      const grp = f.groups.find((g) => g.id === fmt.group_id);
+      if (!grp) return null;
+      const wrong = sample(f.groups.filter((g) => g.id !== grp.id), 3);
+      if (wrong.length < 2) return null;
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'FileFormat', id: fmt.id },
+        object: null,
+        text: fill(phrase.text, { subject: { label: fmt.name } }, lang),
+        options: [grp, ...wrong].map((g) => g.name),
+        _correct: grp.name,
+        _explanation: fill(phrase.explanation,
+          { subject: { label: fmt.name }, answer: { label: grp.name },
+            purpose: { label: grp.purpose } }, lang),
+      };
+    }
+
+    if (template.key === 'concept_part_of') {
+      const c = any(f.concepts.filter((x) => x.part_of_id));
+      if (!c) return null;
+      const whole = f.concepts.find((y) => y.id === c.part_of_id);
+      if (!whole) return null;
+      const wrong = sample(f.concepts.filter((y) => y.id !== whole.id && y.id !== c.id), 3);
+      if (wrong.length < 2) return null;
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'Concept', id: c.id },
+        object: null,
+        text: fill(phrase.text, { subject: { label: c.name } }, lang),
+        options: [whole, ...wrong].map((y) => y.name),
+        _correct: whole.name,
+        _explanation: fill(phrase.explanation,
+          { subject: { label: c.name }, answer: { label: whole.name },
+            example: { label: whole.example || '' } }, lang),
       };
     }
 
@@ -833,6 +990,75 @@ module.exports = function registerSystemRoutes(app, deps) {
         }, lang),
       };
     }
+
+    // ── The standards ────────────────────────────────────────────────────────────────────
+    //
+    // Recomputed from the subject, like every other branch here, so nothing has to be
+    // remembered between the question and the verdict.
+    if (String(template.key).startsWith('stands_for')) {
+      const x = abbreviated(f, template.subject_kind).find((y) => y.id === (subject && subject.id));
+      if (!x) return null;
+      return {
+        correct: x.long_name,
+        ...context([[template.subject_kind, x]], lang),
+        explanation: fill(phrase.explanation,
+          { subject: { label: shortName(x) }, answer: { label: x.long_name },
+            purpose: { label: x.purpose } }, lang),
+      };
+    }
+
+    if (template.key === 'opens_format' || template.key === 'edits_format') {
+      const fmt = f.formats.find((x) => x.id === (subject && subject.id));
+      if (!fmt) return null;
+      const editing = template.key === 'edits_format';
+      // The same implication as in `build`: an editor also opens. Spelled the same way in both
+      // places deliberately — the day it changes, a reader who finds one finds the other.
+      const able = f.supports.filter((s) => s.format_id === fmt.id
+        && (editing ? s.support === 'edit' : true));
+      // The answer the QUESTION named, not merely an able one: several products open a .pdf
+      // and only one of them was in the list. It still has to be able — `object` arrives from
+      // the client, so it is checked rather than trusted.
+      const named = object && able.some((s) => s.product_id === object.id)
+        ? f.products.find((x) => x.id === object.id) : null;
+      const right = named || (able.length ? f.products.find((x) => x.id === able[0].product_id) : null);
+      if (!right) return null;
+      return {
+        correct: right.name,
+        ...context([['Product', right], ['FileFormat', fmt]], lang),
+        explanation: fill(phrase.explanation,
+          { subject: { label: fmt.extension }, answer: { label: right.name },
+            format: { label: fmt.name }, purpose: { label: fmt.purpose } }, lang),
+      };
+    }
+
+    if (template.key === 'format_group') {
+      const fmt = f.formats.find((x) => x.id === (subject && subject.id));
+      if (!fmt) return null;
+      const grp = f.groups.find((g) => g.id === fmt.group_id);
+      if (!grp) return null;
+      return {
+        correct: grp.name,
+        ...context([['FileFormat', fmt], ['FormatGroup', grp]], lang),
+        explanation: fill(phrase.explanation,
+          { subject: { label: fmt.name }, answer: { label: grp.name },
+            purpose: { label: grp.purpose } }, lang),
+      };
+    }
+
+    if (template.key === 'concept_part_of') {
+      const c = f.concepts.find((x) => x.id === (subject && subject.id));
+      if (!c) return null;
+      const whole = f.concepts.find((y) => y.id === c.part_of_id);
+      if (!whole) return null;
+      return {
+        correct: whole.name,
+        ...context([['Concept', whole], ['Concept', c]], lang),
+        explanation: fill(phrase.explanation,
+          { subject: { label: c.name }, answer: { label: whole.name },
+            example: { label: whole.example || '' } }, lang),
+      };
+    }
+
     return null;
   }
 

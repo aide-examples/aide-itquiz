@@ -82,5 +82,101 @@
     "language": "en",
     "text": "What is this?",
     "explanation": "That is the {type} made by {maker}. {er_type} is called {answer}."
+  },
+  {
+    "template": "stands_for_format",
+    "language": "de",
+    "text": "Wofür steht die Abkürzung {subject}?",
+    "explanation": "{subject} steht für „{answer}“.\n*Was {subject} tut:* {purpose}."
+  },
+  {
+    "template": "stands_for_format",
+    "language": "en",
+    "text": "What does {subject} stand for?",
+    "explanation": "{subject} stands for „{answer}“.\n*What {subject} does:* {purpose}."
+  },
+  {
+    "template": "stands_for_protocol",
+    "language": "de",
+    "text": "Wofür steht die Abkürzung {subject}?",
+    "explanation": "{subject} steht für „{answer}“.\n*Was {subject} tut:* {purpose}."
+  },
+  {
+    "template": "stands_for_protocol",
+    "language": "en",
+    "text": "What does {subject} stand for?",
+    "explanation": "{subject} stands for „{answer}“.\n*What {subject} does:* {purpose}."
+  },
+  {
+    "template": "stands_for_connector",
+    "language": "de",
+    "text": "Wofür steht die Abkürzung {subject}?",
+    "explanation": "{subject} steht für „{answer}“.\n*Was {subject} tut:* {purpose}."
+  },
+  {
+    "template": "stands_for_connector",
+    "language": "en",
+    "text": "What does {subject} stand for?",
+    "explanation": "{subject} stands for „{answer}“.\n*What {subject} does:* {purpose}."
+  },
+  {
+    "template": "stands_for_concept",
+    "language": "de",
+    "text": "Wofür steht die Abkürzung {subject}?",
+    "explanation": "{subject} steht für „{answer}“.\n*Was {subject} tut:* {purpose}."
+  },
+  {
+    "template": "stands_for_concept",
+    "language": "en",
+    "text": "What does {subject} stand for?",
+    "explanation": "{subject} stands for „{answer}“.\n*What {subject} does:* {purpose}."
+  },
+  {
+    "template": "opens_format",
+    "language": "de",
+    "text": "Womit kann man eine Datei ansehen, die auf {subject} endet?",
+    "explanation": "{answer} öffnet eine {subject}-Datei.\n*Was {format} enthält:* {purpose}."
+  },
+  {
+    "template": "opens_format",
+    "language": "en",
+    "text": "What can open a file ending in {subject}?",
+    "explanation": "{answer} opens {subject} files.\n*What {format} holds:* {purpose}."
+  },
+  {
+    "template": "edits_format",
+    "language": "de",
+    "text": "Womit kann man eine Datei BEARBEITEN, die auf {subject} endet?",
+    "explanation": "{answer} kann eine {subject}-Datei nicht nur öffnen, sondern ändern.\n*Was {format} enthält:* {purpose}."
+  },
+  {
+    "template": "edits_format",
+    "language": "en",
+    "text": "What can EDIT a file ending in {subject}?",
+    "explanation": "{answer} can change a {subject} file, not only open it.\n*What {format} holds:* {purpose}."
+  },
+  {
+    "template": "format_group",
+    "language": "de",
+    "text": "Was für eine Art von Format ist {subject}?",
+    "explanation": "{subject} ist ein {answer}.\n*Was {answer}e ausmacht:* {purpose}."
+  },
+  {
+    "template": "format_group",
+    "language": "en",
+    "text": "What kind of format is {subject}?",
+    "explanation": "{subject} is a {answer}.\n*What that kind does:* {purpose}."
+  },
+  {
+    "template": "concept_part_of",
+    "language": "de",
+    "text": "Wovon ist {subject} ein Teil?",
+    "explanation": "{subject} ist ein Teil von {answer}[[ — zum Beispiel {example}]]."
+  },
+  {
+    "template": "concept_part_of",
+    "language": "en",
+    "text": "What is {subject} a part of?",
+    "explanation": "{subject} is part of {answer}[[ — {example}, for instance]]."
   }
 ]
