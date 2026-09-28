@@ -52,7 +52,19 @@
                         "QuestionTemplate": "r",
                         "QuestionPhrase": "r"
                     },
-                    "views": {},
+                    // The catalogue views, so the View selector exists at all: with none
+                    // readable RAP shows no selector, and the player's way out of the quiz
+                    // (aide-rap#503) reached records but never a view.
+                    //
+                    // `x`, not `r` — a view is EXECUTED, and `r` looks right while listing
+                    // nothing, silently. Measured here first.
+                    //
+                    // By AREA and not `*`: `*` also handed over the framework's own
+                    // „Import Mappings", „Recent Changes", „Usage" and „Usage Heatmap", which
+                    // are an operator's tools and not a learner's. The area is the boundary
+                    // the model already draws, so a view added to `docs/views/Catalogue/`
+                    // reaches the player by being put there and one added elsewhere does not.
+                    "views": { "*": "", "@Catalogue": "x" },
                     "processes": {},
                     "admin": false
                 },
