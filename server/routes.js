@@ -94,6 +94,25 @@ module.exports = function registerSystemRoutes(app, deps) {
   const engine = () => getAdapter();
 
   /**
+   * The picture of the thing an explanation is about — or nothing.
+   *
+   * A Product and a ProductType keep theirs in `icon`, a Company in `logo`, and the reader
+   * does not care which: they asked about a thing and a thing has a face. So the field name
+   * is decided here rather than at seven call sites, which is also what keeps an eighth
+   * template from inventing a third name for the same idea.
+   *
+   * Returns null for a record without one. That is a fact about the data, not a defect —
+   * most of the inventory has no picture and the explanation reads perfectly without it.
+   *
+   * @param {any} record - a Product, ProductType or Company row
+   * @returns {string|null} a media URL, relative to the app root
+   */
+  function picture(record) {
+    const id = record && (record.icon || record.logo);
+    return id ? `api/media/${id}/file` : null;
+  }
+
+  /**
    * The facts, as the question builder needs them. Small enough to read whole on
    * every question — five types and ten products today, and a quiz that grew to
    * thousands of rows would want a different picker anyway, not a cached one.
@@ -104,7 +123,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       eng.query('SELECT id, name, purpose, part_of_id, icon FROM product_type WHERE id > 1'),
       eng.query('SELECT product_type_id, language, name, purpose, gender, genitive FROM product_type_text WHERE id > 1'),
       eng.query('SELECT id, name, product_type_id, manufacturer_id, icon FROM product WHERE id > 1'),
-      eng.query('SELECT id, name FROM company WHERE id > 1'),
+      eng.query('SELECT id, name, logo FROM company WHERE id > 1'),
       eng.query('SELECT id, key, subject_kind, object_kind, answer_kind FROM question_template WHERE id > 1'),
       eng.query('SELECT template_id, language, text, explanation FROM question_phrase WHERE id > 1'),
     ]);
@@ -482,7 +501,7 @@ module.exports = function registerSystemRoutes(app, deps) {
           chosen: req.query.chosen == null ? null : String(req.query.chosen),
         });
         if (r.error) return res.status(r.status || 400).json({ error: r.error });
-        return res.json({ quality: r.quality, correct: r.truth.correct, explanation: r.truth.explanation });
+        return res.json({ quality: r.quality, correct: r.truth.correct, explanation: r.truth.explanation, image: r.truth.image || null });
       } catch (err) {
         theLogger.error('itquiz: verdict failed', { error: err.message });
         return res.status(500).json({ error: err.message });
@@ -558,6 +577,9 @@ module.exports = function registerSystemRoutes(app, deps) {
       const own = type(p.product_type_id); if (!own) return null;
       return {
         correct: c.name,
+        // The maker's mark, where it has one. The reader recognises a logo long before a
+        // name — which is half of what this quiz is about.
+        image: picture(c),
         explanation: fill(phrase.explanation,
           { subject: { label: p.name }, answer: { label: c.name }, type: typed(own) }, lang),
       };
@@ -569,6 +591,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       if (!p) return null;
       return {
         correct: p.name,
+        image: picture(p),
         explanation: fill(phrase.explanation,
           { subject: { label: c.name }, object: typed(t), answer: { label: p.name }, purpose: { label: word(f, t, lang, 'purpose') } }, lang),
       };
@@ -578,10 +601,14 @@ module.exports = function registerSystemRoutes(app, deps) {
       const beispiel = f.products.find((x) => x.product_type_id === t.id);
       return {
         correct: word(f, t, lang, 'name'),
+        image: picture(t),
         explanation: fill(phrase.explanation,
           { answer: typed(t), example: { label: (beispiel && beispiel.name) || '' } }, lang),
       };
     }
+    // `what_kind` and `what_is_it` deliberately carry NO image: there the picture IS the
+    // question, and showing it again under the answer would say nothing and take the room of
+    // something that does.
     if (template.key === 'what_kind') {
       const t = type(subject && subject.id); if (!t) return null;
       return {
@@ -608,6 +635,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       const ganz = f.types.find((y) => y.id === t.part_of_id); if (!ganz) return null;
       return {
         correct: word(f, ganz, lang, 'name'),
+        image: picture(ganz),
         explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(ganz) }, lang),
       };
     }
@@ -620,6 +648,10 @@ module.exports = function registerSystemRoutes(app, deps) {
       const hersteller = comp(p.manufacturer_id);
       return {
         correct: asked.id === own.id ? yes : no,
+        // „Yes" has no face, so the picture is the SUBJECT's — the thing the sentence is
+        // about. The rule everywhere here is the same one: show what the explanation talks
+        // about, which for a yes/no question is not the answer.
+        image: picture(p),
         explanation: fill(phrase.explanation,
           { subject: { label: p.name }, answer: typed(own), maker: { label: (hersteller && hersteller.name) || '' } }, lang),
       };

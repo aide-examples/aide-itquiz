@@ -99,6 +99,25 @@ body {
 }
 .q-image[hidden] { display: none; }
 
+/* The picture above the explanation. Smaller than the question's — there it IS the question,
+   here it is a face put to a name that has just been read.
+   NOT floated: `.q-verdict` is a flex column, and a float on a flex item does nothing. The
+   first version of this rule said „floated" and the picture sat on its own line anyway — a
+   comment describing an intention rather than the behaviour, which is the worse of the two
+   things a comment can be. Its own line is the right answer here regardless, so the rule
+   simply says what happens. `align-self` keeps it from stretching the flex width. */
+.q-answer-image {
+    align-self: flex-start;
+    max-width: 64px;
+    max-height: 64px;
+    margin: 0;
+    object-fit: contain;
+}
+
+/* An author `display` beats the UA's `[hidden]`, so the hidden state has to say so itself —
+   the same trap that once left the previous answer standing under the next question. */
+.q-answer-image[hidden] { display: none; }
+
 .q-text {
   margin: 0;
   font-size: 1.25rem;

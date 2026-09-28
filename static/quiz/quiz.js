@@ -91,6 +91,11 @@
     $('q-options').innerHTML = '';
     $('q-image').hidden = true;
     $('q-image').removeAttribute('src');
+    // The previous answer's picture goes with the previous answer. Without this it survives
+    // into the next question's verdict for as long as that one has none — the same defect the
+    // explanation itself had, one element over.
+    $('q-answer-image').hidden = true;
+    $('q-answer-image').removeAttribute('src');
     $('q-text').textContent = '…';
     try {
       const r = await fetch(`${QUESTION_URL}?lang=${state.lang}`, { credentials: 'same-origin' });
@@ -109,12 +114,12 @@
     // Two templates ask with a picture instead of a sentence. The `alt` stays EMPTY on
     // purpose: naming the thing in it would hand the answer to a screen reader, and the
     // text beside it already says what is being asked.
-    const bild = /** @type {HTMLImageElement} */ ($('q-image'));
+    const questionImage = /** @type {HTMLImageElement} */ ($('q-image'));
     // The server names the picture relative to the APP root (`api/media/…`); this page sits
     // two levels below it, so it prefixes exactly as the two endpoints above do. Without the
     // prefix the browser asks for `/sys/quiz/api/media/…`, the element is there and visible
     // and simply never paints — measured: `hidden=false`, `naturalWidth=0`, no error.
-    if (q.image) { bild.src = `../../${q.image}`; bild.hidden = false; } else { bild.hidden = true; }
+    if (q.image) { questionImage.src = `../../${q.image}`; questionImage.hidden = false; } else { questionImage.hidden = true; }
     $('q-text').textContent = q.text;
     const box = $('q-options');
     box.innerHTML = '';
@@ -176,6 +181,17 @@
         });
       }
       $('q-explain').innerHTML = renderExplanation(verdict.explanation);
+      // The face of the thing the explanation is about, where it has one. The server decides
+      // WHICH record that is — for a yes/no question it is not the answer — and answers null
+      // where there is no picture, which is the normal case and not a failure.
+      const answerImage = /** @type {HTMLImageElement} */ ($('q-answer-image'));
+      if (verdict.image) {
+        answerImage.src = `../../${verdict.image}`;
+        answerImage.hidden = false;
+      } else {
+        answerImage.hidden = true;
+        answerImage.removeAttribute('src');
+      }
       $('q-verdict').hidden = false;
       $('q-next').focus();
     } catch (_) {

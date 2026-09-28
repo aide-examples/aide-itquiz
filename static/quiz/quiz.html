@@ -22,6 +22,9 @@
   <p class="q-text" id="q-text">…</p>
   <div class="q-options" id="q-options"></div>
   <div class="q-verdict" id="q-verdict" hidden>
+    <!-- `alt` stays empty on purpose: the sentence beside it already names the thing, so a
+         screen reader that also heard „Chrome logo" would hear the answer twice. -->
+    <img class="q-answer-image" id="q-answer-image" alt="" hidden>
     <p class="q-explain" id="q-explain"></p>
     <p class="q-note" id="q-note" hidden></p>
     <button type="button" class="q-next" id="q-next">…</button>
