@@ -16,7 +16,7 @@
     "key": "purpose",
     "subject_kind": "ProductType",
     "answer_kind": "ProductType",
-    "note": "Asks for the kind by what it is FOR — the question the whole system is built around"
+    "note": "Asks for the kind by what it is FOR — the question the whole system is built around. The explanation names an example where there is one; the clause is optional in the phrase itself, so a kind with no product (a processor, a battery) uses the same wording one clause shorter"
   },
   {
     "key": "is_a",
@@ -31,9 +31,15 @@
     "note": "Asks for the WHOLE a kind belongs to. The one question that is about a part and its whole rather than a thing and its kind — „ist Word dasselbe wie MS-Office?“ is not reachable through is_a"
   },
   {
-    "key": "purpose_plain",
+    "key": "what_kind",
     "subject_kind": "ProductType",
     "answer_kind": "ProductType",
-    "note": "The purpose question for a kind that has no product to name as an example — a processor or a battery is a kind everybody meets and nobody buys under a household name. Same question as `purpose`, one clause shorter"
+    "note": "Shows the KIND's pictogram and asks what sort of thing it is. The first question here whose subject is a picture rather than a sentence — a layperson recognises a shape long before they can name it, and that is the order this question follows"
+  },
+  {
+    "key": "what_is_it",
+    "subject_kind": "Product",
+    "answer_kind": "Product",
+    "note": "Shows a PRODUCT's mark and asks what it is. Needs a picture on the product, which is a trademark and has to be supplied — no product carries one yet, so the question simply is not asked until one does"
   }
 ]

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Processor">
+  <!-- Processor — a generic pictogram, deliberately no brand mark: a product logo is a
+       trademark and a hand-drawn imitation of one would be a false fact in a system
+       whose first rule is that it stores none. -->
+  <rect x="34" y="34" width="60" height="60" rx="6" fill="#ffffff" stroke="#4338ca" stroke-width="6"/>
+  <rect x="50" y="50" width="28" height="28" rx="3" fill="#c7d2fe"/>
+  <g stroke="#4338ca" stroke-width="6" stroke-linecap="round">
+    <path d="M48 34 V16"/><path d="M64 34 V16"/><path d="M80 34 V16"/>
+    <path d="M48 94 V112"/><path d="M64 94 V112"/><path d="M80 94 V112"/>
+    <path d="M34 48 H16"/><path d="M34 64 H16"/><path d="M34 80 H16"/>
+    <path d="M94 48 H112"/><path d="M94 64 H112"/><path d="M94 80 H112"/>
+  </g>
+</svg>

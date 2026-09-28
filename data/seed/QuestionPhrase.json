@@ -27,13 +27,13 @@
     "template": "purpose",
     "language": "de",
     "text": "Wie nennt man ein Ding, das Folgendes tut: {subject}?",
-    "explanation": "Das ist {ein_answer} {answer}, zum Beispiel {example}."
+    "explanation": "Das ist {ein_answer} {answer}[[, zum Beispiel {example}]]."
   },
   {
     "template": "purpose",
     "language": "en",
     "text": "What do you call a thing that does this: {subject}?",
-    "explanation": "That is {ein_answer} {answer} — {example}, for instance."
+    "explanation": "That is {ein_answer} {answer}[[ — {example}, for instance]]."
   },
   {
     "template": "is_a",
@@ -60,15 +60,27 @@
     "explanation": "{ein_subject} {subject} is part of {genitiv_answer}."
   },
   {
-    "template": "purpose_plain",
+    "template": "what_kind",
     "language": "de",
-    "text": "Wie nennt man ein Ding, das Folgendes tut: {subject}?",
-    "explanation": "Das ist {ein_answer} {answer}."
+    "text": "Welche Art von Ding ist das?",
+    "explanation": "{ein_answer} {answer} {purpose}[[ — zum Beispiel {examples}]]."
   },
   {
-    "template": "purpose_plain",
+    "template": "what_kind",
     "language": "en",
-    "text": "What do you call a thing that does this: {subject}?",
-    "explanation": "That is {ein_answer} {answer}."
+    "text": "What kind of thing is this?",
+    "explanation": "{ein_answer} {answer} {purpose}[[ — {examples}, for instance]]."
+  },
+  {
+    "template": "what_is_it",
+    "language": "de",
+    "text": "Was ist das?",
+    "explanation": "Das ist {der_type} {type} von {maker}. {er_type} heißt {answer}."
+  },
+  {
+    "template": "what_is_it",
+    "language": "en",
+    "text": "What is this?",
+    "explanation": "That is the {type} made by {maker}. {er_type} is called {answer}."
   }
 ]

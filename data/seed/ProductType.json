@@ -1,77 +1,91 @@
 [
   {
     "name": "Browser",
-    "purpose": "Displays web pages",
-    "note": "Many people set a search engine as their browser's home page, which is why the two seem to be one thing"
+    "purpose": "displays web pages",
+    "note": "Many people set a search engine as their browser's home page, which is why the two seem to be one thing",
+    "icon": "browser.svg"
   },
   {
     "name": "Search engine",
-    "purpose": "Keeps an index of web pages and finds pages in it — and is itself a website",
-    "note": "It is reached THROUGH a browser, the way a shop is reached through a door"
+    "purpose": "keeps an index of web pages and finds pages in it — and is itself a website",
+    "note": "It is reached THROUGH a browser, the way a shop is reached through a door",
+    "icon": "search-engine.svg"
   },
   {
     "name": "Spider",
-    "purpose": "Walks web pages and builds the index a search engine keeps",
-    "note": "Nobody uses a spider directly; it works for the search engine that owns it"
+    "purpose": "walks web pages and builds the index a search engine keeps",
+    "note": "Nobody uses a spider directly; it works for the search engine that owns it",
+    "icon": "spider.svg"
   },
   {
     "name": "Operating system",
-    "purpose": "Runs a device and the programs on it"
+    "purpose": "runs a device and the programs on it",
+    "icon": "operating-system.svg"
   },
   {
     "name": "Device",
-    "purpose": "The physical thing you hold or sit in front of"
+    "purpose": "brings processor, memory and screen together into one machine you hold or sit in front of",
+    "icon": "device.svg"
   },
   {
     "name": "Word processor",
-    "purpose": "Writes and formats documents that are meant to be read as pages",
+    "purpose": "writes and formats documents that are meant to be read as pages",
     "note": "Confused with the office suite it usually arrives in",
-    "part_of": "Office suite"
+    "part_of": "Office suite",
+    "icon": "word-processor.svg"
   },
   {
     "name": "Spreadsheet",
-    "purpose": "Holds numbers in a grid and calculates with them",
+    "purpose": "holds numbers in a grid and calculates with them",
     "note": "The second thing in nearly every office suite, and the reason the suite is not a word processor",
-    "part_of": "Office suite"
+    "part_of": "Office suite",
+    "icon": "spreadsheet.svg"
   },
   {
     "name": "Office suite",
-    "purpose": "Bundles several programs that are sold and installed as one — typically a word processor, a spreadsheet and a presentation program",
-    "note": "The whole point of having this type: a suite is not any of the things inside it, and that is what makes „ist MS-Office ein Textprogramm?“ a real question"
+    "purpose": "bundles several programs that are sold and installed as one — typically a word processor, a spreadsheet and a presentation program",
+    "note": "The whole point of having this type: a suite is not any of the things inside it, and that is what makes „ist MS-Office ein Textprogramm?“ a real question",
+    "icon": "office-suite.svg"
   },
   {
     "name": "Messenger",
-    "purpose": "Carries messages between people who each have it installed",
-    "note": "Three of them in this inventory from three different makers — a good place to see that the maker is not the thing"
+    "purpose": "carries messages between people who each have it installed",
+    "note": "Three of them in this inventory from three different makers — a good place to see that the maker is not the thing",
+    "icon": "messenger.svg"
   },
   {
     "name": "Processor",
-    "purpose": "Carries out the steps a program is made of — the part that actually computes",
+    "purpose": "carries out the steps a program is made of — the part that actually computes",
     "part_of": "Device",
-    "note": "Named as if it were the whole machine: „ein schneller Rechner“ usually means this one part"
+    "note": "Named as if it were the whole machine: „ein schneller Rechner“ usually means this one part",
+    "icon": "processor.svg"
   },
   {
     "name": "Working memory",
-    "purpose": "Holds what is being worked on right now, and is empty again after the device is switched off",
+    "purpose": "holds what is being worked on right now, and is empty again after the device is switched off",
     "part_of": "Device",
-    "note": "Half of the commonest confusion in this whole inventory — both it and the storage are called „Speicher“ in German"
+    "note": "Half of the commonest confusion in this whole inventory — both it and the storage are called „Speicher“ in German",
+    "icon": "working-memory.svg"
   },
   {
     "name": "Storage medium",
-    "purpose": "Keeps files so they are still there after the device has been switched off",
+    "purpose": "keeps files so they are still there after the device has been switched off",
     "part_of": "Device",
-    "note": "The other half: „mein Speicher ist voll“ is nearly always this one, and „der Rechner ist langsam“ nearly always the other"
+    "note": "The other half: „mein Speicher ist voll“ is nearly always this one, and „der Rechner ist langsam“ nearly always the other",
+    "icon": "storage-medium.svg"
   },
   {
     "name": "Screen",
-    "purpose": "Shows what the device puts out, and takes the touches on it as input",
+    "purpose": "shows what the device puts out, and takes the touches on it as input",
     "part_of": "Device",
-    "note": "On a phone it is also the keyboard, which is why a broken one takes the whole device with it"
+    "note": "On a phone it is also the keyboard, which is why a broken one takes the whole device with it",
+    "icon": "screen.svg"
   },
   {
     "name": "Battery",
-    "purpose": "Stores electricity so the device runs without a cable",
+    "purpose": "stores electricity so the device runs without a cable",
     "part_of": "Device",
-    "note": "The one part that wears out by being used normally, which no other part in this list does"
+    "note": "The one part that wears out by being used normally, which no other part in this list does",
+    "icon": "battery.svg"
   }
 ]

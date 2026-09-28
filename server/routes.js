@@ -76,6 +76,10 @@ const INDEFINITE = { m: 'ein', f: 'eine', n: 'ein' };
 // exceptions, so it is stored on the language row (`ProductTypeText.genitive`) rather than
 // guessed. A rule with exceptions would put a wrong sentence in front of a learner.
 const GENITIVE = { m: 'eines', f: 'einer', n: 'eines' };
+// The personal pronoun, for „Das ist der Browser von Google. ER heißt Chrome." Third
+// derivation from the one stored gender — and the third time a sentence needed a form that
+// would have been a guess if the gender were not in the model (§48).
+const PRONOUN = { m: 'er', f: 'sie', n: 'es' };
 
 module.exports = function registerSystemRoutes(app, deps) {
   const { theLogger, appDir, authMiddleware, requireEntityVerb } = deps;
@@ -97,9 +101,9 @@ module.exports = function registerSystemRoutes(app, deps) {
   async function facts() {
     const eng = engine();
     const [types, texts, products, companies, templates, phrases] = await Promise.all([
-      eng.query('SELECT id, name, purpose, part_of_id FROM product_type WHERE id > 1'),
+      eng.query('SELECT id, name, purpose, part_of_id, icon FROM product_type WHERE id > 1'),
       eng.query('SELECT product_type_id, language, name, purpose, gender, genitive FROM product_type_text WHERE id > 1'),
-      eng.query('SELECT id, name, product_type_id, manufacturer_id FROM product WHERE id > 1'),
+      eng.query('SELECT id, name, product_type_id, manufacturer_id, icon FROM product WHERE id > 1'),
       eng.query('SELECT id, name FROM company WHERE id > 1'),
       eng.query('SELECT id, key, subject_kind, object_kind, answer_kind FROM question_template WHERE id > 1'),
       eng.query('SELECT template_id, language, text, explanation FROM question_phrase WHERE id > 1'),
@@ -154,7 +158,25 @@ module.exports = function registerSystemRoutes(app, deps) {
    * role that is not a noun with a gender) renders the placeholder empty.
    */
   function fill(text, roles, lang) {
-    let out = text;
+    // An OPTIONAL CLAUSE: `[[…]]` survives only if every role it names has a value.
+    // „Das ist {ein_answer} {answer}[[, zum Beispiel {example}]]." is then ONE phrase for a
+    // kind that has an example and for one that has none.
+    //
+    // Decided HERE, before anything is substituted — afterwards an empty role has already
+    // become an empty string and the clause looks full. That was the first version, and it
+    // produced „Das ist ein Prozessor, zum Beispiel ." which is exactly the sentence the
+    // mechanism exists to prevent.
+    //
+    // It replaces a second TEMPLATE per case (`purpose` beside `purpose_plain`) — which is how
+    // a phrase table grows: every optional half-sentence doubles the rows, and two wordings of
+    // one question drift apart the first time somebody improves only one of them (§46). The
+    // optionality is a property of the SENTENCE, so it lives in the sentence.
+    let out = String(text).replace(/\[\[([^\]]*)\]\]/g, (_ganz, klausel) => {
+      const rollen = [...String(klausel).matchAll(/\{([a-z_]+)\}/g)]
+        .map((m) => m[1].replace(/^(ein|der|genitiv)_/, ''));
+      const leer = rollen.some((r) => !(roles[r] && String(roles[r].label || '').trim()));
+      return leer ? '' : klausel;
+    });
     for (const [role, v] of Object.entries(roles)) {
       const label = v.label ?? '';
       // English has no gender to store, and does not need one: its indefinite article
@@ -167,10 +189,12 @@ module.exports = function registerSystemRoutes(app, deps) {
       // English inflects neither, so the genitive placeholder renders „a word processor"
       // there — one phrase, both languages.
       const gen = v.gender ? `${GENITIVE[v.gender]} ${v.genitive || label}` : (a ? `${a} ${label}` : label);
+      const es = v.gender ? PRONOUN[v.gender] : (lang === 'en' ? 'it' : '');
       out = out.split(`{${role}}`).join(label);
       out = out.split(`{der_${role}}`).join(der);
       out = out.split(`{ein_${role}}`).join(a);
       out = out.split(`{genitiv_${role}}`).join(gen);
+      out = out.split(`{er_${role}}`).join(es);
     }
     // Collapse runs of SPACES — an empty article placeholder leaves two — but never the
     // newline: a phrase uses it to put an explanatory lead-in on a line of its own, and
@@ -208,6 +232,8 @@ module.exports = function registerSystemRoutes(app, deps) {
     // Deliberately the FIRST and not a random one: a reader who meets the same question
     // twice should meet the same example, or the example becomes noise.
     const exampleOf = (t) => f.products.find((x) => x.product_type_id === t.id) || { name: '' };
+    /** Every product of a kind, as the list an explanation names: „Chrome, Edge, Firefox, Safari". */
+    const examplesOf = (t) => f.products.filter((x) => x.product_type_id === t.id).map((x) => x.name).join(', ');
     const typed = (t) => ({ label: word(f, t, lang, 'name'), gender: gender(f, t, lang), genitive: sprachfeld(f, t, lang, 'genitive') });
 
     if (template.key === 'manufacturer') {
@@ -261,9 +287,9 @@ module.exports = function registerSystemRoutes(app, deps) {
     }
 
     if (template.key === 'purpose') {
-      // A type needs a purpose to be asked about AND a product to be illustrated with —
-      // the explanation names an example, and „zum Beispiel ." is worse than no question.
-      const t = any(f.types.filter((x) => word(f, x, lang, 'purpose') && exampleOf(x)));
+      // Every type with a purpose, whether or not it has a product: the example clause in
+      // the phrase is optional and disappears by itself where there is none.
+      const t = any(f.types.filter((x) => word(f, x, lang, 'purpose')));
       if (!t) return null;
       const wrong = sample(f.types.filter((x) => x.id !== t.id), 3);
       if (wrong.length < 2) return null;
@@ -277,6 +303,48 @@ module.exports = function registerSystemRoutes(app, deps) {
         // The question was the purpose, so naming the type says only what was asked. A
         // thing the reader has actually held is the fact that lands.
         _explanation: fill(phrase.explanation, { answer: typed(t), example: named(exampleOf(t)) }, lang),
+      };
+    }
+
+    if (template.key === 'what_kind') {
+      // The picture IS the question, so a kind without one cannot be asked about — that is a
+      // fact about the data, not an error, and the next template is tried instead.
+      const t = any(f.types.filter((x) => x.icon && word(f, x, lang, 'purpose')));
+      if (!t) return null;
+      const wrong = sample(f.types.filter((x) => x.id !== t.id), 3);
+      if (wrong.length < 2) return null;
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'ProductType', id: t.id },
+        object: null,
+        image: `api/media/${t.icon}/file`,
+        text: fill(phrase.text, {}, lang),
+        options: [t, ...wrong].map((x) => word(f, x, lang, 'name')),
+        _correct: word(f, t, lang, 'name'),
+        _explanation: fill(phrase.explanation, {
+          answer: typed(t),
+          purpose: { label: word(f, t, lang, 'purpose') },
+          examples: { label: examplesOf(t) },
+        }, lang),
+      };
+    }
+
+    if (template.key === 'what_is_it') {
+      const p = any(f.products.filter((x) => x.icon && x.product_type_id && x.manufacturer_id));
+      if (!p) return null;
+      const t = typeOf(p), c = makerOf(p);
+      if (!t || !c) return null;
+      const wrong = sample(f.products.filter((x) => x.id !== p.id), 3);
+      if (wrong.length < 2) return null;
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'Product', id: p.id },
+        object: null,
+        image: `api/media/${p.icon}/file`,
+        text: fill(phrase.text, {}, lang),
+        options: [p, ...wrong].map((x) => x.name),
+        _correct: p.name,
+        _explanation: fill(phrase.explanation, { type: typed(t), maker: named(c), answer: named(p) }, lang),
       };
     }
 
@@ -294,25 +362,6 @@ module.exports = function registerSystemRoutes(app, deps) {
         options: [ganz, ...wrong].map((x) => word(f, x, lang, 'name')),
         _correct: word(f, ganz, lang, 'name'),
         _explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(ganz) }, lang),
-      };
-    }
-
-    if (template.key === 'purpose_plain') {
-      // Deliberately the COMPLEMENT of `purpose`: that one needs an example product, this one
-      // is for the kinds that have none. Disjoint by construction, so the two never compete
-      // for the same type and the plainer sentence never displaces the richer one.
-      const t = any(f.types.filter((x) => word(f, x, lang, 'purpose') && !exampleOf(x).name));
-      if (!t) return null;
-      const wrong = sample(f.types.filter((x) => x.id !== t.id), 3);
-      if (wrong.length < 2) return null;
-      return {
-        template: template.key, language: lang,
-        subject: { kind: 'ProductType', id: t.id },
-        object: null,
-        text: fill(phrase.text, { subject: { label: word(f, t, lang, 'purpose') } }, lang),
-        options: [t, ...wrong].map((x) => word(f, x, lang, 'name')),
-        _correct: word(f, t, lang, 'name'),
-        _explanation: fill(phrase.explanation, { answer: typed(t) }, lang),
       };
     }
 
@@ -533,19 +582,33 @@ module.exports = function registerSystemRoutes(app, deps) {
           { answer: typed(t), example: { label: (beispiel && beispiel.name) || '' } }, lang),
       };
     }
+    if (template.key === 'what_kind') {
+      const t = type(subject && subject.id); if (!t) return null;
+      return {
+        correct: word(f, t, lang, 'name'),
+        explanation: fill(phrase.explanation, {
+          answer: typed(t),
+          purpose: { label: word(f, t, lang, 'purpose') },
+          examples: { label: f.products.filter((x) => x.product_type_id === t.id).map((x) => x.name).join(', ') },
+        }, lang),
+      };
+    }
+    if (template.key === 'what_is_it') {
+      const p = prod(subject && subject.id); if (!p) return null;
+      const t = type(p.product_type_id), c = comp(p.manufacturer_id);
+      if (!t || !c) return null;
+      return {
+        correct: p.name,
+        explanation: fill(phrase.explanation,
+          { type: typed(t), maker: { label: c.name }, answer: { label: p.name } }, lang),
+      };
+    }
     if (template.key === 'part_of') {
       const t = type(subject && subject.id); if (!t) return null;
       const ganz = f.types.find((y) => y.id === t.part_of_id); if (!ganz) return null;
       return {
         correct: word(f, ganz, lang, 'name'),
         explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(ganz) }, lang),
-      };
-    }
-    if (template.key === 'purpose_plain') {
-      const t = type(subject && subject.id); if (!t) return null;
-      return {
-        correct: word(f, t, lang, 'name'),
-        explanation: fill(phrase.explanation, { answer: typed(t) }, lang),
       };
     }
     if (template.key === 'is_a') {

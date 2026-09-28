@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Search engine">
+  <!-- Search engine — a generic pictogram, deliberately no brand mark: a product logo is a
+       trademark and a hand-drawn imitation of one would be a false fact in a system
+       whose first rule is that it stores none. -->
+  <rect x="12" y="16" width="72" height="90" rx="8" fill="#ffffff" stroke="#4338ca" stroke-width="6"/>
+  <rect x="26" y="34" width="44" height="6" rx="3" fill="#c7d2fe"/>
+  <rect x="26" y="48" width="44" height="6" rx="3" fill="#c7d2fe"/>
+  <rect x="26" y="62" width="30" height="6" rx="3" fill="#c7d2fe"/>
+  <circle cx="86" cy="80" r="24" fill="#ffffff" stroke="#4338ca" stroke-width="8"/>
+  <path d="M103 97 L118 112" stroke="#4338ca" stroke-width="10" stroke-linecap="round"/>
+</svg>

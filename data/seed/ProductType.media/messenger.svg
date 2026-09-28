@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Messenger">
+  <!-- Messenger — a generic pictogram, deliberately no brand mark: a product logo is a
+       trademark and a hand-drawn imitation of one would be a false fact in a system
+       whose first rule is that it stores none. -->
+  <path d="M12 26 h72 a8 8 0 0 1 8 8 v34 a8 8 0 0 1 -8 8 h-42 l-18 16 v-16 h-12 a8 8 0 0 1 -8 -8 v-34 a8 8 0 0 1 8 -8 z"
+        fill="#ffffff" stroke="#4338ca" stroke-width="6"/>
+  <path d="M60 60 h44 a8 8 0 0 1 8 8 v26 a8 8 0 0 1 -8 8 h-8 v14 l-14 -14 h-22 a8 8 0 0 1 -8 -8 v-26 a8 8 0 0 1 8 -8 z"
+        fill="#c7d2fe" stroke="#4338ca" stroke-width="6"/>
+</svg>

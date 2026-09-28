@@ -248,3 +248,37 @@ not written in the phrase. Capitalising the first letter fixes it — and would 
 „iPhone ist ein Gerät von Apple." into „IPhone". So the rule fires only when the phrase itself
 opens with an article placeholder, which is a property of the phrase and can be read off it.
 
+## Questions asked with a picture (2026-09-28)
+
+Two new templates whose subject is an IMAGE rather than a sentence — a layperson recognises a
+shape long before they can name it, and that is the order these questions follow.
+
+- **`what_kind`** shows a kind's pictogram: *Welche Art von Ding ist das?* → „Ein Browser zeigt
+  Webseiten an — zum Beispiel Chrome, Edge, Firefox, Safari."
+- **`what_is_it`** shows a product's mark: *Was ist das?* → „Das ist der Browser von Google. Er
+  heißt Chrome."
+
+**The fourteen pictograms are generic and drawn here.** A product logo is a trademark, and a
+hand-drawn imitation of one would be a false fact in a system whose first rule is that it
+stores none. So the KINDS have pictures and the PRODUCTS do not: `what_is_it` is built, and
+simply is not asked until somebody supplies marks that may be used. The pair that matters most
+is unmistakable — a RAM stick against a disk, which is the „Speicher"-confusion made visible.
+
+The pictures travel with the repository: `data/seed/ProductType.media/` beside the JSON that
+names them, which is the framework's own arrangement for seeded media.
+
+### What the two questions needed from the model
+
+- **A pronoun.** „Das ist der Browser von Google. **Er** heißt Chrome." — er/sie/es, the third
+  form derived from the one stored gender, after the article and the genitive.
+- **A list, and a way for it to be absent.** „— zum Beispiel Chrome, Edge, Firefox, Safari" has
+  nothing to say about a processor, which has no products. Rather than a second template, a
+  phrase may now carry an OPTIONAL CLAUSE in `[[…]]`, kept only when every role it names has a
+  value. That also let `purpose_plain` be deleted again: the optionality is a property of the
+  sentence, so it belongs in the sentence rather than in a second row of the table (§46).
+- **Purposes as predicates.** The new frame „Ein Browser {purpose}" exposed that `Device` was
+  written as a noun phrase — „Ein Gerät das Ding, das man in der Hand hält". Thirteen of
+  fourteen were predicates and nobody had said so; it is written down on the attribute now, and
+  `Device` became „vereint Prozessor, Speicher und Bildschirm zu einer Maschine …", which
+  teaches the part-whole relation in the same breath.
+

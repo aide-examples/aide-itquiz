@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Browser">
+  <!-- Browser — a generic pictogram, deliberately no brand mark: a product logo is a
+       trademark and a hand-drawn imitation of one would be a false fact in a system
+       whose first rule is that it stores none. -->
+  <rect x="10" y="22" width="108" height="84" rx="8" fill="#ffffff" stroke="#4338ca" stroke-width="6"/>
+  <path d="M10 44 H118" stroke="#4338ca" stroke-width="6"/>
+  <circle cx="24" cy="33" r="4" fill="#4338ca"/><circle cx="38" cy="33" r="4" fill="#4338ca"/><circle cx="52" cy="33" r="4" fill="#4338ca"/>
+  <rect x="24" y="58" width="60" height="7" rx="3.5" fill="#c7d2fe"/>
+  <rect x="24" y="74" width="80" height="7" rx="3.5" fill="#c7d2fe"/>
+  <rect x="24" y="90" width="44" height="7" rx="3.5" fill="#c7d2fe"/>
+</svg>

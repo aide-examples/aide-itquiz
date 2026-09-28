@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Operating system">
+  <!-- Operating system — a generic pictogram, deliberately no brand mark: a product logo is a
+       trademark and a hand-drawn imitation of one would be a false fact in a system
+       whose first rule is that it stores none. -->
+  <rect x="8" y="18" width="112" height="76" rx="8" fill="#ffffff" stroke="#4338ca" stroke-width="6"/>
+  <path d="M48 106 H80 M64 94 V106" stroke="#4338ca" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="64" cy="56" r="17" fill="none" stroke="#4338ca" stroke-width="7"/>
+  <g stroke="#4338ca" stroke-width="7" stroke-linecap="round">
+    <path d="M64 30 V38"/><path d="M64 74 V82"/><path d="M38 56 H46"/><path d="M82 56 H90"/>
+    <path d="M46 38 L52 44"/><path d="M76 68 L82 74"/><path d="M82 38 L76 44"/><path d="M52 68 L46 74"/>
+  </g>
+</svg>

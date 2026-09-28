@@ -3,7 +3,7 @@
     "product_type": "Browser",
     "language": "de",
     "name": "Browser",
-    "purpose": "Zeigt Webseiten an",
+    "purpose": "zeigt Webseiten an",
     "note": "Viele stellen eine Suchmaschine als Startseite des Browsers ein — daher wirken die beiden wie ein Ding",
     "gender": "m",
     "genitive": "Browsers"
@@ -12,7 +12,7 @@
     "product_type": "Search engine",
     "language": "de",
     "name": "Suchmaschine",
-    "purpose": "Führt ein Verzeichnis von Webseiten und findet Seiten darin — und ist selbst eine Website",
+    "purpose": "führt ein Verzeichnis von Webseiten und findet Seiten darin — und ist selbst eine Website",
     "note": "Man erreicht sie DURCH einen Browser, so wie man ein Geschäft durch eine Tür erreicht",
     "gender": "f"
   },
@@ -20,7 +20,7 @@
     "product_type": "Spider",
     "language": "de",
     "name": "Spider",
-    "purpose": "Geht Webseiten durch und baut daraus das Verzeichnis, das eine Suchmaschine führt",
+    "purpose": "geht Webseiten durch und baut daraus das Verzeichnis, das eine Suchmaschine führt",
     "note": "Niemand benutzt einen Spider unmittelbar; er arbeitet für die Suchmaschine, der er gehört",
     "gender": "m",
     "genitive": "Spiders"
@@ -29,7 +29,7 @@
     "product_type": "Operating system",
     "language": "de",
     "name": "Betriebssystem",
-    "purpose": "Lässt ein Gerät und die Programme darauf laufen",
+    "purpose": "lässt ein Gerät und die Programme darauf laufen",
     "gender": "n",
     "genitive": "Betriebssystems"
   },
@@ -37,7 +37,7 @@
     "product_type": "Device",
     "language": "de",
     "name": "Gerät",
-    "purpose": "Das Ding, das man in der Hand hält oder vor sich stehen hat",
+    "purpose": "vereint Prozessor, Speicher und Bildschirm zu einer Maschine, die man in der Hand hält oder vor sich stehen hat",
     "gender": "n",
     "genitive": "Geräts"
   },
@@ -45,7 +45,7 @@
     "product_type": "Word processor",
     "language": "de",
     "name": "Textprogramm",
-    "purpose": "Schreibt und gestaltet Dokumente, die als Seiten gelesen werden",
+    "purpose": "schreibt und gestaltet Dokumente, die als Seiten gelesen werden",
     "gender": "n",
     "genitive": "Textprogramms"
   },
@@ -53,14 +53,14 @@
     "product_type": "Spreadsheet",
     "language": "de",
     "name": "Tabellenkalkulation",
-    "purpose": "Hält Zahlen in einem Raster und rechnet damit",
+    "purpose": "hält Zahlen in einem Raster und rechnet damit",
     "gender": "f"
   },
   {
     "product_type": "Office suite",
     "language": "de",
     "name": "Office-Paket",
-    "purpose": "Bündelt mehrere Programme, die zusammen verkauft und installiert werden — meist ein Textprogramm, eine Tabellenkalkulation und ein Präsentationsprogramm",
+    "purpose": "bündelt mehrere Programme, die zusammen verkauft und installiert werden — meist ein Textprogramm, eine Tabellenkalkulation und ein Präsentationsprogramm",
     "gender": "n",
     "genitive": "Office-Pakets"
   },
@@ -68,7 +68,7 @@
     "product_type": "Messenger",
     "language": "de",
     "name": "Messenger",
-    "purpose": "Befördert Nachrichten zwischen Menschen, die ihn beide installiert haben",
+    "purpose": "befördert Nachrichten zwischen Menschen, die ihn beide installiert haben",
     "gender": "m",
     "genitive": "Messengers"
   },
@@ -77,7 +77,7 @@
     "language": "de",
     "name": "Prozessor",
     "gender": "m",
-    "purpose": "Führt die Schritte aus, aus denen ein Programm besteht — der Teil, der wirklich rechnet",
+    "purpose": "führt die Schritte aus, aus denen ein Programm besteht — der Teil, der wirklich rechnet",
     "genitive": "Prozessors"
   },
   {
@@ -85,7 +85,7 @@
     "language": "de",
     "name": "Arbeitsspeicher",
     "gender": "m",
-    "purpose": "Hält, woran gerade gearbeitet wird, und ist nach dem Ausschalten wieder leer",
+    "purpose": "hält, woran gerade gearbeitet wird, und ist nach dem Ausschalten wieder leer",
     "genitive": "Arbeitsspeichers"
   },
   {
@@ -93,7 +93,7 @@
     "language": "de",
     "name": "Massenspeicher",
     "gender": "m",
-    "purpose": "Bewahrt Dateien auf, sodass sie nach dem Ausschalten noch da sind",
+    "purpose": "bewahrt Dateien auf, sodass sie nach dem Ausschalten noch da sind",
     "genitive": "Massenspeichers"
   },
   {
@@ -101,7 +101,7 @@
     "language": "de",
     "name": "Bildschirm",
     "gender": "m",
-    "purpose": "Zeigt, was das Gerät ausgibt, und nimmt die Berührungen darauf als Eingabe",
+    "purpose": "zeigt, was das Gerät ausgibt, und nimmt die Berührungen darauf als Eingabe",
     "genitive": "Bildschirms"
   },
   {
@@ -109,7 +109,7 @@
     "language": "de",
     "name": "Akku",
     "gender": "m",
-    "purpose": "Speichert Strom, damit das Gerät ohne Kabel läuft",
+    "purpose": "speichert Strom, damit das Gerät ohne Kabel läuft",
     "genitive": "Akkus"
   }
 ]

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Office suite">
+  <!-- Office suite — a generic pictogram, deliberately no brand mark: a product logo is a
+       trademark and a hand-drawn imitation of one would be a false fact in a system
+       whose first rule is that it stores none. -->
+  <rect x="8" y="30" width="112" height="78" rx="9" fill="#ffffff" stroke="#4338ca" stroke-width="6"/>
+  <path d="M48 30 V20 a6 6 0 0 1 6-6 h20 a6 6 0 0 1 6 6 v10" fill="none" stroke="#4338ca" stroke-width="6"/>
+  <rect x="22" y="48" width="24" height="42" rx="3" fill="#c7d2fe"/>
+  <rect x="52" y="48" width="24" height="42" rx="3" fill="#c7d2fe"/>
+  <rect x="82" y="48" width="24" height="42" rx="3" fill="#c7d2fe"/>
+</svg>

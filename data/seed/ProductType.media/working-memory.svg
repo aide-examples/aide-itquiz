@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Working memory">
+  <!-- Working memory — a generic pictogram, deliberately no brand mark: a product logo is a
+       trademark and a hand-drawn imitation of one would be a false fact in a system
+       whose first rule is that it stores none. -->
+  <rect x="8" y="40" width="112" height="44" rx="5" fill="#ffffff" stroke="#4338ca" stroke-width="6"/>
+  <rect x="22" y="52" width="18" height="20" rx="2" fill="#c7d2fe"/>
+  <rect x="46" y="52" width="18" height="20" rx="2" fill="#c7d2fe"/>
+  <rect x="70" y="52" width="18" height="20" rx="2" fill="#c7d2fe"/>
+  <rect x="94" y="52" width="14" height="20" rx="2" fill="#c7d2fe"/>
+  <g stroke="#4338ca" stroke-width="5" stroke-linecap="round">
+    <path d="M20 84 V96"/><path d="M34 84 V96"/><path d="M48 84 V96"/><path d="M62 84 V96"/>
+    <path d="M76 84 V96"/><path d="M90 84 V96"/><path d="M104 84 V96"/>
+  </g>
+  <path d="M56 40 h16 v-8 h-16 z" fill="#4338ca"/>
+</svg>

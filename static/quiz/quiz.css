@@ -87,6 +87,18 @@ body {
   gap: 1rem;
 }
 
+/* The picture IS the question for two of the templates, so it gets the room a question gets —
+   and a fixed HEIGHT rather than a width, so a wide mark and a tall one occupy the same space
+   and the options below do not jump from one question to the next. */
+.q-image {
+  display: block;
+  height: 8rem;
+  width: auto;
+  max-width: 100%;
+  margin: 0.5rem auto 0;
+}
+.q-image[hidden] { display: none; }
+
 .q-text {
   margin: 0;
   font-size: 1.25rem;

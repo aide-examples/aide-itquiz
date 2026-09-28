@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Word processor">
+  <!-- Word processor — a generic pictogram, deliberately no brand mark: a product logo is a
+       trademark and a hand-drawn imitation of one would be a false fact in a system
+       whose first rule is that it stores none. -->
+  <rect x="24" y="10" width="80" height="108" rx="7" fill="#ffffff" stroke="#4338ca" stroke-width="6"/>
+  <rect x="38" y="32" width="52" height="7" rx="3.5" fill="#4338ca"/>
+  <rect x="38" y="50" width="52" height="6" rx="3" fill="#c7d2fe"/>
+  <rect x="38" y="64" width="52" height="6" rx="3" fill="#c7d2fe"/>
+  <rect x="38" y="78" width="52" height="6" rx="3" fill="#c7d2fe"/>
+  <rect x="38" y="92" width="30" height="6" rx="3" fill="#c7d2fe"/>
+</svg>

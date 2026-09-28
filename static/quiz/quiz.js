@@ -89,6 +89,8 @@
     $('q-explain').innerHTML = '';
     $('q-note').hidden = true;
     $('q-options').innerHTML = '';
+    $('q-image').hidden = true;
+    $('q-image').removeAttribute('src');
     $('q-text').textContent = '…';
     try {
       const r = await fetch(`${QUESTION_URL}?lang=${state.lang}`, { credentials: 'same-origin' });
@@ -104,6 +106,15 @@
   /** Draw the current question and its options. */
   function paint() {
     const q = state.question;
+    // Two templates ask with a picture instead of a sentence. The `alt` stays EMPTY on
+    // purpose: naming the thing in it would hand the answer to a screen reader, and the
+    // text beside it already says what is being asked.
+    const bild = /** @type {HTMLImageElement} */ ($('q-image'));
+    // The server names the picture relative to the APP root (`api/media/…`); this page sits
+    // two levels below it, so it prefixes exactly as the two endpoints above do. Without the
+    // prefix the browser asks for `/sys/quiz/api/media/…`, the element is there and visible
+    // and simply never paints — measured: `hidden=false`, `naturalWidth=0`, no error.
+    if (q.image) { bild.src = `../../${q.image}`; bild.hidden = false; } else { bild.hidden = true; }
     $('q-text').textContent = q.text;
     const box = $('q-options');
     box.innerHTML = '';

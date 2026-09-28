@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Device">
+  <!-- Device — a generic pictogram, deliberately no brand mark: a product logo is a
+       trademark and a hand-drawn imitation of one would be a false fact in a system
+       whose first rule is that it stores none. -->
+  <rect x="34" y="8" width="60" height="112" rx="12" fill="#ffffff" stroke="#4338ca" stroke-width="6"/>
+  <rect x="44" y="24" width="40" height="72" rx="3" fill="#c7d2fe"/>
+  <circle cx="64" cy="108" r="5" fill="#4338ca"/>
+  <rect x="54" y="14" width="20" height="4" rx="2" fill="#4338ca"/>
+</svg>
