@@ -965,7 +965,7 @@ module.exports = function registerSystemRoutes(app, deps) {
   }
 
   /**
-   * When this player last got each question RIGHT — keyed by what makes a question the same one.
+   * What this player has done with each question — keyed by what makes a question the same one.
    *
    * THE KEY IS THE TEMPLATE PLUS THE SUBJECT, not the wording. „Wofür steht DVD?" asked twice is
    * the same question even though the four options were shuffled differently; „Wofür steht DVD?"
@@ -973,27 +973,34 @@ module.exports = function registerSystemRoutes(app, deps) {
    * recognise, and it is the one the history can supply now that the subject is recorded for
    * every kind (#2).
    *
-   * Only the CORRECT answers. A wrong one is not a reason to wait — if anything the opposite,
-   * and that half is deliberately not built: the architect asked for one thing, 🇩🇪 „die
-   * Wiederholung richtig beantworteter Fragen möglichst weit hinauszuschieben", and bringing the
-   * failures forward is a second decision with its own consequences (§43).
+   * `streak` is the number of correct answers SINCE THE LAST WRONG ONE, and the „since" is what
+   * makes it usable. Counting corrects outright would call a question mastered at five wrong and
+   * two right; counting a streak says what the architect asked for — 🇩🇪 „erst bei zweimal
+   * richtig landet sie im Topf derer, die sich ganz hinten anstellen" — and handles his own
+   * example, one wrong and one right, as a streak of 1.
    *
    * @param {string} user
-   * @returns {Promise<Map<string, number>>} `template/kind/id` → the timestamp it was last right
+   * @returns {Promise<Map<string, {streak: number, wrong: number, lastAt: number}>>}
    */
-  async function lastCorrect(user) {
+  async function historyOf(user) {
     const out = new Map();
     try {
       const rows = await engine().query(
-        'SELECT template_id, subject_entity, subject_id, MAX(asked_at) AS last_at '
-        + "FROM asked_question WHERE user = ? AND quality = 'correct' AND id > 1 "
-        + 'GROUP BY template_id, subject_entity, subject_id', [user]);
+        'SELECT template_id, subject_entity, subject_id, asked_at, quality '
+        + 'FROM asked_question WHERE user = ? AND id > 1 ORDER BY asked_at ASC, id ASC', [user]);
       for (const r of rows || []) {
-        out.set(`${r.template_id}/${r.subject_entity || ''}/${r.subject_id || ''}`, Number(r.last_at) || 0);
+        const k = `${r.template_id}/${r.subject_entity || ''}/${r.subject_id || ''}`;
+        const e = out.get(k) || { streak: 0, wrong: 0, lastAt: 0 };
+        // `skipped` is neither: it moves nothing. A question shown and not answered is a
+        // different fact from one answered wrongly, which is why that enum has three values.
+        if (r.quality === 'correct') e.streak += 1;
+        else if (r.quality === 'wrong') { e.streak = 0; e.wrong += 1; }
+        e.lastAt = Math.max(e.lastAt, Number(r.asked_at) || 0);
+        out.set(k, e);
       }
     } catch (err) {
-      // An unreadable history means no spacing, not no question. The quiz is the point; the
-      // spacing is a refinement of it, and refusing to ask anything because a MAX() failed
+      // An unreadable history means no ordering, not no question. The quiz is the point; the
+      // ordering is a refinement of it, and refusing to ask anything because a query failed
       // would be the tail wagging the dog.
       theLogger.warn('itquiz: answer history unreadable, asking without spacing', { user, error: err.message });
     }
@@ -1001,18 +1008,38 @@ module.exports = function registerSystemRoutes(app, deps) {
   }
 
   /**
-   * How long ago this player last got this exact question right — `Infinity` if never.
+   * How soon this player should meet a question again — lower is sooner.
    *
-   * Infinity rather than a large number, so „never asked" always beats „asked, correctly, a very
-   * long time ago" without anybody having to pick how long a long time is.
+   * FOUR BANDS, and each one is a sentence the architect said:
    *
-   * @param {Map<string, number>} history @param {any} q - a built question
-   * @returns {number} seconds since it was last right
+   *   0  got it wrong and has not recovered — „die falschen vorzuziehen ist eine anerkannt
+   *      gute Lernstrategie"
+   *   1  never asked — new material, which is what a quiz is for
+   *   2  one wrong, then one right — „bekommt sie immer noch eine kleine Bevorzugung"
+   *   3  two right since the last wrong — „landet sie im Topf derer, die sich ganz hinten
+   *      anstellen"
+   *
+   * A NEVER-ASKED question sits ahead of a recovering one, and that is a judgement rather than
+   * a rule he gave. The reason: a player who has just started would otherwise circle the handful
+   * they got wrong while two hundred questions they have never seen wait behind. Fresh material
+   * is the larger part of learning here; the recovery is the correction.
+   *
+   * The SOFTNESS is the second half, `staleness`, applied inside every band: the failure longest
+   * ago comes before the failure just made. Two failed questions therefore alternate instead of
+   * one repeating, which is what „sanft" has to mean in practice — a question answered wrongly a
+   * moment ago is the last thing a learner needs to see again immediately.
+   *
+   * @param {Map<string, any>} history @param {any} q - a built question
+   * @returns {{band: number, staleness: number}}
    */
-  function staleness(history, q) {
+  function urgency(history, q) {
     const key = `${q._templateId}/${q.subject?.kind || ''}/${q.subject?.id || ''}`;
-    const at = history.get(key);
-    return at ? nowTs() - at : Infinity;
+    const e = history.get(key);
+    // Infinity rather than a large number, so „never asked" always beats „asked a very long
+    // time ago" without anybody having to pick how long a long time is.
+    if (!e) return { band: 1, staleness: Infinity };
+    const band = e.streak >= 2 ? 3 : e.streak === 1 ? 2 : 0;
+    return { band, staleness: nowTs() - e.lastAt };
   }
 
   /**
@@ -1068,7 +1095,7 @@ module.exports = function registerSystemRoutes(app, deps) {
         const ceiling = LEVELS.includes(String(req.query.level)) ? String(req.query.level) : me.level;
         const all = await facts();
         const f = narrow(all, ceiling);
-        const history = await lastCorrect(me.user);
+        const history = await historyOf(me.user);
 
         // SEVERAL CANDIDATES, THEN THE STALEST — rather than the first one that builds.
         //
@@ -1102,7 +1129,14 @@ module.exports = function registerSystemRoutes(app, deps) {
           if (candidates.length >= 12) break;
         }
         if (candidates.length) {
-          candidates.sort((a, b) => staleness(history, b) - staleness(history, a));
+          // Band first, then the longest-untouched inside it. Sorting on the pair rather than on
+          // a single blended number keeps the rule readable: whoever asks „why did I get THAT
+          // one?" can be answered in one sentence, which a weighted score cannot do.
+          candidates.sort((a, b) => {
+            const ua = urgency(history, a);
+            const ub = urgency(history, b);
+            return ua.band - ub.band || ub.staleness - ua.staleness;
+          });
           const { _correct, _explanation, _templateId, ...open } = candidates[0];
           return res.json({ ...open, level: ceiling, options: shuffled(candidates[0].options) });
         }
