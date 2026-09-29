@@ -307,5 +307,17 @@
     "manufacturer": "Google",
     "wikipedia_de": "de:Google Lens",
     "wikipedia_en": "en:Google Lens"
+  },
+  {
+    "name": "Apple Books",
+    "product_type": "E-book reader",
+    "manufacturer": "Apple",
+    "note": "Comes with every iPhone and Mac, which is why most people have a reader without having chosen one."
+  },
+  {
+    "name": "Adobe Digital Editions",
+    "product_type": "E-book reader",
+    "manufacturer": "Adobe",
+    "note": "The one a public library's lending service asks you to install — the reason many people meet an e-book reader at all, and meet DRM at the same time."
   }
 ]

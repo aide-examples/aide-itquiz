@@ -226,5 +226,11 @@
     "wikipedia_de": "de:Network Attached Storage",
     "wikipedia_en": "en:Network-attached storage",
     "level": "expert"
+  },
+  {
+    "name": "E-book reader",
+    "purpose": "shows a book on a screen and lets the text REFLOW to the window, so it stays readable at any size — and remembers where you stopped",
+    "group": "Document program",
+    "note": "The difference from a document viewer is the one worth knowing: a viewer shows a page exactly as it was laid out, a reader re-breaks the lines to fit whatever screen you hold. That is why a PDF on a phone means pinching and an EPUB does not."
   }
 ]

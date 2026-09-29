@@ -1108,5 +1108,15 @@
     "language": "en",
     "name": "SQL",
     "article": "an"
+  },
+  {
+    "subject_entity": "ProductType",
+    "subject_id": "E-book reader",
+    "language": "de",
+    "name": "E-Book-Reader",
+    "gender": "m",
+    "genitive": "E-Book-Readers",
+    "purpose": "zeigt ein Buch auf einem Bildschirm und lässt den Text MITFLIESSEN, damit er in jeder Größe lesbar bleibt — und merkt sich, wo man aufgehört hat",
+    "note": "Der Unterschied zum Dokumentenbetrachter ist der, den man kennen sollte: ein Betrachter zeigt eine Seite genau so, wie sie gesetzt wurde, ein Reader bricht die Zeilen neu um, passend zu dem Schirm, den man in der Hand hält. Deshalb muss man ein PDF auf dem Handy aufziehen und ein EPUB nicht."
   }
 ]
