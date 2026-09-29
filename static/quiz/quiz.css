@@ -242,7 +242,30 @@ body {
 .q-claim:hover { border-color: var(--brand); }
 .q-claim input { margin-top: 0.25rem; flex: 0 0 auto; }
 .q-claim-text { flex: 1 1 auto; }
-.q-claim-mark { flex: 0 0 auto; font-weight: 700; }
+/* The mark is the player's OWN score on that sentence, and it must not compete with the colour
+   that carries the sentence's truth — so it is monochrome on both: a white glyph in a white ring,
+   legible on the green row and on the red one alike. The colour answers „what was true?", the mark
+   answers „was I right?", and the interesting case exists only because they are separate: a false
+   statement correctly left unticked is RED and carries a TICK.
+
+   Both halves of the pair are accounted for (§49): the glyph's `color` is inherited from
+   `.q-claim.is-true` / `.is-false` above, which set it to white together with their background, so
+   nothing here depends on what another layer happens to supply. */
+.q-claim-mark {
+  flex: 0 0 auto;
+  font-weight: 700;
+  line-height: 1.15;
+  min-width: 1.35em;
+  text-align: center;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  padding: 0 0.1em;
+}
+/* A mark is shown for BOTH outcomes, because an absent one cannot be told from one that failed to
+   render (§54: silence is not a result). The one the player asked to see is the full-strength one;
+   the other is present and quiet, since the row's colour has already said it went wrong. */
+.q-claim.said-right  > .q-claim-mark { opacity: 1; }
+.q-claim.said-wrong  > .q-claim-mark { opacity: 0.55; border-style: dashed; }
 /* The SAME two colours the single-choice options use — one vocabulary for „this held" and „this
    did not", so a player who has learnt it on one question type reads it on the other without
    being taught again. Both halves of the pair are set (§49): these rows inherit their colour

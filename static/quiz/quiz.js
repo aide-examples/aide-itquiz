@@ -29,6 +29,7 @@
       // The submit for a set-answer question. It never says „wähle eine aus": nothing
       // ticked is a legitimate answer and the commonest trap.
       check: 'Prüfen',
+      youWereRight: 'Hier lagst du richtig', youWereWrong: 'Hier lagst du falsch',
       notRecorded: 'Stellvertreter-Modus: diese Antwort wird nicht mitgeschrieben.',
       failed: 'Die Antwort konnte nicht geprüft werden.',
     },
@@ -41,6 +42,7 @@
       score: (r, n) => `${r}/${n}`,
       empty: 'No question can be built right now.',
       check: 'Check',
+      youWereRight: 'You were right here', youWereWrong: 'You were wrong here',
       notRecorded: 'Impersonation: this answer is not being recorded.',
       failed: 'The answer could not be checked.',
     },
@@ -288,6 +290,9 @@
    * The server decides WHERE a reason belongs: it sends one only where the player's judgement
    * differed from the truth, so a claim they got right keeps the bare mark.
    *
+   * The row therefore carries TWO readings at once — green or red for what is true, ✓ or ✗ for
+   * whether the player got it right — and they are deliberately not the same signal.
+   *
    * @param {Array<{ok: boolean, text: string, why: string|null}>} claims
    */
   function markClaims(claims) {
@@ -298,10 +303,30 @@
     (claims || []).forEach((c, i) => {
       const row = box.querySelector(`.q-claim[data-index="${i}"]`);
       if (!row) return;
+      // TWO SIGNALS, AND THEY ARE ABOUT DIFFERENT THINGS. The COLOUR says what is true of the
+      // statement; the MARK says whether the player judged it rightly. They are independent, and
+      // the combination that only exists once they are separated is the instructive one: a FALSE
+      // statement left unticked is red — and carries a tick, because the player was right about it.
+      //
+      // Until 2026-09-29 the mark repeated the colour (`c.ok ? '✓' : '✗'`), so a tick meant „this
+      // sentence is true" and the player's own score was nowhere on the row. 🇩🇪 „ich will überall
+      // dort einen HAKEN sehen, wo ich richtig lag."
       row.classList.add(c.ok ? 'is-true' : 'is-false');
+      // What the player SAID, read from the box they ticked rather than inferred from whether a
+      // correction came back. The correction is sent only where the judgement differed, so it
+      // would work as a proxy today and would stop the day a claim has no wording to correct it
+      // with — a derivation that is right by accident (§3).
+      const cb = /** @type {HTMLInputElement|null} */ (row.querySelector('input[type=checkbox]'));
+      const said = !!(cb && cb.checked);
+      const wasRight = said === !!c.ok;
+      row.classList.add(wasRight ? 'said-right' : 'said-wrong');
       const mark = document.createElement('span');
       mark.className = 'q-claim-mark';
-      mark.textContent = c.ok ? '✓' : '✗';
+      mark.textContent = wasRight ? '✓' : '✗';
+      // The glyph is meaning that reaches the eye and nothing else; the label is what a screen
+      // reader and a hover get (§21).
+      mark.title = wasRight ? words().youWereRight : words().youWereWrong;
+      mark.setAttribute('aria-label', mark.title);
       row.prepend(mark);
       if (!c.why) return;
       const why = document.createElement('em');
