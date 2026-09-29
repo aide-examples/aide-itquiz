@@ -11,7 +11,7 @@ What one learner was asked, and how it went. One row per question shown — the 
 
 **No score, no leaderboard.** The brief is explicit, and the history exists for a different reason: so the app does not ask again what it has just asked, and so a learner can see what they keep getting wrong.
 
-**The records are held by real foreign keys, one optional column per possible target** (`subject_product`, `subject_product_type`, `subject_company`) with an `AtMostOne` constraint — RAP's polymorphic reference. Not a `kind + id` pair: that would have no referential integrity, so a deleted product would leave a log row pointing at a number, and the history would quietly start lying (see `rap:features/polymorphic-references.md`).
+**The records are held by a `kind + id` pair** — `[POLY_FK=subject_entity:subject_id]`, twice — and the chapter below says why that beat one optional foreign key per possible target. The price is named where it is paid: no foreign key stands behind `subject_id`, so a deleted record leaves a row pointing at a number, and that is checked by a detector rather than by the database (aide-rap#514). *This paragraph described the rejected design until 2026-09-29, and argued against the one that was built.*
 
 ## Why the reference is polymorphic and not six foreign keys
 
@@ -54,6 +54,3 @@ already holds — so the obstacle does not apply. It goes first, and proves the 
 ]
 ```
 
-## Constraints
-AtMostOne(subject_product, subject_product_type, subject_company)
-AtMostOne(object_product, object_product_type, object_company)
