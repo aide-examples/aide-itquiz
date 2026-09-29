@@ -70,8 +70,14 @@ beside the translated noun and not on the entity.
 **An absent row is not an error.** It means the English term is used in that language too, which
 is true of a great many IT words — „Browser", „Router", „Server". The reader gets the English
 word, correctly, because nobody translates it either. `name` and `purpose` therefore fall back to
-the referenced record; `gender` and `genitive` do not, because there is no English gender to
-inherit.
+the referenced record; `gender`, `genitive` and `article` do not, because there is no English
+gender to inherit.
+
+**An English row need not translate anything.** Fifteen of them carry a `name` identical to the
+record's and exist only for `article` — the one grammatical fact English has that cannot be
+derived (see the attribute below). That looks like a row saying nothing and is not: the row is
+where a fact about the ENGLISH word lives, and the word being the same word in both languages
+does not move it anywhere else.
 
 **Uniqueness is now a declared key**, which is the whole point of the change above:
 `uk:1` over `(subject_entity, subject_id, language)`. All three are always set, so the index is
@@ -92,6 +98,7 @@ check either — it only knows that two rows differ.
 {"name":"purpose","type":"longString","optional":true,"description":"What it is FOR, in that language, in one sentence a layperson understands. A PREDICATE and lower-case, like the English one it stands in for — it is substituted into several frames and only a predicate fits them all","example":"führt ein Verzeichnis von Webseiten und findet Seiten darin — und ist selbst eine Website"},
 {"name":"looks_like","type":"longString","optional":true,"description":"How to recognise the thing by eye, in that language. The one field here written for somebody LOOKING rather than reading, and it belongs in a translation for the same reason `purpose` does: a sentence describing a shape is prose, not a measurement","example":"eine quadratische Plastikhülle, etwa neun Zentimeter breit, mit einem verschiebbaren Metallschieber"},
 {"name":"gender","type":"Gender","optional":true,"description":"Grammatical gender of the noun, where the language has one. Both articles are derived from this one value, so „der\" and „ein\" cannot disagree about a word","example":"f"},
+{"name":"article","type":"string","optional":true,"max":10,"description":"The INDEFINITE article this word takes, where it cannot be derived. Only English needs it: German derives both articles from `gender`, while English chooses „a\" or „an\" by the SOUND of the next word — so an initialism read letter by letter takes „an XML\", „an SSD\", „an RJ45\", and one read as a word takes „a JSON\", „a USB stick\". Nothing in the model says which of the two a name is, and no rule over the letters can tell them apart. Absent means the first-letter approximation is right, which it is for most names","example":"an"},
 {"name":"genitive","type":"string","optional":true,"description":"The noun in the GENITIVE, where the language inflects it. Stored and not derived: the ending follows a rule with exceptions — „des Browsers\", „eines Office-Pakets\", but „einer Suchmaschine\" unchanged — and a rule with exceptions would put a wrong sentence in front of a learner. Absent means the name is already the genitive form, which holds for every feminine noun and for English","example":"Office-Pakets"},
 {"name":"note","type":"longString","optional":true,"description":"A true remark in that language, shown after an answer","example":"Viele stellen eine Suchmaschine als Startseite des Browsers ein — daher wirken die beiden wie ein Ding"}
 ]

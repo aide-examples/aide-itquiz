@@ -757,7 +757,8 @@
     "subject_entity": "Concept",
     "subject_id": "IP-Adresse",
     "language": "en",
-    "name": "IP address"
+    "name": "IP address",
+    "article": "an"
   },
   {
     "subject_entity": "Concept",
@@ -787,6 +788,140 @@
     "subject_entity": "Connector",
     "subject_id": "Cinch",
     "language": "en",
-    "name": "RCA"
+    "name": "RCA",
+    "article": "an"
+  },
+  {
+    "subject_entity": "FileFormat",
+    "subject_id": "ODF",
+    "language": "en",
+    "name": "ODF",
+    "article": "an"
+  },
+  {
+    "subject_entity": "FileFormat",
+    "subject_id": "HTML",
+    "language": "en",
+    "name": "HTML",
+    "article": "an"
+  },
+  {
+    "subject_entity": "FileFormat",
+    "subject_id": "MP3",
+    "language": "en",
+    "name": "MP3",
+    "article": "an"
+  },
+  {
+    "subject_entity": "FileFormat",
+    "subject_id": "MP4",
+    "language": "en",
+    "name": "MP4",
+    "article": "an"
+  },
+  {
+    "subject_entity": "FileFormat",
+    "subject_id": "EPUB",
+    "language": "en",
+    "name": "EPUB",
+    "article": "an"
+  },
+  {
+    "subject_entity": "FileFormat",
+    "subject_id": "XML",
+    "language": "en",
+    "name": "XML",
+    "article": "an"
+  },
+  {
+    "subject_entity": "Protocol",
+    "subject_id": "HTTP",
+    "language": "en",
+    "name": "HTTP",
+    "article": "an"
+  },
+  {
+    "subject_entity": "Protocol",
+    "subject_id": "HTTPS",
+    "language": "en",
+    "name": "HTTPS",
+    "article": "an"
+  },
+  {
+    "subject_entity": "Protocol",
+    "subject_id": "MQTT",
+    "language": "en",
+    "name": "MQTT",
+    "article": "an"
+  },
+  {
+    "subject_entity": "Protocol",
+    "subject_id": "SIP",
+    "language": "en",
+    "name": "SIP",
+    "article": "a"
+  },
+  {
+    "subject_entity": "Protocol",
+    "subject_id": "SMTP",
+    "language": "en",
+    "name": "SMTP",
+    "article": "an"
+  },
+  {
+    "subject_entity": "Connector",
+    "subject_id": "HDMI",
+    "language": "en",
+    "name": "HDMI",
+    "article": "an"
+  },
+  {
+    "subject_entity": "Connector",
+    "subject_id": "USB-C",
+    "language": "en",
+    "name": "USB-C",
+    "article": "a"
+  },
+  {
+    "subject_entity": "Connector",
+    "subject_id": "USB-A",
+    "language": "en",
+    "name": "USB-A",
+    "article": "a"
+  },
+  {
+    "subject_entity": "Connector",
+    "subject_id": "RJ45",
+    "language": "en",
+    "name": "RJ45",
+    "article": "an"
+  },
+  {
+    "subject_entity": "StorageMedium",
+    "subject_id": "SSD",
+    "language": "en",
+    "name": "SSD",
+    "article": "an"
+  },
+  {
+    "subject_entity": "StorageMedium",
+    "subject_id": "SD card",
+    "language": "en",
+    "name": "SD card",
+    "article": "an"
+  },
+  {
+    "subject_entity": "StorageMedium",
+    "subject_id": "USB stick",
+    "language": "en",
+    "name": "USB stick",
+    "article": "a"
+  },
+  {
+    "subject_entity": "ProductType",
+    "subject_id": "AI assistant",
+    "language": "en",
+    "name": "AI assistant",
+    "article": "an"
   }
 ]

@@ -102,6 +102,12 @@
     "note": "Which of four holds the most. The one question `capacity_mb` exists for, and the reason it is a number rather than a string: an order read off „700 MB“ and „4,7 GB“ sorts by the first digit."
   },
   {
+    "key": "storage_capacity_min",
+    "subject_kind": "StorageMedium",
+    "answer_kind": "StorageMedium",
+    "note": "The same ordering read from the other end. Its own template rather than a variant of the first, because a question type is what the repetition schedule counts — the two directions ask about different media and must not push each other to the back"
+  },
+  {
     "key": "storage_rewritable",
     "subject_kind": "StorageMedium",
     "note": "Can you write on it again? A yes/no over the property a person meets as a surprise — the RO in CD-ROM has been saying so all along and almost nobody has read it."

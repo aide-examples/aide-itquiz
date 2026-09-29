@@ -261,10 +261,16 @@ module.exports = function registerSystemRoutes(app, deps) {
     const [types, translations, products, companies, templates, phrases,
       formats, groups, protocols, connectors, concepts, supports, storages] = await Promise.all([
       eng.query('SELECT id, name, purpose, part_of_id, icon, wikipedia_de, wikipedia_en, level FROM product_type WHERE id > 1'),
-      // ONE translation table for all six translated entities, a polymorphic reference: six real
-      // FK columns with `ExactlyOne` over them. Read whole like everything else here, and indexed
-      // in `wording()` rather than queried per lookup.
-      eng.query('SELECT subject_entity, subject_id, language, name, purpose, gender, '
+      // ONE translation table for all seven translated entities, a polymorphic reference:
+      // `subject_entity` names the kind and `subject_id` the row, declared as one `[POLY_FK=…]`
+      // pair. Read whole like everything else here, and indexed in `translationOf()` rather than
+      // queried per lookup.
+      //
+      // EVERY column of it, and that is not laziness. This list has silently dropped a column
+      // once already — `storage_medium_id`, back when the table had one FK per kind — and the
+      // symptom was that every German wording fell back to English, including the gender the
+      // articles are derived from. Nothing errored; the quiz simply spoke the wrong language.
+      eng.query('SELECT subject_entity, subject_id, language, name, purpose, gender, article, '
         + 'genitive, looks_like, note FROM translation WHERE id > 1'),
       eng.query('SELECT id, name, product_type_id, manufacturer_id, icon, wikipedia_de, wikipedia_en, level FROM product WHERE id > 1'),
       eng.query('SELECT id, name, logo, wikipedia_de, wikipedia_en, level FROM company WHERE id > 1'),
@@ -416,12 +422,13 @@ module.exports = function registerSystemRoutes(app, deps) {
    * translation table of their own.
    *
    * @param {any} f @param {string} kind @param {any} record @param {string} lang
-   * @returns {{label: string, gender: string|null, genitive: string|null}}
+   * @returns {{label: string, gender: string|null, article: string|null, genitive: string|null}}
    */
   function said(f, kind, record, lang) {
     return {
       label: word(f, kind, record, lang, 'name') || '',
       gender: grammar(f, kind, record, lang, 'gender'),
+      article: grammar(f, kind, record, lang, 'article'),
       genitive: grammar(f, kind, record, lang, 'genitive'),
     };
   }
@@ -583,8 +590,13 @@ module.exports = function registerSystemRoutes(app, deps) {
     const actualLabel = (shape.actual && shape.actual(f, fmt, lang)) || '';
     // The correction names the TRUE counterpart, which needs the same grammar as the claim.
     const actualRecord = shape.role && shape.partner(f).find((x) => (shape.label(f, x, lang) || '') === actualLabel);
+    // `said` and not a bare label, because the English claim frames say „{ein_subject} {subject}
+    // file" and that article belongs to the FORMAT rather than to the noun after it: „an MP3
+    // file", „a JSON file". German does the opposite and must not be changed to match — „eine
+    // MP3-Datei" agrees with *Datei*, which is feminine whatever the format is called, so its
+    // article is rightly written into the phrase.
     return fill(frame, {
-      subject: { label: word(f, 'FileFormat', fmt, lang, 'name') },
+      subject: said(f, 'FileFormat', fmt, lang),
       answer,
       actual: actualRecord ? shape.role(f, actualRecord, lang) : { label: actualLabel },
     }, lang);
@@ -677,12 +689,16 @@ module.exports = function registerSystemRoutes(app, deps) {
 
     for (const [role, v] of Object.entries(roles)) {
       const label = v.label ?? '';
-      // English has no gender to store, and does not need one: its indefinite article
-      // follows the SOUND of the next word. The initial letter is the usual
-      // approximation and it is wrong for exactly the cases this system does not have
-      // (an hour, a university) — when one turns up, that is the moment to store it,
-      // not before.
-      const a = v.gender ? INDEFINITE[v.gender] : (lang === 'en' && label ? (/^[aeiou]/i.test(label) ? 'an' : 'a') : '');
+      // English has no gender, and its indefinite article follows the SOUND of the next word
+      // rather than its spelling. The initial letter is the usual approximation; it said „A XML
+      // file" and „an USB stick" (#6), because an initialism read letter by letter takes its
+      // article from the LETTER'S NAME — ex, em, ess, aitch all open with a vowel; you does not.
+      //
+      // So the stored value wins where there is one, and the approximation stays for everything
+      // else. GENDER still wins over both: German derives „der" and „ein" from that one value, so
+      // a stored article there could disagree with the definite one about the same word.
+      const a = v.gender ? INDEFINITE[v.gender]
+        : (v.article || (lang === 'en' && label ? (/^[aeiou]/i.test(label) ? 'an' : 'a') : ''));
       const der = v.gender ? DEFINITE[v.gender] : (lang === 'en' && label ? 'the' : '');
       // English inflects neither, so the genitive placeholder renders „a word processor"
       // there — one phrase, both languages.
@@ -1075,20 +1091,31 @@ module.exports = function registerSystemRoutes(app, deps) {
       };
     }
 
-    if (template.key === 'storage_capacity') {
-      // Four media, and the one that holds the most is the answer. `capacity_mb` earns its
+    if (template.key === 'storage_capacity' || template.key === 'storage_capacity_min') {
+      // Four media, and the one at one END of the ordering is the answer. `capacity_mb` earns its
       // numeric type here and only here: the comparison IS the question.
+      //
+      // BOTH DIRECTIONS FROM ONE BLOCK, and the reason is not brevity. Asking only for the largest
+      // yielded 5 distinct questions out of 8 media (#3): hard disk and SSD are bigger than
+      // everything else, so one of them was the answer in nearly every draw and six media were
+      // subjects only when neither happened to be drawn. Inverting the ordering makes the floppy
+      // disk and the CD-ROM the interesting end, and every step of it — the tie refusal, the
+      // runner-up, the verdict — is the same step read the other way round.
+      const least = template.key === 'storage_capacity_min';
+      /** The one of two that is further towards the end this template asks about. */
+      const nearer = (a, b) => (least
+        ? (Number(b.capacity_mb) < Number(a.capacity_mb) ? b : a)
+        : (Number(b.capacity_mb) > Number(a.capacity_mb) ? b : a));
       const pool = f.storages.filter((x) => Number(x.capacity_mb) > 0);
       if (pool.length < 4) return null;
       const four = sample(pool, 4);
-      const right = four.reduce((a, b) => (Number(b.capacity_mb) > Number(a.capacity_mb) ? b : a));
+      const right = four.reduce(nearer);
       // A tie would make two options right. It cannot happen on today's data and would be a
       // silent defect if it ever did, so it is refused rather than resolved (§3).
       if (four.filter((x) => Number(x.capacity_mb) === Number(right.capacity_mb)).length > 1) return null;
       // The RUNNER-UP travels in the explanation, because „4,7 GB" alone says nothing to
       // somebody who does not already know what a DVD holds. Two numbers are a comparison.
-      const second = four.filter((x) => x.id !== right.id)
-        .reduce((a, b) => (Number(b.capacity_mb) > Number(a.capacity_mb) ? b : a));
+      const second = four.filter((x) => x.id !== right.id).reduce(nearer);
       return {
         template: template.key, language: lang,
         subject: { kind: 'StorageMedium', id: right.id },
@@ -1794,18 +1821,22 @@ module.exports = function registerSystemRoutes(app, deps) {
       };
     }
 
-    if (template.key === 'storage_capacity') {
+    if (template.key === 'storage_capacity' || template.key === 'storage_capacity_min') {
+      const least = template.key === 'storage_capacity_min';
       // The subject IS the right answer — `build` put it there, because which four were offered
       // is the one thing this cannot recompute. What it DOES recompute is the capacity and the
       // wording, so a changed number reaches the verdict without a second path.
       const right = f.storages.find((x) => x.id === (subject && subject.id));
       if (!right) return null;
-      // The runner-up the QUESTION named, not the biggest one left in the inventory. It is
-      // checked rather than trusted — `object` arrives from the client — and a value that is not
-      // smaller than the answer is dropped instead of printed.
+      // The runner-up the QUESTION named, not the one at that end of the whole inventory. It is
+      // checked rather than trusted — `object` arrives from the client — and a value on the wrong
+      // SIDE of the answer is dropped instead of printed, or the comparison contradicts the
+      // verdict it is supposed to support: „holds the most: 1 TB. For comparison: 2 TB."
       const named = object && f.storages.find((x) => x.id === object.id);
-      const second = named && Number(named.capacity_mb) > 0
-        && Number(named.capacity_mb) < Number(right.capacity_mb) ? named : null;
+      const beyond = named && (least
+        ? Number(named.capacity_mb) > Number(right.capacity_mb)
+        : Number(named.capacity_mb) < Number(right.capacity_mb));
+      const second = named && Number(named.capacity_mb) > 0 && beyond ? named : null;
       return {
         correct: word(f, 'StorageMedium', right, lang, 'name'),
         ...context([['StorageMedium', right]], lang),
@@ -1900,7 +1931,14 @@ module.exports = function registerSystemRoutes(app, deps) {
         const existing = await engine().query('SELECT id FROM player WHERE user = ?', [user]);
         const patch = { ...(level ? { level } : {}), ...(language ? { language } : {}) };
         if (existing && existing[0]) {
-          await theGenericService.updateEntity('Player', existing[0].id, patch, context);
+          // THE FOURTH ARGUMENT IS `expectedVersion`, NOT the context — `createEntity` takes it
+          // third and `updateEntity` takes it fifth, and passing the context in the version slot
+          // failed in the two ways such a mistake always does: the optimistic-locking check
+          // compared the row's version against an OBJECT and refused every write („expected
+          // version [object Object]"), while the context it was supposed to carry never arrived,
+          // so the audit entry would have had no actor either. `null` is the deliberate value
+          // here: the player's own settings have one writer and nothing to lose a race with.
+          await theGenericService.updateEntity('Player', existing[0].id, patch, null, context);
         } else {
           await theGenericService.createEntity('Player', { user, ...patch }, context);
         }

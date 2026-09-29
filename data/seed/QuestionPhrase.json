@@ -165,7 +165,7 @@
     "template": "format_group",
     "language": "en",
     "text": "What kind of format is {subject}?",
-    "explanation": "{subject} is a {answer}.\n*What that kind does:* {purpose}."
+    "explanation": "{subject} is {ein_answer} {answer}.\n*What that kind does:* {purpose}."
   },
   {
     "template": "concept_part_of",
@@ -202,6 +202,18 @@
     "language": "en",
     "text": "Which of these holds the most?",
     "explanation": "{answer} holds the most: {capacity}.[[ For comparison {other}: {other_capacity}.]]"
+  },
+  {
+    "template": "storage_capacity_min",
+    "language": "de",
+    "text": "Auf welches davon passt am wenigsten?",
+    "explanation": "{Der_answer} {answer} fasst am wenigsten: {capacity}.[[ Zum Vergleich {der_other} {other}: {other_capacity}.]]"
+  },
+  {
+    "template": "storage_capacity_min",
+    "language": "en",
+    "text": "Which of these holds the least?",
+    "explanation": "{answer} holds the least: {capacity}.[[ For comparison {other}: {other_capacity}.]]"
   },
   {
     "template": "storage_rewritable",
@@ -260,8 +272,8 @@
   {
     "template": "claim_ext",
     "language": "en",
-    "text": "A {subject} file ends in {answer}.",
-    "explanation": "A {subject} file does not end in {answer}[[ — it ends in {actual}]]."
+    "text": "{ein_subject} {subject} file ends in {answer}.",
+    "explanation": "{ein_subject} {subject} file does not end in {answer}[[ — it ends in {actual}]]."
   },
   {
     "template": "claim_opens",
@@ -272,8 +284,8 @@
   {
     "template": "claim_opens",
     "language": "en",
-    "text": "{answer} can open a {subject} file.",
-    "explanation": "{answer} cannot open a {subject} file[[ — {actual} can]]."
+    "text": "{answer} can open {ein_subject} {subject} file.",
+    "explanation": "{answer} cannot open {ein_subject} {subject} file[[ — {actual} can]]."
   },
   {
     "template": "claim_edits",
@@ -284,8 +296,8 @@
   {
     "template": "claim_edits",
     "language": "en",
-    "text": "{answer} can edit a {subject} file.",
-    "explanation": "{answer} cannot edit a {subject} file[[ — {actual} can]]."
+    "text": "{answer} can edit {ein_subject} {subject} file.",
+    "explanation": "{answer} cannot edit {ein_subject} {subject} file[[ — {actual} can]]."
   },
   {
     "template": "claim_stands",
