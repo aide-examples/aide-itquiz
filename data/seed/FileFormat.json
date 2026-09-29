@@ -17,7 +17,8 @@
     "wikipedia_de": "de:OpenDocument",
     "wikipedia_en": "en:OpenDocument",
     "note": "The extension says .odt for a text and .ods for a spreadsheet — one family, several endings, which is why the family has its own name",
-    "group": "Dokumentformat"
+    "group": "Dokumentformat",
+    "level": "advanced"
   },
   {
     "name": "DOCX",
@@ -27,7 +28,8 @@
     "wikipedia_de": "de:Office Open XML",
     "wikipedia_en": "en:Office Open XML",
     "note": "The x at the end arrived in 2007 and means the file is a zipped folder of XML — the older .doc was one opaque lump, which is why old files sometimes will not open",
-    "group": "Dokumentformat"
+    "group": "Dokumentformat",
+    "level": "advanced"
   },
   {
     "name": "HTML",
@@ -37,7 +39,8 @@
     "wikipedia_de": "de:Hypertext Markup Language",
     "wikipedia_en": "en:HTML",
     "note": "A file a person almost never has on their own machine and meets constantly all the same: every page in the browser is one, delivered rather than stored",
-    "group": "Auszeichnungssprache"
+    "group": "Auszeichnungssprache",
+    "level": "advanced"
   },
   {
     "name": "JPEG",
@@ -87,7 +90,8 @@
     "wikipedia_de": "de:CSV (Dateiformat)",
     "wikipedia_en": "en:Comma-separated values",
     "note": "The comma is in the name and is a semicolon in half of Europe, because the comma is already the decimal point there — the commonest reason a CSV opens as one long column",
-    "group": "Tabellenformat"
+    "group": "Tabellenformat",
+    "level": "advanced"
   },
   {
     "name": "EPUB",
@@ -97,7 +101,8 @@
     "wikipedia_de": "de:EPUB",
     "wikipedia_en": "en:EPUB",
     "note": "The difference from a PDF is the whole point: a PDF keeps the page, an EPUB keeps the text and lets the page follow the screen",
-    "group": "Dokumentformat"
+    "group": "Dokumentformat",
+    "level": "advanced"
   },
   {
     "name": "XML",
@@ -107,7 +112,19 @@
     "purpose": "holds data together with marks naming what each piece is, in a way both a person and a program can read",
     "wikipedia_de": "de:Extensible Markup Language",
     "wikipedia_en": "en:XML",
-    "note": "HTML's sibling and the reason DOCX and ODF end in an x or are called Open: inside, both are folders of XML in a ZIP"
+    "note": "HTML's sibling and the reason DOCX and ODF end in an x or are called Open: inside, both are folders of XML in a ZIP",
+    "level": "expert"
+  },
+  {
+    "name": "JSON",
+    "extension": ".json",
+    "long_name": "JavaScript Object Notation",
+    "group": "Auszeichnungssprache",
+    "purpose": "holds data as nested lists and name-value pairs, in a form a program reads quickly and a person can still follow",
+    "wikipedia_de": "de:JavaScript Object Notation",
+    "wikipedia_en": "en:JSON",
+    "note": "XML's younger rival and the one that won: the same job with far less punctuation. Almost everything a browser fetches from a server today arrives as JSON",
+    "level": "expert"
   },
   {
     "name": "ZIP",
@@ -127,6 +144,7 @@
     "purpose": "makes ONE file smaller, and nothing else — no folder, no second file",
     "wikipedia_de": "de:Gzip",
     "wikipedia_en": "en:Gzip",
-    "note": "Which is why one so often meets `.tar.gz`: the tar puts the files into one, the gz makes that one small. Two steps where ZIP does both, and the reason the ending has two parts"
+    "note": "Which is why one so often meets `.tar.gz`: the tar puts the files into one, the gz makes that one small. Two steps where ZIP does both, and the reason the ending has two parts",
+    "level": "expert"
   }
 ]

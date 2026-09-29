@@ -36,6 +36,7 @@ so the asymmetry reads as a decision rather than an oversight.
 {"name":"purpose","type":"longString","description":"What the formats in this group are FOR, in one sentence — the thing worth carrying to the next format one meets. A PREDICATE and lower-case, like every other purpose in this model","example":"holds a picture, as a photograph or as a drawing"},
 {"name":"wikipedia_de","type":"wikipedia","optional":true,"description":"The German Wikipedia article — a TITLE, verified against the API rather than guessed","example":"Grafikformat"},
 {"name":"wikipedia_en","type":"wikipedia","optional":true,"description":"The English article. Separate from the German one because an article title is an identifier in another system, not a translation","example":"Image file format"},
+{"name":"level","type":"Level","default":"basic","description":"How far into the subject this record sits. `default` and therefore OPTIONAL on purpose: the seed then marks only what is NOT everyday, which keeps the classification of ~140 records readable as a diff and makes the safe direction the free one — a new record counts as basic and a beginner meets it","example":"expert"},
 {"name":"note","type":"longString","optional":true,"description":"A true remark worth showing after an answer, including how this group is commonly misunderstood","example":"The split people actually meet is inside this group: a photo is a JPEG and a logo is a PNG, and almost nobody has been told why"}
 ]
 ```

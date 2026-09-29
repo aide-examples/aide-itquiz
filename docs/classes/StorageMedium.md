@@ -44,6 +44,7 @@ SD card.
 {"name":"icon","type":"media","optional":true,"mime":"img","description":"A picture of the thing — the fastest way to recognise one, and the reason this entity was asked for","example":"dvd.jpg"},
 {"name":"wikipedia_de","type":"wikipedia","optional":true,"description":"The German Wikipedia article — a TITLE, verified against the API rather than guessed","example":"DVD"},
 {"name":"wikipedia_en","type":"wikipedia","optional":true,"description":"The English article. Separate from the German one because an article title is an identifier in another system, not a translation","example":"DVD"},
+{"name":"level","type":"Level","default":"basic","description":"How far into the subject this record sits. `default` and therefore OPTIONAL on purpose: the seed then marks only what is NOT everyday, which keeps the classification of ~140 records readable as a diff and makes the safe direction the free one — a new record counts as basic and a beginner meets it","example":"expert"},
 {"name":"note","type":"longString","optional":true,"description":"A true remark worth showing after an answer, including how this one is commonly misunderstood","example":"The RO in CD-ROM means read-only, and it is the reason a music CD cannot be recorded over — a distinction the word „CD\" alone hides"}
 ]
 ```

@@ -51,6 +51,7 @@ of whom, about which records, and how it went.
 
 | Entity | Description |
 |--------|-------------|
+| [Player](classes/Player.md) | One person's settings — the level of question they want and the language they play in. A setting and not an account: RAP owns the identity, this holds what the quiz needs to know. An absent row means the defaults, which is what a first-time visitor should get. |
 | [AskedQuestion](classes/AskedQuestion.md) | Written by the system route, never through CRUD — the owner comes from the session, so one player cannot reach another's history. |
 </div>
 

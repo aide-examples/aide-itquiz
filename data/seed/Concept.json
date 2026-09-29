@@ -17,7 +17,8 @@
     "example": "mailto:info@example.com",
     "wikipedia_de": "de:Uniform Resource Identifier",
     "wikipedia_en": "en:Uniform Resource Identifier",
-    "note": "The pair people cannot keep apart, and the difference is one word: a URI says WHAT, a URL also says WHERE. Every URL is a URI; almost nobody needs the distinction and almost everybody has seen both letters"
+    "note": "The pair people cannot keep apart, and the difference is one word: a URI says WHAT, a URL also says WHERE. Every URL is a URI; almost nobody needs the distinction and almost everybody has seen both letters",
+    "level": "expert"
   },
   {
     "name": "Domain",
@@ -26,7 +27,8 @@
     "part_of": "Webadresse",
     "wikipedia_de": "de:Domain (Internet)",
     "wikipedia_en": "en:Domain name",
-    "note": "People say „Website\" for it and the two are not the same: the domain is the name, the website is what stands at it. One can be sold without the other, which is a whole industry"
+    "note": "People say „Website\" for it and the two are not the same: the domain is the name, the website is what stands at it. One can be sold without the other, which is a whole industry",
+    "level": "advanced"
   },
   {
     "name": "Top-Level-Domain",
@@ -36,7 +38,8 @@
     "part_of": "Domain",
     "wikipedia_de": "de:Top-Level-Domain",
     "wikipedia_en": "en:Top-level domain",
-    "note": "„.de heißt deutsche Firma\" is the common reading and it is not true: anybody may buy one, and a .com may sit in Hamburg. The ending says where the name was registered, never where anything is"
+    "note": "„.de heißt deutsche Firma\" is the common reading and it is not true: anybody may buy one, and a .com may sit in Hamburg. The ending says where the name was registered, never where anything is",
+    "level": "advanced"
   },
   {
     "name": "IP-Adresse",
@@ -45,7 +48,8 @@
     "example": "185.15.59.224",
     "wikipedia_de": "de:IP-Adresse",
     "wikipedia_en": "en:IP address",
-    "note": "The number under every name. A domain exists because people do not remember numbers, which is the entire reason the two are separate things"
+    "note": "The number under every name. A domain exists because people do not remember numbers, which is the entire reason the two are separate things",
+    "level": "advanced"
   },
   {
     "name": "Socket",
@@ -53,7 +57,8 @@
     "example": "185.15.59.224:443",
     "wikipedia_de": "de:Socket (Software)",
     "wikipedia_en": "en:Network socket",
-    "note": "Filed as a protocol by habit and it is not one: a socket is an endpoint, a protocol is the agreement about what is said once two are joined"
+    "note": "Filed as a protocol by habit and it is not one: a socket is an endpoint, a protocol is the agreement about what is said once two are joined",
+    "level": "expert"
   },
   {
     "name": "VOIP",
@@ -61,7 +66,8 @@
     "purpose": "is telephoning over the internet instead of over a telephone line",
     "wikipedia_de": "de:IP-Telefonie",
     "wikipedia_en": "en:Voice over IP",
-    "note": "Said as if it were a protocol; the protocols under it are SIP, which arranges the call, and RTP, which carries the voice. The architect named the mechanism behind such words: one reaches for the roomier drawer because it is quicker"
+    "note": "Said as if it were a protocol; the protocols under it are SIP, which arranges the call, and RTP, which carries the voice. The architect named the mechanism behind such words: one reaches for the roomier drawer because it is quicker",
+    "level": "advanced"
   },
   {
     "name": "Lokales Netz",
@@ -71,6 +77,7 @@
     "example": "der Router, der Drucker und zwei Laptops in einer Wohnung",
     "wikipedia_de": "de:Local Area Network",
     "wikipedia_en": "en:Local area network",
-    "note": "Not a protocol and not a thing you can buy: it is the BOUNDARY, the answer to „which machines are on my side of the router?\". Ethernet and WLAN are the two ways of being on it"
+    "note": "Not a protocol and not a thing you can buy: it is the BOUNDARY, the answer to „which machines are on my side of the router?\". Ethernet and WLAN are the two ways of being on it",
+    "level": "advanced"
   }
 ]

@@ -254,31 +254,74 @@ module.exports = function registerSystemRoutes(app, deps) {
     const eng = engine();
     const [types, translations, products, companies, templates, phrases,
       formats, groups, protocols, connectors, concepts, supports, storages] = await Promise.all([
-      eng.query('SELECT id, name, purpose, part_of_id, icon, wikipedia_de, wikipedia_en FROM product_type WHERE id > 1'),
+      eng.query('SELECT id, name, purpose, part_of_id, icon, wikipedia_de, wikipedia_en, level FROM product_type WHERE id > 1'),
       // ONE translation table for all six translated entities, a polymorphic reference: six real
       // FK columns with `ExactlyOne` over them. Read whole like everything else here, and indexed
       // in `wording()` rather than queried per lookup.
       eng.query('SELECT product_type_id, file_format_id, format_group_id, protocol_id, '
         + 'connector_id, concept_id, storage_medium_id, language, name, purpose, gender, '
         + 'genitive, looks_like, note FROM translation WHERE id > 1'),
-      eng.query('SELECT id, name, product_type_id, manufacturer_id, icon, wikipedia_de, wikipedia_en FROM product WHERE id > 1'),
-      eng.query('SELECT id, name, logo, wikipedia_de, wikipedia_en FROM company WHERE id > 1'),
+      eng.query('SELECT id, name, product_type_id, manufacturer_id, icon, wikipedia_de, wikipedia_en, level FROM product WHERE id > 1'),
+      eng.query('SELECT id, name, logo, wikipedia_de, wikipedia_en, level FROM company WHERE id > 1'),
       eng.query('SELECT id, key, subject_kind, object_kind, answer_kind FROM question_template WHERE id > 1'),
       eng.query('SELECT template_id, language, text, explanation FROM question_phrase WHERE id > 1'),
       // The standards and the notions, added 2026-09-28. Each is small and read whole, for the
       // same reason the first four are: a quiz that grew to thousands of rows would want a
       // different picker anyway, not a cached one.
-      eng.query('SELECT id, name, extension, long_name, group_id, purpose, icon, wikipedia_de, wikipedia_en FROM file_format WHERE id > 1'),
-      eng.query('SELECT id, name, purpose, wikipedia_de, wikipedia_en FROM format_group WHERE id > 1'),
-      eng.query('SELECT id, name, long_name, purpose, wikipedia_de, wikipedia_en FROM protocol WHERE id > 1'),
-      eng.query('SELECT id, name, long_name, purpose, looks_like, icon, wikipedia_de, wikipedia_en FROM connector WHERE id > 1'),
-      eng.query('SELECT id, name, abbreviation, long_name, purpose, example, part_of_id, wikipedia_de, wikipedia_en FROM concept WHERE id > 1'),
+      eng.query('SELECT id, name, extension, long_name, group_id, purpose, icon, wikipedia_de, wikipedia_en, level FROM file_format WHERE id > 1'),
+      eng.query('SELECT id, name, purpose, wikipedia_de, wikipedia_en, level FROM format_group WHERE id > 1'),
+      eng.query('SELECT id, name, long_name, purpose, wikipedia_de, wikipedia_en, level FROM protocol WHERE id > 1'),
+      eng.query('SELECT id, name, long_name, purpose, looks_like, icon, wikipedia_de, wikipedia_en, level FROM connector WHERE id > 1'),
+      eng.query('SELECT id, name, abbreviation, long_name, purpose, example, part_of_id, wikipedia_de, wikipedia_en, level FROM concept WHERE id > 1'),
       eng.query('SELECT product_id, format_id, support FROM format_support WHERE id > 1'),
       eng.query('SELECT id, name, long_name, purpose, looks_like, capacity_mb, rewritable, icon, '
-        + 'wikipedia_de, wikipedia_en, note FROM storage_medium WHERE id > 1'),
+        + 'level, wikipedia_de, wikipedia_en, note FROM storage_medium WHERE id > 1'),
     ]);
     return { types, translations, products, companies, templates, phrases,
       formats, groups, protocols, connectors, concepts, supports, storages };
+  }
+
+  /**
+   * The levels, in order. The order IS the comparison — `LEVELS.indexOf` is how a ceiling is
+   * checked — and it must match the row order of the `Level` enum in Types.md, because that is
+   * what RAP sorts the enum by. Two orders for one idea would disagree the first time a fourth
+   * level was inserted anywhere but at the end.
+   */
+  const LEVELS = ['basic', 'advanced', 'expert'];
+
+  /**
+   * How far into the subject a record sits — `basic` for anything unsaid.
+   *
+   * Absent means basic, and that is the DECLARED default rather than a guess: the attribute
+   * carries `"default":"basic"`, so the seed marks only what is not everyday and a record nobody
+   * has thought about is met by a beginner. The safe direction is the free one.
+   *
+   * @param {any} record
+   * @returns {string}
+   */
+  function levelOf(record) {
+    const v = record && record.level;
+    return LEVELS.includes(v) ? v : 'basic';
+  }
+
+  /**
+   * Is a question built from these records within a player's ceiling?
+   *
+   * THE HIGHEST RECORD WINS, which is the whole rule: a question is as hard as the hardest thing
+   * it names. „Wofür steht PDF?" and „Wofür steht SIP?" come from one template and are not the
+   * same question, and no amount of levelling the templates would have said so.
+   *
+   * A CEILING and not a band. Somebody who picks `expert` still meets Browser and DVD — a quiz
+   * that asked only hard questions would teach nothing about how the easy and the hard connect,
+   * which for this subject matter is most of the point.
+   *
+   * @param {string} ceiling - the player's chosen level
+   * @param {...any} records - every record the question names; nulls are ignored
+   * @returns {boolean}
+   */
+  function withinLevel(ceiling, ...records) {
+    const max = Math.max(0, ...records.filter(Boolean).map((r) => LEVELS.indexOf(levelOf(r))));
+    return max <= LEVELS.indexOf(LEVELS.includes(ceiling) ? ceiling : 'basic');
   }
 
   /**
@@ -375,6 +418,45 @@ module.exports = function registerSystemRoutes(app, deps) {
       label: word(f, kind, record, lang, 'name') || '',
       gender: grammar(f, kind, record, lang, 'gender'),
       genitive: grammar(f, kind, record, lang, 'genitive'),
+    };
+  }
+
+  /**
+   * The facts as a player at one level may meet them.
+   *
+   * FILTERED BEFORE THE QUESTION IS BUILT, not after it, and that is the difference between two
+   * quite different features. Checking afterwards would keep an expert term out of the ANSWER
+   * and let it stand in the OPTIONS — and a beginner asked to choose between Browser, Spider,
+   * Socket and SIP has already been told the subject is not for them, whichever one is right.
+   *
+   * It also means no branch knows about levels. Twenty of them build questions out of these
+   * pools; none had to learn a new rule, and the twenty-first will not either (§17).
+   *
+   * The three tables that are NOT filtered are the ones that are not subject matter: the
+   * translations, the templates and their phrases, and `format_support`, which is a relation
+   * between two records that are themselves filtered.
+   *
+   * @param {any} f - the facts
+   * @param {string} ceiling - the player's chosen level
+   * @returns {any} the same shape, with every askable pool narrowed
+   */
+  function narrow(f, ceiling) {
+    const keep = (rows) => (rows || []).filter((r) => withinLevel(ceiling, r));
+    return {
+      ...f,
+      types: keep(f.types),
+      products: keep(f.products),
+      companies: keep(f.companies),
+      formats: keep(f.formats),
+      groups: keep(f.groups),
+      protocols: keep(f.protocols),
+      connectors: keep(f.connectors),
+      concepts: keep(f.concepts),
+      storages: keep(f.storages),
+      // The index is rebuilt lazily by `translationOf`, and it must not travel from the unnarrowed
+      // copy — it is keyed by record id, so it would still be correct, but sharing a mutable cache
+      // between two views of the facts is the kind of thing that is correct until it is not.
+      _byTranslationKey: undefined,
     };
   }
 
@@ -882,6 +964,83 @@ module.exports = function registerSystemRoutes(app, deps) {
     return null;
   }
 
+  /**
+   * When this player last got each question RIGHT — keyed by what makes a question the same one.
+   *
+   * THE KEY IS THE TEMPLATE PLUS THE SUBJECT, not the wording. „Wofür steht DVD?" asked twice is
+   * the same question even though the four options were shuffled differently; „Wofür steht DVD?"
+   * and „Wofür steht SSD?" are two, from one template. That is the identity a learner would
+   * recognise, and it is the one the history can supply now that the subject is recorded for
+   * every kind (#2).
+   *
+   * Only the CORRECT answers. A wrong one is not a reason to wait — if anything the opposite,
+   * and that half is deliberately not built: the architect asked for one thing, 🇩🇪 „die
+   * Wiederholung richtig beantworteter Fragen möglichst weit hinauszuschieben", and bringing the
+   * failures forward is a second decision with its own consequences (§43).
+   *
+   * @param {string} user
+   * @returns {Promise<Map<string, number>>} `template/kind/id` → the timestamp it was last right
+   */
+  async function lastCorrect(user) {
+    const out = new Map();
+    try {
+      const rows = await engine().query(
+        'SELECT template_id, subject_entity, subject_id, MAX(asked_at) AS last_at '
+        + "FROM asked_question WHERE user = ? AND quality = 'correct' AND id > 1 "
+        + 'GROUP BY template_id, subject_entity, subject_id', [user]);
+      for (const r of rows || []) {
+        out.set(`${r.template_id}/${r.subject_entity || ''}/${r.subject_id || ''}`, Number(r.last_at) || 0);
+      }
+    } catch (err) {
+      // An unreadable history means no spacing, not no question. The quiz is the point; the
+      // spacing is a refinement of it, and refusing to ask anything because a MAX() failed
+      // would be the tail wagging the dog.
+      theLogger.warn('itquiz: answer history unreadable, asking without spacing', { user, error: err.message });
+    }
+    return out;
+  }
+
+  /**
+   * How long ago this player last got this exact question right — `Infinity` if never.
+   *
+   * Infinity rather than a large number, so „never asked" always beats „asked, correctly, a very
+   * long time ago" without anybody having to pick how long a long time is.
+   *
+   * @param {Map<string, number>} history @param {any} q - a built question
+   * @returns {number} seconds since it was last right
+   */
+  function staleness(history, q) {
+    const key = `${q._templateId}/${q.subject?.kind || ''}/${q.subject?.id || ''}`;
+    const at = history.get(key);
+    return at ? nowTs() - at : Infinity;
+  }
+
+  /**
+   * The settings of whoever is asking — their level and their language.
+   *
+   * An ABSENT ROW IS NOT AN ERROR: it means the defaults, which is exactly what a first-time
+   * visitor should get. Nobody is given a row for logging in; a row appears when somebody
+   * changes something, which is the only moment there is anything to remember.
+   *
+   * @param {any} req
+   * @returns {Promise<{user: string, level: string, language: string|null}>}
+   */
+  async function playerOf(req) {
+    const user = String(req.user?.username || req.user?.role || 'anonymous');
+    try {
+      const rows = await engine().query('SELECT user, level, language FROM player WHERE user = ?', [user]);
+      const row = rows && rows[0];
+      return { user, level: LEVELS.includes(row?.level) ? row.level : 'basic', language: row?.language || null };
+    } catch (err) {
+      // A missing table (before the migration) or a locked database must not stop the quiz: the
+      // defaults are a complete answer, and refusing to hand out a question because a SETTING
+      // could not be read would be the tail wagging the dog (§3 — this is not a silent omission,
+      // the level simply has a documented default).
+      theLogger.warn('itquiz: player settings unreadable, using defaults', { user, error: err.message });
+      return { user, level: 'basic', language: null };
+    }
+  }
+
   /** Shuffle in place — the right answer must not always be first. */
   function shuffled(options) {
     const a = options.slice();
@@ -901,15 +1060,51 @@ module.exports = function registerSystemRoutes(app, deps) {
     authMiddleware, requireEntityVerb('ProductType', 'r'),
     async (req, res) => {
       try {
-        const lang = String(req.query.lang || 'en');
-        const f = await facts();
-        // Try the templates in random order — one of them may have no instance
-        // in today's facts, and that must not turn into an empty page.
+        const me = await playerOf(req);
+        const lang = String(req.query.lang || me.language || 'en');
+        // The URL may override the stored level, which is what makes the selector on the page
+        // work before anything is saved — and what lets somebody try a harder question without
+        // committing to it.
+        const ceiling = LEVELS.includes(String(req.query.level)) ? String(req.query.level) : me.level;
+        const all = await facts();
+        const f = narrow(all, ceiling);
+        const history = await lastCorrect(me.user);
+
+        // SEVERAL CANDIDATES, THEN THE STALEST — rather than the first one that builds.
+        //
+        // The loop still walks the templates in random order, because one of them may have no
+        // instance in today's facts and that must not turn into an empty page. What changed is
+        // that it no longer STOPS at the first success: it collects a handful and then prefers
+        // the question this player has least recently answered correctly.
+        //
+        // TWELVE, and the number was measured rather than argued. With six, a player who had
+        // answered ninety-five questions correctly got the 4th-oldest back rather than the
+        // oldest: the true oldest simply was not among the six drawn. Building is nearly free —
+        // a whole request with twelve candidates takes about 6 ms, because the facts are already
+        // in memory and a candidate is a sample out of them — so the pool can afford to be wide
+        // enough that the choice is a real one.
+        //
+        // It is still a SAMPLE and not the whole set, deliberately: scoring every buildable
+        // question would mean building every buildable question on every request, for a
+        // refinement of the order in which they come.
+        //
+        // Never-right beats long-ago-right, without anybody choosing how long a long time is:
+        // `staleness` answers `Infinity` for a question this player has never got right, which
+        // includes every question they have never seen.
+        const candidates = [];
         for (const template of shuffled(f.templates)) {
           const q = build(f, template, lang);
           if (!q) continue;
-          const { _correct, _explanation, ...open } = q;
-          return res.json({ ...open, options: shuffled(q.options) });
+          // The template id travels on the built question so the history can be keyed without
+          // `build` having to know that a history exists.
+          q._templateId = template.id;
+          candidates.push(q);
+          if (candidates.length >= 12) break;
+        }
+        if (candidates.length) {
+          candidates.sort((a, b) => staleness(history, b) - staleness(history, a));
+          const { _correct, _explanation, _templateId, ...open } = candidates[0];
+          return res.json({ ...open, level: ceiling, options: shuffled(candidates[0].options) });
         }
         return res.status(503).json({ error: 'no question can be built from the facts on record' });
       } catch (err) {
@@ -944,10 +1139,26 @@ module.exports = function registerSystemRoutes(app, deps) {
 
   /** The two records a question was about, as the log's polymorphic columns spell them. */
   function roleColumns(subject, object) {
-    const col = (role, r) => (r ? { Product: `${role}_product_id`, ProductType: `${role}_product_type_id`, Company: `${role}_company_id` }[r.kind] : null);
+    // TWO COLUMNS PER ROLE, and any kind fits (#2). Until 2026-09-29 this mapped a kind onto one
+    // of three named FK columns — the three entities that existed when it was written — and for
+    // each of the six added since it produced `{ undefined: 7 }`. A key literally named
+    // "undefined". Nothing errored: the row was written, the answer counted, and the history
+    // said the question had been about nothing. Which is also why the repetition logic could not
+    // be built before this: two thirds of the inventory left no trace of WHAT was asked.
     const out = {};
-    if (subject) out[col('subject', subject)] = subject.id;
-    if (object) out[col('object', object)] = object.id;
+    for (const [role, r] of [['subject', subject], ['object', object]]) {
+      if (!r) continue;
+      // An unknown shape is a defect and says so rather than writing something. The kinds are
+      // not enumerated here — the `EntityKind` enum is the list, and repeating it would be a
+      // second copy to keep in step (§17).
+      if (!r.kind || r.id == null) {
+        theLogger.warn('itquiz: a question role without a kind or an id was not recorded',
+          { role, value: JSON.stringify(r).slice(0, 120) });
+        continue;
+      }
+      out[`${role}_entity`] = String(r.kind);
+      out[`${role}_id`] = r.id;
+    }
     return out;
   }
 
@@ -1335,5 +1546,66 @@ module.exports = function registerSystemRoutes(app, deps) {
     return null;
   }
 
-  theLogger.info('itquiz routes registered', { routes: ['GET /api/sys/itquiz/question', 'GET /api/sys/itquiz/verdict', 'POST /api/sys/itquiz/answer'] });
+  /**
+   * GET/POST /api/sys/itquiz/settings — the player's own level and language.
+   *
+   * WRITTEN THROUGH THE SERVICE (§51), never through the repository, so the before-hook, the
+   * transaction and the audit entry all happen — a level somebody set is a change worth a trail
+   * like any other.
+   *
+   * A row appears on the first write and not before: reading is answered from the defaults when
+   * there is nothing stored, which is what a first-time visitor should get.
+   *
+   * Guarded by the same declared permission as the question itself. A player may set their OWN
+   * level and nobody else's — the username comes from the session and is never taken from the
+   * body, which is the whole of the authorisation here.
+   */
+  app.get('/api/sys/itquiz/settings',
+    authMiddleware, requireEntityVerb('ProductType', 'r'),
+    async (req, res) => {
+      try {
+        const me = await playerOf(req);
+        return res.json({ ...me, levels: LEVELS });
+      } catch (err) {
+        theLogger.error('itquiz: settings read failed', { error: err.message });
+        return res.status(500).json({ error: err.message });
+      }
+    });
+
+  app.post('/api/sys/itquiz/settings',
+    authMiddleware, requireEntityVerb('ProductType', 'r'),
+    async (req, res) => {
+      try {
+        const user = String(req.user?.username || req.user?.role || 'anonymous');
+        const level = LEVELS.includes(String(req.body?.level)) ? String(req.body.level) : null;
+        const language = req.body?.language ? String(req.body.language) : null;
+        if (!level && !language) {
+          // A request that changes nothing is a client bug, and saying so beats writing a row
+          // that records the absence of a decision (§3).
+          return res.status(400).json({ error: 'nothing to set — give a level, a language, or both' });
+        }
+        // The SAME context shape the answer path uses, and copied rather than invented: the
+        // service reads `changedBy`, not a nested `user`, and the comment beside that call
+        // records what it cost to find out. An internal call that is shorter than the user's
+        // path differs by exactly the obligations it skips (§51).
+        const context = {
+          correlationId: req.correlationId,
+          clientIp: req.ip || req.connection?.remoteAddress,
+          changedBy: user,
+        };
+        const existing = await engine().query('SELECT id FROM player WHERE user = ?', [user]);
+        const patch = { ...(level ? { level } : {}), ...(language ? { language } : {}) };
+        if (existing && existing[0]) {
+          await theGenericService.updateEntity('Player', existing[0].id, patch, context);
+        } else {
+          await theGenericService.createEntity('Player', { user, ...patch }, context);
+        }
+        return res.json(await playerOf(req));
+      } catch (err) {
+        theLogger.error('itquiz: settings write failed', { error: err.message });
+        return res.status(500).json({ error: err.message });
+      }
+    });
+
+  theLogger.info('itquiz routes registered', { routes: ['GET /api/sys/itquiz/question', 'GET /api/sys/itquiz/verdict', 'POST /api/sys/itquiz/answer', 'GET|POST /api/sys/itquiz/settings'] });
 };

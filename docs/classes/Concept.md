@@ -46,6 +46,7 @@ agreed with them would teach the confusion instead of naming it.
 {"name":"part_of","type":"Concept","optional":true,"description":"The larger thing this is a part of, where there is one. `.de` is part of a domain, a domain is part of a web address — one line that teaches the structure by holding it","example":"Domain"},
 {"name":"wikipedia_de","type":"wikipedia","optional":true,"description":"The German Wikipedia article — a TITLE, verified against the API rather than guessed","example":"Uniform Resource Locator"},
 {"name":"wikipedia_en","type":"wikipedia","optional":true,"description":"The English article. Separate from the German one because an article title is an identifier in another system, not a translation","example":"URL"},
+{"name":"level","type":"Level","default":"basic","description":"How far into the subject this record sits. `default` and therefore OPTIONAL on purpose: the seed then marks only what is NOT everyday, which keeps the classification of ~140 records readable as a diff and makes the safe direction the free one — a new record counts as basic and a beginner meets it","example":"expert"},
 {"name":"note","type":"longString","optional":true,"description":"A true remark worth showing after an answer — including what people commonly mix this up with, stated as an observation about people and never as a fact about the thing","example":"The address bar and the search box are one field in every modern browser, which is why „ins Internet gehen\" and „googeln\" have become the same gesture"}
 ]
 ```

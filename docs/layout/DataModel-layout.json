@@ -13,7 +13,7 @@
       "y": 30
     },
     "ProductType": {
-      "x": 350,
+      "x": 240,
       "y": 320
     },
     "ProductTypeText": {
@@ -143,11 +143,15 @@
     "StorageMedium": {
       "x": 1190,
       "y": 580
+    },
+    "Player": {
+      "x": 480,
+      "y": 280
     }
   },
   "canvas": {
-    "width": 1400,
-    "height": 888
+    "width": 1384.5068359375,
+    "height": 896
   },
   "stubLevel": 4,
   "stubs": {

@@ -30,7 +30,8 @@
     "rewritable": false,
     "wikipedia_de": "de:Blu-ray Disc",
     "wikipedia_en": "en:Blu-ray",
-    "note": "Named after the laser, not the case: a shorter wavelength reads smaller pits, which is the entire trick behind five times a DVD in the same space"
+    "note": "Named after the laser, not the case: a shorter wavelength reads smaller pits, which is the entire trick behind five times a DVD in the same space",
+    "level": "advanced"
   },
   {
     "name": "Hard disk",
@@ -51,7 +52,8 @@
     "rewritable": true,
     "wikipedia_de": "de:Solid-State-Drive",
     "wikipedia_en": "en:Solid-state drive",
-    "note": "„Solid state\" means nothing moves — the word is about the absence of mechanics, not about sturdiness, although it delivers that too. The single biggest reason an old computer feels new after one is fitted"
+    "note": "„Solid state\" means nothing moves — the word is about the absence of mechanics, not about sturdiness, although it delivers that too. The single biggest reason an old computer feels new after one is fitted",
+    "level": "advanced"
   },
   {
     "name": "SD card",
@@ -82,6 +84,7 @@
     "rewritable": true,
     "wikipedia_de": "de:Diskette",
     "wikipedia_en": "en:Floppy disk",
-    "note": "Still the Save icon in almost every program, thirty years after the last person used one. A whole generation recognises the picture and has never seen the object"
+    "note": "Still the Save icon in almost every program, thirty years after the last person used one. A whole generation recognises the picture and has never seen the object",
+    "level": "advanced"
   }
 ]

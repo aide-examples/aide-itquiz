@@ -27,6 +27,7 @@ group the selector shows them under.
 
 ## History
 
+- Player
 - AskedQuestion
 
 ## System

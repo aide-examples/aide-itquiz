@@ -597,5 +597,12 @@
     "name": "BLE",
     "purpose": "trägt dieselben kurzen Funknachrichten wie Bluetooth, aber mit so wenig Strom, dass ein Sensor jahrelang an einer Knopfzelle läuft",
     "gender": "n"
+  },
+  {
+    "file_format": "JSON",
+    "language": "de",
+    "name": "JSON",
+    "purpose": "hält Daten als verschachtelte Listen und Name-Wert-Paare, in einer Form, die ein Programm schnell liest und ein Mensch noch mitlesen kann",
+    "note": "Der jüngere Rivale von XML — und der, der gewonnen hat: dieselbe Aufgabe mit weit weniger Satzzeichen. Fast alles, was ein Browser heute von einem Server holt, kommt als JSON"
   }
 ]

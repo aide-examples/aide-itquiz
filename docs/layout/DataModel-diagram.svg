@@ -1,23 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1420 1008" width="1420" height="1008">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1420 1016" width="1420" height="1016">
   <defs>
     <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
       <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
     </marker>
     <clipPath id="clip-AskedQuestion"><rect x="680" y="300" width="160" height="224" rx="3"/></clipPath>
     <clipPath id="clip-Company"><rect x="790" y="140" width="160" height="144" rx="3"/></clipPath>
-    <clipPath id="clip-Concept"><rect x="700" y="620" width="160" height="176" rx="3"/></clipPath>
-    <clipPath id="clip-Connector"><rect x="500" y="670" width="160" height="160" rx="3"/></clipPath>
+    <clipPath id="clip-Concept"><rect x="700" y="620" width="160" height="192" rx="3"/></clipPath>
+    <clipPath id="clip-Connector"><rect x="500" y="670" width="160" height="176" rx="3"/></clipPath>
     <clipPath id="clip-ConnectorPort"><rect x="440" y="520" width="160" height="80" rx="3"/></clipPath>
-    <clipPath id="clip-FileFormat"><rect x="1210" y="170" width="160" height="176" rx="3"/></clipPath>
-    <clipPath id="clip-FormatGroup"><rect x="1120" y="400" width="160" height="112" rx="3"/></clipPath>
+    <clipPath id="clip-FileFormat"><rect x="1210" y="170" width="160" height="192" rx="3"/></clipPath>
+    <clipPath id="clip-FormatGroup"><rect x="1120" y="400" width="160" height="128" rx="3"/></clipPath>
     <clipPath id="clip-FormatSupport"><rect x="1140" y="30" width="160" height="144" rx="3"/></clipPath>
-    <clipPath id="clip-Product"><rect x="580" y="30" width="160" height="144" rx="3"/></clipPath>
-    <clipPath id="clip-ProductType"><rect x="350" y="320" width="160" height="144" rx="3"/></clipPath>
-    <clipPath id="clip-Protocol"><rect x="980" y="200" width="160" height="144" rx="3"/></clipPath>
+    <clipPath id="clip-Player"><rect x="480" y="280" width="160" height="96" rx="3"/></clipPath>
+    <clipPath id="clip-Product"><rect x="580" y="30" width="160" height="160" rx="3"/></clipPath>
+    <clipPath id="clip-ProductType"><rect x="240" y="320" width="160" height="160" rx="3"/></clipPath>
+    <clipPath id="clip-Protocol"><rect x="980" y="200" width="160" height="160" rx="3"/></clipPath>
     <clipPath id="clip-QuestionPhrase"><rect x="970" y="660" width="160" height="96" rx="3"/></clipPath>
     <clipPath id="clip-QuestionTemplate"><rect x="880" y="460" width="160" height="112" rx="3"/></clipPath>
-    <clipPath id="clip-StorageMedium"><rect x="1190" y="580" width="160" height="192" rx="3"/></clipPath>
-    <clipPath id="clip-Translation"><rect x="40" y="60" width="160" height="240" rx="3"/></clipPath>
+    <clipPath id="clip-StorageMedium"><rect x="1190" y="580" width="160" height="208" rx="3"/></clipPath>
+    <clipPath id="clip-Translation"><rect x="40" y="60" width="160" height="256" rx="3"/></clipPath>
     <clipPath id="clip-Audit"><rect x="40" y="590" width="130.044921875" height="24" rx="3"/></clipPath>
     <clipPath id="clip-BackgroundTask"><rect x="40" y="620" width="130.044921875" height="24" rx="3"/></clipPath>
     <clipPath id="clip-Feed"><rect x="40" y="650" width="130.044921875" height="24" rx="3"/></clipPath>
@@ -35,40 +36,40 @@
     <clipPath id="clip-UsageStats"><rect x="210" y="770" width="90" height="24" rx="3"/></clipPath>
     <clipPath id="clip-WorkerStats"><rect x="210" y="800" width="90" height="24" rx="3"/></clipPath>
   </defs>
-  <rect width="1420" height="1008" fill="white"/>
+  <rect width="1420" height="1016" fill="white"/>
 
   <!-- Relationships -->
   <path d="M 840 512 L 865 512 L 880 512.6315789473684" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 680 336 L 655 336 L 658.4615384615385 174" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 680 400 L 655 400 L 510 394.84444444444443" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 680 336 L 655 336 L 658.2300884955753 190" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 680 400 L 655 400 L 400 400" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
   <path d="M 840 368 L 865 368 L 867.6923076923077 284" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 680 352 L 655 352 L 658.56 174" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 680 416 L 655 416 L 510 400.5333333333333" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 680 352 L 655 352 L 658.3471074380166 190" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 680 416 L 655 416 L 400 403.82089552238807" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
   <path d="M 840 384 L 865 384 L 867.9069767441861 284" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
   <path d="M 860 656 A 18 18 0 0 0 860 620" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 440 556 L 415 556 L 423.4146341463415 464" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 600 572 L 625 572 L 600.2247191011236 670" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 1210 334 L 1185 334 L 1193.1147540983607 400" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
-  <path d="M 1140 98 L 1115 98 L 740 101.2967032967033" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 1300 114 L 1325 114 L 1311.388888888889 170" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 580 162 L 555 162 L 469.1304347826087 320" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 740 146 L 765 146 L 790 161.71428571428572" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 510 356 A 18 18 0 0 0 510 320" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 440 556 L 415 556 L 368.71794871794873 480" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 600 572 L 625 572 L 601.2903225806451 670" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 1210 350 L 1185 350 L 1191.578947368421 400" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
+  <path d="M 1140 98 L 1115 98 L 740 107.8901098901099" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 1300 114 L 1325 114 L 1312.1052631578948 170" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 580 178 L 555 178 L 400 324.4255319148936" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 740 162 L 765 162 L 790 173.9047619047619" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
+  <path d="M 400 356 A 18 18 0 0 0 400 320" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)" stroke-dasharray="6,3"/>
   <path d="M 970 696 L 945 696 L 955.3333333333334 572" fill="none" stroke="#333" stroke-width="1" marker-end="url(#arrowhead)"/>
-  <path d="M 200 220 L 220 220" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
-  <text x="223" y="223" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">ProductType</text>
-  <path d="M 200 188 L 220 188" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
-  <text x="223" y="191" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">FileFormat</text>
   <path d="M 200 236 L 220 236" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
-  <text x="223" y="239" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">FormatGroup</text>
+  <text x="223" y="239" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">ProductType</text>
   <path d="M 200 204 L 220 204" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
-  <text x="223" y="207" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">Protocol</text>
-  <path d="M 200 284 L 220 284" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
-  <text x="223" y="287" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">Connector</text>
-  <path d="M 200 268 L 220 268" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
-  <text x="223" y="271" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">Concept</text>
+  <text x="223" y="207" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">FileFormat</text>
   <path d="M 200 252 L 220 252" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
-  <text x="223" y="255" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">StorageMedium</text>
+  <text x="223" y="255" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">FormatGroup</text>
+  <path d="M 200 220 L 220 220" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+  <text x="223" y="223" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">Protocol</text>
+  <path d="M 200 300 L 220 300" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+  <text x="223" y="303" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">Connector</text>
+  <path d="M 200 284 L 220 284" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+  <text x="223" y="287" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">Concept</text>
+  <path d="M 200 268 L 220 268" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="6,3" marker-end="url(#arrowhead)"/>
+  <text x="223" y="271" text-anchor="start" font-family="Arial, sans-serif" font-size="8" fill="#999">StorageMedium</text>
 
   <!-- Class boxes -->
   <rect x="26" y="576" width="288" height="262" fill="none" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="6,4" rx="6"/>
@@ -91,7 +92,7 @@
   <text x="795" y="228.2" font-family="Arial, sans-serif" font-size="12" fill="#555">because a layperson</text>
   <text x="795" y="244.2" font-family="Arial, sans-serif" font-size="12" fill="#555">confuses the maker with the</text>
   <text x="795" y="260.2" font-family="Arial, sans-serif" font-size="12" fill="#555">thing it makes.</text>
-  <rect x="700" y="620" width="160" height="176" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="700" y="620" width="160" height="192" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
   <rect x="700" y="620" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-Concept)"/>
   <text x="780" y="636" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Concept</text>
   <line x1="700" y1="644" x2="860" y2="644" stroke="#333" stroke-width="1"/>
@@ -101,7 +102,7 @@
   <text x="705" y="708.2" font-family="Arial, sans-serif" font-size="12" fill="#555">address, the part of it</text>
   <text x="705" y="724.2" font-family="Arial, sans-serif" font-size="12" fill="#555">before the first slash, the</text>
   <text x="705" y="740.2" font-family="Arial, sans-serif" font-size="12" fill="#555">dot-something at the end.</text>
-  <rect x="500" y="670" width="160" height="160" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="500" y="670" width="160" height="176" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
   <rect x="500" y="670" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-Connector)"/>
   <text x="580" y="686" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Connector</text>
   <line x1="500" y1="694" x2="660" y2="694" stroke="#333" stroke-width="1"/>
@@ -118,7 +119,7 @@
   <text x="445" y="560.2" font-family="Arial, sans-serif" font-size="12" fill="#555">One kind of device has one</text>
   <text x="445" y="576.2" font-family="Arial, sans-serif" font-size="12" fill="#555">kind of socket — „ein</text>
   <text x="445" y="592.2" font-family="Arial, sans-serif" font-size="12" fill="#555">Laptop hat HDMI&quot;.</text>
-  <rect x="1210" y="170" width="160" height="176" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="1210" y="170" width="160" height="192" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
   <rect x="1210" y="170" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-FileFormat)"/>
   <text x="1290" y="186" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">FileFormat</text>
   <line x1="1210" y1="194" x2="1370" y2="194" stroke="#333" stroke-width="1"/>
@@ -129,7 +130,7 @@
   <text x="1215" y="274.2" font-family="Arial, sans-serif" font-size="12" fill="#555">this system is about: what a</text>
   <text x="1215" y="290.2" font-family="Arial, sans-serif" font-size="12" fill="#555">thing IS versus what it can</text>
   <text x="1215" y="306.2" font-family="Arial, sans-serif" font-size="12" fill="#555">OPEN.</text>
-  <rect x="1120" y="400" width="160" height="112" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="1120" y="400" width="160" height="128" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
   <rect x="1120" y="400" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-FormatGroup)"/>
   <text x="1200" y="416" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">FormatGroup</text>
   <line x1="1120" y1="424" x2="1280" y2="424" stroke="#333" stroke-width="1"/>
@@ -148,7 +149,15 @@
   <text x="1145" y="134.2" font-family="Arial, sans-serif" font-size="12" fill="#555">and the reason that</text>
   <text x="1145" y="150.2" font-family="Arial, sans-serif" font-size="12" fill="#555">question has several right</text>
   <text x="1145" y="166.2" font-family="Arial, sans-serif" font-size="12" fill="#555">answers.</text>
-  <rect x="580" y="30" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="480" y="280" width="160" height="96" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="480" y="280" width="160" height="24" fill="#DCFCE7" clip-path="url(#clip-Player)"/>
+  <text x="560" y="296" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Player</text>
+  <line x1="480" y1="304" x2="640" y2="304" stroke="#333" stroke-width="1"/>
+  <text x="485" y="320.2" font-family="Arial, sans-serif" font-size="12" fill="#555">One person&#39;s settings —</text>
+  <text x="485" y="336.2" font-family="Arial, sans-serif" font-size="12" fill="#555">which level of question they</text>
+  <text x="485" y="352.2" font-family="Arial, sans-serif" font-size="12" fill="#555">want, and in which</text>
+  <text x="485" y="368.2" font-family="Arial, sans-serif" font-size="12" fill="#555">language.</text>
+  <rect x="580" y="30" width="160" height="160" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
   <rect x="580" y="30" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-Product)"/>
   <text x="660" y="46" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Product</text>
   <line x1="580" y1="54" x2="740" y2="54" stroke="#333" stroke-width="1"/>
@@ -157,16 +166,16 @@
   <text x="585" y="102.2" font-family="Arial, sans-serif" font-size="12" fill="#555">Google Search, Googlebot,</text>
   <text x="585" y="118.2" font-family="Arial, sans-serif" font-size="12" fill="#555">Android. Exactly one type,</text>
   <text x="585" y="134.2" font-family="Arial, sans-serif" font-size="12" fill="#555">exactly one maker.</text>
-  <rect x="350" y="320" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
-  <rect x="350" y="320" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-ProductType)"/>
-  <text x="430" y="336" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">ProductType</text>
-  <line x1="350" y1="344" x2="510" y2="344" stroke="#333" stroke-width="1"/>
-  <text x="355" y="360.2" font-family="Arial, sans-serif" font-size="12" fill="#555">A KIND of thing — browser,</text>
-  <text x="355" y="376.2" font-family="Arial, sans-serif" font-size="12" fill="#555">search engine, spider,</text>
-  <text x="355" y="392.2" font-family="Arial, sans-serif" font-size="12" fill="#555">operating system. Its</text>
-  <text x="355" y="408.2" font-family="Arial, sans-serif" font-size="12" fill="#555">purpose is the sentence</text>
-  <text x="355" y="424.2" font-family="Arial, sans-serif" font-size="12" fill="#555">that separates them.</text>
-  <rect x="980" y="200" width="160" height="144" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="240" y="320" width="160" height="160" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="240" y="320" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-ProductType)"/>
+  <text x="320" y="336" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">ProductType</text>
+  <line x1="240" y1="344" x2="400" y2="344" stroke="#333" stroke-width="1"/>
+  <text x="245" y="360.2" font-family="Arial, sans-serif" font-size="12" fill="#555">A KIND of thing — browser,</text>
+  <text x="245" y="376.2" font-family="Arial, sans-serif" font-size="12" fill="#555">search engine, spider,</text>
+  <text x="245" y="392.2" font-family="Arial, sans-serif" font-size="12" fill="#555">operating system. Its</text>
+  <text x="245" y="408.2" font-family="Arial, sans-serif" font-size="12" fill="#555">purpose is the sentence</text>
+  <text x="245" y="424.2" font-family="Arial, sans-serif" font-size="12" fill="#555">that separates them.</text>
+  <rect x="980" y="200" width="160" height="160" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
   <rect x="980" y="200" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-Protocol)"/>
   <text x="1060" y="216" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Protocol</text>
   <line x1="980" y1="224" x2="1140" y2="224" stroke="#333" stroke-width="1"/>
@@ -194,7 +203,7 @@
   <text x="885" y="532.2" font-family="Arial, sans-serif" font-size="12" fill="#555">records fill its roles, and</text>
   <text x="885" y="548.2" font-family="Arial, sans-serif" font-size="12" fill="#555">where the right answer</text>
   <text x="885" y="564.2" font-family="Arial, sans-serif" font-size="12" fill="#555">comes from. No wording.</text>
-  <rect x="1190" y="580" width="160" height="192" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="1190" y="580" width="160" height="208" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
   <rect x="1190" y="580" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-StorageMedium)"/>
   <text x="1270" y="596" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">StorageMedium</text>
   <line x1="1190" y1="604" x2="1350" y2="604" stroke="#333" stroke-width="1"/>
@@ -202,7 +211,7 @@
   <text x="1195" y="636.2" font-family="Arial, sans-serif" font-size="12" fill="#555">disc, a disk, a card, a stick.</text>
   <text x="1195" y="652.2" font-family="Arial, sans-serif" font-size="12" fill="#555">You can hold it, and nobody</text>
   <text x="1195" y="668.2" font-family="Arial, sans-serif" font-size="12" fill="#555">asks who made it.</text>
-  <rect x="40" y="60" width="160" height="240" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="40" y="60" width="160" height="256" fill="white" stroke="#333" stroke-width="1.5" rx="3"/>
   <rect x="40" y="60" width="160" height="24" fill="#E0E7FF" clip-path="url(#clip-Translation)"/>
   <text x="120" y="76" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Translation</text>
   <line x1="40" y1="84" x2="200" y2="84" stroke="#333" stroke-width="1"/>
@@ -261,42 +270,44 @@
   <text x="255" y="816" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold">WorkerStats</text>
 
   <!-- Legend -->
-  <text x="20" y="888" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Areas:</text>
-  <text x="160" y="888" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Types:</text>
-  <rect x="20" y="898" width="14" height="14" fill="#E0E7FF" stroke="#333" stroke-width="1"/>
-  <text x="40" y="908" font-family="Arial, sans-serif" font-size="11">Facts</text>
-  <text x="160" y="908" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Enums:</text>
-  <rect x="201.9013671875" y="899" width="46.52197265625" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="204.9013671875" y="907" font-family="Arial, sans-serif" font-size="9">EntityKind</text>
-  <rect x="253.42333984375" y="899" width="52.02392578125" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="256.42333984375" y="907" font-family="Arial, sans-serif" font-size="9">FileSupport</text>
-  <rect x="310.447265625" y="899" width="46.04296875" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="313.447265625" y="907" font-family="Arial, sans-serif" font-size="9">Language</text>
-  <rect x="361.490234375" y="899" width="64.02099609375" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="364.490234375" y="907" font-family="Arial, sans-serif" font-size="9">AnswerQuality</text>
-  <rect x="430.51123046875" y="899" width="36.01904296875" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="433.51123046875" y="907" font-family="Arial, sans-serif" font-size="9">Gender</text>
-  <rect x="471.5302734375" y="899" width="51.52734375" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="474.5302734375" y="907" font-family="Arial, sans-serif" font-size="9">AuditAction</text>
-  <rect x="528.0576171875" y="899" width="90.55078125" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="531.0576171875" y="907" font-family="Arial, sans-serif" font-size="9">BackgroundTaskKind</text>
-  <rect x="623.6083984375" y="899" width="93.55224609375" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="626.6083984375" y="907" font-family="Arial, sans-serif" font-size="9">BackgroundTaskState</text>
-  <rect x="722.16064453125" y="899" width="64.025390625" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="725.16064453125" y="907" font-family="Arial, sans-serif" font-size="9">ProcessStatus</text>
-  <rect x="791.18603515625" y="899" width="66.53466796875" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="794.18603515625" y="907" font-family="Arial, sans-serif" font-size="9">ProposalAction</text>
-  <rect x="862.720703125" y="899" width="67.03564453125" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
-  <text x="865.720703125" y="907" font-family="Arial, sans-serif" font-size="9">ProposalStatus</text>
-  <rect x="20" y="918" width="14" height="14" fill="#FEF3C7" stroke="#333" stroke-width="1"/>
-  <text x="40" y="928" font-family="Arial, sans-serif" font-size="11">Questions</text>
-  <rect x="20" y="938" width="14" height="14" fill="#DCFCE7" stroke="#333" stroke-width="1"/>
-  <text x="40" y="948" font-family="Arial, sans-serif" font-size="11">History</text>
-  <rect x="20" y="958" width="14" height="14" fill="#9ca3af" stroke="#333" stroke-width="1"/>
-  <text x="40" y="968" font-family="Arial, sans-serif" font-size="11">System</text>
+  <text x="20" y="896" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Areas:</text>
+  <text x="160" y="896" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Types:</text>
+  <rect x="20" y="906" width="14" height="14" fill="#E0E7FF" stroke="#333" stroke-width="1"/>
+  <text x="40" y="916" font-family="Arial, sans-serif" font-size="11">Facts</text>
+  <text x="160" y="916" font-family="Arial, sans-serif" font-size="10" font-weight="bold">Enums:</text>
+  <rect x="201.9013671875" y="907" width="46.52197265625" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="204.9013671875" y="915" font-family="Arial, sans-serif" font-size="9">EntityKind</text>
+  <rect x="253.42333984375" y="907" width="52.02392578125" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="256.42333984375" y="915" font-family="Arial, sans-serif" font-size="9">FileSupport</text>
+  <rect x="310.447265625" y="907" width="46.04296875" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="313.447265625" y="915" font-family="Arial, sans-serif" font-size="9">Language</text>
+  <rect x="361.490234375" y="907" width="64.02099609375" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="364.490234375" y="915" font-family="Arial, sans-serif" font-size="9">AnswerQuality</text>
+  <rect x="430.51123046875" y="907" width="27.515625" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="433.51123046875" y="915" font-family="Arial, sans-serif" font-size="9">Level</text>
+  <rect x="463.02685546875" y="907" width="36.01904296875" height="12" fill="#E0E0E0" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="466.02685546875" y="915" font-family="Arial, sans-serif" font-size="9">Gender</text>
+  <rect x="504.0458984375" y="907" width="51.52734375" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="507.0458984375" y="915" font-family="Arial, sans-serif" font-size="9">AuditAction</text>
+  <rect x="560.5732421875" y="907" width="90.55078125" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="563.5732421875" y="915" font-family="Arial, sans-serif" font-size="9">BackgroundTaskKind</text>
+  <rect x="656.1240234375" y="907" width="93.55224609375" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="659.1240234375" y="915" font-family="Arial, sans-serif" font-size="9">BackgroundTaskState</text>
+  <rect x="754.67626953125" y="907" width="64.025390625" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="757.67626953125" y="915" font-family="Arial, sans-serif" font-size="9">ProcessStatus</text>
+  <rect x="823.70166015625" y="907" width="66.53466796875" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="826.70166015625" y="915" font-family="Arial, sans-serif" font-size="9">ProposalAction</text>
+  <rect x="895.236328125" y="907" width="67.03564453125" height="12" fill="#9ca3af" stroke="#333" stroke-width="0.5" rx="2"/>
+  <text x="898.236328125" y="915" font-family="Arial, sans-serif" font-size="9">ProposalStatus</text>
+  <rect x="20" y="926" width="14" height="14" fill="#FEF3C7" stroke="#333" stroke-width="1"/>
+  <text x="40" y="936" font-family="Arial, sans-serif" font-size="11">Questions</text>
+  <rect x="20" y="946" width="14" height="14" fill="#DCFCE7" stroke="#333" stroke-width="1"/>
+  <text x="40" y="956" font-family="Arial, sans-serif" font-size="11">History</text>
+  <rect x="20" y="966" width="14" height="14" fill="#9ca3af" stroke="#333" stroke-width="1"/>
+  <text x="40" y="976" font-family="Arial, sans-serif" font-size="11">System</text>
 
   <!-- Watermark -->
-  <text x="1405" y="888" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">AI for Development Engineers</text>
-  <text x="1405" y="902" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">Rapid Application Prototype <tspan fill="#0066cc">(http://github.com/aide-examples)</tspan></text>
-  <text x="1405" y="916" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">29. September 2026</text>
+  <text x="1405" y="896" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">AI for Development Engineers</text>
+  <text x="1405" y="910" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">Rapid Application Prototype <tspan fill="#0066cc">(http://github.com/aide-examples)</tspan></text>
+  <text x="1405" y="924" text-anchor="end" font-family="Arial, sans-serif" font-size="11" fill="#555">29. September 2026</text>
 </svg>

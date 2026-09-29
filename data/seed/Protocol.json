@@ -5,7 +5,8 @@
     "purpose": "carries web pages from a server to a browser — the agreement every page in the address bar arrives under",
     "wikipedia_de": "de:Hypertext Transfer Protocol",
     "wikipedia_en": "en:HTTP",
-    "note": "The four letters at the front of an address are this, which is why a browser puts them there when nobody types them"
+    "note": "The four letters at the front of an address are this, which is why a browser puts them there when nobody types them",
+    "level": "advanced"
   },
   {
     "name": "HTTPS",
@@ -13,7 +14,8 @@
     "purpose": "carries the same pages as HTTP, encrypted, so nobody on the way can read along or change anything",
     "wikipedia_de": "de:Hypertext Transfer Protocol Secure",
     "wikipedia_en": "en:HTTPS",
-    "note": "The padlock in the browser bar is this protocol and nothing else: it says the line is private, never that the site is honest. A fraudulent shop can have a perfectly good padlock"
+    "note": "The padlock in the browser bar is this protocol and nothing else: it says the line is private, never that the site is honest. A fraudulent shop can have a perfectly good padlock",
+    "level": "advanced"
   },
   {
     "name": "MQTT",
@@ -21,7 +23,8 @@
     "purpose": "carries tiny messages between devices that report something — a thermometer, a light switch, a door contact",
     "wikipedia_de": "de:MQTT",
     "wikipedia_en": "en:MQTT",
-    "note": "The one on this list a person never types. It is here because it is what „smart home\" is made of underneath, and because it shows a protocol does not have to involve a browser at all"
+    "note": "The one on this list a person never types. It is here because it is what „smart home\" is made of underneath, and because it shows a protocol does not have to involve a browser at all",
+    "level": "expert"
   },
   {
     "name": "SIP",
@@ -29,7 +32,8 @@
     "purpose": "sets up a call over the internet — who is calling whom, and on which line the voice will travel",
     "wikipedia_de": "de:Session Initiation Protocol",
     "wikipedia_en": "en:Session Initiation Protocol",
-    "note": "People say VOIP for this, and VOIP is not a protocol but a purpose — telephoning over the internet. SIP arranges the call, another protocol carries the voice. The habit of reaching for the roomier drawer is worth noticing in oneself"
+    "note": "People say VOIP for this, and VOIP is not a protocol but a purpose — telephoning over the internet. SIP arranges the call, another protocol carries the voice. The habit of reaching for the roomier drawer is worth noticing in oneself",
+    "level": "expert"
   },
   {
     "name": "SMTP",
@@ -37,14 +41,16 @@
     "purpose": "carries a mail from the sender's server to the recipient's",
     "wikipedia_de": "de:Simple Mail Transfer Protocol",
     "wikipedia_en": "en:Simple Mail Transfer Protocol",
-    "note": "Nobody meets this directly — mail simply arrives. It is in for the reader who has seen the four letters in a settings dialog and would like them to mean something"
+    "note": "Nobody meets this directly — mail simply arrives. It is in for the reader who has seen the four letters in a settings dialog and would like them to mean something",
+    "level": "expert"
   },
   {
     "name": "Ethernet",
     "purpose": "carries data along a cable between the machines in one building — the wired half of every network",
     "wikipedia_de": "de:Ethernet",
     "wikipedia_en": "en:Ethernet",
-    "note": "The oldest agreement still in daily use here, from 1973, and the reason an RJ45 socket on a router in 2026 accepts a cable made decades ago"
+    "note": "The oldest agreement still in daily use here, from 1973, and the reason an RJ45 socket on a router in 2026 accepts a cable made decades ago",
+    "level": "advanced"
   },
   {
     "name": "WLAN",
@@ -67,34 +73,39 @@
     "purpose": "carries the same kind of short-range messages as Bluetooth on so little power that a sensor runs for years on one coin cell",
     "wikipedia_de": "de:Bluetooth Low Energy",
     "wikipedia_en": "en:Bluetooth Low Energy",
-    "note": "Also written BT-LE. It shares a name with Bluetooth and is a different radio protocol underneath — which is why a fitness band pairs in a second and holds for a year, while a headset needs charging every few days"
+    "note": "Also written BT-LE. It shares a name with Bluetooth and is a different radio protocol underneath — which is why a fitness band pairs in a second and holds for a year, while a headset needs charging every few days",
+    "level": "expert"
   },
   {
     "name": "Zigbee",
     "purpose": "carries tiny messages between the lamps, switches and sensors of a house, each one passing the message along for the others",
     "wikipedia_de": "de:ZigBee",
     "wikipedia_en": "en:Zigbee",
-    "note": "Every device is also a relay, so the network grows stronger with each lamp added — the opposite of WLAN, where more devices means more contention"
+    "note": "Every device is also a relay, so the network grows stronger with each lamp added — the opposite of WLAN, where more devices means more contention",
+    "level": "advanced"
   },
   {
     "name": "Z-Wave",
     "purpose": "does what Zigbee does, on a different radio frequency that walls block less",
     "wikipedia_de": "de:Z-Wave",
     "wikipedia_en": "en:Z-Wave",
-    "note": "The reason a house often has both: they cannot talk to each other, and whichever the first bought lamp used tends to decide the rest"
+    "note": "The reason a house often has both: they cannot talk to each other, and whichever the first bought lamp used tends to decide the rest",
+    "level": "expert"
   },
   {
     "name": "Matter",
     "purpose": "lets smart-home devices of different makes work together, whichever app or assistant the owner uses",
     "wikipedia_de": "de:Matter (Standard)",
     "wikipedia_en": "en:Matter (standard)",
-    "note": "The newest one here, and the first that tries to end the problem rather than add to it — agreed by Apple, Google, Amazon and Samsung together, which had not happened before"
+    "note": "The newest one here, and the first that tries to end the problem rather than add to it — agreed by Apple, Google, Amazon and Samsung together, which had not happened before",
+    "level": "advanced"
   },
   {
     "name": "Thread",
     "purpose": "carries the messages Matter sends, over the same kind of self-relaying radio network Zigbee uses",
     "wikipedia_de": "de:Thread (Netzwerkprotokoll)",
     "wikipedia_en": "en:Thread (network protocol)",
-    "note": "Matter and Thread are constantly confused and are two layers of one thing: Thread is the road, Matter is the language spoken on it"
+    "note": "Matter and Thread are constantly confused and are two layers of one thing: Thread is the road, Matter is the language spoken on it",
+    "level": "expert"
   }
 ]

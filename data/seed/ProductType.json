@@ -21,7 +21,8 @@
     "note": "Nobody uses a spider directly; it works for the search engine that owns it",
     "icon": "spider.svg",
     "wikipedia_de": "de:Webcrawler",
-    "wikipedia_en": "en:Web crawler"
+    "wikipedia_en": "en:Web crawler",
+    "level": "expert"
   },
   {
     "name": "Operating system",
@@ -61,7 +62,8 @@
     "note": "The whole point of having this type: a suite is not any of the things inside it, and that is what makes „ist MS-Office ein Textprogramm?“ a real question",
     "icon": "office-suite.svg",
     "wikipedia_de": "de:Office-Paket",
-    "wikipedia_en": "en:Productivity software"
+    "wikipedia_en": "en:Productivity software",
+    "level": "advanced"
   },
   {
     "name": "Messenger",
@@ -78,7 +80,8 @@
     "note": "Named as if it were the whole machine: „ein schneller Rechner“ usually means this one part",
     "icon": "processor.svg",
     "wikipedia_de": "de:Prozessor",
-    "wikipedia_en": "en:Central processing unit"
+    "wikipedia_en": "en:Central processing unit",
+    "level": "advanced"
   },
   {
     "name": "Working memory",
@@ -87,7 +90,8 @@
     "note": "Half of the commonest confusion in this whole inventory — both it and the storage are called „Speicher“ in German",
     "icon": "working-memory.svg",
     "wikipedia_de": "de:Arbeitsspeicher",
-    "wikipedia_en": "en:Random-access memory"
+    "wikipedia_en": "en:Random-access memory",
+    "level": "advanced"
   },
   {
     "name": "Storage medium",
@@ -96,7 +100,8 @@
     "note": "The other half: „mein Speicher ist voll“ is nearly always this one, and „der Rechner ist langsam“ nearly always the other",
     "icon": "storage-medium.svg",
     "wikipedia_de": "de:Massenspeicher",
-    "wikipedia_en": "en:Computer data storage"
+    "wikipedia_en": "en:Computer data storage",
+    "level": "advanced"
   },
   {
     "name": "Screen",
@@ -179,20 +184,23 @@
     "purpose": "opens a document and shows it without being able to change it",
     "note": "Asked for as „ODF-Viewer“ or „PDF-Viewer“ — but the format is not the kind: one viewer opens several formats, which is what FileFormat is in the model for",
     "wikipedia_de": "de:Dateibetrachter",
-    "wikipedia_en": "en:File viewer"
+    "wikipedia_en": "en:File viewer",
+    "level": "advanced"
   },
   {
     "name": "Barcode scanner",
     "purpose": "reads the stripes or squares on a label and turns them back into the number or address they stand for",
     "note": "On a phone this is the camera, which is why most people have never installed one and still use one weekly",
     "wikipedia_de": "de:Barcodelesegerät",
-    "wikipedia_en": "en:Barcode reader"
+    "wikipedia_en": "en:Barcode reader",
+    "level": "advanced"
   },
   {
     "name": "Network storage",
     "purpose": "keeps files on a box of its own in the house, reachable from every device on the network",
     "note": "Known by its abbreviation NAS. The bridge between the two kinds of storage a person knows: it is as reachable as a cloud drive and as local as a disk — the own cloud in the hallway",
     "wikipedia_de": "de:Network Attached Storage",
-    "wikipedia_en": "en:Network-attached storage"
+    "wikipedia_en": "en:Network-attached storage",
+    "level": "expert"
   }
 ]
