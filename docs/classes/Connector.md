@@ -7,7 +7,7 @@ The shape of a plug and the socket it fits — the one standard in this system a
 
 ## About
 
-HDMI, USB-C, RJ45, Cinch, a headphone jack. A **connector** is an agreement about a shape and
+HDMI, USB-C, RJ45, RCA, a headphone jack. A **connector** is an agreement about a shape and
 what travels through it, and it is the third standard this model carries after
 [FileFormat](FileFormat.md) and [Protocol](Protocol.md) — the same shape a third time: a named
 thing with an abbreviation, that products support and nobody confuses with the products.

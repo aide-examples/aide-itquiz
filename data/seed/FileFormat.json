@@ -7,7 +7,7 @@
     "wikipedia_de": "de:Portable Document Format",
     "wikipedia_en": "en:PDF",
     "note": "People say „ein PDF\" for any document they cannot change, which is most of what the format is known for — and the reason it exists: it was made so a page would print the same on any machine",
-    "group": "Dokumentformat"
+    "group": "Document format"
   },
   {
     "name": "ODF",
@@ -17,7 +17,7 @@
     "wikipedia_de": "de:OpenDocument",
     "wikipedia_en": "en:OpenDocument",
     "note": "The extension says .odt for a text and .ods for a spreadsheet — one family, several endings, which is why the family has its own name",
-    "group": "Dokumentformat",
+    "group": "Document format",
     "level": "advanced"
   },
   {
@@ -28,7 +28,7 @@
     "wikipedia_de": "de:Office Open XML",
     "wikipedia_en": "en:Office Open XML",
     "note": "The x at the end arrived in 2007 and means the file is a zipped folder of XML — the older .doc was one opaque lump, which is why old files sometimes will not open",
-    "group": "Dokumentformat",
+    "group": "Document format",
     "level": "advanced"
   },
   {
@@ -39,7 +39,7 @@
     "wikipedia_de": "de:Hypertext Markup Language",
     "wikipedia_en": "en:HTML",
     "note": "A file a person almost never has on their own machine and meets constantly all the same: every page in the browser is one, delivered rather than stored",
-    "group": "Auszeichnungssprache",
+    "group": "Markup language",
     "level": "advanced"
   },
   {
@@ -50,7 +50,7 @@
     "wikipedia_de": "de:JPEG",
     "wikipedia_en": "en:JPEG",
     "note": "Named after the committee that agreed it, not after anything in the picture — one of the abbreviations whose long form explains nothing at all",
-    "group": "Bildformat"
+    "group": "Image format"
   },
   {
     "name": "PNG",
@@ -60,7 +60,7 @@
     "wikipedia_de": "de:Portable Network Graphics",
     "wikipedia_en": "en:PNG",
     "note": "The transparent part is why logos are PNGs and photos are JPEGs — a difference people meet without ever being told it",
-    "group": "Bildformat"
+    "group": "Image format"
   },
   {
     "name": "MP3",
@@ -70,7 +70,7 @@
     "wikipedia_de": "de:MP3",
     "wikipedia_en": "en:MP3",
     "note": "For a while the word meant the player rather than the format — „ein MP3\" was a device you clipped to your belt",
-    "group": "Audioformat"
+    "group": "Audio format"
   },
   {
     "name": "MP4",
@@ -80,7 +80,7 @@
     "wikipedia_de": "de:MP4",
     "wikipedia_en": "en:MP4 file format",
     "note": "Not „MP3 for video\", although the names invite it: MP4 is a container that holds several streams, while MP3 is one kind of sound",
-    "group": "Videoformat"
+    "group": "Video format"
   },
   {
     "name": "CSV",
@@ -90,7 +90,7 @@
     "wikipedia_de": "de:CSV (Dateiformat)",
     "wikipedia_en": "en:Comma-separated values",
     "note": "The comma is in the name and is a semicolon in half of Europe, because the comma is already the decimal point there — the commonest reason a CSV opens as one long column",
-    "group": "Tabellenformat",
+    "group": "Table format",
     "level": "advanced"
   },
   {
@@ -101,14 +101,14 @@
     "wikipedia_de": "de:EPUB",
     "wikipedia_en": "en:EPUB",
     "note": "The difference from a PDF is the whole point: a PDF keeps the page, an EPUB keeps the text and lets the page follow the screen",
-    "group": "Dokumentformat",
+    "group": "Document format",
     "level": "advanced"
   },
   {
     "name": "XML",
     "extension": ".xml",
     "long_name": "Extensible Markup Language",
-    "group": "Auszeichnungssprache",
+    "group": "Markup language",
     "purpose": "holds data together with marks naming what each piece is, in a way both a person and a program can read",
     "wikipedia_de": "de:Extensible Markup Language",
     "wikipedia_en": "en:XML",
@@ -119,7 +119,7 @@
     "name": "JSON",
     "extension": ".json",
     "long_name": "JavaScript Object Notation",
-    "group": "Auszeichnungssprache",
+    "group": "Markup language",
     "purpose": "holds data as nested lists and name-value pairs, in a form a program reads quickly and a person can still follow",
     "wikipedia_de": "de:JavaScript Object Notation",
     "wikipedia_en": "en:JSON",
@@ -130,7 +130,7 @@
     "name": "ZIP",
     "extension": ".zip",
     "long_name": "ZIP archive",
-    "group": "Kompressionsformat",
+    "group": "Compression format",
     "purpose": "holds several files in one, made smaller, and gives them back exactly as they were",
     "wikipedia_de": "de:ZIP-Dateiformat",
     "wikipedia_en": "en:ZIP (file format)",
@@ -140,7 +140,7 @@
     "name": "GZ",
     "extension": ".gz",
     "long_name": "gzip",
-    "group": "Kompressionsformat",
+    "group": "Compression format",
     "purpose": "makes ONE file smaller, and nothing else — no folder, no second file",
     "wikipedia_de": "de:Gzip",
     "wikipedia_en": "en:Gzip",

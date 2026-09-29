@@ -37,7 +37,7 @@
     "level": "advanced"
   },
   {
-    "name": "Klinke",
+    "name": "Jack",
     "long_name": "Phone connector",
     "purpose": "carries sound to headphones or from a microphone",
     "looks_like": "a round metal pin with one or two black rings near the tip, 3.5 millimetres across",
@@ -46,7 +46,7 @@
     "note": "Older than everything else on this list by about a century: the shape comes from manual telephone exchanges, which is where the German name „Klinke\" is from"
   },
   {
-    "name": "Cinch",
+    "name": "RCA",
     "long_name": "RCA connector",
     "purpose": "carries one analogue signal — one plug for the left sound, one for the right, one for the picture",
     "looks_like": "a round plug with a metal pin in a metal ring, colour-coded red, white or yellow",

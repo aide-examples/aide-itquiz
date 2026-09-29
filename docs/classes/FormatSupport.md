@@ -32,18 +32,13 @@ instead of the generator having to.
 
 ```json
 [
-{"name":"product","type":"Product","description":"The program","example":"Chrome"},
-{"name":"format","type":"FileFormat","description":"The kind of file","example":"PDF"},
+{"name":"product","type":"Product","uk":1,"description":"The program","example":"Chrome"},
+{"name":"format","type":"FileFormat","uk":1,"description":"The kind of file","example":"PDF"},
 {"name":"support","type":"FileSupport","description":"What it can do with it. `edit` includes `view` — see Types.md, the order of the enum is the strength","example":"view"},
 {"name":"note","type":"longString","optional":true,"description":"A true remark about THIS pairing, where there is one worth showing","example":"Every browser shows a PDF today, which is why nobody installs a reader any more"}
 ]
 ```
 
-## Unique Keys
-
-| Key | Columns | Why |
-|-----|---------|-----|
-| one_row_per_pair | product, format | The strongest support, once. A second row for the same pair would give a question two right answers while the generator names one |
 
 ## Error Messages
 

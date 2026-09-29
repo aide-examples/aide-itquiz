@@ -18,7 +18,7 @@ makes it worth having is the `purpose` — the sentence a reader can carry to th
 meet — and a purpose belongs to a record, not to a value in a list. It is the same reading
 `ProductType` follows: the kind carries the explanation, the instances carry the names.
 
-**Why not `part_of` on `FileFormat` itself.** A group is not a format. „Bildformat" is not
+**Why not `part_of` on `FileFormat` itself.** A group is not a format. An image format is not
 something one can save a file as, so a self-reference would put a thing that exists beside a
 thing that does not and call them the same. `ProductType.part_of` is a different relation — a
 processor really is *part of* a device — and the difference is worth keeping visible.
@@ -32,7 +32,7 @@ so the asymmetry reads as a decision rather than an oversight.
 
 ```json
 [
-{"name":"name","type":"string","unique":true,"label":true,"description":"What the group is called, as a person would say it","example":"Bildformat"},
+{"name":"name","type":"string","unique":true,"label":true,"description":"What the group is called, as a person would say it. ENGLISH, like every other model name — the German („Bildformat") lives in `Translation` with its gender","example":"Image format"},
 {"name":"purpose","type":"longString","description":"What the formats in this group are FOR, in one sentence — the thing worth carrying to the next format one meets. A PREDICATE and lower-case, like every other purpose in this model","example":"holds a picture, as a photograph or as a drawing"},
 {"name":"wikipedia_de","type":"wikipedia","optional":true,"description":"The German Wikipedia article — a TITLE, verified against the API rather than guessed","example":"Grafikformat"},
 {"name":"wikipedia_en","type":"wikipedia","optional":true,"description":"The English article. Separate from the German one because an article title is an identifier in another system, not a translation","example":"Image file format"},

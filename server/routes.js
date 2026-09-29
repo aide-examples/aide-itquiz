@@ -134,8 +134,8 @@ module.exports = function registerSystemRoutes(app, deps) {
    * What to SHOW as the abbreviation of such a record.
    *
    * A format, a protocol and a connector are called by their short form already — `name` IS
-   * „DOCX". A concept is not: its name is „Top-Level-Domain" and the abbreviation people meet
-   * is „TLD", which is why that entity carries both. Asking „wofür steht Top-Level-Domain?"
+   * „DOCX". A concept is not: its name is „Top-level domain" and the abbreviation people meet
+   * is „TLD", which is why that entity carries both. Asking „wofür steht Top-level domain?"
    * would answer itself.
    *
    * IT TAKES A LANGUAGE, and for four of the five pools that changes nothing — `PDF`, `HTTP` and
@@ -651,15 +651,15 @@ module.exports = function registerSystemRoutes(app, deps) {
     // produced „Das ist ein Prozessor, zum Beispiel ." which is exactly the sentence the
     // mechanism exists to prevent.
     //
-    // It replaces a second TEMPLATE per case (`purpose` beside `purpose_plain`) — which is how
-    // a phrase table grows: every optional half-sentence doubles the rows, and two wordings of
-    // one question drift apart the first time somebody improves only one of them (§46). The
-    // optionality is a property of the SENTENCE, so it lives in the sentence.
-    let out = String(text).replace(/\[\[([^\]]*)\]\]/g, (_ganz, klausel) => {
-      const rollen = [...String(klausel).matchAll(/\{([a-z_]+)\}/g)]
+    // It replaces a second TEMPLATE for the same question — which is how a phrase table grows:
+    // every optional half-sentence doubles the rows, and two wordings of one question drift apart
+    // the first time somebody improves only one of them (§46). The optionality is a property of
+    // the SENTENCE, so it lives in the sentence.
+    let out = String(text).replace(/\[\[([^\]]*)\]\]/g, (_whole, clause) => {
+      const named = [...String(clause).matchAll(/\{([a-z_]+)\}/g)]
         .map((m) => m[1].replace(/^(ein|der|genitiv)_/, ''));
-      const leer = rollen.some((r) => !(roles[r] && String(roles[r].label || '').trim()));
-      return leer ? '' : klausel;
+      const empty = named.some((r) => !(roles[r] && String(roles[r].label || '').trim()));
+      return empty ? '' : clause;
     });
     // A derived word that OPENS A SENTENCE is capitalised, and it is marked HERE — while the
     // placeholders are still visible — because after substitution nothing distinguishes a

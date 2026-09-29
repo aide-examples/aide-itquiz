@@ -24,23 +24,26 @@ the question this serves today is answered without it, and a column added when a
 it costs one migration, while one added now costs the discipline of filling it correctly for
 every row forever (§43).
 
-**The pair is unique.** A kind of device has a kind of socket or it does not; saying so twice
-says nothing new, and a duplicate would give a question two identical right answers.
+**The pair is unique**, and it is declared as `uk:1` on both attributes. A kind of device has a kind
+of socket or it does not; saying so twice says nothing new, and a duplicate would give a question
+two identical right answers.
+
+*Lehrgeld 2026-09-29.* That sentence used to stand above a `## Unique Keys` chapter — a table of key
+name, columns and reason — and the framework reads no such chapter. So nothing was declared, and
+because `[ASSOCIATION]` means there is no label either, the seed loader had nothing at all to
+recognise a row by: one ordinary reload turned twelve pairs into twenty-four, silently. The two
+facts compound, which is why it is worth stating here rather than only in the framework's issue
+(aide-rap#525): an association without a `uk` cannot be seeded twice.
 
 ## Attributes
 
 ```json
 [
-{"name":"product_type","type":"ProductType","description":"The kind of thing that has the socket","example":"Device"},
-{"name":"connector","type":"Connector","description":"The kind of socket it has","example":"HDMI"}
+{"name":"product_type","type":"ProductType","uk":1,"description":"The kind of thing that has the socket","example":"Device"},
+{"name":"connector","type":"Connector","uk":1,"description":"The kind of socket it has","example":"HDMI"}
 ]
 ```
 
-## Unique Keys
-
-| Key | Columns | Why |
-|-----|---------|-----|
-| one_row_per_pair | product_type, connector | A kind either has that socket or it does not. A second row says nothing and would give a question the same answer twice |
 
 ## Error Messages
 

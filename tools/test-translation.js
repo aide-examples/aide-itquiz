@@ -158,7 +158,8 @@ if (fs.existsSync(DB)) {
     const db = new Database(DB, { readonly: true });
     const has = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='translation'").get();
     if (has) {
-      const live = db.prepare('SELECT id, subject_entity, subject_id FROM translation WHERE id > 1').all();
+      const live = db.prepare('SELECT id, subject_entity, subject_id, language, name, article, purpose, '
+        + 'looks_like, gender, genitive, note FROM translation WHERE id > 1').all();
       dbChecked = live.length;
       // THE ORPHAN CHECK, which is the price of a polymorphic reference: no foreign key stands
       // behind `subject_id`, so a record deleted out from under a wording leaves it pointing at
@@ -169,8 +170,26 @@ if (fs.existsSync(DB)) {
           continue;
         }
         const table = r.subject_entity.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toLowerCase();
-        const hit = db.prepare(`SELECT 1 FROM ${table} WHERE id = ?`).get(r.subject_id);
-        if (!hit) findings.push(`translation #${r.id}: no ${r.subject_entity} with id ${r.subject_id}`);
+        const hit = db.prepare(`SELECT name FROM ${table} WHERE id = ?`).get(r.subject_id);
+        if (!hit) {
+          findings.push(`translation #${r.id}: no ${r.subject_entity} with id ${r.subject_id}`);
+          continue;
+        }
+        // DEAD ROWS, which only the live half can see. A seed load REPLACES and does not mirror,
+        // so a row removed from the seed stays in the database — and the fifteen removed on
+        // 2026-09-29 were exactly the ones that had become pointless: an English wording identical
+        // to the record's own name, once the record was renamed to English (#5).
+        //
+        // Harmless, and still a finding: `word()` returns the same value either way, so nothing
+        // shows, and the next reader cannot tell a row that says nothing from one that says
+        // something the record does not.
+        const saysNothing = r.name === hit.name
+          && !r.article && !r.purpose && !r.looks_like && !r.gender && !r.genitive && !r.note;
+        if (saysNothing) {
+          findings.push(`translation #${r.id}: ${r.subject_entity}/${hit.name} (${r.language}) repeats `
+            + 'the record\'s own name and carries nothing else — the row says nothing, and a seed '
+            + 'load cannot remove it because it replaces rather than mirrors');
+        }
       }
     }
     db.close();

@@ -18,8 +18,8 @@ about the subject matter.
 | FileFormat | File format | A kind of FILE — .pdf, .odt, .mp3 |
 | Protocol | Protocol | An agreement two programs follow — HTTP, MQTT |
 | Connector | Connector | The shape of a plug and its socket — HDMI, USB-C |
-| FormatGroup | Format group | What a format is a kind of — Bildformat, Kompressionsformat |
-| Concept | Concept | Something one reads and types that nobody makes — Webadresse, Domain |
+| FormatGroup | Format group | What a format is a kind of — Image format, Compression format |
+| Concept | Concept | Something one reads and types that nobody makes — Web address, Domain |
 | StorageMedium | Storage medium | A thing bytes sit on — CD-ROM, SSD, SD-Karte |
 
 ### FileSupport

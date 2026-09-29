@@ -1,6 +1,6 @@
 [
   {
-    "name": "Webadresse",
+    "name": "Web address",
     "abbreviation": "URL",
     "long_name": "Uniform Resource Locator",
     "purpose": "names one page on the web so exactly that no other page in the world has the same one",
@@ -10,7 +10,7 @@
     "note": "The address bar and the search box are one field in every modern browser, which is why „ins Internet gehen\" and „googeln\" have become the same gesture — and why many people have never typed an address in their lives"
   },
   {
-    "name": "Ressourcenkennung",
+    "name": "Resource identifier",
     "abbreviation": "URI",
     "long_name": "Uniform Resource Identifier",
     "purpose": "names a thing, whether or not it says where to find it — the wider idea that a web address is one case of",
@@ -24,14 +24,14 @@
     "name": "Domain",
     "purpose": "names who a place on the web belongs to — the part of an address between the slashes and the first single slash",
     "example": "wikipedia.org",
-    "part_of": "Webadresse",
+    "part_of": "Web address",
     "wikipedia_de": "de:Domain (Internet)",
     "wikipedia_en": "en:Domain name",
     "note": "People say „Website\" for it and the two are not the same: the domain is the name, the website is what stands at it. One can be sold without the other, which is a whole industry",
     "level": "advanced"
   },
   {
-    "name": "Top-Level-Domain",
+    "name": "Top-level domain",
     "abbreviation": "TLD",
     "purpose": "is the last part of a domain — the dot-something that says which register the name was bought from",
     "example": ".de",
@@ -42,7 +42,7 @@
     "level": "advanced"
   },
   {
-    "name": "IP-Adresse",
+    "name": "IP address",
     "abbreviation": "IP",
     "purpose": "is the number a device is reachable at in a network — what a domain is looked up to arrive at",
     "example": "185.15.59.224",
@@ -70,7 +70,7 @@
     "level": "advanced"
   },
   {
-    "name": "Lokales Netz",
+    "name": "Local network",
     "abbreviation": "LAN",
     "long_name": "Local Area Network",
     "purpose": "is the network inside one building — the devices that can reach each other without going out to the internet",

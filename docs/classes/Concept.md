@@ -38,7 +38,7 @@ agreed with them would teach the confusion instead of naming it.
 
 ```json
 [
-{"name":"name","type":"string","unique":true,"label":true,"description":"What the thing is called, as a person would say or read it","example":"Webadresse"},
+{"name":"name","type":"string","unique":true,"label":true,"description":"What the thing is called, as a person would say or read it. ENGLISH — the German („Webadresse") is a `Translation` row","example":"Web address"},
 {"name":"abbreviation","type":"string","optional":true,"unique":true,"description":"The short form, where the short form is what people actually meet. `unique` rather than `search`, because the global search covers the label and every unique string field — so somebody typing „TLD\" lands here","example":"URL"},
 {"name":"long_name","type":"string","optional":true,"unique":true,"description":"What the abbreviation stands for, written out — the answer to „wofür steht das?\". Also `unique`, for the same reason and because two concepts do not share a long form","example":"Uniform Resource Locator"},
 {"name":"purpose","type":"longString","description":"What it is FOR, in one sentence a layperson understands. A PREDICATE and lower-case, like every other purpose in this model — it is substituted into several frames and only a predicate fits them all","example":"names one page on the web so exactly that no other page has the same one"},
