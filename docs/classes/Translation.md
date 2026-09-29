@@ -10,7 +10,13 @@ One record's wording in one language — the noun, what it is for, and the gramm
 The model is English. What a learner reads is not, and six entities carry a `name` and a
 `purpose` that have to arrive in the reader's language: [ProductType](ProductType.md),
 [FileFormat](FileFormat.md), [FormatGroup](FormatGroup.md), [Protocol](Protocol.md),
-[Connector](Connector.md), [Concept](Concept.md).
+[Connector](Connector.md), [Concept](Concept.md), [StorageMedium](StorageMedium.md).
+
+*Seven, since 2026-09-29 — and seven is one past what RAP recommends for this shape ("max ~6
+targets per PMR group"). It is carried rather than redesigned because the redesign is already
+decided and waiting: aide-itquiz#1 collapses all seven into the two columns of a `[POLY_FK=…]`,
+where an eighth costs a row and not a column. Adding one more here is the cheap move ONLY
+because that is the direction of travel; a second one past the limit would not be.*
 
 **One table and not six**, at the architect's decision — 🇩🇪 *„Fassen wir die Übersetzungen
 zusammen."* `ProductTypeText` was the first of the six and is absorbed here; five siblings beside
@@ -61,6 +67,7 @@ rather than leaving a reader to infer a guarantee that is not there (§42).
 {"name":"protocol","type":"Protocol","optional":true,"description":"…when it is a protocol","example":"HTTPS"},
 {"name":"connector","type":"Connector","optional":true,"description":"…when it is a connector","example":"HDMI"},
 {"name":"concept","type":"Concept","optional":true,"description":"…when it is one of the notions nobody manufactures","example":"Webadresse"},
+{"name":"storage_medium","type":"StorageMedium","optional":true,"description":"…when it is a thing bytes sit on","example":"Floppy disk"},
 {"name":"language","type":"Language","description":"Which language this wording is in","example":"de"},
 {"name":"name","type":"string","description":"The word in that language — what the learner is meant to end up knowing","example":"Suchmaschine"},
 {"name":"purpose","type":"longString","optional":true,"description":"What it is FOR, in that language, in one sentence a layperson understands. A PREDICATE and lower-case, like the English one it stands in for — it is substituted into several frames and only a predicate fits them all","example":"führt ein Verzeichnis von Webseiten und findet Seiten darin — und ist selbst eine Website"},
@@ -83,4 +90,4 @@ a line that means nothing to the parser now says so instead of vanishing.*
 
 ## Constraints
 
-ExactlyOne(product_type, file_format, format_group, protocol, connector, concept) [LABEL="Translated record"]
+ExactlyOne(product_type, file_format, format_group, protocol, connector, concept, storage_medium) [LABEL="Translated record"]

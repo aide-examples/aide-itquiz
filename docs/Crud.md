@@ -16,6 +16,7 @@ group the selector shows them under.
 - Protocol
 - Connector
 - ConnectorPort
+- StorageMedium
 - Concept
 - Translation
 

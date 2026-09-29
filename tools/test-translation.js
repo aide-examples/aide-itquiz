@@ -34,7 +34,15 @@ const SUBJECTS = [
   ['protocol', 'protocol_id', 'Protocol.json'],
   ['connector', 'connector_id', 'Connector.json'],
   ['concept', 'concept_id', 'Concept.json'],
+  ['storage_medium', 'storage_medium_id', 'StorageMedium.json'],
 ];
+
+// SEVEN ENTRIES, AND EVERY NEW TRANSLATED ENTITY COSTS AN EIGHTH — here, in the entity doc, in
+// the constraint, and in a column. That is the enumeration-in-code cost the architecture
+// guideline names (§48): a change requires a sweep every time, and a forgotten site fails
+// silently. It is the whole argument for aide-itquiz#1, where the seven references collapse into
+// one `[POLY_FK=…]` pair and an eighth entity is a ROW rather than a sweep. Until then this list
+// is the sweep, and it is written down here so the next person knows there is one.
 
 /** @type {string[]} */
 const findings = [];

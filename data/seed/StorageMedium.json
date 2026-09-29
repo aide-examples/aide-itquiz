@@ -1,0 +1,87 @@
+[
+  {
+    "name": "CD-ROM",
+    "long_name": "Compact Disc Read-Only Memory",
+    "purpose": "holds about an album's worth of data on a disc that is pressed once and never changed",
+    "looks_like": "a shiny disc twelve centimetres across, silver underneath, with a hole in the middle",
+    "capacity_mb": 700,
+    "rewritable": false,
+    "wikipedia_de": "de:CD-ROM",
+    "wikipedia_en": "en:CD-ROM",
+    "note": "The RO means read-only, and it is the whole reason a bought CD cannot be recorded over. The word „CD\" alone hides that — a CD-R and a CD-RW are different things wearing almost the same name"
+  },
+  {
+    "name": "DVD",
+    "long_name": "Digital Versatile Disc",
+    "purpose": "holds a film, or a few gigabytes of files, on a disc the same size as a CD",
+    "looks_like": "the same shiny twelve-centimetre disc as a CD — you cannot tell them apart by eye, only by the label",
+    "capacity_mb": 4700,
+    "rewritable": false,
+    "wikipedia_de": "de:DVD",
+    "wikipedia_en": "en:DVD",
+    "note": "The V once stood for Video and was changed to Versatile when it turned out people wanted to put anything on it. Seven times a CD, in the same shape"
+  },
+  {
+    "name": "Blu-ray",
+    "long_name": "Blu-ray Disc",
+    "purpose": "holds a film in high resolution, on a disc read by a blue laser instead of a red one",
+    "looks_like": "again the same twelve-centimetre disc, usually in a blue case rather than a black one",
+    "capacity_mb": 25000,
+    "rewritable": false,
+    "wikipedia_de": "de:Blu-ray Disc",
+    "wikipedia_en": "en:Blu-ray",
+    "note": "Named after the laser, not the case: a shorter wavelength reads smaller pits, which is the entire trick behind five times a DVD in the same space"
+  },
+  {
+    "name": "Hard disk",
+    "purpose": "holds everything on a computer on spinning magnetic platters, cheaply and in quantity",
+    "looks_like": "a sealed metal box about the size of a pack of cards, heavy for its size, and it makes a faint noise while it works",
+    "capacity_mb": 2000000,
+    "rewritable": true,
+    "wikipedia_de": "de:Festplattenlaufwerk",
+    "wikipedia_en": "en:Hard disk drive",
+    "note": "The only medium here with moving parts, which is why it is the only one that can be killed by being dropped while it runs — and why it is the one that warns you with a noise first"
+  },
+  {
+    "name": "SSD",
+    "long_name": "Solid-State Drive",
+    "purpose": "does a hard disk's job with no moving parts, so it answers far faster and makes no sound",
+    "looks_like": "a flat plastic box, or a stick the size of a chewing-gum strip plugged flat onto the board",
+    "capacity_mb": 1000000,
+    "rewritable": true,
+    "wikipedia_de": "de:Solid-State-Drive",
+    "wikipedia_en": "en:Solid-state drive",
+    "note": "„Solid state\" means nothing moves — the word is about the absence of mechanics, not about sturdiness, although it delivers that too. The single biggest reason an old computer feels new after one is fitted"
+  },
+  {
+    "name": "SD card",
+    "long_name": "Secure Digital card",
+    "purpose": "holds the pictures a camera takes, on a card small enough to forget in a pocket",
+    "looks_like": "a flat plastic card about the size of a postage stamp, with one corner cut off at an angle",
+    "capacity_mb": 64000,
+    "rewritable": true,
+    "wikipedia_de": "de:SD-Karte",
+    "wikipedia_en": "en:SD card",
+    "note": "The cut corner is not decoration: it is what stops the card going in the wrong way round. There is a smaller one too — microSD — and the adapter that makes it the bigger one is just a plastic frame"
+  },
+  {
+    "name": "USB stick",
+    "purpose": "holds files on something you carry in a pocket and plug into any computer",
+    "looks_like": "a thumb-sized plastic or metal body with a USB plug at one end, often with a cap that gets lost",
+    "capacity_mb": 32000,
+    "rewritable": true,
+    "wikipedia_de": "de:USB-Stick",
+    "wikipedia_en": "en:USB flash drive",
+    "note": "Inside it is the same kind of memory as an SSD and an SD card — three things that look nothing alike and differ mainly in the plug they wear"
+  },
+  {
+    "name": "Floppy disk",
+    "purpose": "held a document or two on a magnetic disc in a plastic sleeve — the way files moved between computers before networks",
+    "looks_like": "a square plastic case about nine centimetres across with a sliding metal shutter",
+    "capacity_mb": 1,
+    "rewritable": true,
+    "wikipedia_de": "de:Diskette",
+    "wikipedia_en": "en:Floppy disk",
+    "note": "Still the Save icon in almost every program, thirty years after the last person used one. A whole generation recognises the picture and has never seen the object"
+  }
+]

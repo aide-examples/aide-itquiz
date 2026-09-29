@@ -460,5 +460,62 @@
     "name": "VOIP",
     "purpose": "ist Telefonieren über das Internet statt über eine Telefonleitung",
     "gender": "n"
+  },
+  {
+    "storage_medium": "CD-ROM",
+    "language": "de",
+    "name": "CD-ROM",
+    "purpose": "fasst ungefähr ein Musikalbum an Daten, auf einer Scheibe, die einmal gepresst und nie wieder geändert wird",
+    "gender": "f"
+  },
+  {
+    "storage_medium": "DVD",
+    "language": "de",
+    "name": "DVD",
+    "purpose": "fasst einen Film oder ein paar Gigabyte an Dateien, auf einer Scheibe so groß wie eine CD",
+    "gender": "f"
+  },
+  {
+    "storage_medium": "Blu-ray",
+    "language": "de",
+    "name": "Blu-ray",
+    "purpose": "fasst einen Film in hoher Auflösung, auf einer Scheibe, die ein blauer Laser liest statt eines roten",
+    "gender": "f"
+  },
+  {
+    "storage_medium": "Hard disk",
+    "language": "de",
+    "name": "Festplatte",
+    "purpose": "bewahrt alles auf einem Rechner auf, auf sich drehenden magnetischen Scheiben, billig und in Menge",
+    "gender": "f"
+  },
+  {
+    "storage_medium": "SSD",
+    "language": "de",
+    "name": "SSD",
+    "purpose": "erledigt die Arbeit einer Festplatte ohne bewegliche Teile — deshalb viel schneller und lautlos",
+    "gender": "f"
+  },
+  {
+    "storage_medium": "SD card",
+    "language": "de",
+    "name": "SD-Karte",
+    "purpose": "bewahrt die Bilder auf, die eine Kamera macht, auf einer Karte, die man in der Tasche vergisst",
+    "gender": "f"
+  },
+  {
+    "storage_medium": "USB stick",
+    "language": "de",
+    "name": "USB-Stick",
+    "purpose": "bewahrt Dateien auf etwas auf, das man in der Tasche trägt und an jeden Rechner steckt",
+    "gender": "m",
+    "genitive": "USB-Sticks"
+  },
+  {
+    "storage_medium": "Floppy disk",
+    "language": "de",
+    "name": "Diskette",
+    "purpose": "bewahrte ein, zwei Dokumente auf einer magnetischen Scheibe in einer Plastikhülle auf — so wanderten Dateien, bevor es Netze gab",
+    "gender": "f"
   }
 ]
