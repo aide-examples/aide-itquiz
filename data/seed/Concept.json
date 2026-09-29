@@ -62,5 +62,15 @@
     "wikipedia_de": "de:IP-Telefonie",
     "wikipedia_en": "en:Voice over IP",
     "note": "Said as if it were a protocol; the protocols under it are SIP, which arranges the call, and RTP, which carries the voice. The architect named the mechanism behind such words: one reaches for the roomier drawer because it is quicker"
+  },
+  {
+    "name": "Lokales Netz",
+    "abbreviation": "LAN",
+    "long_name": "Local Area Network",
+    "purpose": "is the network inside one building — the devices that can reach each other without going out to the internet",
+    "example": "der Router, der Drucker und zwei Laptops in einer Wohnung",
+    "wikipedia_de": "de:Local Area Network",
+    "wikipedia_en": "en:Local area network",
+    "note": "Not a protocol and not a thing you can buy: it is the BOUNDARY, the answer to „which machines are on my side of the router?\". Ethernet and WLAN are the two ways of being on it"
   }
 ]

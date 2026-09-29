@@ -38,5 +38,55 @@
     "wikipedia_de": "de:Simple Mail Transfer Protocol",
     "wikipedia_en": "en:Simple Mail Transfer Protocol",
     "note": "Nobody meets this directly — mail simply arrives. It is in for the reader who has seen the four letters in a settings dialog and would like them to mean something"
+  },
+  {
+    "name": "Ethernet",
+    "purpose": "carries data along a cable between the machines in one building — the wired half of every network",
+    "wikipedia_de": "de:Ethernet",
+    "wikipedia_en": "en:Ethernet",
+    "note": "The oldest agreement still in daily use here, from 1973, and the reason an RJ45 socket on a router in 2026 accepts a cable made decades ago"
+  },
+  {
+    "name": "WLAN",
+    "long_name": "Wireless Local Area Network",
+    "purpose": "carries the same data as Ethernet through the air, so a device needs no cable to reach the router",
+    "wikipedia_de": "de:Wireless Local Area Network",
+    "wikipedia_en": "en:Wi-Fi",
+    "note": "Germans say WLAN, the rest of the world says Wi-Fi, and both mean the same standard — one of the few cases where the German word is the more technical one"
+  },
+  {
+    "name": "Bluetooth",
+    "purpose": "carries sound and small amounts of data a few metres, between two devices that have been introduced to each other once",
+    "wikipedia_de": "de:Bluetooth",
+    "wikipedia_en": "en:Bluetooth",
+    "note": "Named after a Danish king who united tribes, and its mark is his initials in runes. The pairing is the point: unlike WLAN it connects two THINGS, not a thing to a network"
+  },
+  {
+    "name": "Zigbee",
+    "purpose": "carries tiny messages between the lamps, switches and sensors of a house, each one passing the message along for the others",
+    "wikipedia_de": "de:ZigBee",
+    "wikipedia_en": "en:Zigbee",
+    "note": "Every device is also a relay, so the network grows stronger with each lamp added — the opposite of WLAN, where more devices means more contention"
+  },
+  {
+    "name": "Z-Wave",
+    "purpose": "does what Zigbee does, on a different radio frequency that walls block less",
+    "wikipedia_de": "de:Z-Wave",
+    "wikipedia_en": "en:Z-Wave",
+    "note": "The reason a house often has both: they cannot talk to each other, and whichever the first bought lamp used tends to decide the rest"
+  },
+  {
+    "name": "Matter",
+    "purpose": "lets smart-home devices of different makes work together, whichever app or assistant the owner uses",
+    "wikipedia_de": "de:Matter (Standard)",
+    "wikipedia_en": "en:Matter (standard)",
+    "note": "The newest one here, and the first that tries to end the problem rather than add to it — agreed by Apple, Google, Amazon and Samsung together, which had not happened before"
+  },
+  {
+    "name": "Thread",
+    "purpose": "carries the messages Matter sends, over the same kind of self-relaying radio network Zigbee uses",
+    "wikipedia_de": "de:Thread (Netzwerkprotokoll)",
+    "wikipedia_en": "en:Thread (network protocol)",
+    "note": "Matter and Thread are constantly confused and are two layers of one thing: Thread is the road, Matter is the language spoken on it"
   }
 ]

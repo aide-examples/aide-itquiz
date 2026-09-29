@@ -113,7 +113,14 @@ module.exports = function registerSystemRoutes(app, deps) {
       FileFormat: f.formats, Protocol: f.protocols,
       Connector: f.connectors, Concept: f.concepts,
     };
-    return (pools[kind] || []).filter((x) => x.long_name);
+    // The long form must be DIFFERENT from the short one, and that second condition is not
+    // pedantry: `Bluetooth` was seeded with `long_name: "Bluetooth"` — it abbreviates nothing —
+    // and the generator dutifully produced „Wofür steht die Abkürzung Bluetooth? — Bluetooth
+    // steht für ‚Bluetooth'." A question that answers itself, built from data that was not
+    // wrong, only unsuitable. The seed is fixed; this is what stops the next author doing it
+    // again, because nothing else would have noticed.
+    return (pools[kind] || []).filter((x) => x.long_name
+      && String(x.long_name).trim().toLowerCase() !== String(shortName(x)).trim().toLowerCase());
   }
 
   /**

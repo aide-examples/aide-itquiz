@@ -517,5 +517,62 @@
     "name": "Diskette",
     "purpose": "bewahrte ein, zwei Dokumente auf einer magnetischen Scheibe in einer Plastikhülle auf — so wanderten Dateien, bevor es Netze gab",
     "gender": "f"
+  },
+  {
+    "protocol": "Ethernet",
+    "language": "de",
+    "name": "Ethernet",
+    "purpose": "trägt Daten über ein Kabel zwischen den Geräten eines Gebäudes — die verkabelte Hälfte jedes Netzes",
+    "gender": "n"
+  },
+  {
+    "protocol": "WLAN",
+    "language": "de",
+    "name": "WLAN",
+    "purpose": "trägt dieselben Daten wie Ethernet durch die Luft, sodass ein Gerät kein Kabel zum Router braucht",
+    "gender": "n"
+  },
+  {
+    "protocol": "Bluetooth",
+    "language": "de",
+    "name": "Bluetooth",
+    "purpose": "trägt Ton und kleine Datenmengen ein paar Meter weit, zwischen zwei Geräten, die einander einmal vorgestellt wurden",
+    "gender": "n"
+  },
+  {
+    "protocol": "Zigbee",
+    "language": "de",
+    "name": "Zigbee",
+    "purpose": "trägt winzige Nachrichten zwischen den Lampen, Schaltern und Sensoren eines Hauses, wobei jedes Gerät die Nachrichten der anderen weiterreicht",
+    "gender": "n"
+  },
+  {
+    "protocol": "Z-Wave",
+    "language": "de",
+    "name": "Z-Wave",
+    "purpose": "tut dasselbe wie Zigbee, auf einer anderen Funkfrequenz, die Wände weniger stark abschirmen",
+    "gender": "n"
+  },
+  {
+    "protocol": "Matter",
+    "language": "de",
+    "name": "Matter",
+    "purpose": "lässt Smart-Home-Geräte verschiedener Hersteller zusammenarbeiten, egal welche App oder welcher Assistent benutzt wird",
+    "gender": "n"
+  },
+  {
+    "protocol": "Thread",
+    "language": "de",
+    "name": "Thread",
+    "purpose": "trägt die Nachrichten, die Matter verschickt, über dieselbe Art selbstweiterreichendes Funknetz wie Zigbee",
+    "gender": "n"
+  },
+  {
+    "concept": "Lokales Netz",
+    "language": "de",
+    "name": "Lokales Netz",
+    "purpose": "ist das Netz innerhalb eines Gebäudes — die Geräte, die einander erreichen, ohne ins Internet zu gehen",
+    "gender": "n",
+    "genitive": "lokalen Netzes"
   }
 ]

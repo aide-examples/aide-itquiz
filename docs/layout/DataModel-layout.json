@@ -5,28 +5,28 @@
       "y": 300
     },
     "Company": {
-      "x": 780,
-      "y": 80
+      "x": 790,
+      "y": 140
     },
     "Product": {
-      "x": 600,
-      "y": 20
+      "x": 580,
+      "y": 30
     },
     "ProductType": {
-      "x": 420,
-      "y": 360
+      "x": 350,
+      "y": 320
     },
     "ProductTypeText": {
       "x": 260,
       "y": 200
     },
     "QuestionPhrase": {
-      "x": 850,
-      "y": 760
+      "x": 970,
+      "y": 660
     },
     "QuestionTemplate": {
-      "x": 760,
-      "y": 610
+      "x": 880,
+      "y": 460
     },
     "Audit": {
       "x": 40,
@@ -109,41 +109,45 @@
       "folder": "f1"
     },
     "FileFormat": {
-      "x": 30,
-      "y": 70
+      "x": 1210,
+      "y": 170
     },
     "FormatSupport": {
-      "x": 230,
-      "y": 60
+      "x": 1140,
+      "y": 30
     },
     "Concept": {
-      "x": 390,
-      "y": 650
+      "x": 700,
+      "y": 620
     },
     "Connector": {
-      "x": 570,
+      "x": 500,
       "y": 670
     },
     "ConnectorPort": {
-      "x": 500,
-      "y": 560
+      "x": 440,
+      "y": 520
     },
     "FormatGroup": {
-      "x": 120,
-      "y": 370
+      "x": 1120,
+      "y": 400
     },
     "Protocol": {
-      "x": 950,
-      "y": 130
+      "x": 980,
+      "y": 200
     },
     "Translation": {
-      "x": 970,
-      "y": 340
+      "x": 40,
+      "y": 60
+    },
+    "StorageMedium": {
+      "x": 1190,
+      "y": 580
     }
   },
   "canvas": {
-    "width": 1131.201171875,
-    "height": 906
+    "width": 1400,
+    "height": 888
   },
   "stubLevel": 4,
   "stubs": {
@@ -156,6 +160,7 @@
     "Translation.format_group": true,
     "Translation.connector": true,
     "Translation.protocol": true,
-    "ConnectorPort.product_type": false
+    "ConnectorPort.product_type": false,
+    "Translation.storage_medium": true
   }
 }
