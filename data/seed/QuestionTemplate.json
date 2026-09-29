@@ -85,6 +85,12 @@
     "note": "Sorts a format into its kind — the question that turns ten formats into six ideas plus examples"
   },
   {
+    "key": "product_group",
+    "subject_kind": "ProductType",
+    "answer_kind": "ProductGroup",
+    "note": "What FAMILY a kind of thing belongs to. Beside `part_of`, which asks what it is a PART of — the two are different relations and a player meets both, because a processor is part of a device and a kind of hardware component at the same time (#7)"
+  },
+  {
     "key": "concept_part_of",
     "subject_kind": "Concept",
     "answer_kind": "Concept",

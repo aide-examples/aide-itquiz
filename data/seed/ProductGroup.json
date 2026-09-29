@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Web service",
+    "purpose": "runs on somebody else's computer, so you reach it over the internet instead of installing it",
+    "note": "A web service and a web client are easy to swap: the search engine is the service, the browser is the client that reaches it"
+  },
+  {
+    "name": "Web client",
+    "purpose": "fetches web pages itself, rather than being what pages are fetched from",
+    "level": "advanced"
+  },
+  {
+    "name": "Document program",
+    "purpose": "makes or shows something that is meant to be read as pages"
+  },
+  {
+    "name": "Message program",
+    "purpose": "carries what one person writes to another person"
+  },
+  {
+    "name": "System program",
+    "purpose": "runs the machine and what is on it, rather than a task of yours",
+    "level": "advanced"
+  },
+  {
+    "name": "Decoder",
+    "purpose": "turns a recorded or printed form back into what it stands for",
+    "level": "advanced",
+    "note": "The kinship is one nobody sees: a media player and a barcode scanner do the same thing to different marks"
+  },
+  {
+    "name": "Hardware component",
+    "purpose": "is a part inside a device and of no use on its own",
+    "level": "advanced",
+    "note": "This is the family whose members are also `part_of` a device — the two statements are both true and say different things"
+  }
+]

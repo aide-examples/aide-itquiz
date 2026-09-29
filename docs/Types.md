@@ -20,7 +20,8 @@ about the subject matter.
 | Connector | Connector | The shape of a plug and its socket — HDMI, USB-C |
 | FormatGroup | Format group | What a format is a kind of — Image format, Compression format |
 | Concept | Concept | Something one reads and types that nobody makes — Web address, Domain |
-| StorageMedium | Storage medium | A thing bytes sit on — CD-ROM, SSD, SD-Karte |
+| StorageMedium | Storage medium | A thing bytes sit on — CD-ROM, SSD, SD card |
+| ProductGroup | Product group | What a KIND of thing is a kind of — Web service, Hardware component |
 
 ### FileSupport
 

@@ -168,6 +168,18 @@
     "explanation": "{subject} is {ein_answer} {answer}.\n*What that kind does:* {purpose}."
   },
   {
+    "template": "product_group",
+    "language": "de",
+    "text": "Was für eine Art von Sache ist {ein_subject} {subject}?",
+    "explanation": "{Ein_subject} {subject} ist {ein_answer} {answer} — {der_answer} {answer} {purpose}.[[\n{note}]]"
+  },
+  {
+    "template": "product_group",
+    "language": "en",
+    "text": "What sort of thing is {ein_subject} {subject}?",
+    "explanation": "{ein_subject} {subject} is {ein_answer} {answer} — {ein_answer} {answer} {purpose}.[[\n{note}]]"
+  },
+  {
     "template": "concept_part_of",
     "language": "de",
     "text": "Wovon ist {subject} ein Teil?",

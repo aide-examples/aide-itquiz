@@ -833,5 +833,70 @@
     "language": "en",
     "name": "AI assistant",
     "article": "an"
+  },
+  {
+    "subject_entity": "ProductGroup",
+    "subject_id": "Web service",
+    "language": "de",
+    "name": "Webdienst",
+    "purpose": "läuft auf dem Rechner eines anderen, man erreicht ihn also über das Internet, statt ihn zu installieren",
+    "gender": "m",
+    "genitive": "Webdienstes",
+    "note": "Webdienst und Web-Client werden leicht verwechselt: die Suchmaschine ist der Dienst, der Browser ist der Client, der ihn erreicht"
+  },
+  {
+    "subject_entity": "ProductGroup",
+    "subject_id": "Web client",
+    "language": "de",
+    "name": "Web-Client",
+    "purpose": "holt selbst Webseiten, statt das zu sein, wovon Seiten geholt werden",
+    "gender": "m",
+    "genitive": "Web-Clients"
+  },
+  {
+    "subject_entity": "ProductGroup",
+    "subject_id": "Document program",
+    "language": "de",
+    "name": "Dokumentprogramm",
+    "purpose": "erstellt oder zeigt etwas, das als Seiten gelesen werden soll",
+    "gender": "n",
+    "genitive": "Dokumentprogramms"
+  },
+  {
+    "subject_entity": "ProductGroup",
+    "subject_id": "Message program",
+    "language": "de",
+    "name": "Nachrichtenprogramm",
+    "purpose": "bringt das, was eine Person schreibt, zu einer anderen Person",
+    "gender": "n",
+    "genitive": "Nachrichtenprogramms"
+  },
+  {
+    "subject_entity": "ProductGroup",
+    "subject_id": "System program",
+    "language": "de",
+    "name": "Systemprogramm",
+    "purpose": "betreibt das Gerät und was darauf liegt, statt eine Aufgabe von dir zu erledigen",
+    "gender": "n",
+    "genitive": "Systemprogramms"
+  },
+  {
+    "subject_entity": "ProductGroup",
+    "subject_id": "Decoder",
+    "language": "de",
+    "name": "Decoder",
+    "purpose": "macht aus einer Aufnahme oder einem Aufdruck wieder das, was darin steht",
+    "gender": "m",
+    "genitive": "Decoders",
+    "note": "Die Verwandtschaft sieht niemand: ein Medienplayer und ein Barcodescanner tun mit verschiedenen Zeichen dasselbe"
+  },
+  {
+    "subject_entity": "ProductGroup",
+    "subject_id": "Hardware component",
+    "language": "de",
+    "name": "Hardwarekomponente",
+    "purpose": "ist ein Teil im Inneren eines Geräts und für sich allein zu nichts zu gebrauchen",
+    "gender": "f",
+    "note": "Das ist die Familie, deren Mitglieder zugleich Teil eines Geräts sind — beide Aussagen sind wahr und sagen Verschiedenes"
   }
 ]

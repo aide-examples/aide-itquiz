@@ -259,8 +259,13 @@ module.exports = function registerSystemRoutes(app, deps) {
   async function facts() {
     const eng = engine();
     const [types, translations, products, companies, templates, phrases,
-      formats, groups, protocols, connectors, concepts, supports, storages] = await Promise.all([
-      eng.query('SELECT id, name, purpose, part_of_id, icon, wikipedia_de, wikipedia_en, level FROM product_type WHERE id > 1'),
+      formats, groups, productGroups, protocols, connectors, concepts, supports, storages] = await Promise.all([
+      // `group_id` beside `part_of_id`: BOTH relations are read, because a player meets both (#7).
+      // Leaving it out is the third instance in this system of one silent class — a column the
+      // builder filters on and the query does not fetch. It does not error; the question type
+      // simply never fires, and 500 draws came back without a single one before this line was
+      // corrected.
+      eng.query('SELECT id, name, purpose, part_of_id, group_id, icon, wikipedia_de, wikipedia_en, level FROM product_type WHERE id > 1'),
       // ONE translation table for all seven translated entities, a polymorphic reference:
       // `subject_entity` names the kind and `subject_id` the row, declared as one `[POLY_FK=…]`
       // pair. Read whole like everything else here, and indexed in `translationOf()` rather than
@@ -281,6 +286,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       // different picker anyway, not a cached one.
       eng.query('SELECT id, name, extension, long_name, group_id, purpose, icon, wikipedia_de, wikipedia_en, level FROM file_format WHERE id > 1'),
       eng.query('SELECT id, name, purpose, wikipedia_de, wikipedia_en, level FROM format_group WHERE id > 1'),
+      eng.query('SELECT id, name, purpose, note, wikipedia_de, wikipedia_en, level FROM product_group WHERE id > 1'),
       eng.query('SELECT id, name, long_name, purpose, wikipedia_de, wikipedia_en, level FROM protocol WHERE id > 1'),
       eng.query('SELECT id, name, long_name, purpose, looks_like, icon, wikipedia_de, wikipedia_en, level FROM connector WHERE id > 1'),
       eng.query('SELECT id, name, abbreviation, long_name, purpose, example, part_of_id, wikipedia_de, wikipedia_en, level FROM concept WHERE id > 1'),
@@ -289,7 +295,7 @@ module.exports = function registerSystemRoutes(app, deps) {
         + 'level, wikipedia_de, wikipedia_en, note FROM storage_medium WHERE id > 1'),
     ]);
     return { types, translations, products, companies, templates, phrases,
-      formats, groups, protocols, connectors, concepts, supports, storages };
+      formats, groups, productGroups, protocols, connectors, concepts, supports, storages };
   }
 
   /**
@@ -350,6 +356,7 @@ module.exports = function registerSystemRoutes(app, deps) {
    */
   const TRANSLATED_KINDS = new Set([
     'ProductType', 'FileFormat', 'FormatGroup', 'Protocol', 'Connector', 'Concept', 'StorageMedium',
+    'ProductGroup',
   ]);
 
   /**
@@ -461,6 +468,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       companies: keep(f.companies),
       formats: keep(f.formats),
       groups: keep(f.groups),
+      productGroups: keep(f.productGroups),
       protocols: keep(f.protocols),
       connectors: keep(f.connectors),
       concepts: keep(f.concepts),
@@ -1026,6 +1034,33 @@ module.exports = function registerSystemRoutes(app, deps) {
             // „Auszeichnungssprache" is „eine". A hard-coded article gets that one wrong.
             answer: said(f, 'FormatGroup', grp, lang),
             purpose: { label: word(f, 'FormatGroup', grp, lang, 'purpose') } }, lang),
+      };
+    }
+
+    if (template.key === 'product_group') {
+      // The SAME shape as `format_group` one entity along, and deliberately not extracted into a
+      // shared helper: the two differ in the subject kind, the group kind, the pool and the FK, so
+      // a common version would take four parameters to say one thing (§9's anti-trigger — more than
+      // five switches means the paths are not the same path). What IS shared is the reasoning in
+      // the comments there; this one keeps only what is its own.
+      const type = any(f.types.filter((x) => x.group_id));
+      if (!type) return null;
+      const grp = f.productGroups.find((g) => g.id === type.group_id);
+      if (!grp) return null;
+      const wrong = sample(f.productGroups.filter((g) => g.id !== grp.id), 3);
+      if (wrong.length < 2) return null;
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'ProductType', id: type.id },
+        object: null,
+        text: fill(phrase.text, { subject: said(f, 'ProductType', type, lang) }, lang),
+        options: [grp, ...wrong].map((g) => word(f, 'ProductGroup', g, lang, 'name')),
+        _correct: word(f, 'ProductGroup', grp, lang, 'name'),
+        _explanation: fill(phrase.explanation,
+          { subject: said(f, 'ProductType', type, lang),
+            answer: said(f, 'ProductGroup', grp, lang),
+            purpose: { label: word(f, 'ProductGroup', grp, lang, 'purpose') },
+            note: { label: word(f, 'ProductGroup', grp, lang, 'note') || '' } }, lang),
       };
     }
 
@@ -1747,6 +1782,22 @@ module.exports = function registerSystemRoutes(app, deps) {
           { subject: { label: word(f, 'FileFormat', fmt, lang, 'name') },
             answer: said(f, 'FormatGroup', grp, lang),
             purpose: { label: word(f, 'FormatGroup', grp, lang, 'purpose') } }, lang),
+      };
+    }
+
+    if (template.key === 'product_group') {
+      const type = f.types.find((x) => x.id === (subject && subject.id));
+      if (!type) return null;
+      const grp = f.productGroups.find((g) => g.id === type.group_id);
+      if (!grp) return null;
+      return {
+        correct: word(f, 'ProductGroup', grp, lang, 'name'),
+        ...context([['ProductType', type], ['ProductGroup', grp]], lang),
+        explanation: fill(phrase.explanation,
+          { subject: said(f, 'ProductType', type, lang),
+            answer: said(f, 'ProductGroup', grp, lang),
+            purpose: { label: word(f, 'ProductGroup', grp, lang, 'purpose') },
+            note: { label: word(f, 'ProductGroup', grp, lang, 'note') || '' } }, lang),
       };
     }
 

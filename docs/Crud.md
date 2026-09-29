@@ -8,6 +8,7 @@ group the selector shows them under.
 ## Facts
 
 - ProductType
+- ProductGroup
 - Product
 - Company
 - FormatGroup

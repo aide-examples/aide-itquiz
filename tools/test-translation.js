@@ -27,23 +27,38 @@ const ROOT = path.resolve(__dirname, '..');
 const SEED = path.join(ROOT, 'data', 'seed', 'Translation.json');
 
 /**
- * The kinds that may be translated, and the seed file each one's names live in.
+ * The kinds a wording may name, DERIVED from the `EntityKind` enum rather than listed here.
  *
- * ONE ENTRY PER KIND and no longer one per COLUMN (#1). Until the polymorphic conversion this
- * list carried a seed key, a database column and a file for each of seven references, and every
- * new translated entity cost an edit here as well as in the entity, the constraint and the query.
- * The list is now only what it has to be: the set of kinds a row may name, plus where to check
- * that the name it gives exists.
+ * It was a list until 2026-09-29, and the list was wrong within the hour: `ProductGroup` was added
+ * to the model, to the router's `TRANSLATED_KINDS` and to seven seed rows, and this file still said
+ * the kind did not exist — so the detector reported fourteen findings against correct data, which is
+ * the shape of failure that teaches people to ignore a detector.
+ *
+ * A second enumeration of one set drifts the first time somebody touches the first (§17). The enum
+ * in `Types.md` is the model's own answer to *which kinds are there*, so it is read; a kind is
+ * checkable here when it also has a seed file of its own, and that file is the answer to *does the
+ * name resolve*. Nothing is maintained, and a kind added tomorrow is covered by existing.
+ *
+ * @returns {Array<[string, string]>} kind and the seed file its names live in
  */
-const KINDS = [
-  ['ProductType', 'ProductType.json'],
-  ['FileFormat', 'FileFormat.json'],
-  ['FormatGroup', 'FormatGroup.json'],
-  ['Protocol', 'Protocol.json'],
-  ['Connector', 'Connector.json'],
-  ['Concept', 'Concept.json'],
-  ['StorageMedium', 'StorageMedium.json'],
-];
+function translatableKinds() {
+  const types = fs.readFileSync(path.join(ROOT, 'docs', 'Types.md'), 'utf8');
+  const chapter = types.split(/^### EntityKind$/m)[1];
+  if (!chapter) throw new Error('Types.md has no `### EntityKind` chapter — nothing to derive from');
+  const table = chapter.split(/^### /m)[0];
+  /** @type {Array<[string, string]>} */
+  const out = [];
+  for (const line of table.split('\n')) {
+    const m = /^\|\s*([A-Z][A-Za-z]*)\s*\|/.exec(line);
+    if (!m || m[1] === 'Internal') continue;
+    const file = `${m[1]}.json`;
+    if (fs.existsSync(path.join(ROOT, 'data', 'seed', file))) out.push([m[1], file]);
+  }
+  if (!out.length) throw new Error('no kind in `EntityKind` has a seed file — the derivation is wrong');
+  return out;
+}
+
+const KINDS = translatableKinds();
 
 /** @type {string[]} */
 const findings = [];
