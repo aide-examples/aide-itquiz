@@ -26,23 +26,24 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const SEED = path.join(ROOT, 'data', 'seed', 'Translation.json');
 
-/** The six references, and the seed key ↔ database column of each. */
-const SUBJECTS = [
-  ['product_type', 'product_type_id', 'ProductType.json'],
-  ['file_format', 'file_format_id', 'FileFormat.json'],
-  ['format_group', 'format_group_id', 'FormatGroup.json'],
-  ['protocol', 'protocol_id', 'Protocol.json'],
-  ['connector', 'connector_id', 'Connector.json'],
-  ['concept', 'concept_id', 'Concept.json'],
-  ['storage_medium', 'storage_medium_id', 'StorageMedium.json'],
+/**
+ * The kinds that may be translated, and the seed file each one's names live in.
+ *
+ * ONE ENTRY PER KIND and no longer one per COLUMN (#1). Until the polymorphic conversion this
+ * list carried a seed key, a database column and a file for each of seven references, and every
+ * new translated entity cost an edit here as well as in the entity, the constraint and the query.
+ * The list is now only what it has to be: the set of kinds a row may name, plus where to check
+ * that the name it gives exists.
+ */
+const KINDS = [
+  ['ProductType', 'ProductType.json'],
+  ['FileFormat', 'FileFormat.json'],
+  ['FormatGroup', 'FormatGroup.json'],
+  ['Protocol', 'Protocol.json'],
+  ['Connector', 'Connector.json'],
+  ['Concept', 'Concept.json'],
+  ['StorageMedium', 'StorageMedium.json'],
 ];
-
-// SEVEN ENTRIES, AND EVERY NEW TRANSLATED ENTITY COSTS AN EIGHTH — here, in the entity doc, in
-// the constraint, and in a column. That is the enumeration-in-code cost the architecture
-// guideline names (§48): a change requires a sweep every time, and a forgotten site fails
-// silently. It is the whole argument for aide-itquiz#1, where the seven references collapse into
-// one `[POLY_FK=…]` pair and an eighth entity is a ROW rather than a sweep. Until then this list
-// is the sweep, and it is written down here so the next person knows there is one.
 
 /** @type {string[]} */
 const findings = [];
@@ -50,33 +51,34 @@ const findings = [];
 // ── The seed ────────────────────────────────────────────────────────────────────────────────
 const rows = JSON.parse(fs.readFileSync(SEED, 'utf8'));
 
-/** The names each referenced entity's own seed offers, so a typo in a key is caught here. */
+/** The names each referenced entity's own seed offers, so a typo in a name is caught here. */
 const known = new Map();
-for (const [key, , file] of SUBJECTS) {
+for (const [kind, file] of KINDS) {
   const p = path.join(ROOT, 'data', 'seed', file);
   const own = fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8')) : [];
-  known.set(key, new Set(own.map((r) => r.name)));
+  known.set(kind, new Set(own.map((r) => r.name)));
 }
 
 const seen = new Map();
 rows.forEach((r, i) => {
   const at = `seed row ${i + 1}`;
-  const present = SUBJECTS.map(([k]) => k).filter((k) => r[k] !== undefined && r[k] !== null);
-  if (present.length !== 1) {
-    findings.push(`${at}: ${present.length === 0 ? 'names no subject' : `names ${present.length} subjects (${present.join(', ')})`}`
-      + ' — ExactlyOne means exactly one');
+  // WHAT THE UNIQUE KEY CANNOT SAY. `(subject_entity, subject_id, language)` is a declared key
+  // now, so duplicates are the database's problem and no longer this tool's. What no index can
+  // check is whether the row names a kind the model has, and whether the NAME in `subject_id`
+  // resolves to a record — a key only knows that two rows differ.
+  if (!known.has(r.subject_entity)) {
+    findings.push(`${at}: subject_entity "${r.subject_entity}" is not a translated kind`);
     return;
   }
-  const [key] = present;
   if (!r.language) findings.push(`${at}: no language`);
   if (!r.name) findings.push(`${at}: no name — the word in that language is the point of the row`);
-  if (!known.get(key).has(r[key])) {
-    findings.push(`${at}: ${key} "${r[key]}" is in no ${key} seed — the FK will not resolve`);
+  if (!known.get(r.subject_entity).has(r.subject_id)) {
+    findings.push(`${at}: no ${r.subject_entity} is called "${r.subject_id}" — the seed names its `
+      + 'target and the loader resolves it, so a typo here becomes a null reference');
   }
-  const id = `${key}/${r[key]}/${r.language}`;
+  const id = `${r.subject_entity}/${r.subject_id}/${r.language}`;
   if (seen.has(id)) {
-    findings.push(`${at}: a second wording for ${id} (first at seed row ${seen.get(id) + 1}) `
-      + '— the generator would have two words for one thing and no rule for choosing');
+    findings.push(`${at}: a second wording for ${id} (first at seed row ${seen.get(id) + 1})`);
   } else {
     seen.set(id, i);
   }
@@ -100,22 +102,19 @@ if (fs.existsSync(DB)) {
     const db = new Database(DB, { readonly: true });
     const has = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='translation'").get();
     if (has) {
-      const cols = SUBJECTS.map(([, c]) => `"${c}"`).join(', ');
-      const live = db.prepare(`SELECT id, ${cols}, language FROM translation WHERE id > 1`).all();
+      const live = db.prepare('SELECT id, subject_entity, subject_id FROM translation WHERE id > 1').all();
       dbChecked = live.length;
-      const dbSeen = new Map();
+      // THE ORPHAN CHECK, which is the price of a polymorphic reference: no foreign key stands
+      // behind `subject_id`, so a record deleted out from under a wording leaves it pointing at
+      // nothing. This is the local stand-in until aide-rap#514 makes it a framework check.
       for (const r of live) {
-        const present = SUBJECTS.map(([, c]) => c).filter((c) => r[c]);
-        if (present.length !== 1) {
-          findings.push(`translation #${r.id}: ${present.length} subjects set — ExactlyOne means exactly one`);
+        if (!known.has(r.subject_entity)) {
+          findings.push(`translation #${r.id}: subject_entity "${r.subject_entity}" is not a translated kind`);
           continue;
         }
-        const id = `${present[0]}/${r[present[0]]}/${r.language}`;
-        if (dbSeen.has(id)) {
-          findings.push(`translation #${r.id}: a second wording for ${id} (first is #${dbSeen.get(id)})`);
-        } else {
-          dbSeen.set(id, r.id);
-        }
+        const table = r.subject_entity.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toLowerCase();
+        const hit = db.prepare(`SELECT 1 FROM ${table} WHERE id = ?`).get(r.subject_id);
+        if (!hit) findings.push(`translation #${r.id}: no ${r.subject_entity} with id ${r.subject_id}`);
       }
     }
     db.close();
@@ -134,4 +133,4 @@ if (findings.length) {
 }
 console.log(`✓ test-translation: ${rows.length} seed rows`
   + `${dbChecked ? ` and ${dbChecked} live rows` : ''}, each with exactly one subject `
-  + 'and at most one wording per record per language');
+  + 'each naming a kind the model has and a record that exists');

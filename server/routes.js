@@ -264,8 +264,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       // ONE translation table for all six translated entities, a polymorphic reference: six real
       // FK columns with `ExactlyOne` over them. Read whole like everything else here, and indexed
       // in `wording()` rather than queried per lookup.
-      eng.query('SELECT product_type_id, file_format_id, format_group_id, protocol_id, '
-        + 'connector_id, concept_id, storage_medium_id, language, name, purpose, gender, '
+      eng.query('SELECT subject_entity, subject_id, language, name, purpose, gender, '
         + 'genitive, looks_like, note FROM translation WHERE id > 1'),
       eng.query('SELECT id, name, product_type_id, manufacturer_id, icon, wikipedia_de, wikipedia_en, level FROM product WHERE id > 1'),
       eng.query('SELECT id, name, logo, wikipedia_de, wikipedia_en, level FROM company WHERE id > 1'),
@@ -331,21 +330,21 @@ module.exports = function registerSystemRoutes(app, deps) {
   }
 
   /**
-   * Which column of `translation` carries the reference, per entity kind.
+   * The kinds that can carry a translation.
    *
-   * The one place that knows the mapping. A seventh translated entity adds a line here and a
-   * column there, and every caller below inherits it — which is the whole reason the six
-   * translations are one table and not six (§17).
+   * A LIST AND NO LONGER A MAP (#1). It used to pair each kind with its own column —
+   * `ProductType: 'product_type_id'` and six siblings — because the table had seven optional
+   * foreign keys. It now has one polymorphic pair, so the kind IS the value stored, and what is
+   * left here is the set of kinds that may appear: a guard against a lookup for something that
+   * was never translated, not a translation table of its own.
+   *
+   * An eighth translated entity is now a ROW rather than a column, a constraint member, a
+   * detector entry and a line here. That was the argument for the change and this list is what
+   * is left of the sweep.
    */
-  const TRANSLATION_FK = {
-    ProductType: 'product_type_id',
-    FileFormat: 'file_format_id',
-    FormatGroup: 'format_group_id',
-    Protocol: 'protocol_id',
-    Connector: 'connector_id',
-    Concept: 'concept_id',
-    StorageMedium: 'storage_medium_id',
-  };
+  const TRANSLATED_KINDS = new Set([
+    'ProductType', 'FileFormat', 'FormatGroup', 'Protocol', 'Connector', 'Concept', 'StorageMedium',
+  ]);
 
   /**
    * The translation row for one record in one language, or null.
@@ -363,12 +362,12 @@ module.exports = function registerSystemRoutes(app, deps) {
     if (!f._byTranslationKey) {
       f._byTranslationKey = new Map();
       for (const t of f.translations) {
-        for (const [k, col] of Object.entries(TRANSLATION_FK)) {
-          if (t[col]) f._byTranslationKey.set(`${k}/${t[col]}/${t.language}`, t);
+        if (t.subject_entity && t.subject_id) {
+          f._byTranslationKey.set(`${t.subject_entity}/${t.subject_id}/${t.language}`, t);
         }
       }
     }
-    if (!record || !TRANSLATION_FK[kind]) return null;
+    if (!record || !TRANSLATED_KINDS.has(kind)) return null;
     return f._byTranslationKey.get(`${kind}/${record.id}/${lang}`) || null;
   }
 

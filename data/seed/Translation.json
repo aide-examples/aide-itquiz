@@ -1,6 +1,7 @@
 [
   {
-    "product_type": "Browser",
+    "subject_entity": "ProductType",
+    "subject_id": "Browser",
     "language": "de",
     "name": "Browser",
     "purpose": "zeigt Webseiten an",
@@ -9,7 +10,8 @@
     "note": "Viele stellen eine Suchmaschine als Startseite des Browsers ein — daher wirken die beiden wie ein Ding"
   },
   {
-    "product_type": "Search engine",
+    "subject_entity": "ProductType",
+    "subject_id": "Search engine",
     "language": "de",
     "name": "Suchmaschine",
     "purpose": "führt ein Verzeichnis von Webseiten und findet Seiten darin — und ist selbst eine Website",
@@ -17,7 +19,8 @@
     "note": "Man erreicht sie DURCH einen Browser, so wie man ein Geschäft durch eine Tür erreicht"
   },
   {
-    "product_type": "Spider",
+    "subject_entity": "ProductType",
+    "subject_id": "Spider",
     "language": "de",
     "name": "Spider",
     "purpose": "geht Webseiten durch und baut daraus das Verzeichnis, das eine Suchmaschine führt",
@@ -26,7 +29,8 @@
     "note": "Niemand benutzt einen Spider unmittelbar; er arbeitet für die Suchmaschine, der er gehört"
   },
   {
-    "product_type": "Operating system",
+    "subject_entity": "ProductType",
+    "subject_id": "Operating system",
     "language": "de",
     "name": "Betriebssystem",
     "purpose": "lässt ein Gerät und die Programme darauf laufen",
@@ -34,7 +38,8 @@
     "genitive": "Betriebssystems"
   },
   {
-    "product_type": "Device",
+    "subject_entity": "ProductType",
+    "subject_id": "Device",
     "language": "de",
     "name": "Gerät",
     "purpose": "vereint Prozessor, Speicher und Bildschirm zu einer Maschine, die man in der Hand hält oder vor sich stehen hat",
@@ -42,7 +47,8 @@
     "genitive": "Geräts"
   },
   {
-    "product_type": "Word processor",
+    "subject_entity": "ProductType",
+    "subject_id": "Word processor",
     "language": "de",
     "name": "Textprogramm",
     "purpose": "schreibt und gestaltet Dokumente, die als Seiten gelesen werden",
@@ -50,14 +56,16 @@
     "genitive": "Textprogramms"
   },
   {
-    "product_type": "Spreadsheet",
+    "subject_entity": "ProductType",
+    "subject_id": "Spreadsheet",
     "language": "de",
     "name": "Tabellenkalkulation",
     "purpose": "hält Zahlen in einem Raster und rechnet damit",
     "gender": "f"
   },
   {
-    "product_type": "Office suite",
+    "subject_entity": "ProductType",
+    "subject_id": "Office suite",
     "language": "de",
     "name": "Office-Paket",
     "purpose": "bündelt mehrere Programme, die zusammen verkauft und installiert werden — meist ein Textprogramm, eine Tabellenkalkulation und ein Präsentationsprogramm",
@@ -65,7 +73,8 @@
     "genitive": "Office-Pakets"
   },
   {
-    "product_type": "Messenger",
+    "subject_entity": "ProductType",
+    "subject_id": "Messenger",
     "language": "de",
     "name": "Messenger",
     "purpose": "befördert Nachrichten zwischen Menschen, die ihn beide installiert haben",
@@ -73,7 +82,8 @@
     "genitive": "Messengers"
   },
   {
-    "product_type": "Processor",
+    "subject_entity": "ProductType",
+    "subject_id": "Processor",
     "language": "de",
     "name": "Prozessor",
     "purpose": "führt die Schritte aus, aus denen ein Programm besteht — der Teil, der wirklich rechnet",
@@ -81,7 +91,8 @@
     "genitive": "Prozessors"
   },
   {
-    "product_type": "Working memory",
+    "subject_entity": "ProductType",
+    "subject_id": "Working memory",
     "language": "de",
     "name": "Arbeitsspeicher",
     "purpose": "hält, woran gerade gearbeitet wird, und ist nach dem Ausschalten wieder leer",
@@ -89,7 +100,8 @@
     "genitive": "Arbeitsspeichers"
   },
   {
-    "product_type": "Storage medium",
+    "subject_entity": "ProductType",
+    "subject_id": "Storage medium",
     "language": "de",
     "name": "Massenspeicher",
     "purpose": "bewahrt Dateien auf, sodass sie nach dem Ausschalten noch da sind",
@@ -97,7 +109,8 @@
     "genitive": "Massenspeichers"
   },
   {
-    "product_type": "Screen",
+    "subject_entity": "ProductType",
+    "subject_id": "Screen",
     "language": "de",
     "name": "Bildschirm",
     "purpose": "zeigt, was das Gerät ausgibt, und nimmt die Berührungen darauf als Eingabe",
@@ -105,7 +118,8 @@
     "genitive": "Bildschirms"
   },
   {
-    "product_type": "Battery",
+    "subject_entity": "ProductType",
+    "subject_id": "Battery",
     "language": "de",
     "name": "Akku",
     "purpose": "speichert Strom, damit das Gerät ohne Kabel läuft",
@@ -113,7 +127,8 @@
     "genitive": "Akkus"
   },
   {
-    "product_type": "Online encyclopedia",
+    "subject_entity": "ProductType",
+    "subject_id": "Online encyclopedia",
     "language": "de",
     "name": "Onlinelexikon",
     "purpose": "sammelt Wissen in Artikeln, die die Leser selbst schreiben und berichtigen",
@@ -121,7 +136,8 @@
     "genitive": "Onlinelexikons"
   },
   {
-    "product_type": "Mail client",
+    "subject_entity": "ProductType",
+    "subject_id": "Mail client",
     "language": "de",
     "name": "E-Mail-Programm",
     "purpose": "holt deine Post von einem Server und zeigt sie an, und schickt weg, was du schreibst",
@@ -129,7 +145,8 @@
     "genitive": "E-Mail-Programms"
   },
   {
-    "product_type": "AI assistant",
+    "subject_entity": "ProductType",
+    "subject_id": "AI assistant",
     "language": "de",
     "name": "KI-Assistent",
     "purpose": "antwortet in Sätzen, weil er an einer riesigen Menge Text trainiert wurde",
@@ -137,7 +154,8 @@
     "genitive": "KI-Assistenten"
   },
   {
-    "product_type": "Map service",
+    "subject_entity": "ProductType",
+    "subject_id": "Map service",
     "language": "de",
     "name": "Kartendienst",
     "purpose": "zeigt, wo etwas ist und wie man von einem zum anderen kommt",
@@ -145,7 +163,8 @@
     "genitive": "Kartendienstes"
   },
   {
-    "product_type": "Video platform",
+    "subject_entity": "ProductType",
+    "subject_id": "Video platform",
     "language": "de",
     "name": "Videoportal",
     "purpose": "bewahrt Videos auf, die jeder hochladen und jeder ansehen darf",
@@ -153,7 +172,8 @@
     "genitive": "Videoportals"
   },
   {
-    "product_type": "App store",
+    "subject_entity": "ProductType",
+    "subject_id": "App store",
     "language": "de",
     "name": "App-Store",
     "purpose": "ist der Ort, aus dem die Programme auf einem Handy kommen und an dem sie aktuell gehalten werden",
@@ -161,7 +181,8 @@
     "genitive": "App-Stores"
   },
   {
-    "product_type": "Cloud storage",
+    "subject_entity": "ProductType",
+    "subject_id": "Cloud storage",
     "language": "de",
     "name": "Onlinespeicher",
     "purpose": "bewahrt Dateien auf dem Computer eines anderen auf, damit jedes deiner Geräte sie erreicht",
@@ -169,7 +190,8 @@
     "genitive": "Onlinespeichers"
   },
   {
-    "product_type": "Media player",
+    "subject_entity": "ProductType",
+    "subject_id": "Media player",
     "language": "de",
     "name": "Medienspieler",
     "purpose": "spielt eine Ton- oder Videodatei ab, womit sie auch aufgenommen wurde",
@@ -177,7 +199,8 @@
     "genitive": "Medienspielers"
   },
   {
-    "product_type": "File manager",
+    "subject_entity": "ProductType",
+    "subject_id": "File manager",
     "language": "de",
     "name": "Dateimanager",
     "purpose": "zeigt, was auf einem Gerät liegt, als Ordner und Dateien, und lässt dich verschieben, kopieren und löschen",
@@ -185,7 +208,8 @@
     "genitive": "Dateimanagers"
   },
   {
-    "product_type": "Document viewer",
+    "subject_entity": "ProductType",
+    "subject_id": "Document viewer",
     "language": "de",
     "name": "Dokumentenbetrachter",
     "purpose": "öffnet ein Dokument und zeigt es an, ohne es ändern zu können",
@@ -193,7 +217,8 @@
     "genitive": "Dokumentenbetrachters"
   },
   {
-    "product_type": "Barcode scanner",
+    "subject_entity": "ProductType",
+    "subject_id": "Barcode scanner",
     "language": "de",
     "name": "Barcode-Scanner",
     "purpose": "liest die Striche oder Quadrate auf einem Etikett und macht wieder die Nummer oder Adresse daraus, für die sie stehen",
@@ -201,7 +226,8 @@
     "genitive": "Barcode-Scanners"
   },
   {
-    "product_type": "Network storage",
+    "subject_entity": "ProductType",
+    "subject_id": "Network storage",
     "language": "de",
     "name": "Netzwerkspeicher",
     "purpose": "bewahrt Dateien auf einem eigenen Kasten im Haus auf, erreichbar von jedem Gerät im Netz",
@@ -209,85 +235,99 @@
     "genitive": "Netzwerkspeichers"
   },
   {
-    "file_format": "PDF",
+    "subject_entity": "FileFormat",
+    "subject_id": "PDF",
     "language": "de",
     "name": "PDF",
     "purpose": "hält ein Dokument so fest, dass es überall gleich aussieht, egal wer es öffnet"
   },
   {
-    "file_format": "ODF",
+    "subject_entity": "FileFormat",
+    "subject_id": "ODF",
     "language": "de",
     "name": "ODF",
     "purpose": "hält ein Textdokument in einem Format, das niemandem gehört, sodass jedes Office-Programm es lesen und schreiben darf"
   },
   {
-    "file_format": "DOCX",
+    "subject_entity": "FileFormat",
+    "subject_id": "DOCX",
     "language": "de",
     "name": "DOCX",
     "purpose": "hält ein Textdokument in dem Format, das Microsoft Word schreibt"
   },
   {
-    "file_format": "HTML",
+    "subject_entity": "FileFormat",
+    "subject_id": "HTML",
     "language": "de",
     "name": "HTML",
     "purpose": "hält eine Webseite — den Text zusammen mit Marken, die sagen, was eine Überschrift, ein Link, ein Bild ist"
   },
   {
-    "file_format": "JPEG",
+    "subject_entity": "FileFormat",
+    "subject_id": "JPEG",
     "language": "de",
     "name": "JPEG",
     "purpose": "hält ein Foto und macht es kleiner, indem es Feinheiten wegwirft, die das Auge kaum bemerkt"
   },
   {
-    "file_format": "PNG",
+    "subject_entity": "FileFormat",
+    "subject_id": "PNG",
     "language": "de",
     "name": "PNG",
     "purpose": "hält ein Bild, ohne etwas wegzuwerfen, und darf Teile davon durchsichtig lassen"
   },
   {
-    "file_format": "MP3",
+    "subject_entity": "FileFormat",
+    "subject_id": "MP3",
     "language": "de",
     "name": "MP3",
     "purpose": "hält Musik oder Sprache, klein genug, um Tausende davon mitzunehmen"
   },
   {
-    "file_format": "MP4",
+    "subject_entity": "FileFormat",
+    "subject_id": "MP4",
     "language": "de",
     "name": "MP4",
     "purpose": "hält ein Video zusammen mit seinem Ton"
   },
   {
-    "file_format": "CSV",
+    "subject_entity": "FileFormat",
+    "subject_id": "CSV",
     "language": "de",
     "name": "CSV",
     "purpose": "hält eine Tabelle als reinen Text, eine Zeile pro Datensatz und die Spalten durch ein Zeichen getrennt"
   },
   {
-    "file_format": "EPUB",
+    "subject_entity": "FileFormat",
+    "subject_id": "EPUB",
     "language": "de",
     "name": "EPUB",
     "purpose": "hält ein Buch, dessen Text sich umbricht, damit er auf alles passt, worauf man ihn liest"
   },
   {
-    "file_format": "XML",
+    "subject_entity": "FileFormat",
+    "subject_id": "XML",
     "language": "de",
     "name": "XML",
     "purpose": "hält Daten zusammen mit Marken, die jedes Stück benennen, sodass Mensch und Programm beide lesen können"
   },
   {
-    "file_format": "ZIP",
+    "subject_entity": "FileFormat",
+    "subject_id": "ZIP",
     "language": "de",
     "name": "ZIP",
     "purpose": "hält mehrere Dateien in einer, macht sie kleiner und gibt sie genau so zurück, wie sie waren"
   },
   {
-    "file_format": "GZ",
+    "subject_entity": "FileFormat",
+    "subject_id": "GZ",
     "language": "de",
     "name": "GZ",
     "purpose": "macht EINE Datei kleiner, und nichts weiter — kein Ordner, keine zweite Datei"
   },
   {
-    "format_group": "Dokumentformat",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Dokumentformat",
     "language": "de",
     "name": "Dokumentformat",
     "purpose": "hält einen Text, der als Seiten gelesen werden soll, mit seinem Layout",
@@ -295,7 +335,8 @@
     "genitive": "Dokumentformats"
   },
   {
-    "format_group": "Bildformat",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Bildformat",
     "language": "de",
     "name": "Bildformat",
     "purpose": "hält ein Bild, als Fotografie oder als Zeichnung",
@@ -303,7 +344,8 @@
     "genitive": "Bildformats"
   },
   {
-    "format_group": "Audioformat",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Audioformat",
     "language": "de",
     "name": "Audioformat",
     "purpose": "hält Ton — Musik, Sprache, eine Aufnahme",
@@ -311,7 +353,8 @@
     "genitive": "Audioformats"
   },
   {
-    "format_group": "Videoformat",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Videoformat",
     "language": "de",
     "name": "Videoformat",
     "purpose": "hält bewegte Bilder zusammen mit ihrem Ton",
@@ -319,7 +362,8 @@
     "genitive": "Videoformats"
   },
   {
-    "format_group": "Kompressionsformat",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Kompressionsformat",
     "language": "de",
     "name": "Kompressionsformat",
     "purpose": "macht eine oder mehrere Dateien kleiner und kann sie genau so zurückgeben, wie sie waren",
@@ -327,7 +371,8 @@
     "genitive": "Kompressionsformats"
   },
   {
-    "format_group": "Auszeichnungssprache",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Auszeichnungssprache",
     "language": "de",
     "name": "Auszeichnungssprache",
     "purpose": "hält Text zusammen mit Marken, die sagen, was jeder Teil IST — eine Überschrift, ein Link, eine Tabelle",
@@ -335,7 +380,8 @@
     "note": "Die eine Gruppe hier, die kein „…format\" heißt — und deshalb die einzige, bei der „ein Bildformat\" zu „eine Auszeichnungssprache\" werden muss"
   },
   {
-    "format_group": "Tabellenformat",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Tabellenformat",
     "language": "de",
     "name": "Tabellenformat",
     "purpose": "hält Zeilen und Spalten — die Form, in der eine Tabellenkalkulation arbeitet",
@@ -343,61 +389,71 @@
     "genitive": "Tabellenformats"
   },
   {
-    "protocol": "HTTP",
+    "subject_entity": "Protocol",
+    "subject_id": "HTTP",
     "language": "de",
     "name": "HTTP",
     "purpose": "bringt Webseiten von einem Server zu einem Browser — die Abmachung, auf der jede Seite in der Adressleiste beruht"
   },
   {
-    "protocol": "HTTPS",
+    "subject_entity": "Protocol",
+    "subject_id": "HTTPS",
     "language": "de",
     "name": "HTTPS",
     "purpose": "bringt die gleichen Seiten wie HTTP, aber verschlüsselt, sodass niemand auf dem Weg mitlesen oder etwas verändern kann"
   },
   {
-    "protocol": "MQTT",
+    "subject_entity": "Protocol",
+    "subject_id": "MQTT",
     "language": "de",
     "name": "MQTT",
     "purpose": "bringt winzige Nachrichten zwischen Geräten hin und her, die etwas melden — ein Thermometer, eine Lampe, ein Zähler"
   },
   {
-    "protocol": "SIP",
+    "subject_entity": "Protocol",
+    "subject_id": "SIP",
     "language": "de",
     "name": "SIP",
     "purpose": "baut ein Gespräch über das Internet auf — wer wen anruft, und über welche Leitung die Stimme dann läuft"
   },
   {
-    "protocol": "SMTP",
+    "subject_entity": "Protocol",
+    "subject_id": "SMTP",
     "language": "de",
     "name": "SMTP",
     "purpose": "bringt eine Mail vom Server des Absenders zum Server des Empfängers"
   },
   {
-    "connector": "HDMI",
+    "subject_entity": "Connector",
+    "subject_id": "HDMI",
     "language": "de",
     "name": "HDMI",
     "purpose": "überträgt Bild und Ton über ein einziges Kabel, von einem Gerät zu einem Bildschirm"
   },
   {
-    "connector": "USB-C",
+    "subject_entity": "Connector",
+    "subject_id": "USB-C",
     "language": "de",
     "name": "USB-C",
     "purpose": "überträgt Strom und Daten über ein kleines Kabel und passt in beiden Richtungen"
   },
   {
-    "connector": "USB-A",
+    "subject_entity": "Connector",
+    "subject_id": "USB-A",
     "language": "de",
     "name": "USB-A",
     "purpose": "überträgt Strom und Daten — der rechteckige Stecker, der zwanzig Jahre lang an allem war"
   },
   {
-    "connector": "RJ45",
+    "subject_entity": "Connector",
+    "subject_id": "RJ45",
     "language": "de",
     "name": "RJ45",
     "purpose": "überträgt eine Netzwerkverbindung über Kabel — das Kabel, mit dem ein Rechner am Router steckt"
   },
   {
-    "connector": "Klinke",
+    "subject_entity": "Connector",
+    "subject_id": "Klinke",
     "language": "de",
     "name": "Klinke",
     "purpose": "überträgt Ton zu einem Kopfhörer oder von einem Mikrofon",
@@ -405,49 +461,56 @@
     "note": "Der einzige Stecker in dieser Liste, dessen deutscher Name gebräuchlicher ist als der englische — „phone connector\" sagt hier niemand"
   },
   {
-    "connector": "Cinch",
+    "subject_entity": "Connector",
+    "subject_id": "Cinch",
     "language": "de",
     "name": "Cinch",
     "purpose": "überträgt ein einzelnes analoges Signal — ein Stecker für den linken Ton, einer für den rechten, einer für das Bild",
     "gender": "n"
   },
   {
-    "concept": "Webadresse",
+    "subject_entity": "Concept",
+    "subject_id": "Webadresse",
     "language": "de",
     "name": "Webadresse",
     "purpose": "benennt eine Seite im Web so genau, dass keine andere Seite auf der Welt dieselbe Adresse hat",
     "gender": "f"
   },
   {
-    "concept": "Ressourcenkennung",
+    "subject_entity": "Concept",
+    "subject_id": "Ressourcenkennung",
     "language": "de",
     "name": "Ressourcenkennung",
     "purpose": "benennt ein Ding, ganz gleich ob damit auch gesagt wird, wo es zu finden ist — der weitere Begriff, von dem eine Webadresse ein Sonderfall ist",
     "gender": "f"
   },
   {
-    "concept": "Domain",
+    "subject_entity": "Concept",
+    "subject_id": "Domain",
     "language": "de",
     "name": "Domain",
     "purpose": "benennt, wem ein Ort im Web gehört — der Teil einer Adresse zwischen den Schrägstrichen",
     "gender": "f"
   },
   {
-    "concept": "Top-Level-Domain",
+    "subject_entity": "Concept",
+    "subject_id": "Top-Level-Domain",
     "language": "de",
     "name": "Top-Level-Domain",
     "purpose": "ist der letzte Teil einer Domain — das Punkt-Irgendwas, das sagt, welches Register den Namen führt",
     "gender": "f"
   },
   {
-    "concept": "IP-Adresse",
+    "subject_entity": "Concept",
+    "subject_id": "IP-Adresse",
     "language": "de",
     "name": "IP-Adresse",
     "purpose": "ist die Nummer, unter der ein Gerät in einem Netz erreichbar ist — das, wozu eine Domain aufgelöst wird",
     "gender": "f"
   },
   {
-    "concept": "Socket",
+    "subject_entity": "Concept",
+    "subject_id": "Socket",
     "language": "de",
     "name": "Socket",
     "purpose": "ist ein Ende einer Verbindung zwischen zwei Programmen — die Stelle, an der das eine sich in das andere einsteckt",
@@ -455,14 +518,16 @@
     "genitive": "Sockets"
   },
   {
-    "concept": "VOIP",
+    "subject_entity": "Concept",
+    "subject_id": "VOIP",
     "language": "de",
     "name": "VOIP",
     "purpose": "ist Telefonieren über das Internet statt über eine Telefonleitung",
     "gender": "n"
   },
   {
-    "storage_medium": "CD-ROM",
+    "subject_entity": "StorageMedium",
+    "subject_id": "CD-ROM",
     "language": "de",
     "name": "CD-ROM",
     "purpose": "fasst ungefähr ein Musikalbum an Daten, auf einer Scheibe, die einmal gepresst und nie wieder geändert wird",
@@ -471,7 +536,8 @@
     "note": "Das RO heißt read-only, und genau deshalb kann man eine gekaufte CD nicht überspielen. Das Wort „CD“ allein verschweigt das — eine CD-R und eine CD-RW sind andere Dinge mit fast demselben Namen"
   },
   {
-    "storage_medium": "DVD",
+    "subject_entity": "StorageMedium",
+    "subject_id": "DVD",
     "language": "de",
     "name": "DVD",
     "purpose": "fasst einen Film oder ein paar Gigabyte an Dateien, auf einer Scheibe so groß wie eine CD",
@@ -480,7 +546,8 @@
     "note": "Das V stand einmal für Video und wurde zu Versatile geändert, als sich zeigte, dass die Leute alles Mögliche darauf legen wollten. Siebenmal eine CD, in derselben Form"
   },
   {
-    "storage_medium": "Blu-ray",
+    "subject_entity": "StorageMedium",
+    "subject_id": "Blu-ray",
     "language": "de",
     "name": "Blu-ray",
     "purpose": "fasst einen Film in hoher Auflösung, auf einer Scheibe, die ein blauer Laser liest statt eines roten",
@@ -489,7 +556,8 @@
     "note": "Benannt nach dem Laser, nicht nach der Hülle: eine kürzere Wellenlänge liest kleinere Vertiefungen, und das ist der ganze Trick hinter fünfmal einer DVD auf gleichem Platz"
   },
   {
-    "storage_medium": "Hard disk",
+    "subject_entity": "StorageMedium",
+    "subject_id": "Hard disk",
     "language": "de",
     "name": "Festplatte",
     "purpose": "bewahrt alles auf einem Rechner auf, auf sich drehenden magnetischen Scheiben, billig und in Menge",
@@ -498,7 +566,8 @@
     "note": "Das einzige Medium hier mit beweglichen Teilen — deshalb das einzige, das ein Sturz im Betrieb umbringt, und das einzige, das sich vorher mit einem Geräusch meldet"
   },
   {
-    "storage_medium": "SSD",
+    "subject_entity": "StorageMedium",
+    "subject_id": "SSD",
     "language": "de",
     "name": "SSD",
     "purpose": "erledigt die Arbeit einer Festplatte ohne bewegliche Teile — deshalb viel schneller und lautlos",
@@ -507,7 +576,8 @@
     "note": "„Solid State“ heißt: nichts bewegt sich. Das Wort meint die Abwesenheit von Mechanik, nicht Robustheit — obwohl sie die mitliefert. Der mit Abstand größte Grund, warum sich ein alter Rechner damit neu anfühlt"
   },
   {
-    "storage_medium": "SD card",
+    "subject_entity": "StorageMedium",
+    "subject_id": "SD card",
     "language": "de",
     "name": "SD-Karte",
     "purpose": "bewahrt die Bilder auf, die eine Kamera macht, auf einer Karte, die man in der Tasche vergisst",
@@ -516,7 +586,8 @@
     "note": "Die abgeschnittene Ecke ist keine Zierde: sie verhindert, dass die Karte falsch herum hineingeht. Es gibt sie auch kleiner — microSD — und der Adapter, der die kleine zur großen macht, ist nur ein Plastikrahmen"
   },
   {
-    "storage_medium": "USB stick",
+    "subject_entity": "StorageMedium",
+    "subject_id": "USB stick",
     "language": "de",
     "name": "USB-Stick",
     "purpose": "bewahrt Dateien auf etwas auf, das man in der Tasche trägt und an jeden Rechner steckt",
@@ -526,7 +597,8 @@
     "note": "Innen steckt dieselbe Art Speicher wie in einer SSD und einer SD-Karte — drei Dinge, die einander nicht ähnlich sehen und sich vor allem im Stecker unterscheiden, den sie tragen"
   },
   {
-    "storage_medium": "Floppy disk",
+    "subject_entity": "StorageMedium",
+    "subject_id": "Floppy disk",
     "language": "de",
     "name": "Diskette",
     "purpose": "bewahrte ein, zwei Dokumente auf einer magnetischen Scheibe in einer Plastikhülle auf — so wanderten Dateien, bevor es Netze gab",
@@ -535,56 +607,64 @@
     "note": "Bis heute das Speichern-Symbol in fast jedem Programm, dreißig Jahre nachdem der Letzte eine benutzt hat. Eine ganze Generation erkennt das Bild und hat den Gegenstand nie gesehen"
   },
   {
-    "protocol": "Ethernet",
+    "subject_entity": "Protocol",
+    "subject_id": "Ethernet",
     "language": "de",
     "name": "Ethernet",
     "purpose": "trägt Daten über ein Kabel zwischen den Geräten eines Gebäudes — die verkabelte Hälfte jedes Netzes",
     "gender": "n"
   },
   {
-    "protocol": "WLAN",
+    "subject_entity": "Protocol",
+    "subject_id": "WLAN",
     "language": "de",
     "name": "WLAN",
     "purpose": "trägt dieselben Daten wie Ethernet durch die Luft, sodass ein Gerät kein Kabel zum Router braucht",
     "gender": "n"
   },
   {
-    "protocol": "Bluetooth",
+    "subject_entity": "Protocol",
+    "subject_id": "Bluetooth",
     "language": "de",
     "name": "Bluetooth",
     "purpose": "trägt Ton und kleine Datenmengen ein paar Meter weit, zwischen zwei Geräten, die einander einmal vorgestellt wurden",
     "gender": "n"
   },
   {
-    "protocol": "Zigbee",
+    "subject_entity": "Protocol",
+    "subject_id": "Zigbee",
     "language": "de",
     "name": "Zigbee",
     "purpose": "trägt winzige Nachrichten zwischen den Lampen, Schaltern und Sensoren eines Hauses, wobei jedes Gerät die Nachrichten der anderen weiterreicht",
     "gender": "n"
   },
   {
-    "protocol": "Z-Wave",
+    "subject_entity": "Protocol",
+    "subject_id": "Z-Wave",
     "language": "de",
     "name": "Z-Wave",
     "purpose": "tut dasselbe wie Zigbee, auf einer anderen Funkfrequenz, die Wände weniger stark abschirmen",
     "gender": "n"
   },
   {
-    "protocol": "Matter",
+    "subject_entity": "Protocol",
+    "subject_id": "Matter",
     "language": "de",
     "name": "Matter",
     "purpose": "lässt Smart-Home-Geräte verschiedener Hersteller zusammenarbeiten, egal welche App oder welcher Assistent benutzt wird",
     "gender": "n"
   },
   {
-    "protocol": "Thread",
+    "subject_entity": "Protocol",
+    "subject_id": "Thread",
     "language": "de",
     "name": "Thread",
     "purpose": "trägt die Nachrichten, die Matter verschickt, über dieselbe Art selbstweiterreichendes Funknetz wie Zigbee",
     "gender": "n"
   },
   {
-    "concept": "Lokales Netz",
+    "subject_entity": "Concept",
+    "subject_id": "Lokales Netz",
     "language": "de",
     "name": "Lokales Netz",
     "purpose": "ist das Netz innerhalb eines Gebäudes — die Geräte, die einander erreichen, ohne ins Internet zu gehen",
@@ -592,101 +672,120 @@
     "genitive": "lokalen Netzes"
   },
   {
-    "protocol": "BLE",
+    "subject_entity": "Protocol",
+    "subject_id": "BLE",
     "language": "de",
     "name": "BLE",
     "purpose": "trägt dieselben kurzen Funknachrichten wie Bluetooth, aber mit so wenig Strom, dass ein Sensor jahrelang an einer Knopfzelle läuft",
     "gender": "n"
   },
   {
-    "file_format": "JSON",
+    "subject_entity": "FileFormat",
+    "subject_id": "JSON",
     "language": "de",
     "name": "JSON",
     "purpose": "hält Daten als verschachtelte Listen und Name-Wert-Paare, in einer Form, die ein Programm schnell liest und ein Mensch noch mitlesen kann",
     "note": "Der jüngere Rivale von XML — und der, der gewonnen hat: dieselbe Aufgabe mit weit weniger Satzzeichen. Fast alles, was ein Browser heute von einem Server holt, kommt als JSON"
   },
   {
-    "format_group": "Dokumentformat",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Dokumentformat",
     "language": "en",
     "name": "Document format"
   },
   {
-    "format_group": "Bildformat",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Bildformat",
     "language": "en",
     "name": "Image format"
   },
   {
-    "format_group": "Audioformat",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Audioformat",
     "language": "en",
     "name": "Audio format"
   },
   {
-    "format_group": "Videoformat",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Videoformat",
     "language": "en",
     "name": "Video format"
   },
   {
-    "format_group": "Kompressionsformat",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Kompressionsformat",
     "language": "en",
     "name": "Compression format"
   },
   {
-    "format_group": "Auszeichnungssprache",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Auszeichnungssprache",
     "language": "en",
     "name": "Markup language"
   },
   {
-    "format_group": "Tabellenformat",
+    "subject_entity": "FormatGroup",
+    "subject_id": "Tabellenformat",
     "language": "en",
     "name": "Table format"
   },
   {
-    "concept": "Webadresse",
+    "subject_entity": "Concept",
+    "subject_id": "Webadresse",
     "language": "en",
     "name": "Web address"
   },
   {
-    "concept": "Ressourcenkennung",
+    "subject_entity": "Concept",
+    "subject_id": "Ressourcenkennung",
     "language": "en",
     "name": "Resource identifier"
   },
   {
-    "concept": "Domain",
+    "subject_entity": "Concept",
+    "subject_id": "Domain",
     "language": "en",
     "name": "Domain"
   },
   {
-    "concept": "Top-Level-Domain",
+    "subject_entity": "Concept",
+    "subject_id": "Top-Level-Domain",
     "language": "en",
     "name": "Top-level domain"
   },
   {
-    "concept": "IP-Adresse",
+    "subject_entity": "Concept",
+    "subject_id": "IP-Adresse",
     "language": "en",
     "name": "IP address"
   },
   {
-    "concept": "Socket",
+    "subject_entity": "Concept",
+    "subject_id": "Socket",
     "language": "en",
     "name": "Socket"
   },
   {
-    "concept": "VOIP",
+    "subject_entity": "Concept",
+    "subject_id": "VOIP",
     "language": "en",
     "name": "VOIP"
   },
   {
-    "concept": "Lokales Netz",
+    "subject_entity": "Concept",
+    "subject_id": "Lokales Netz",
     "language": "en",
     "name": "Local network"
   },
   {
-    "connector": "Klinke",
+    "subject_entity": "Connector",
+    "subject_id": "Klinke",
     "language": "en",
     "name": "Jack"
   },
   {
-    "connector": "Cinch",
+    "subject_entity": "Connector",
+    "subject_id": "Cinch",
     "language": "en",
     "name": "RCA"
   }
