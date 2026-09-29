@@ -1,0 +1,75 @@
+[
+  {
+    "name": "JavaScript",
+    "purpose": "runs inside every browser there is, and since a while on servers too",
+    "note": "Java and JavaScript are not related. The name was a marketing decision in 1995 and has been confusing people ever since."
+  },
+  {
+    "name": "Python",
+    "purpose": "reads almost like English, and is used for everything from a school lesson to analysing data"
+  },
+  {
+    "name": "PHP",
+    "long_name": "PHP: Hypertext Preprocessor",
+    "purpose": "runs on the web server and assembles a page before it is sent to the browser",
+    "level": "advanced",
+    "note": "Its long form contains its own abbreviation, on purpose — the original one stood for something else entirely."
+  },
+  {
+    "name": "Java",
+    "purpose": "runs the same program unchanged on any machine that has its runtime installed",
+    "level": "advanced"
+  },
+  {
+    "name": "CSS",
+    "long_name": "Cascading Style Sheets",
+    "purpose": "says what a page should LOOK like, separately from what the page says",
+    "level": "advanced",
+    "note": "The one language on this list that changes nothing and decides everything about the impression a page makes."
+  },
+  {
+    "name": "SQL",
+    "long_name": "Structured Query Language",
+    "purpose": "asks a database for exactly the rows you want, and says nothing about how it should find them",
+    "level": "advanced",
+    "note": "The odd one out: every other language here says HOW something is to be done. This one says only WHAT is wanted and leaves the how to the database."
+  },
+  {
+    "name": "TypeScript",
+    "purpose": "is JavaScript with the types written down, so a mistake is found before the program ever runs",
+    "level": "expert"
+  },
+  {
+    "name": "C",
+    "purpose": "writes programs that talk almost directly to the machine, and is what most other languages are themselves written in",
+    "level": "expert"
+  },
+  {
+    "name": "Perl",
+    "long_name": "Practical Extraction and Report Language",
+    "purpose": "pulls text apart and puts it back together, and was what most of the early web was held together with",
+    "level": "expert",
+    "note": "Famous for letting one write the same thing in a great many ways, which is both why people loved it and why they stopped."
+  },
+  {
+    "name": "Bash",
+    "long_name": "Bourne Again Shell",
+    "purpose": "is the language the command line itself understands, so a sequence of commands becomes a program",
+    "level": "advanced",
+    "note": "The older and plainer one is called `sh`; „Bash\" is a pun on being a second Bourne shell."
+  },
+  {
+    "name": "awk",
+    "long_name": "Aho Weinberger Kernighan",
+    "purpose": "reads a file line by line and does something with the fields of each line",
+    "level": "expert",
+    "note": "Its long form is simply the surnames of the three people who wrote it — which is why nobody ever guesses it."
+  },
+  {
+    "name": "sed",
+    "long_name": "Stream Editor",
+    "purpose": "changes text while it flows past, without ever opening a file to look at it",
+    "level": "expert",
+    "note": "A program with a tiny language inside it, and the reason a one-line replacement in a thousand files is a single command."
+  }
+]

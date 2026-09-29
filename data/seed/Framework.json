@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Vue",
+    "language": "JavaScript",
+    "purpose": "keeps a page and the data behind it in step, so a change in one shows up in the other without being copied across by hand",
+    "level": "advanced"
+  },
+  {
+    "name": "React",
+    "language": "JavaScript",
+    "purpose": "builds a page out of small reusable pieces and redraws only the pieces whose data changed",
+    "level": "advanced"
+  },
+  {
+    "name": "jQuery",
+    "language": "JavaScript",
+    "purpose": "made reaching into a page short and made it work the same in every browser, at a time when it did not",
+    "level": "advanced",
+    "note": "Its own success retired it: what it added has since been built into the browsers themselves."
+  },
+  {
+    "name": "Angular",
+    "language": "TypeScript",
+    "purpose": "gives a large application its whole structure — routing, forms and data — rather than leaving it to be assembled",
+    "level": "expert"
+  },
+  {
+    "name": "Bootstrap",
+    "language": "CSS",
+    "purpose": "supplies a set of ready-made appearances, so a page looks tidy and works on a phone without anybody designing it",
+    "level": "advanced",
+    "note": "The reason a great many sites of the 2010s look faintly alike."
+  },
+  {
+    "name": "Hibernate",
+    "language": "Java",
+    "purpose": "moves objects in a program into the rows of a database and back, so nobody writes the SQL for it by hand",
+    "level": "expert"
+  },
+  {
+    "name": "Spring",
+    "language": "Java",
+    "purpose": "hands a program the parts it needs instead of letting it fetch them itself, which is what makes those parts exchangeable",
+    "level": "expert"
+  },
+  {
+    "name": "Struts",
+    "language": "Java",
+    "purpose": "separated a web application's pages from its logic, back when most of them had those mixed together",
+    "level": "expert",
+    "note": "A great many Java web applications were built on it around 2005, and a fair number of them are still running."
+  },
+  {
+    "name": "Django",
+    "language": "Python",
+    "purpose": "brings a database, an administration screen and the pages along with it, so a working site exists before anything is written",
+    "level": "expert"
+  },
+  {
+    "name": "Laravel",
+    "language": "PHP",
+    "purpose": "gives PHP the structure it never had of its own, and is what most new PHP applications are built with",
+    "level": "expert"
+  }
+]

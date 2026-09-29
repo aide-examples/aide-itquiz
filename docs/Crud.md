@@ -19,6 +19,8 @@ group the selector shows them under.
 - ConnectorPort
 - StorageMedium
 - Concept
+- ProgrammingLanguage
+- Framework
 - Translation
 
 ## Questions

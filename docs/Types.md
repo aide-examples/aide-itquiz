@@ -22,6 +22,8 @@ about the subject matter.
 | Concept | Concept | Something one reads and types that nobody makes — Web address, Domain |
 | StorageMedium | Storage medium | A thing bytes sit on — CD-ROM, SSD, SD card |
 | ProductGroup | Product group | What a KIND of thing is a kind of — Web service, Hardware component |
+| ProgrammingLanguage | Programming language | The notation a program is written in — Python, PHP, awk |
+| Framework | Framework | A ready-made scaffold a program is written inside, belonging to one language — Vue, Hibernate |
 
 ### FileSupport
 

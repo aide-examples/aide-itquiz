@@ -898,5 +898,213 @@
     "purpose": "ist ein Teil im Inneren eines Geräts und für sich allein zu nichts zu gebrauchen",
     "gender": "f",
     "note": "Das ist die Familie, deren Mitglieder zugleich Teil eines Geräts sind — beide Aussagen sind wahr und sagen Verschiedenes"
+  },
+  {
+    "subject_entity": "ProgrammingLanguage",
+    "subject_id": "JavaScript",
+    "language": "de",
+    "name": "JavaScript",
+    "purpose": "läuft in jedem Browser, den es gibt, und seit einiger Zeit auch auf Servern",
+    "gender": "n",
+    "genitive": "JavaScripts",
+    "note": "Java und JavaScript haben nichts miteinander zu tun. Der Name war 1995 eine Marketing-Entscheidung und verwirrt seitdem."
+  },
+  {
+    "subject_entity": "ProgrammingLanguage",
+    "subject_id": "Python",
+    "language": "de",
+    "name": "Python",
+    "purpose": "liest sich fast wie Englisch und wird für alles benutzt, von der Schulstunde bis zur Datenanalyse",
+    "gender": "n",
+    "genitive": "Pythons"
+  },
+  {
+    "subject_entity": "ProgrammingLanguage",
+    "subject_id": "PHP",
+    "language": "de",
+    "name": "PHP",
+    "purpose": "läuft auf dem Webserver und setzt eine Seite zusammen, bevor sie zum Browser geht",
+    "gender": "n",
+    "note": "Die Langform enthält absichtlich die eigene Abkürzung — die ursprüngliche stand für etwas ganz anderes."
+  },
+  {
+    "subject_entity": "ProgrammingLanguage",
+    "subject_id": "Java",
+    "language": "de",
+    "name": "Java",
+    "purpose": "führt dasselbe Programm unverändert auf jeder Maschine aus, auf der seine Laufzeitumgebung installiert ist",
+    "gender": "n",
+    "genitive": "Javas"
+  },
+  {
+    "subject_entity": "ProgrammingLanguage",
+    "subject_id": "CSS",
+    "language": "de",
+    "name": "CSS",
+    "purpose": "sagt, wie eine Seite AUSSEHEN soll, getrennt davon, was auf ihr steht",
+    "gender": "n",
+    "note": "Die einzige Sprache dieser Liste, die nichts verändert und alles über den Eindruck einer Seite entscheidet."
+  },
+  {
+    "subject_entity": "ProgrammingLanguage",
+    "subject_id": "SQL",
+    "language": "de",
+    "name": "SQL",
+    "purpose": "fragt eine Datenbank nach genau den Zeilen, die man will, und sagt nichts darüber, wie sie sie finden soll",
+    "gender": "n",
+    "note": "Der Sonderfall: jede andere Sprache hier sagt, WIE etwas zu tun ist. Diese sagt nur, WAS gewünscht ist, und überlässt das Wie der Datenbank."
+  },
+  {
+    "subject_entity": "ProgrammingLanguage",
+    "subject_id": "TypeScript",
+    "language": "de",
+    "name": "TypeScript",
+    "purpose": "ist JavaScript mit aufgeschriebenen Typen, damit ein Fehler auffällt, bevor das Programm überhaupt läuft",
+    "gender": "n",
+    "genitive": "TypeScripts"
+  },
+  {
+    "subject_entity": "ProgrammingLanguage",
+    "subject_id": "C",
+    "language": "de",
+    "name": "C",
+    "purpose": "schreibt Programme, die fast direkt mit der Maschine reden — und ist das, worin die meisten anderen Sprachen selbst geschrieben sind",
+    "gender": "n"
+  },
+  {
+    "subject_entity": "ProgrammingLanguage",
+    "subject_id": "Perl",
+    "language": "de",
+    "name": "Perl",
+    "purpose": "nimmt Text auseinander und setzt ihn wieder zusammen — und war das, womit das frühe Web zusammengehalten wurde",
+    "gender": "n",
+    "genitive": "Perls",
+    "note": "Berühmt dafür, dasselbe auf sehr viele Weisen schreiben zu können — weshalb man es liebte und weshalb man aufhörte."
+  },
+  {
+    "subject_entity": "ProgrammingLanguage",
+    "subject_id": "Bash",
+    "language": "de",
+    "name": "Bash",
+    "purpose": "ist die Sprache, die die Kommandozeile selbst versteht — damit wird eine Folge von Befehlen zum Programm",
+    "gender": "f",
+    "note": "Die ältere und schlichtere heißt `sh`; „Bash\" ist ein Wortspiel darauf, eine zweite Bourne-Shell zu sein."
+  },
+  {
+    "subject_entity": "ProgrammingLanguage",
+    "subject_id": "awk",
+    "language": "de",
+    "name": "awk",
+    "purpose": "liest eine Datei Zeile für Zeile und tut etwas mit den Feldern jeder Zeile",
+    "gender": "n",
+    "note": "Die Langform sind einfach die Nachnamen der drei Leute, die es geschrieben haben — deshalb errät sie niemand."
+  },
+  {
+    "subject_entity": "ProgrammingLanguage",
+    "subject_id": "sed",
+    "language": "de",
+    "name": "sed",
+    "purpose": "verändert Text, während er vorbeifließt, ohne je eine Datei zum Ansehen zu öffnen",
+    "gender": "m",
+    "note": "Ein Programm mit einer winzigen Sprache darin — und der Grund, warum eine Ersetzung in tausend Dateien ein einziger Befehl ist."
+  },
+  {
+    "subject_entity": "Framework",
+    "subject_id": "Vue",
+    "language": "de",
+    "name": "Vue",
+    "purpose": "hält eine Seite und die Daten dahinter im Gleichschritt — eine Änderung an einem zeigt sich am anderen, ohne dass jemand sie überträgt",
+    "gender": "n",
+    "genitive": "Vues"
+  },
+  {
+    "subject_entity": "Framework",
+    "subject_id": "React",
+    "language": "de",
+    "name": "React",
+    "purpose": "baut eine Seite aus kleinen wiederverwendbaren Stücken und zeichnet nur die neu, deren Daten sich geändert haben",
+    "gender": "n",
+    "genitive": "Reacts"
+  },
+  {
+    "subject_entity": "Framework",
+    "subject_id": "jQuery",
+    "language": "de",
+    "name": "jQuery",
+    "purpose": "machte das Hineingreifen in eine Seite kurz — und in jedem Browser gleich, zu einer Zeit, als es das nicht war",
+    "gender": "n",
+    "genitive": "jQuerys",
+    "note": "Der eigene Erfolg hat es abgelöst: was es hinzufügte, ist inzwischen in den Browsern selbst eingebaut."
+  },
+  {
+    "subject_entity": "Framework",
+    "subject_id": "Angular",
+    "language": "de",
+    "name": "Angular",
+    "purpose": "gibt einer großen Anwendung ihre ganze Struktur — Navigation, Formulare, Daten — statt sie zusammensetzen zu lassen",
+    "gender": "n",
+    "genitive": "Angulars"
+  },
+  {
+    "subject_entity": "Framework",
+    "subject_id": "Bootstrap",
+    "language": "de",
+    "name": "Bootstrap",
+    "purpose": "liefert fertige Erscheinungsformen, damit eine Seite ordentlich aussieht und auf dem Handy funktioniert, ohne dass jemand sie entwirft",
+    "gender": "n",
+    "genitive": "Bootstraps",
+    "note": "Der Grund, warum sehr viele Seiten der 2010er Jahre einander entfernt ähneln."
+  },
+  {
+    "subject_entity": "Framework",
+    "subject_id": "Hibernate",
+    "language": "de",
+    "name": "Hibernate",
+    "purpose": "bringt Objekte eines Programms in die Zeilen einer Datenbank und zurück, damit niemand das SQL dafür von Hand schreibt",
+    "gender": "n",
+    "genitive": "Hibernates"
+  },
+  {
+    "subject_entity": "Framework",
+    "subject_id": "Spring",
+    "language": "de",
+    "name": "Spring",
+    "purpose": "gibt einem Programm die Teile, die es braucht, statt es sie selbst holen zu lassen — das ist, was diese Teile austauschbar macht",
+    "gender": "n",
+    "genitive": "Springs"
+  },
+  {
+    "subject_entity": "Framework",
+    "subject_id": "Struts",
+    "language": "de",
+    "name": "Struts",
+    "purpose": "trennte die Seiten einer Webanwendung von ihrer Logik, als die meisten beides noch vermischt hatten",
+    "gender": "n",
+    "note": "Sehr viele Java-Webanwendungen wurden um 2005 darauf gebaut, und einige laufen heute noch."
+  },
+  {
+    "subject_entity": "Framework",
+    "subject_id": "Django",
+    "language": "de",
+    "name": "Django",
+    "purpose": "bringt Datenbank, Verwaltungsoberfläche und Seiten gleich mit, sodass eine funktionierende Website existiert, bevor etwas geschrieben ist",
+    "gender": "n",
+    "genitive": "Djangos"
+  },
+  {
+    "subject_entity": "Framework",
+    "subject_id": "Laravel",
+    "language": "de",
+    "name": "Laravel",
+    "purpose": "gibt PHP die Struktur, die es von sich aus nie hatte — und ist das, womit die meisten neuen PHP-Anwendungen gebaut werden",
+    "gender": "n",
+    "genitive": "Laravels"
+  },
+  {
+    "subject_entity": "ProgrammingLanguage",
+    "subject_id": "SQL",
+    "language": "en",
+    "name": "SQL",
+    "article": "an"
   }
 ]

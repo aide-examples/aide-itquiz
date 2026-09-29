@@ -204,6 +204,42 @@
     "explanation": "{subject} stands for „{answer}“.\n*What {subject} does:* {purpose}."
   },
   {
+    "template": "stands_for_language",
+    "language": "de",
+    "text": "Wofür steht die Abkürzung {subject}?",
+    "explanation": "{subject} steht für „{answer}“.\n*Was man in {subject} schreibt:* {purpose}."
+  },
+  {
+    "template": "stands_for_language",
+    "language": "en",
+    "text": "What does {subject} stand for?",
+    "explanation": "{subject} stands for „{answer}“.\n*What one writes in {subject}:* {purpose}."
+  },
+  {
+    "template": "language_purpose",
+    "language": "de",
+    "text": "Wie heißt die Sprache, in der man Folgendes schreibt: {subject}?",
+    "explanation": "Das ist {answer}.[[\n{note}]]"
+  },
+  {
+    "template": "language_purpose",
+    "language": "en",
+    "text": "Which language do you write this in: {subject}?",
+    "explanation": "That is {answer}.[[\n{note}]]"
+  },
+  {
+    "template": "framework_language",
+    "language": "de",
+    "text": "In welcher Sprache arbeitet man mit {subject}?",
+    "explanation": "{subject} ist ein Framework für {answer}.\n*Was es abnimmt:* {purpose}.[[\n{note}]]"
+  },
+  {
+    "template": "framework_language",
+    "language": "en",
+    "text": "Which language do you use {subject} with?",
+    "explanation": "{subject} is a framework for {answer}.\n*What it saves you:* {purpose}.[[\n{note}]]"
+  },
+  {
     "template": "storage_capacity",
     "language": "de",
     "text": "Auf welches davon passt am meisten?",

@@ -119,6 +119,7 @@ module.exports = function registerSystemRoutes(app, deps) {
     const pools = {
       FileFormat: f.formats, Protocol: f.protocols,
       Connector: f.connectors, Concept: f.concepts, StorageMedium: f.storages,
+      ProgrammingLanguage: f.languages,
     };
     // The long form must be DIFFERENT from the short one, and that second condition is not
     // pedantry: `Bluetooth` was seeded with `long_name: "Bluetooth"` — it abbreviates nothing —
@@ -259,7 +260,8 @@ module.exports = function registerSystemRoutes(app, deps) {
   async function facts() {
     const eng = engine();
     const [types, translations, products, companies, templates, phrases,
-      formats, groups, productGroups, protocols, connectors, concepts, supports, storages] = await Promise.all([
+      formats, groups, productGroups, languages, frameworks, protocols, connectors, concepts,
+      supports, storages] = await Promise.all([
       // `group_id` beside `part_of_id`: BOTH relations are read, because a player meets both (#7).
       // Leaving it out is the third instance in this system of one silent class — a column the
       // builder filters on and the query does not fetch. It does not error; the question type
@@ -287,6 +289,8 @@ module.exports = function registerSystemRoutes(app, deps) {
       eng.query('SELECT id, name, extension, long_name, group_id, purpose, icon, wikipedia_de, wikipedia_en, level FROM file_format WHERE id > 1'),
       eng.query('SELECT id, name, purpose, wikipedia_de, wikipedia_en, level FROM format_group WHERE id > 1'),
       eng.query('SELECT id, name, purpose, note, wikipedia_de, wikipedia_en, level FROM product_group WHERE id > 1'),
+      eng.query('SELECT id, name, long_name, purpose, note, wikipedia_de, wikipedia_en, level FROM programming_language WHERE id > 1'),
+      eng.query('SELECT id, name, language_id, purpose, note, wikipedia_de, wikipedia_en, level FROM framework WHERE id > 1'),
       eng.query('SELECT id, name, long_name, purpose, wikipedia_de, wikipedia_en, level FROM protocol WHERE id > 1'),
       eng.query('SELECT id, name, long_name, purpose, looks_like, icon, wikipedia_de, wikipedia_en, level FROM connector WHERE id > 1'),
       eng.query('SELECT id, name, abbreviation, long_name, purpose, example, part_of_id, wikipedia_de, wikipedia_en, level FROM concept WHERE id > 1'),
@@ -295,7 +299,8 @@ module.exports = function registerSystemRoutes(app, deps) {
         + 'level, wikipedia_de, wikipedia_en, note FROM storage_medium WHERE id > 1'),
     ]);
     return { types, translations, products, companies, templates, phrases,
-      formats, groups, productGroups, protocols, connectors, concepts, supports, storages };
+      formats, groups, productGroups, languages, frameworks, protocols, connectors, concepts,
+      supports, storages };
   }
 
   /**
@@ -356,7 +361,7 @@ module.exports = function registerSystemRoutes(app, deps) {
    */
   const TRANSLATED_KINDS = new Set([
     'ProductType', 'FileFormat', 'FormatGroup', 'Protocol', 'Connector', 'Concept', 'StorageMedium',
-    'ProductGroup',
+    'ProductGroup', 'ProgrammingLanguage', 'Framework',
   ]);
 
   /**
@@ -469,6 +474,8 @@ module.exports = function registerSystemRoutes(app, deps) {
       formats: keep(f.formats),
       groups: keep(f.groups),
       productGroups: keep(f.productGroups),
+      languages: keep(f.languages),
+      frameworks: keep(f.frameworks),
       protocols: keep(f.protocols),
       connectors: keep(f.connectors),
       concepts: keep(f.concepts),
@@ -1166,6 +1173,57 @@ module.exports = function registerSystemRoutes(app, deps) {
           capacity: { label: capacity(right.capacity_mb, lang) },
           other: said(f, 'StorageMedium', second, lang),
           other_capacity: { label: capacity(second.capacity_mb, lang) },
+        }, lang),
+      };
+    }
+
+    if (template.key === 'language_purpose') {
+      // The purpose is the QUESTION and the language is the answer, the same way round as
+      // `purpose` does it for a product type: naming what a thing is for and asking what it is
+      // called is the direction a learner can actually answer in.
+      const x = any(f.languages.filter((y) => word(f, 'ProgrammingLanguage', y, lang, 'purpose')));
+      if (!x) return null;
+      const wrong = sample(f.languages.filter((y) => y.id !== x.id), 3);
+      if (wrong.length < 2) return null;
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'ProgrammingLanguage', id: x.id },
+        object: null,
+        text: fill(phrase.text, { subject: { label: word(f, 'ProgrammingLanguage', x, lang, 'purpose') } }, lang),
+        options: [x, ...wrong].map((y) => word(f, 'ProgrammingLanguage', y, lang, 'name')),
+        _correct: word(f, 'ProgrammingLanguage', x, lang, 'name'),
+        _explanation: fill(phrase.explanation, {
+          answer: said(f, 'ProgrammingLanguage', x, lang),
+          note: { label: word(f, 'ProgrammingLanguage', x, lang, 'note') || '' },
+        }, lang),
+      };
+    }
+
+    if (template.key === 'framework_language') {
+      // THE ONE QUESTION THIS ENTITY EXISTS FOR. The distractors are other LANGUAGES, never other
+      // frameworks: „is Vue JavaScript or Java?" is the confusion, and „is Vue Vue or React?" is
+      // not a question.
+      const fw = any(f.frameworks.filter((x) => x.language_id > 1));
+      if (!fw) return null;
+      const right = f.languages.find((x) => x.id === fw.language_id);
+      // A framework whose language sits ABOVE the player's level is dropped rather than asked
+      // with a right answer they were never shown — `narrow` filtered the languages, not the
+      // frameworks' references into them.
+      if (!right) return null;
+      const wrong = sample(f.languages.filter((x) => x.id !== right.id), 3);
+      if (wrong.length < 2) return null;
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'Framework', id: fw.id },
+        object: null,
+        text: fill(phrase.text, { subject: { label: word(f, 'Framework', fw, lang, 'name') } }, lang),
+        options: [right, ...wrong].map((x) => word(f, 'ProgrammingLanguage', x, lang, 'name')),
+        _correct: word(f, 'ProgrammingLanguage', right, lang, 'name'),
+        _explanation: fill(phrase.explanation, {
+          subject: said(f, 'Framework', fw, lang),
+          answer: said(f, 'ProgrammingLanguage', right, lang),
+          purpose: { label: word(f, 'Framework', fw, lang, 'purpose') },
+          note: { label: word(f, 'Framework', fw, lang, 'note') || '' },
         }, lang),
       };
     }
@@ -1896,6 +1954,36 @@ module.exports = function registerSystemRoutes(app, deps) {
           capacity: { label: capacity(right.capacity_mb, lang) },
           other: second ? said(f, 'StorageMedium', second, lang) : { label: '' },
           other_capacity: { label: second ? capacity(second.capacity_mb, lang) : '' },
+        }, lang),
+      };
+    }
+
+    if (template.key === 'language_purpose') {
+      const x = f.languages.find((y) => y.id === (subject && subject.id));
+      if (!x) return null;
+      return {
+        correct: word(f, 'ProgrammingLanguage', x, lang, 'name'),
+        ...context([['ProgrammingLanguage', x]], lang),
+        explanation: fill(phrase.explanation, {
+          answer: said(f, 'ProgrammingLanguage', x, lang),
+          note: { label: word(f, 'ProgrammingLanguage', x, lang, 'note') || '' },
+        }, lang),
+      };
+    }
+
+    if (template.key === 'framework_language') {
+      const fw = f.frameworks.find((x) => x.id === (subject && subject.id));
+      if (!fw) return null;
+      const right = f.languages.find((x) => x.id === fw.language_id);
+      if (!right) return null;
+      return {
+        correct: word(f, 'ProgrammingLanguage', right, lang, 'name'),
+        ...context([['Framework', fw], ['ProgrammingLanguage', right]], lang),
+        explanation: fill(phrase.explanation, {
+          subject: said(f, 'Framework', fw, lang),
+          answer: said(f, 'ProgrammingLanguage', right, lang),
+          purpose: { label: word(f, 'Framework', fw, lang, 'purpose') },
+          note: { label: word(f, 'Framework', fw, lang, 'note') || '' },
         }, lang),
       };
     }

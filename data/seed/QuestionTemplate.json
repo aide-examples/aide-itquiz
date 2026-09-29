@@ -102,6 +102,23 @@
     "note": "A ROW and not a commit — the `stands_for` branch already serves four entities and only needs to be told which pool. Which is the whole point of declaring question types as data (§48), and the first time it paid out without a line of code."
   },
   {
+    "key": "stands_for_language",
+    "subject_kind": "ProgrammingLanguage",
+    "note": "The sixth entity served by ONE `stands_for` branch — a row and not a commit, which is what declaring question types as data was for. Only the seven languages whose name IS an abbreviation can be drawn; the rest carry no long form and that is data, not a gap"
+  },
+  {
+    "key": "language_purpose",
+    "subject_kind": "ProgrammingLanguage",
+    "answer_kind": "ProgrammingLanguage",
+    "note": "The purpose is the question and the language is the answer, the same direction `purpose` runs for a product type"
+  },
+  {
+    "key": "framework_language",
+    "subject_kind": "Framework",
+    "answer_kind": "ProgrammingLanguage",
+    "note": "The one question `Framework` exists for. The distractors are other LANGUAGES: „is Vue JavaScript or Java?\" is the confusion, „is Vue Vue or React?\" is not a question"
+  },
+  {
     "key": "storage_capacity",
     "subject_kind": "StorageMedium",
     "answer_kind": "StorageMedium",
