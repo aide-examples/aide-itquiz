@@ -178,5 +178,53 @@
     "language": "en",
     "text": "What is {subject} a part of?",
     "explanation": "{subject} is part of {answer}[[ — {example}, for instance]]."
+  },
+  {
+    "template": "stands_for_storage",
+    "language": "de",
+    "text": "Wofür steht die Abkürzung {subject}?",
+    "explanation": "{subject} steht für „{answer}“.\n*Was {subject} tut:* {purpose}."
+  },
+  {
+    "template": "stands_for_storage",
+    "language": "en",
+    "text": "What does {subject} stand for?",
+    "explanation": "{subject} stands for „{answer}“.\n*What {subject} does:* {purpose}."
+  },
+  {
+    "template": "storage_capacity",
+    "language": "de",
+    "text": "Auf welches davon passt am meisten?",
+    "explanation": "{Der_answer} {answer} fasst am meisten: {capacity}.[[ Zum Vergleich {der_other} {other}: {other_capacity}.]]"
+  },
+  {
+    "template": "storage_capacity",
+    "language": "en",
+    "text": "Which of these holds the most?",
+    "explanation": "{answer} holds the most: {capacity}.[[ For comparison {other}: {other_capacity}.]]"
+  },
+  {
+    "template": "storage_rewritable",
+    "language": "de",
+    "text": "Kann man {ein_subject} {subject} noch einmal beschreiben?",
+    "explanation": "{answer}.[[ {note}]]"
+  },
+  {
+    "template": "storage_rewritable",
+    "language": "en",
+    "text": "Can {ein_subject} {subject} be written on again?",
+    "explanation": "{answer}.[[ {note}]]"
+  },
+  {
+    "template": "storage_looks_like",
+    "language": "de",
+    "text": "Was ist das?",
+    "explanation": "Das ist {ein_answer} {answer} — {purpose}.[[\n*Zu erkennen an:* {looks_like}.]]"
+  },
+  {
+    "template": "storage_looks_like",
+    "language": "en",
+    "text": "What is this?",
+    "explanation": "That is {ein_answer} {answer} — {purpose}.[[\n*How to recognise it:* {looks_like}.]]"
   }
 ]

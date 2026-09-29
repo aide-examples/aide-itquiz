@@ -466,42 +466,54 @@
     "language": "de",
     "name": "CD-ROM",
     "purpose": "fasst ungefähr ein Musikalbum an Daten, auf einer Scheibe, die einmal gepresst und nie wieder geändert wird",
-    "gender": "f"
+    "gender": "f",
+    "looks_like": "eine glänzende Scheibe, zwölf Zentimeter breit, silbern auf der Unterseite, mit einem Loch in der Mitte",
+    "note": "Das RO heißt read-only, und genau deshalb kann man eine gekaufte CD nicht überspielen. Das Wort „CD“ allein verschweigt das — eine CD-R und eine CD-RW sind andere Dinge mit fast demselben Namen"
   },
   {
     "storage_medium": "DVD",
     "language": "de",
     "name": "DVD",
     "purpose": "fasst einen Film oder ein paar Gigabyte an Dateien, auf einer Scheibe so groß wie eine CD",
-    "gender": "f"
+    "gender": "f",
+    "looks_like": "dieselbe glänzende Zwölf-Zentimeter-Scheibe wie eine CD — mit bloßem Auge nicht zu unterscheiden, nur am Aufdruck",
+    "note": "Das V stand einmal für Video und wurde zu Versatile geändert, als sich zeigte, dass die Leute alles Mögliche darauf legen wollten. Siebenmal eine CD, in derselben Form"
   },
   {
     "storage_medium": "Blu-ray",
     "language": "de",
     "name": "Blu-ray",
     "purpose": "fasst einen Film in hoher Auflösung, auf einer Scheibe, die ein blauer Laser liest statt eines roten",
-    "gender": "f"
+    "gender": "f",
+    "looks_like": "wieder dieselbe Zwölf-Zentimeter-Scheibe, meist in einer blauen statt einer schwarzen Hülle",
+    "note": "Benannt nach dem Laser, nicht nach der Hülle: eine kürzere Wellenlänge liest kleinere Vertiefungen, und das ist der ganze Trick hinter fünfmal einer DVD auf gleichem Platz"
   },
   {
     "storage_medium": "Hard disk",
     "language": "de",
     "name": "Festplatte",
     "purpose": "bewahrt alles auf einem Rechner auf, auf sich drehenden magnetischen Scheiben, billig und in Menge",
-    "gender": "f"
+    "gender": "f",
+    "looks_like": "ein verschlossener Metallkasten etwa so groß wie ein Kartenspiel, schwer für seine Größe, und er macht ein leises Geräusch bei der Arbeit",
+    "note": "Das einzige Medium hier mit beweglichen Teilen — deshalb das einzige, das ein Sturz im Betrieb umbringt, und das einzige, das sich vorher mit einem Geräusch meldet"
   },
   {
     "storage_medium": "SSD",
     "language": "de",
     "name": "SSD",
     "purpose": "erledigt die Arbeit einer Festplatte ohne bewegliche Teile — deshalb viel schneller und lautlos",
-    "gender": "f"
+    "gender": "f",
+    "looks_like": "ein flacher Plastikkasten, oder ein Riegel so groß wie ein Kaugummistreifen, der flach auf der Platine steckt",
+    "note": "„Solid State“ heißt: nichts bewegt sich. Das Wort meint die Abwesenheit von Mechanik, nicht Robustheit — obwohl sie die mitliefert. Der mit Abstand größte Grund, warum sich ein alter Rechner damit neu anfühlt"
   },
   {
     "storage_medium": "SD card",
     "language": "de",
     "name": "SD-Karte",
     "purpose": "bewahrt die Bilder auf, die eine Kamera macht, auf einer Karte, die man in der Tasche vergisst",
-    "gender": "f"
+    "gender": "f",
+    "looks_like": "eine flache Plastikkarte etwa so groß wie eine Briefmarke, mit einer schräg abgeschnittenen Ecke",
+    "note": "Die abgeschnittene Ecke ist keine Zierde: sie verhindert, dass die Karte falsch herum hineingeht. Es gibt sie auch kleiner — microSD — und der Adapter, der die kleine zur großen macht, ist nur ein Plastikrahmen"
   },
   {
     "storage_medium": "USB stick",
@@ -509,14 +521,18 @@
     "name": "USB-Stick",
     "purpose": "bewahrt Dateien auf etwas auf, das man in der Tasche trägt und an jeden Rechner steckt",
     "gender": "m",
-    "genitive": "USB-Sticks"
+    "genitive": "USB-Sticks",
+    "looks_like": "ein daumengroßer Körper aus Plastik oder Metall mit einem USB-Stecker an einem Ende, oft mit einer Kappe, die verlorengeht",
+    "note": "Innen steckt dieselbe Art Speicher wie in einer SSD und einer SD-Karte — drei Dinge, die einander nicht ähnlich sehen und sich vor allem im Stecker unterscheiden, den sie tragen"
   },
   {
     "storage_medium": "Floppy disk",
     "language": "de",
     "name": "Diskette",
     "purpose": "bewahrte ein, zwei Dokumente auf einer magnetischen Scheibe in einer Plastikhülle auf — so wanderten Dateien, bevor es Netze gab",
-    "gender": "f"
+    "gender": "f",
+    "looks_like": "eine quadratische Plastikhülle, etwa neun Zentimeter breit, mit einem verschiebbaren Metallschieber",
+    "note": "Bis heute das Speichern-Symbol in fast jedem Programm, dreißig Jahre nachdem der Letzte eine benutzt hat. Eine ganze Generation erkennt das Bild und hat den Gegenstand nie gesehen"
   },
   {
     "protocol": "Ethernet",
@@ -574,5 +590,12 @@
     "purpose": "ist das Netz innerhalb eines Gebäudes — die Geräte, die einander erreichen, ohne ins Internet zu gehen",
     "gender": "n",
     "genitive": "lokalen Netzes"
+  },
+  {
+    "protocol": "BLE",
+    "language": "de",
+    "name": "BLE",
+    "purpose": "trägt dieselben kurzen Funknachrichten wie Bluetooth, aber mit so wenig Strom, dass ein Sensor jahrelang an einer Knopfzelle läuft",
+    "gender": "n"
   }
 ]

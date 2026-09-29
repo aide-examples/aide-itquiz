@@ -62,6 +62,14 @@
     "note": "Named after a Danish king who united tribes, and its mark is his initials in runes. The pairing is the point: unlike WLAN it connects two THINGS, not a thing to a network"
   },
   {
+    "name": "BLE",
+    "long_name": "Bluetooth Low Energy",
+    "purpose": "carries the same kind of short-range messages as Bluetooth on so little power that a sensor runs for years on one coin cell",
+    "wikipedia_de": "de:Bluetooth Low Energy",
+    "wikipedia_en": "en:Bluetooth Low Energy",
+    "note": "Also written BT-LE. It shares a name with Bluetooth and is a different radio protocol underneath — which is why a fitness band pairs in a second and holds for a year, while a headset needs charging every few days"
+  },
+  {
     "name": "Zigbee",
     "purpose": "carries tiny messages between the lamps, switches and sensors of a house, each one passing the message along for the others",
     "wikipedia_de": "de:ZigBee",

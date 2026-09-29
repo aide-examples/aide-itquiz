@@ -106,12 +106,13 @@ module.exports = function registerSystemRoutes(app, deps) {
    *
    * @param {any} f - the facts
    * @param {string} kind - an `EntityKind` value
+   * @param {string} lang - the language asked in; the short form is read in it
    * @returns {any[]} the records of that kind that carry a long form
    */
-  function abbreviated(f, kind) {
+  function abbreviated(f, kind, lang) {
     const pools = {
       FileFormat: f.formats, Protocol: f.protocols,
-      Connector: f.connectors, Concept: f.concepts,
+      Connector: f.connectors, Concept: f.concepts, StorageMedium: f.storages,
     };
     // The long form must be DIFFERENT from the short one, and that second condition is not
     // pedantry: `Bluetooth` was seeded with `long_name: "Bluetooth"` — it abbreviates nothing —
@@ -120,7 +121,7 @@ module.exports = function registerSystemRoutes(app, deps) {
     // wrong, only unsuitable. The seed is fixed; this is what stops the next author doing it
     // again, because nothing else would have noticed.
     return (pools[kind] || []).filter((x) => x.long_name
-      && String(x.long_name).trim().toLowerCase() !== String(shortName(x)).trim().toLowerCase());
+      && String(x.long_name).trim().toLowerCase() !== String(shortName(f, kind, x, lang)).trim().toLowerCase());
   }
 
   /**
@@ -131,11 +132,19 @@ module.exports = function registerSystemRoutes(app, deps) {
    * is „TLD", which is why that entity carries both. Asking „wofür steht Top-Level-Domain?"
    * would answer itself.
    *
+   * IT TAKES A LANGUAGE, and for four of the five pools that changes nothing — `PDF`, `HTTP` and
+   * `HDMI` are the same word everywhere, which is why the first version did without one. A
+   * storage medium is where it shows: „SD card" and „Floppy disk" are English, and the question
+   * asked about them by those names in the middle of a German sentence.
+   *
+   * @param {any} f - the facts
+   * @param {string} kind - an `EntityKind` value
    * @param {any} record - a row from `abbreviated`
+   * @param {string} lang
    * @returns {string}
    */
-  function shortName(record) {
-    return record.abbreviation || record.name;
+  function shortName(f, kind, record, lang) {
+    return record.abbreviation || word(f, kind, record, lang, 'name');
   }
 
   /**
@@ -244,14 +253,14 @@ module.exports = function registerSystemRoutes(app, deps) {
   async function facts() {
     const eng = engine();
     const [types, translations, products, companies, templates, phrases,
-      formats, groups, protocols, connectors, concepts, supports] = await Promise.all([
+      formats, groups, protocols, connectors, concepts, supports, storages] = await Promise.all([
       eng.query('SELECT id, name, purpose, part_of_id, icon, wikipedia_de, wikipedia_en FROM product_type WHERE id > 1'),
       // ONE translation table for all six translated entities, a polymorphic reference: six real
       // FK columns with `ExactlyOne` over them. Read whole like everything else here, and indexed
       // in `wording()` rather than queried per lookup.
       eng.query('SELECT product_type_id, file_format_id, format_group_id, protocol_id, '
-        + 'connector_id, concept_id, language, name, purpose, gender, genitive, note '
-        + 'FROM translation WHERE id > 1'),
+        + 'connector_id, concept_id, storage_medium_id, language, name, purpose, gender, '
+        + 'genitive, looks_like, note FROM translation WHERE id > 1'),
       eng.query('SELECT id, name, product_type_id, manufacturer_id, icon, wikipedia_de, wikipedia_en FROM product WHERE id > 1'),
       eng.query('SELECT id, name, logo, wikipedia_de, wikipedia_en FROM company WHERE id > 1'),
       eng.query('SELECT id, key, subject_kind, object_kind, answer_kind FROM question_template WHERE id > 1'),
@@ -265,9 +274,11 @@ module.exports = function registerSystemRoutes(app, deps) {
       eng.query('SELECT id, name, long_name, purpose, looks_like, icon, wikipedia_de, wikipedia_en FROM connector WHERE id > 1'),
       eng.query('SELECT id, name, abbreviation, long_name, purpose, example, part_of_id, wikipedia_de, wikipedia_en FROM concept WHERE id > 1'),
       eng.query('SELECT product_id, format_id, support FROM format_support WHERE id > 1'),
+      eng.query('SELECT id, name, long_name, purpose, looks_like, capacity_mb, rewritable, icon, '
+        + 'wikipedia_de, wikipedia_en, note FROM storage_medium WHERE id > 1'),
     ]);
     return { types, translations, products, companies, templates, phrases,
-      formats, groups, protocols, connectors, concepts, supports };
+      formats, groups, protocols, connectors, concepts, supports, storages };
   }
 
   /**
@@ -284,6 +295,7 @@ module.exports = function registerSystemRoutes(app, deps) {
     Protocol: 'protocol_id',
     Connector: 'connector_id',
     Concept: 'concept_id',
+    StorageMedium: 'storage_medium_id',
   };
 
   /**
@@ -456,6 +468,28 @@ module.exports = function registerSystemRoutes(app, deps) {
     out = out.replace(/[^\S\n]{2,}/g, ' ').replace(/[^\S\n]*\n[^\S\n]*/g, '\n').trim();
 
     return out;
+  }
+
+  /**
+   * A capacity as a person would say it — „700 MB", „4,7 GB", „2 TB".
+   *
+   * DERIVED and never stored beside the number, because a stored display form is a second
+   * source for one fact and drifts the first time somebody corrects only one of them (§46). The
+   * number is what the model keeps, because its ORDER is the point.
+   *
+   * German writes the decimal comma, English the point, and that is the whole reason this takes
+   * a language: „4.7 GB" in a German sentence is a different number to a German reader.
+   *
+   * @param {number|null|undefined} mb - megabytes
+   * @param {string} lang
+   * @returns {string} the empty string when there is no number to say
+   */
+  function capacity(mb, lang) {
+    const n = Number(mb);
+    if (!Number.isFinite(n) || n <= 0) return '';
+    const [value, unit] = n >= 1000000 ? [n / 1000000, 'TB'] : n >= 1000 ? [n / 1000, 'GB'] : [n, 'MB'];
+    const rounded = value >= 10 || Number.isInteger(value) ? Math.round(value) : Math.round(value * 10) / 10;
+    return `${String(rounded).replace('.', lang === 'de' ? ',' : '.')} ${unit}`;
   }
 
   /**
@@ -644,7 +678,7 @@ module.exports = function registerSystemRoutes(app, deps) {
     // which pool through `subject_kind`, so a fifth entity that carries a `long_name` is a
     // row and not a commit, which is what the template mechanism is for (§48).
     if (String(template.key).startsWith('stands_for')) {
-      const pool = abbreviated(f, template.subject_kind);
+      const pool = abbreviated(f, template.subject_kind, lang);
       const x = any(pool);
       if (!x) return null;
       const wrong = sample(pool.filter((y) => y.id !== x.id), 3);
@@ -653,13 +687,13 @@ module.exports = function registerSystemRoutes(app, deps) {
         template: template.key, language: lang,
         subject: { kind: template.subject_kind, id: x.id },
         object: null,
-        text: fill(phrase.text, { subject: { label: shortName(x) } }, lang),
+        text: fill(phrase.text, { subject: { label: shortName(f, template.subject_kind, x, lang) } }, lang),
         // The OPTIONS are long forms, so the distractors have to be long forms too — a list
         // with one sentence and three words answers itself.
         options: [x, ...wrong].map((y) => y.long_name),
         _correct: x.long_name,
         _explanation: fill(phrase.explanation,
-          { subject: { label: shortName(x) }, answer: { label: x.long_name },
+          { subject: { label: shortName(f, template.subject_kind, x, lang) }, answer: { label: x.long_name },
             // The abbreviation and the long form are NOT translated — „DOCX" is DOCX and
             // „Office Open XML" is the standard's own name. Only what it DOES is language.
             purpose: { label: word(f, template.subject_kind, x, lang, 'purpose') } }, lang),
@@ -756,6 +790,92 @@ module.exports = function registerSystemRoutes(app, deps) {
             // ein Teil von Webadresse" — an article missing where German needs one.
             answer: said(f, 'Concept', whole, lang),
             example: { label: whole.example || '' } }, lang),
+      };
+    }
+
+    // ── The storage media, added 2026-09-29 ───────────────────────────────────────────────
+    //
+    // `stands_for_storage` needs NO branch: the `stands_for` code above serves five entities and
+    // was only told about the fifth pool. A question type that is a row and not a commit, which
+    // is what declaring them as data was for (§48) — and the first time it paid out.
+
+    if (template.key === 'storage_capacity') {
+      // Four media, and the one that holds the most is the answer. `capacity_mb` earns its
+      // numeric type here and only here: the comparison IS the question.
+      const pool = f.storages.filter((x) => Number(x.capacity_mb) > 0);
+      if (pool.length < 4) return null;
+      const four = sample(pool, 4);
+      const right = four.reduce((a, b) => (Number(b.capacity_mb) > Number(a.capacity_mb) ? b : a));
+      // A tie would make two options right. It cannot happen on today's data and would be a
+      // silent defect if it ever did, so it is refused rather than resolved (§3).
+      if (four.filter((x) => Number(x.capacity_mb) === Number(right.capacity_mb)).length > 1) return null;
+      // The RUNNER-UP travels in the explanation, because „4,7 GB" alone says nothing to
+      // somebody who does not already know what a DVD holds. Two numbers are a comparison.
+      const second = four.filter((x) => x.id !== right.id)
+        .reduce((a, b) => (Number(b.capacity_mb) > Number(a.capacity_mb) ? b : a));
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'StorageMedium', id: right.id },
+        // The RUNNER-UP travels. `judge` can recompute which medium holds the most, but not
+        // which four were offered — and a comparison drawn from all of them contradicts the
+        // answer: „am meisten: 1 TB. Zum Vergleich: 2 TB." Measured, on the first draw.
+        object: { kind: 'StorageMedium', id: second.id },
+        text: fill(phrase.text, {}, lang),
+        options: four.map((x) => word(f, 'StorageMedium', x, lang, 'name')),
+        _correct: word(f, 'StorageMedium', right, lang, 'name'),
+        _explanation: fill(phrase.explanation, {
+          answer: said(f, 'StorageMedium', right, lang),
+          capacity: { label: capacity(right.capacity_mb, lang) },
+          other: said(f, 'StorageMedium', second, lang),
+          other_capacity: { label: capacity(second.capacity_mb, lang) },
+        }, lang),
+      };
+    }
+
+    if (template.key === 'storage_rewritable') {
+      const pool = f.storages.filter((x) => x.rewritable !== null && x.rewritable !== undefined);
+      const x = any(pool);
+      if (!x) return null;
+      const yes = lang === 'de' ? 'Ja' : 'Yes';
+      const no = lang === 'de' ? 'Nein' : 'No';
+      const right = x.rewritable ? yes : no;
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'StorageMedium', id: x.id },
+        object: null,
+        text: fill(phrase.text, { subject: said(f, 'StorageMedium', x, lang) }, lang),
+        options: [yes, no],
+        _correct: right,
+        _explanation: fill(phrase.explanation, {
+          answer: { label: right },
+          // The note carries the WHY — „the RO in CD-ROM has been saying so all along" — and a
+          // bare Ja/Nein without it teaches the fact and not the reason.
+          note: { label: word(f, 'StorageMedium', x, lang, 'note') || '' },
+        }, lang),
+      };
+    }
+
+    if (template.key === 'storage_looks_like') {
+      // A PICTURE question: only media that have one can be asked about, and that is a fact
+      // about the inventory rather than an error.
+      const pool = f.storages.filter((x) => x.icon);
+      const x = any(pool);
+      if (!x) return null;
+      const wrong = sample(pool.filter((y) => y.id !== x.id), 3);
+      if (wrong.length < 2) return null;
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'StorageMedium', id: x.id },
+        object: null,
+        text: fill(phrase.text, {}, lang),
+        image: picture(x),
+        options: [x, ...wrong].map((y) => word(f, 'StorageMedium', y, lang, 'name')),
+        _correct: word(f, 'StorageMedium', x, lang, 'name'),
+        _explanation: fill(phrase.explanation, {
+          answer: said(f, 'StorageMedium', x, lang),
+          purpose: { label: word(f, 'StorageMedium', x, lang, 'purpose') },
+          looks_like: { label: word(f, 'StorageMedium', x, lang, 'looks_like') || '' },
+        }, lang),
       };
     }
 
@@ -1084,13 +1204,13 @@ module.exports = function registerSystemRoutes(app, deps) {
     // Recomputed from the subject, like every other branch here, so nothing has to be
     // remembered between the question and the verdict.
     if (String(template.key).startsWith('stands_for')) {
-      const x = abbreviated(f, template.subject_kind).find((y) => y.id === (subject && subject.id));
+      const x = abbreviated(f, template.subject_kind, lang).find((y) => y.id === (subject && subject.id));
       if (!x) return null;
       return {
         correct: x.long_name,
         ...context([[template.subject_kind, x]], lang),
         explanation: fill(phrase.explanation,
-          { subject: { label: shortName(x) }, answer: { label: x.long_name },
+          { subject: { label: shortName(f, template.subject_kind, x, lang) }, answer: { label: x.long_name },
             // The abbreviation and the long form are NOT translated — „DOCX" is DOCX and
             // „Office Open XML" is the standard's own name. Only what it DOES is language.
             purpose: { label: word(f, template.subject_kind, x, lang, 'purpose') } }, lang),
@@ -1151,6 +1271,64 @@ module.exports = function registerSystemRoutes(app, deps) {
           { subject: { label: word(f, 'Concept', c, lang, 'name') },
             answer: said(f, 'Concept', whole, lang),
             example: { label: whole.example || '' } }, lang),
+      };
+    }
+
+    // ── The storage media ─────────────────────────────────────────────────────────────────
+    //
+    // Recomputed from the subject like every other branch here. `stands_for_storage` needs
+    // nothing: the `stands_for` branch above already answers for all five pools.
+
+    if (template.key === 'storage_capacity') {
+      // The subject IS the right answer — `build` put it there, because which four were offered
+      // is the one thing this cannot recompute. What it DOES recompute is the capacity and the
+      // wording, so a changed number reaches the verdict without a second path.
+      const right = f.storages.find((x) => x.id === (subject && subject.id));
+      if (!right) return null;
+      // The runner-up the QUESTION named, not the biggest one left in the inventory. It is
+      // checked rather than trusted — `object` arrives from the client — and a value that is not
+      // smaller than the answer is dropped instead of printed.
+      const named = object && f.storages.find((x) => x.id === object.id);
+      const second = named && Number(named.capacity_mb) > 0
+        && Number(named.capacity_mb) < Number(right.capacity_mb) ? named : null;
+      return {
+        correct: word(f, 'StorageMedium', right, lang, 'name'),
+        ...context([['StorageMedium', right]], lang),
+        explanation: fill(phrase.explanation, {
+          answer: said(f, 'StorageMedium', right, lang),
+          capacity: { label: capacity(right.capacity_mb, lang) },
+          other: second ? said(f, 'StorageMedium', second, lang) : { label: '' },
+          other_capacity: { label: second ? capacity(second.capacity_mb, lang) : '' },
+        }, lang),
+      };
+    }
+
+    if (template.key === 'storage_rewritable') {
+      const x = f.storages.find((y) => y.id === (subject && subject.id));
+      if (!x) return null;
+      const yes = lang === 'de' ? 'Ja' : 'Yes';
+      const no = lang === 'de' ? 'Nein' : 'No';
+      return {
+        correct: x.rewritable ? yes : no,
+        ...context([['StorageMedium', x]], lang),
+        explanation: fill(phrase.explanation, {
+          answer: { label: x.rewritable ? yes : no },
+          note: { label: word(f, 'StorageMedium', x, lang, 'note') || '' },
+        }, lang),
+      };
+    }
+
+    if (template.key === 'storage_looks_like') {
+      const x = f.storages.find((y) => y.id === (subject && subject.id));
+      if (!x) return null;
+      return {
+        correct: word(f, 'StorageMedium', x, lang, 'name'),
+        ...context([['StorageMedium', x]], lang),
+        explanation: fill(phrase.explanation, {
+          answer: said(f, 'StorageMedium', x, lang),
+          purpose: { label: word(f, 'StorageMedium', x, lang, 'purpose') },
+          looks_like: { label: word(f, 'StorageMedium', x, lang, 'looks_like') || '' },
+        }, lang),
       };
     }
 

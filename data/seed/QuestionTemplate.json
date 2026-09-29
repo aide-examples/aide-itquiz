@@ -89,5 +89,27 @@
     "subject_kind": "Concept",
     "answer_kind": "Concept",
     "note": "Walks the address apart: a TLD is part of a domain, a domain part of a web address. The same shape as `part_of` on ProductType, over a different entity"
+  },
+  {
+    "key": "stands_for_storage",
+    "subject_kind": "StorageMedium",
+    "note": "A ROW and not a commit — the `stands_for` branch already serves four entities and only needs to be told which pool. Which is the whole point of declaring question types as data (§48), and the first time it paid out without a line of code."
+  },
+  {
+    "key": "storage_capacity",
+    "subject_kind": "StorageMedium",
+    "answer_kind": "StorageMedium",
+    "note": "Which of four holds the most. The one question `capacity_mb` exists for, and the reason it is a number rather than a string: an order read off „700 MB“ and „4,7 GB“ sorts by the first digit."
+  },
+  {
+    "key": "storage_rewritable",
+    "subject_kind": "StorageMedium",
+    "note": "Can you write on it again? A yes/no over the property a person meets as a surprise — the RO in CD-ROM has been saying so all along and almost nobody has read it."
+  },
+  {
+    "key": "storage_looks_like",
+    "subject_kind": "StorageMedium",
+    "answer_kind": "StorageMedium",
+    "note": "Shows the picture and asks what it is. The question this entity was asked for: a person holding a card who does not know it is called an SD card cannot look anything up."
   }
 ]
