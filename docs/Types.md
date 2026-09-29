@@ -60,6 +60,22 @@ skipped one as if it had been failed.
 | wrong | Wrong | #dc2626 | Answered incorrectly |
 | skipped | Skipped | #9ca3af | Shown, not answered |
 
+### TemplateKind
+
+What a row in [QuestionTemplate](classes/QuestionTemplate.md) IS — a question the quiz can ask,
+or a sentence shape another question is built from.
+
+**It exists because the distinction was a naming convention first.** A template whose key began
+with `claim_` was a sentence shape, and the question route filtered on that prefix. It worked and
+it was invisible: nothing in the model said so, a row renamed without the prefix would silently
+have become drawable, and a reader of the table had to know the rule to make sense of it. The
+architect asked the question that ended it — *is that an attribute?* — and the answer was no.
+
+| Internal | External | Description |
+|----------|----------|-------------|
+| question | Frage | A question the quiz draws and asks. The default, and what every row was before 2026-09-29 |
+| claim | Behauptung | A sentence shape used INSIDE another question — the four statements of `four_claims`. Never drawn on its own |
+
 ### Level
 
 How far into the subject a record sits. The reason it exists is that this quiz drifted: SIP,

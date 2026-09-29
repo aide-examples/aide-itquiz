@@ -222,3 +222,42 @@ body {
   .q-after { flex-direction: column-reverse; }
   .q-look { width: 100%; }
 }
+
+/* ── A question whose answer is a SET (four_claims) ──────────────────────────────────────────
+   Checkboxes and one submit, because this question is answered once rather than four times —
+   and nothing ticked is a legitimate answer, so the submit is always enabled. */
+.q-claim {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  line-height: 1.4;
+}
+.q-claim:hover { border-color: var(--brand); }
+.q-claim input { margin-top: 0.25rem; flex: 0 0 auto; }
+.q-claim-text { flex: 1 1 auto; }
+.q-claim-mark { flex: 0 0 auto; font-weight: 700; }
+/* The SAME two colours the single-choice options use — one vocabulary for „this held" and „this
+   did not", so a player who has learnt it on one question type reads it on the other without
+   being taught again. Both halves of the pair are set (§49): these rows inherit their colour
+   from `.q-claim` above, and a rule changing only the background would leave the text to
+   whatever another layer happens to supply. */
+.q-claim.is-true  { border-color: var(--right); background: var(--right); color: #ffffff; }
+.q-claim.is-false { border-color: var(--wrong); background: var(--wrong); color: #ffffff; }
+
+/* The correction, under the statement it corrects rather than in a list below — the answer and
+   its reason in one line of sight. Indented to the text column, past the checkbox, so it reads
+   as belonging to the sentence above and not as a fifth statement. */
+.q-claim-why {
+  display: block;
+  margin: -0.2rem 0 0.3rem 2.1rem;
+  font-size: 0.92em;
+  color: var(--muted);
+}
+.q-claim-submit { margin-top: 0.3rem; }

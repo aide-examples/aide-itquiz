@@ -21,6 +21,7 @@ One KIND of question, declared as data. A template says which records fill its p
 {"name":"subject_kind","type":"EntityKind","description":"Which kind of record fills {subject} — the thing the question is ABOUT","example":"Product"},
 {"name":"object_kind","type":"EntityKind","optional":true,"description":"Which kind fills {object}, where a question needs a second record (\"Is {subject} a {object}?\"). Empty for the questions that need only one","example":"ProductType"},
 {"name":"answer_kind","type":"EntityKind","optional":true,"description":"Which kind the correct answer and its distractors are drawn from. Empty for a yes/no question, whose answers are not records","example":"Company"},
+{"name":"kind","type":"TemplateKind","default":"question","description":"Whether this row is a question the quiz asks or a sentence shape another question is built from. A CONVENTION until 2026-09-29 — the route filtered on a `claim_` prefix in the key — which worked and said nothing: a row renamed without the prefix would have become drawable in silence","example":"claim"},
 {"name":"note","type":"longString","optional":true,"description":"What this template is for, in the author's words","example":"Separates the maker from the thing made"}
 ]
 ```

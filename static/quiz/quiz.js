@@ -26,6 +26,9 @@
         + 'das Quiz bleibt daneben stehen.',
       score: (r, n) => `${r}/${n}`,
       empty: 'Es lässt sich gerade keine Frage bilden.',
+      // The submit for a set-answer question. It never says „wähle eine aus": nothing
+      // ticked is a legitimate answer and the commonest trap.
+      check: 'Prüfen',
       notRecorded: 'Stellvertreter-Modus: diese Antwort wird nicht mitgeschrieben.',
       failed: 'Die Antwort konnte nicht geprüft werden.',
     },
@@ -37,6 +40,7 @@
       lookTab: 'Opens the catalogue at this entry, in a new tab — the quiz stays where it is.',
       score: (r, n) => `${r}/${n}`,
       empty: 'No question can be built right now.',
+      check: 'Check',
       notRecorded: 'Impersonation: this answer is not being recorded.',
       failed: 'The answer could not be checked.',
     },
@@ -217,6 +221,7 @@
     $('q-text').textContent = q.text;
     const box = $('q-options');
     box.innerHTML = '';
+    if (q.multi) { paintClaims(q, box); return; }
     q.options.forEach((label, i) => {
       const b = document.createElement('button');
       b.type = 'button';
@@ -228,6 +233,84 @@
       box.appendChild(b);
     });
     /** @type {HTMLButtonElement|null} */ (box.querySelector('.q-option'))?.focus();
+  }
+
+
+  /**
+   * A question whose answer is a SET: four statements, tick the ones that hold.
+   *
+   * Checkboxes and one button, rather than four buttons. The difference is not cosmetic — with
+   * buttons every click is an answer, and this question is only answered once all four have been
+   * judged. NOTHING TICKED IS A VALID ANSWER and the commonest trap: the player must be able to
+   * submit an empty set, which is why the button is always enabled and never says „pick one".
+   *
+   * The count of true statements is deliberately not shown anywhere: naming it would invite
+   * arithmetic instead of judging each sentence, and at none or all it would be the whole answer.
+   *
+   * @param {any} q - the question @param {HTMLElement} box - the options container
+   */
+  function paintClaims(q, box) {
+    q.options.forEach((label, i) => {
+      const row = document.createElement('label');
+      row.className = 'q-claim';
+      row.dataset.index = String(i);
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.value = String(i);
+      const span = document.createElement('span');
+      span.className = 'q-claim-text';
+      // The number is the keyboard shortcut, as with the single-choice options.
+      span.textContent = `${i + 1}. ${label}`;
+      row.append(cb, span);
+      box.appendChild(row);
+    });
+    const go = document.createElement('button');
+    go.type = 'button';
+    go.className = 'q-option q-claim-submit';
+    go.textContent = words().check;
+    go.addEventListener('click', () => {
+      const ticked = [...box.querySelectorAll('input[type=checkbox]')]
+        .filter((c) => /** @type {HTMLInputElement} */ (c).checked)
+        .map((c) => /** @type {HTMLInputElement} */ (c).value);
+      answer(ticked.join(','), go);
+    });
+    box.appendChild(go);
+    /** @type {HTMLInputElement|null} */ (box.querySelector('input'))?.focus();
+  }
+
+  /**
+   * Mark each statement and put the correction where the mistake was.
+   *
+   * IN PLACE and in italics, under the sentence it corrects — 🇩🇪 „direkt im Fragenblock hinter
+   * der falschen Behauptung in kursiv". A list below would make the reader carry four sentences
+   * in their head to match them up; here the answer and its reason occupy one line of sight.
+   *
+   * The server decides WHERE a reason belongs: it sends one only where the player's judgement
+   * differed from the truth, so a claim they got right keeps the bare mark.
+   *
+   * @param {Array<{ok: boolean, text: string, why: string|null}>} claims
+   */
+  function markClaims(claims) {
+    const box = $('q-options');
+    box.querySelectorAll('input[type=checkbox]').forEach((c) => {
+      /** @type {HTMLInputElement} */ (c).disabled = true;
+    });
+    (claims || []).forEach((c, i) => {
+      const row = box.querySelector(`.q-claim[data-index="${i}"]`);
+      if (!row) return;
+      row.classList.add(c.ok ? 'is-true' : 'is-false');
+      const mark = document.createElement('span');
+      mark.className = 'q-claim-mark';
+      mark.textContent = c.ok ? '✓' : '✗';
+      row.prepend(mark);
+      if (!c.why) return;
+      const why = document.createElement('em');
+      why.className = 'q-claim-why';
+      why.textContent = c.why;
+      row.after(why);
+    });
+    const go = box.querySelector('.q-claim-submit');
+    if (go) /** @type {HTMLButtonElement} */ (go).disabled = true;
   }
 
   /**
@@ -242,7 +325,10 @@
     if (!q) return;
     const buttons = /** @type {NodeListOf<HTMLButtonElement>} */ ($('q-options').querySelectorAll('.q-option'));
     buttons.forEach((b) => { b.disabled = true; });
-    const payload = { template: q.template, language: q.language, subject: q.subject, object: q.object, chosen };
+    // `claims` travels back with the answer: the server recomputes each statement's truth, but
+    // WHICH four were shown is a choice made when the question was built and cannot be derived.
+    const payload = { template: q.template, language: q.language, subject: q.subject,
+      object: q.object, chosen, claims: q.claims };
     try {
       // The verdict first, and as a GET. It is a read — the server computes the truth from
       // the facts and stores nothing — and being a read is what lets it work in a session
@@ -252,6 +338,7 @@
       const qs = new URLSearchParams({
         template: q.template, language: q.language, chosen: String(chosen),
         subject: JSON.stringify(q.subject), object: JSON.stringify(q.object),
+        ...(q.claims ? { claims: JSON.stringify(q.claims) } : {}),
       });
       const r = await fetch(`${VERDICT_URL}?${qs}`, { credentials: 'same-origin' });
       if (!r.ok) throw new Error(String(r.status));
@@ -266,13 +353,21 @@
       if (verdict.quality === 'correct') state.right += 1;
       $('q-score').textContent = words().score(state.right, state.asked);
 
-      button.classList.add(verdict.quality === 'correct' ? 'is-right' : 'is-wrong');
-      if (verdict.quality !== 'correct') {
-        // Show where the right answer was. Without it a wrong answer teaches
-        // only that it was wrong, which is the half that does not help.
-        buttons.forEach((b) => {
-          if (b.textContent.replace(/^\d+\.\s/, '') === verdict.correct) b.classList.add('is-right');
-        });
+      if (verdict.claims) {
+        // A set-answer question marks every statement rather than one button, and puts the
+        // reason under the sentence it belongs to. The submit button itself only carries the
+        // overall verdict, because „richtig" here means the whole set was right.
+        markClaims(verdict.claims);
+        button.classList.add(verdict.quality === 'correct' ? 'is-right' : 'is-wrong');
+      } else {
+        button.classList.add(verdict.quality === 'correct' ? 'is-right' : 'is-wrong');
+        if (verdict.quality !== 'correct') {
+          // Show where the right answer was. Without it a wrong answer teaches
+          // only that it was wrong, which is the half that does not help.
+          buttons.forEach((b) => {
+            if (b.textContent.replace(/^\d+\.\s/, '') === verdict.correct) b.classList.add('is-right');
+          });
+        }
       }
       $('q-explain').innerHTML = renderExplanation(verdict.explanation);
       // The face of the thing the explanation is about, where it has one. The server decides

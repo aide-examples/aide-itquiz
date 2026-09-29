@@ -604,5 +604,90 @@
     "name": "JSON",
     "purpose": "hält Daten als verschachtelte Listen und Name-Wert-Paare, in einer Form, die ein Programm schnell liest und ein Mensch noch mitlesen kann",
     "note": "Der jüngere Rivale von XML — und der, der gewonnen hat: dieselbe Aufgabe mit weit weniger Satzzeichen. Fast alles, was ein Browser heute von einem Server holt, kommt als JSON"
+  },
+  {
+    "format_group": "Dokumentformat",
+    "language": "en",
+    "name": "Document format"
+  },
+  {
+    "format_group": "Bildformat",
+    "language": "en",
+    "name": "Image format"
+  },
+  {
+    "format_group": "Audioformat",
+    "language": "en",
+    "name": "Audio format"
+  },
+  {
+    "format_group": "Videoformat",
+    "language": "en",
+    "name": "Video format"
+  },
+  {
+    "format_group": "Kompressionsformat",
+    "language": "en",
+    "name": "Compression format"
+  },
+  {
+    "format_group": "Auszeichnungssprache",
+    "language": "en",
+    "name": "Markup language"
+  },
+  {
+    "format_group": "Tabellenformat",
+    "language": "en",
+    "name": "Table format"
+  },
+  {
+    "concept": "Webadresse",
+    "language": "en",
+    "name": "Web address"
+  },
+  {
+    "concept": "Ressourcenkennung",
+    "language": "en",
+    "name": "Resource identifier"
+  },
+  {
+    "concept": "Domain",
+    "language": "en",
+    "name": "Domain"
+  },
+  {
+    "concept": "Top-Level-Domain",
+    "language": "en",
+    "name": "Top-level domain"
+  },
+  {
+    "concept": "IP-Adresse",
+    "language": "en",
+    "name": "IP address"
+  },
+  {
+    "concept": "Socket",
+    "language": "en",
+    "name": "Socket"
+  },
+  {
+    "concept": "VOIP",
+    "language": "en",
+    "name": "VOIP"
+  },
+  {
+    "concept": "Lokales Netz",
+    "language": "en",
+    "name": "Local network"
+  },
+  {
+    "connector": "Klinke",
+    "language": "en",
+    "name": "Jack"
+  },
+  {
+    "connector": "Cinch",
+    "language": "en",
+    "name": "RCA"
   }
 ]

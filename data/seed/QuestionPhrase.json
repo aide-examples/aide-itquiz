@@ -226,5 +226,77 @@
     "language": "en",
     "text": "What is this?",
     "explanation": "That is {ein_answer} {answer} — {purpose}.[[\n*How to recognise it:* {looks_like}.]]"
+  },
+  {
+    "template": "four_claims",
+    "language": "de",
+    "text": "Was stimmt über {subject}?",
+    "explanation": "Von vier Behauptungen über {subject} {were}."
+  },
+  {
+    "template": "four_claims",
+    "language": "en",
+    "text": "What is true about {subject}?",
+    "explanation": "Of four statements about {subject}, {were}."
+  },
+  {
+    "template": "claim_group",
+    "language": "de",
+    "text": "{subject} ist {ein_answer} {answer}.",
+    "explanation": "{subject} ist {kein_answer} {answer}[[, sondern {ein_actual} {actual}]]."
+  },
+  {
+    "template": "claim_group",
+    "language": "en",
+    "text": "{subject} is {ein_answer} {answer}.",
+    "explanation": "{subject} is not {ein_answer} {answer}[[ — it is {ein_actual} {actual}]]."
+  },
+  {
+    "template": "claim_ext",
+    "language": "de",
+    "text": "Eine {subject}-Datei endet auf {answer}.",
+    "explanation": "Eine {subject}-Datei endet nicht auf {answer}[[, sondern auf {actual}]]."
+  },
+  {
+    "template": "claim_ext",
+    "language": "en",
+    "text": "A {subject} file ends in {answer}.",
+    "explanation": "A {subject} file does not end in {answer}[[ — it ends in {actual}]]."
+  },
+  {
+    "template": "claim_opens",
+    "language": "de",
+    "text": "Mit {answer} kann man eine {subject}-Datei ansehen.",
+    "explanation": "Mit {answer} kann man keine {subject}-Datei ansehen[[ — mit {actual} schon]]."
+  },
+  {
+    "template": "claim_opens",
+    "language": "en",
+    "text": "{answer} can open a {subject} file.",
+    "explanation": "{answer} cannot open a {subject} file[[ — {actual} can]]."
+  },
+  {
+    "template": "claim_edits",
+    "language": "de",
+    "text": "Mit {answer} kann man eine {subject}-Datei bearbeiten.",
+    "explanation": "Mit {answer} kann man eine {subject}-Datei nicht bearbeiten[[ — mit {actual} schon]]."
+  },
+  {
+    "template": "claim_edits",
+    "language": "en",
+    "text": "{answer} can edit a {subject} file.",
+    "explanation": "{answer} cannot edit a {subject} file[[ — {actual} can]]."
+  },
+  {
+    "template": "claim_stands",
+    "language": "de",
+    "text": "{subject} steht für „{answer}“.",
+    "explanation": "{subject} steht nicht für „{answer}“[[, sondern für „{actual}“]]."
+  },
+  {
+    "template": "claim_stands",
+    "language": "en",
+    "text": "{subject} stands for „{answer}“.",
+    "explanation": "{subject} does not stand for „{answer}“[[ — it stands for „{actual}“]]."
   }
 ]

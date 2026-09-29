@@ -111,5 +111,45 @@
     "subject_kind": "StorageMedium",
     "answer_kind": "StorageMedium",
     "note": "Shows the picture and asks what it is. The question this entity was asked for: a person holding a card who does not know it is called an SD card cannot look anything up."
+  },
+  {
+    "key": "four_claims",
+    "subject_kind": "FileFormat",
+    "note": "Four statements about one thing, of which 0 to 4 are true — the classic multiple-response pattern, and the first type here whose answer is a SET rather than one option. The count is deliberately NOT shown: naming it invites arithmetic instead of judging each statement, and at 0 or 4 it would be the whole answer."
+  },
+  {
+    "key": "claim_group",
+    "subject_kind": "FileFormat",
+    "answer_kind": "FormatGroup",
+    "note": "Not drawable on its own — a sentence shape for `four_claims`. It lives here rather than in code so the wording can be corrected without a commit, which for a teaching system is the difference between a phrasing that gets fixed and one that does not.",
+    "kind": "claim"
+  },
+  {
+    "key": "claim_ext",
+    "subject_kind": "FileFormat",
+    "answer_kind": "FileFormat",
+    "note": "A sentence shape for `four_claims`: the ending. The partner is the format whose extension is CLAIMED, so the truth is a comparison of ids and never of strings.",
+    "kind": "claim"
+  },
+  {
+    "key": "claim_opens",
+    "subject_kind": "FileFormat",
+    "answer_kind": "Product",
+    "note": "A sentence shape for `four_claims`: which program can open it.",
+    "kind": "claim"
+  },
+  {
+    "key": "claim_edits",
+    "subject_kind": "FileFormat",
+    "answer_kind": "Product",
+    "note": "A sentence shape for `four_claims`: which program can CHANGE it. The narrower of the pair, and the distinction most people have never been told.",
+    "kind": "claim"
+  },
+  {
+    "key": "claim_stands",
+    "subject_kind": "FileFormat",
+    "answer_kind": "FileFormat",
+    "note": "A sentence shape for `four_claims`: what the abbreviation stands for. Only for formats that carry a long form differing from the short one.",
+    "kind": "claim"
   }
 ]

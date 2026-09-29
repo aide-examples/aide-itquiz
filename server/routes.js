@@ -70,6 +70,12 @@ function sample(rows, n) {
 
 const DEFINITE = { m: 'der', f: 'die', n: 'das' };
 const INDEFINITE = { m: 'ein', f: 'eine', n: 'ein' };
+// The NEGATED article, added 2026-09-29 for the corrections a four-claims question gives. German
+// negates a noun with a word rather than a particle — „EPUB ist KEINE Auszeichnungssprache", not
+// „ist eine Auszeichnungssprache nicht" — so a correction that avoided it would be schoolroom
+// German at the exact moment the reader is being taught something. Same shape as INDEFINITE, and
+// derived from the same one stored gender, so the three cannot disagree about a noun.
+const NEGATED = { m: 'kein', f: 'keine', n: 'kein' };
 // German genitive article. The part-of sentence wants „Teil EINES Office-Pakets", and the
 // case cannot be avoided by rewording without making the sentence worse. The ARTICLE derives
 // from the gender like the other two; the noun's own ending does NOT — it follows a rule with
@@ -263,7 +269,7 @@ module.exports = function registerSystemRoutes(app, deps) {
         + 'genitive, looks_like, note FROM translation WHERE id > 1'),
       eng.query('SELECT id, name, product_type_id, manufacturer_id, icon, wikipedia_de, wikipedia_en, level FROM product WHERE id > 1'),
       eng.query('SELECT id, name, logo, wikipedia_de, wikipedia_en, level FROM company WHERE id > 1'),
-      eng.query('SELECT id, key, subject_kind, object_kind, answer_kind FROM question_template WHERE id > 1'),
+      eng.query('SELECT id, key, kind, subject_kind, object_kind, answer_kind FROM question_template WHERE id > 1'),
       eng.query('SELECT template_id, language, text, explanation FROM question_phrase WHERE id > 1'),
       // The standards and the notions, added 2026-09-28. Each is small and read whole, for the
       // same reason the first four are: a quiz that grew to thousands of rows would want a
@@ -461,6 +467,158 @@ module.exports = function registerSystemRoutes(app, deps) {
   }
 
   /**
+   * The five shapes a claim about a file format can take.
+   *
+   * Each is a pair: what makes it TRUE, and which record it names. The claim itself travels as
+   * `{c, p}` — a shape and a partner id — and never as a sentence or a truth value, which is the
+   * whole design of this question type.
+   *
+   * WHY THE CLAIM AND NOT ITS TRUTH TRAVELS. Every other template here lets `judge` recompute the
+   * answer from `subject` and `object`, so the POST never has to believe what the GET said. Four
+   * statements cannot be recomputed from a subject alone — which four were shown is a choice made
+   * at build time. So the choice travels and the TRUTH is still computed server-side, from the
+   * facts, on both paths. A client can misreport which claims it was shown; it cannot make a
+   * false one true.
+   *
+   * Note `ext` and `stands` take a FORMAT as their partner rather than a string: the claim is
+   * then „this format's ending" and the truth is a comparison of ids. A string partner would put
+   * the answer in the claim and make the judge compare prose.
+   */
+  const CLAIM_SHAPES = {
+    // `p` is a FormatGroup — true when it is the format's own group.
+    group: {
+      partner: (f) => f.groups,
+      truth: (f, fmt, p) => fmt.group_id === p.id,
+      label: (f, p, lang) => word(f, 'FormatGroup', p, lang, 'name'),
+      // A group is a GENDERED noun in German — „ein Bildformat" but „eine Auszeichnungssprache" —
+      // so the claim sentence asks for `{ein_answer}` and this hands it the gender. The first
+      // version wrote „ein" into the phrase and produced „EPUB ist ein Auszeichnungssprache":
+      // the same mistake `format_group` made, one question type later, because the article was
+      // in the sentence instead of in the model (§48).
+      role: (f, p, lang) => said(f, 'FormatGroup', p, lang),
+      actual: (f, fmt, lang) => {
+        const g = f.groups.find((x) => x.id === fmt.group_id);
+        return g ? word(f, 'FormatGroup', g, lang, 'name') : '';
+      },
+    },
+    // `p` is a FileFormat — the claim is „it ends in THAT format's extension".
+    ext: {
+      partner: (f) => f.formats.filter((x) => x.extension),
+      truth: (f, fmt, p) => fmt.id === p.id,
+      label: (f, p) => p.extension,
+      actual: (f, fmt) => fmt.extension || '',
+    },
+    // `p` is a Product — true when some support row exists at all.
+    opens: {
+      partner: (f) => f.products,
+      truth: (f, fmt, p) => f.supports.some((s) => s.format_id === fmt.id && s.product_id === p.id),
+      label: (f, p) => p.name,
+      // One program that CAN — naming a single example teaches more than „some program can",
+      // and the phrase drops the clause when the inventory has none.
+      actual: (f, fmt) => {
+        const s = f.supports.find((x) => x.format_id === fmt.id);
+        const p = s && f.products.find((x) => x.id === s.product_id);
+        return p ? p.name : '';
+      },
+    },
+    // `p` is a Product — true only for `edit`, the narrower half of the pair.
+    edits: {
+      partner: (f) => f.products,
+      truth: (f, fmt, p) => f.supports.some((s) => s.format_id === fmt.id && s.product_id === p.id
+        && s.support === 'edit'),
+      label: (f, p) => p.name,
+      actual: (f, fmt) => {
+        const s = f.supports.find((x) => x.format_id === fmt.id && x.support === 'edit');
+        const p = s && f.products.find((x) => x.id === s.product_id);
+        return p ? p.name : '';
+      },
+    },
+    // `p` is a FileFormat — the claim is „it stands for THAT format's long name".
+    stands: {
+      partner: (f) => f.formats.filter((x) => x.long_name),
+      truth: (f, fmt, p) => fmt.id === p.id,
+      label: (f, p) => p.long_name,
+      actual: (f, fmt) => fmt.long_name || '',
+    },
+  };
+
+  /**
+   * Is one claim true of one format? Computed from the facts, never read off the claim.
+   *
+   * @param {any} f @param {any} fmt - the subject @param {{c: string, p: number}} claim
+   * @returns {boolean}
+   */
+  function claimTruth(f, fmt, claim) {
+    const shape = CLAIM_SHAPES[claim && claim.c];
+    if (!shape) return false;
+    const p = shape.partner(f).find((x) => x.id === claim.p);
+    return p ? !!shape.truth(f, fmt, p) : false;
+  }
+
+  /**
+   * One claim as a sentence in the reader's language.
+   *
+   * The wording comes from `QuestionPhrase`, under the template key `claim_<shape>`, so it can be
+   * corrected without a commit — which for a teaching system is the difference between a phrasing
+   * that gets fixed and one that does not. A missing phrase yields the empty string rather than a
+   * broken sentence, and the caller drops the claim.
+   *
+   * @param {any} f @param {any} fmt @param {{c: string, p: number}} claim @param {string} lang
+   * @returns {string}
+   */
+  function claimText(f, fmt, claim, lang, correcting = false) {
+    const shape = CLAIM_SHAPES[claim && claim.c];
+    const tpl = f.templates.find((t) => t.key === `claim_${claim && claim.c}`);
+    const phrase = tpl && f.phrases.find((x) => x.template_id === tpl.id && x.language === lang);
+    if (!shape || !phrase) return '';
+    const p = shape.partner(f).find((x) => x.id === claim.p);
+    if (!p) return '';
+    // The phrase's `text` is the claim; its `explanation` is what is TRUE instead. Two sentences
+    // in one row, because they are two readings of one fact and separating them into two rows
+    // would let a correction drift away from the claim it corrects (§46).
+    const frame = correcting ? (phrase.explanation || '') : phrase.text;
+    if (!frame) return '';
+    // `role` where the noun needs grammar, a bare label otherwise. A shape that supplies one
+    // gets `{ein_answer}` and `{der_answer}` for free; the rest never use them.
+    const answer = shape.role ? shape.role(f, p, lang) : { label: shape.label(f, p, lang) || '' };
+    const actualLabel = (shape.actual && shape.actual(f, fmt, lang)) || '';
+    // The correction names the TRUE counterpart, which needs the same grammar as the claim.
+    const actualRecord = shape.role && shape.partner(f).find((x) => (shape.label(f, x, lang) || '') === actualLabel);
+    return fill(frame, {
+      subject: { label: word(f, 'FileFormat', fmt, lang, 'name') },
+      answer,
+      actual: actualRecord ? shape.role(f, actualRecord, lang) : { label: actualLabel },
+    }, lang);
+  }
+
+  /**
+   * Four claims about one format — a mix of true and false, in random order.
+   *
+   * ONE TRUE AND ONE FALSE VARIANT PER SHAPE is offered to the draw, so the four can come out at
+   * any count from zero to four. The architect chose not to tell the player the count, and both
+   * extremes stay possible on purpose: they are the most surprising cases and therefore the ones
+   * worth meeting.
+   *
+   * @param {any} f @param {any} fmt @param {string} lang
+   * @returns {Array<{c: string, p: number}>} four claims, or fewer than four when the inventory
+   *   cannot supply them — the caller then gives up on this format
+   */
+  function claimsFor(f, fmt, lang) {
+    const pool = [];
+    for (const [c, shape] of Object.entries(CLAIM_SHAPES)) {
+      const partners = shape.partner(f);
+      const yes = partners.filter((p) => shape.truth(f, fmt, p));
+      const no = partners.filter((p) => !shape.truth(f, fmt, p));
+      // One of each where both exist. A shape with no true partner still contributes a false
+      // claim, and one with no false partner a true one — neither is a defect, it is what the
+      // inventory says about this format.
+      if (yes.length) pool.push({ c, p: any(yes).id });
+      if (no.length) pool.push({ c, p: any(no).id });
+    }
+    return sample(pool.filter((cl) => claimText(f, fmt, cl, lang)), 4);
+  }
+
+  /**
    * Fill a phrase.
    *
    * Besides `{subject}` / `{object}` / `{answer}` a phrase may carry
@@ -511,7 +669,7 @@ module.exports = function registerSystemRoutes(app, deps) {
     // mark stood between the sentence boundary and the placeholder, so the pass walked past
     // and shipped „*ein Textprogramm ist Teil eines Office-Pakets.*". The one mark a phrase may
     // carry is the one that has to be allowed through here.
-    out = out.replace(/(^|[.!?]["'»]?[^\S\n]+|\n[^\S\n]*)(\*?)\{(ein|der|genitiv|er)_([a-z_]+)\}/g,
+    out = out.replace(/(^|[.!?]["'»]?[^\S\n]+|\n[^\S\n]*)(\*?)\{(ein|kein|der|genitiv|er)_([a-z_]+)\}/g,
       (_all, before, mark, kind, role) =>
         `${before}${mark}{${kind[0].toUpperCase()}${kind.slice(1)}_${role}}`);
 
@@ -531,14 +689,19 @@ module.exports = function registerSystemRoutes(app, deps) {
       // there — one phrase, both languages.
       const gen = v.gender ? `${GENITIVE[v.gender]} ${v.genitive || label}` : (a ? `${a} ${label}` : label);
       const es = v.gender ? PRONOUN[v.gender] : (lang === 'en' ? 'it' : '');
+      // English negates with a particle in the verb („is not a …"), so the negated article is
+      // the plain one there and the phrase carries the „not" itself.
+      const kein = v.gender ? NEGATED[v.gender] : (lang === 'en' && label ? a : '');
       out = out.split(`{${role}}`).join(label);
       out = out.split(`{der_${role}}`).join(der);
       out = out.split(`{ein_${role}}`).join(a);
+      out = out.split(`{kein_${role}}`).join(kein);
       out = out.split(`{genitiv_${role}}`).join(gen);
       out = out.split(`{er_${role}}`).join(es);
       // The same four, capitalised — the marker pass above rewrote the ones that open a
       // sentence. Spelled out rather than derived with a regex, so a placeholder that is NOT
       // one of these four cannot be capitalised by accident.
+      out = out.split(`{Kein_${role}}`).join(capitalised(kein));
       out = out.split(`{Der_${role}}`).join(capitalised(der));
       out = out.split(`{Ein_${role}}`).join(capitalised(a));
       out = out.split(`{Genitiv_${role}}`).join(capitalised(gen));
@@ -881,6 +1044,38 @@ module.exports = function registerSystemRoutes(app, deps) {
     // was only told about the fifth pool. A question type that is a row and not a commit, which
     // is what declaring them as data was for (§48) — and the first time it paid out.
 
+    // ── Four claims, of which 0 to 4 are true ─────────────────────────────────────────────
+    //
+    // The first type here whose answer is a SET. `_correct` is the sorted list of the indices
+    // that hold — a canonical string, so „0,2" and „2,0" are the same answer and the comparison
+    // in `assess` needs no special case.
+    //
+    // THE COUNT IS NOT SHOWN, at the architect's decision. Naming it invites arithmetic instead
+    // of judging each statement, and at 0 or 4 it would be the whole answer. Both extremes stay
+    // possible on purpose — they are the most surprising cases and therefore the ones worth
+    // meeting.
+    if (template.key === 'four_claims') {
+      // A format that can furnish four DISTINCT claims. Most can; one with no group, no long
+      // form and nothing that opens it cannot, and that is the inventory speaking.
+      const askable = f.formats.filter((x) => claimsFor(f, x, lang).length === 4);
+      const fmt = any(askable);
+      if (!fmt) return null;
+      const claims = claimsFor(f, fmt, lang);
+      if (claims.length < 4) return null;
+      const right = claims.map((cl, i) => (claimTruth(f, fmt, cl) ? i : -1)).filter((i) => i >= 0);
+      return {
+        template: template.key, language: lang,
+        subject: { kind: 'FileFormat', id: fmt.id },
+        object: null,
+        multi: true,
+        claims,
+        text: fill(phrase.text, { subject: { label: word(f, 'FileFormat', fmt, lang, 'name') } }, lang),
+        options: claims.map((cl) => claimText(f, fmt, cl, lang)),
+        _correct: right.join(','),
+        _explanation: '',   // the per-claim verdict is the explanation; see `judge`
+      };
+    }
+
     if (template.key === 'storage_capacity') {
       // Four media, and the one that holds the most is the answer. `capacity_mb` earns its
       // numeric type here and only here: the comparison IS the question.
@@ -1119,7 +1314,16 @@ module.exports = function registerSystemRoutes(app, deps) {
         // `staleness` answers `Infinity` for a question this player has never got right, which
         // includes every question they have never seen.
         const candidates = [];
-        for (const template of shuffled(f.templates)) {
+        // A `claim` row is a SENTENCE SHAPE for `four_claims`, not a question — it lives in
+        // `QuestionTemplate` so its wording sits in `QuestionPhrase` beside every other wording
+        // and can be corrected without a commit. Skipped here rather than filtered at load,
+        // because `claimText` looks those rows up by key.
+        //
+        // The test is the MODEL and no longer the name. It was `key.startsWith('claim_')` for
+        // half a day, which worked and said nothing: a row renamed without the prefix would have
+        // become drawable in silence, and the table gave a reader no way to tell the two kinds
+        // apart (§48 — a fact about a row belongs on the row).
+        for (const template of shuffled(f.templates).filter((t) => t.kind !== 'claim')) {
           const q = build(f, template, lang);
           if (!q) continue;
           // The template id travels on the built question so the history can be keyed without
@@ -1138,7 +1342,13 @@ module.exports = function registerSystemRoutes(app, deps) {
             return ua.band - ub.band || ub.staleness - ua.staleness;
           });
           const { _correct, _explanation, _templateId, ...open } = candidates[0];
-          return res.json({ ...open, level: ceiling, options: shuffled(candidates[0].options) });
+          // A SET-ANSWER QUESTION IS NOT SHUFFLED HERE. Its `options` and its `claims` are the
+          // same four things in the same order, and the answer is a list of INDICES — shuffling
+          // one and not the other made statement 0 and claim 0 different sentences, so every
+          // verdict was about something the player had not read. The claims were already drawn
+          // at random when they were built; there is nothing left to shuffle.
+          const opts = open.multi ? candidates[0].options : shuffled(candidates[0].options);
+          return res.json({ ...open, level: ceiling, options: opts });
         }
         return res.status(503).json({ error: 'no question can be built from the facts on record' });
       } catch (err) {
@@ -1159,12 +1369,15 @@ module.exports = function registerSystemRoutes(app, deps) {
    * @returns {Promise<{error?: string, status?: number, template?: any, truth?: any, quality?: string}>}
    */
   async function assess(payload) {
-    const { template: key, language, subject, object, chosen } = payload || {};
+    // `claims` is the one thing a question can carry that is not recomputable from its subject:
+    // WHICH four statements were shown. Their TRUTH is still computed here, from the facts, so a
+    // client can misreport what it was shown and cannot make a false claim true (#four_claims).
+    const { template: key, language, subject, object, chosen, claims } = payload || {};
     const f = await facts();
     const template = f.templates.find((t) => t.key === key);
     if (!template) return { status: 400, error: `unknown template ${key}` };
 
-    const truth = judge(f, template, language, subject, object);
+    const truth = judge(f, template, language, subject, object, claims, chosen);
     if (!truth) return { status: 400, error: 'the question no longer matches the facts' };
 
     const quality = chosen == null ? 'skipped' : (chosen === truth.correct ? 'correct' : 'wrong');
@@ -1212,6 +1425,9 @@ module.exports = function registerSystemRoutes(app, deps) {
           language: req.query.language,
           subject: parse(req.query.subject),
           object: parse(req.query.object),
+          // WHICH four statements were shown. Their truth is computed here from the facts, so
+          // this is the one thing the client is believed about and it is not a truth claim.
+          claims: parse(req.query.claims),
           chosen: req.query.chosen == null ? null : String(req.query.chosen),
         });
         if (r.error) return res.status(r.status || 400).json({ error: r.error });
@@ -1219,6 +1435,10 @@ module.exports = function registerSystemRoutes(app, deps) {
           quality: r.quality,
           correct: r.truth.correct,
           explanation: r.truth.explanation,
+          // Present only for a set-answer question: each statement with its own mark and, where
+          // the player judged it wrongly, what is true instead. The page needs it structured to
+          // put the correction under the sentence it corrects.
+          ...(r.truth.claims ? { claims: r.truth.claims } : {}),
           image: r.truth.image || null,
           // `{lang, title}`, never a URL — the client hands both to the framework's
           // `wikipediaRef`, which is the one thing that knows how an article is addressed.
@@ -1290,7 +1510,7 @@ module.exports = function registerSystemRoutes(app, deps) {
    * one only names the truth — and folding them together would mean building a
    * whole question in order to grade one.
    */
-  function judge(f, template, lang, subject, object) {
+  function judge(f, template, lang, subject, object, claims, chosen) {
     const type = (id) => f.types.find((t) => t.id === id);
     const prod = (id) => f.products.find((p) => p.id === id);
     const comp = (id) => f.companies.find((c) => c.id === id);
@@ -1523,6 +1743,57 @@ module.exports = function registerSystemRoutes(app, deps) {
     //
     // Recomputed from the subject like every other branch here. `stands_for_storage` needs
     // nothing: the `stands_for` branch above already answers for all five pools.
+
+    if (template.key === 'four_claims') {
+      const fmt = f.formats.find((x) => x.id === (subject && subject.id));
+      if (!fmt) return null;
+      const list = Array.isArray(claims) ? claims : [];
+      if (!list.length) return null;
+      const verdicts = list.map((cl) => claimTruth(f, fmt, cl));
+      const right = verdicts.map((t, i) => (t ? i : -1)).filter((i) => i >= 0);
+      // THE VERDICT IS PER CLAIM, not a score and not a text block. „3 von 4 richtig" teaches
+      // nothing; each statement with its own mark, and a reason where the reader was surprised,
+      // is the whole lesson — and it is why the count could be withheld from the QUESTION
+      // without withholding anything afterwards.
+      //
+      // Returned STRUCTURED so the page can show the correction where the mistake was made
+      // rather than in a list below — 🇩🇪 „direkt im Fragenblock hinter der falschen Behauptung
+      // in kursiv". A joined string would have forced the page to parse back out what this
+      // already knows.
+      //
+      // `why` only where the player's judgement differed from the truth. A claim they got right
+      // needs no sentence, and everywhere else it is noise. And a TRUE statement left unticked
+      // gets none either: the statement IS the fact, so the ✓ in front of it is already the
+      // correction. Only a false one held for true has something else to say.
+      const picked = new Set(String(chosen ?? '').split(',').map((x) => x.trim()).filter((x) => x !== ''));
+      const detail = list.map((cl, i) => {
+        const ok = verdicts[i];
+        const said = picked.has(String(i));
+        return {
+          ok,
+          text: claimText(f, fmt, cl, lang),
+          why: (!ok && said) ? claimText(f, fmt, cl, lang, true) : null,
+        };
+      });
+      // ONE placeholder carries the whole count clause, because German needs the verb to agree
+      // with it — „stimmt keine", „stimmt eine", „stimmen 3" — and a separate `{right}` beside a
+      // `{were}` produced „stimmen 3 3." on the first draw. The number and its verb are one
+      // phrase in both languages; splitting them made the sentence a template for two languages
+      // that neither of them fits.
+      const n = right.length;
+      const clause = lang === 'de'
+        ? (n === 0 ? 'stimmt keine' : n === 1 ? 'stimmt eine' : `stimmen ${n}`)
+        : (n === 0 ? 'none were true' : n === 1 ? '1 was true' : `${n} were true`);
+      return {
+        correct: right.join(','),
+        ...context([['FileFormat', fmt]], lang),
+        claims: detail,
+        explanation: fill(phrase.explanation || '', {
+          subject: { label: word(f, 'FileFormat', fmt, lang, 'name') },
+          were: { label: clause },
+        }, lang),
+      };
+    }
 
     if (template.key === 'storage_capacity') {
       // The subject IS the right answer — `build` put it there, because which four were offered
