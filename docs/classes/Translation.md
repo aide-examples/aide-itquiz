@@ -97,6 +97,7 @@ check either — it only knows that two rows differ.
 {"name":"name","type":"string","description":"The word in that language — what the learner is meant to end up knowing","example":"Suchmaschine"},
 {"name":"purpose","type":"longString","optional":true,"description":"What it is FOR, in that language, in one sentence a layperson understands. A PREDICATE and lower-case, like the English one it stands in for — it is substituted into several frames and only a predicate fits them all","example":"führt ein Verzeichnis von Webseiten und findet Seiten darin — und ist selbst eine Website"},
 {"name":"looks_like","type":"longString","optional":true,"description":"How to recognise the thing by eye, in that language. The one field here written for somebody LOOKING rather than reading, and it belongs in a translation for the same reason `purpose` does: a sentence describing a shape is prose, not a measurement","example":"eine quadratische Plastikhülle, etwa neun Zentimeter breit, mit einem verschiebbaren Metallschieber"},
+{"name":"example","type":"longString","optional":true,"description":"A concrete instance, in that language, where the record's own one is language-bound. Most examples are not — a URL, an IP address, a dot-something belong to no language and stay on the record, which is why this is optional and rare. It is here for the two that are: „der Router, der Drucker und zwei Laptops in einer Wohnung“ is German prose, and a German Wikipedia link is a German example of a web address (#10)","example":"der Router, der Drucker und zwei Laptops in einer Wohnung"},
 {"name":"gender","type":"Gender","optional":true,"description":"Grammatical gender of the noun, where the language has one. Both articles are derived from this one value, so „der\" and „ein\" cannot disagree about a word","example":"f"},
 {"name":"article","type":"string","optional":true,"max":10,"description":"The INDEFINITE article this word takes, where it cannot be derived. Only English needs it: German derives both articles from `gender`, while English chooses „a\" or „an\" by the SOUND of the next word — so an initialism read letter by letter takes „an XML\", „an SSD\", „an RJ45\", and one read as a word takes „a JSON\", „a USB stick\". Nothing in the model says which of the two a name is, and no rule over the letters can tell them apart. Absent means the first-letter approximation is right, which it is for most names","example":"an"},
 {"name":"genitive","type":"string","optional":true,"description":"The noun in the GENITIVE, where the language inflects it. Stored and not derived: the ending follows a rule with exceptions — „des Browsers\", „eines Office-Pakets\", but „einer Suchmaschine\" unchanged — and a rule with exceptions would put a wrong sentence in front of a learner. Absent means the name is already the genitive form, which holds for every feminine noun and for English","example":"Office-Pakets"},
@@ -105,3 +106,29 @@ check either — it only knows that two rows differ.
 ```
 
 
+
+## Actions
+
+```json
+[
+{"id":"integrity","label":"Check references","kind":"compute","target":"server/actions/translation-integrity.js","role":"admin","description":"Reports every wording whose subject no longer exists, every one naming a kind the model does not have, and every one that merely repeats its record's own name. The check a polymorphic reference gives up in exchange for one table instead of seven."}
+]
+```
+
+**Why an action and not a tool.** This reads application data, and the project rule puts such a
+report in the system that owns the data rather than in the framework's manifest. The plainer reason
+is that a standalone script runs when somebody types it, which is never (#8) — an action is computed
+on open, so it cannot be stale, and it can later grow a repair beside its findings, which a view
+could not.
+
+**`compute` rather than a page:** it answers rather than does, so there is nothing to render and no
+operand to pick — and being headless is what lets a schedule call it later without a rewrite.
+
+The framework-wide version is aide-rap#514. When that lands this narrows to whatever is specific to
+itquiz, or goes.
+
+## Error Messages
+
+| Code | en | de |
+|------|----|----|
+| unique_1 | This record already has a wording in that language | Für diesen Datensatz gibt es die Formulierung in dieser Sprache schon |

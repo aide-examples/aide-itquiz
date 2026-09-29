@@ -474,7 +474,8 @@
     "language": "de",
     "name": "Webadresse",
     "purpose": "benennt eine Seite im Web so genau, dass keine andere Seite auf der Welt dieselbe Adresse hat",
-    "gender": "f"
+    "gender": "f",
+    "example": "https://de.wikipedia.org/wiki/Webbrowser"
   },
   {
     "subject_entity": "Concept",
@@ -669,7 +670,8 @@
     "name": "Lokales Netz",
     "purpose": "ist das Netz innerhalb eines Gebäudes — die Geräte, die einander erreichen, ohne ins Internet zu gehen",
     "gender": "n",
-    "genitive": "lokalen Netzes"
+    "genitive": "lokalen Netzes",
+    "example": "der Router, der Drucker und zwei Laptops in einer Wohnung"
   },
   {
     "subject_entity": "Protocol",

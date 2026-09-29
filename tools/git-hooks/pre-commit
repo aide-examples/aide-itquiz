@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+#
+# pre-commit — run this system's own detectors before a commit lands.
+#
+# WHY THIS EXISTS (#8). `tools/test-translation.js` documented itself as a guard and was nothing of
+# the kind: this repo had no hooks at all, and nothing anywhere referenced the script. It ran when
+# somebody typed it, which is to say never — while the entity doc called it „the local stand-in" for
+# a referential check the database gives up in exchange for a polymorphic reference. A stand-in that
+# never stands.
+#
+# WHAT BELONGS HERE, and what does not. Only checks over FILES IN THE REPO — seeds, entity docs,
+# wordings. A check over live DATA is a system ACTION instead (`Translation.integrity`), because the
+# data is not in the commit and a hook has no database worth asking.
+#
+# The list is not hard-coded: every `tools/test-*.js` runs. A new detector is a file and not an edit
+# here, which is the same reason the kind list inside `test-translation.js` became a derivation.
+#
+# A GATE, not a convenience: a red detector blocks the commit. For a deliberate work-in-progress
+# commit, bypass with `git commit --no-verify`.
+#
+# Installed by `bash tools/install-hooks.sh`. `.git/hooks` is not version-controlled, so this copy
+# is the source of truth and the installed one is a copy.
+
+set -u
+
+REPO="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
+cd "$REPO" || exit 0
+
+# No node → skip rather than block. A hook must not brick a checkout that lacks the toolchain.
+command -v node >/dev/null 2>&1 || exit 0
+
+shopt -s nullglob
+detectors=(tools/test-*.js)
+[ ${#detectors[@]} -gt 0 ] || exit 0
+
+red=0
+for d in "${detectors[@]}"; do
+  if ! out="$(node "$d" 2>&1)"; then
+    echo "✗ pre-commit gate failed: $(basename "$d" .js)"
+    printf '%s\n' "$out" | sed 's/^/    /'
+    red=$((red + 1))
+  fi
+done
+
+if [ "$red" -gt 0 ]; then
+  echo ""
+  echo "→ $red detector(s) red — commit blocked. Fix them, or bypass a WIP commit with:"
+  echo "    git commit --no-verify"
+  exit 1
+fi
+
+echo "✓ pre-commit: ${#detectors[@]} detector(s) green"

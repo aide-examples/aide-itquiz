@@ -278,7 +278,7 @@ module.exports = function registerSystemRoutes(app, deps) {
       // symptom was that every German wording fell back to English, including the gender the
       // articles are derived from. Nothing errored; the quiz simply spoke the wrong language.
       eng.query('SELECT subject_entity, subject_id, language, name, purpose, gender, article, '
-        + 'genitive, looks_like, note FROM translation WHERE id > 1'),
+        + 'genitive, looks_like, example, note FROM translation WHERE id > 1'),
       eng.query('SELECT id, name, product_type_id, manufacturer_id, icon, wikipedia_de, wikipedia_en, level FROM product WHERE id > 1'),
       eng.query('SELECT id, name, logo, wikipedia_de, wikipedia_en, level FROM company WHERE id > 1'),
       eng.query('SELECT id, key, kind, subject_kind, object_kind, answer_kind FROM question_template WHERE id > 1'),
@@ -1091,7 +1091,11 @@ module.exports = function registerSystemRoutes(app, deps) {
             // phrase asks for `{genitiv_answer}`. Without it the sentence read „Domain ist
             // ein Teil von Webadresse" — an article missing where German needs one.
             answer: said(f, 'Concept', whole, lang),
-            example: { label: whole.example || '' } }, lang),
+            // `word` and not `whole.example`: an example is prose where the thing being
+            // exemplified is, so it belongs to a language the same way `purpose` does (#10).
+            // Most are language-neutral — a URL, an IP, a dot-something — and fall back to
+            // the record, which is exactly what `word` does.
+            example: { label: word(f, 'Concept', whole, lang, 'example') || '' } }, lang),
       };
     }
 
@@ -1870,7 +1874,11 @@ module.exports = function registerSystemRoutes(app, deps) {
         explanation: fill(phrase.explanation,
           { subject: { label: word(f, 'Concept', c, lang, 'name') },
             answer: said(f, 'Concept', whole, lang),
-            example: { label: whole.example || '' } }, lang),
+            // `word` and not `whole.example`: an example is prose where the thing being
+            // exemplified is, so it belongs to a language the same way `purpose` does (#10).
+            // Most are language-neutral — a URL, an IP, a dot-something — and fall back to
+            // the record, which is exactly what `word` does.
+            example: { label: word(f, 'Concept', whole, lang, 'example') || '' } }, lang),
       };
     }
 

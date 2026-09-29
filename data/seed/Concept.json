@@ -4,7 +4,7 @@
     "abbreviation": "URL",
     "long_name": "Uniform Resource Locator",
     "purpose": "names one page on the web so exactly that no other page in the world has the same one",
-    "example": "https://de.wikipedia.org/wiki/Webbrowser",
+    "example": "https://en.wikipedia.org/wiki/Web_browser",
     "wikipedia_de": "de:Uniform Resource Locator",
     "wikipedia_en": "en:URL",
     "note": "The address bar and the search box are one field in every modern browser, which is why „ins Internet gehen\" and „googeln\" have become the same gesture — and why many people have never typed an address in their lives"
@@ -74,7 +74,7 @@
     "abbreviation": "LAN",
     "long_name": "Local Area Network",
     "purpose": "is the network inside one building — the devices that can reach each other without going out to the internet",
-    "example": "der Router, der Drucker und zwei Laptops in einer Wohnung",
+    "example": "the router, the printer and two laptops in one flat",
     "wikipedia_de": "de:Local Area Network",
     "wikipedia_en": "en:Local area network",
     "note": "Not a protocol and not a thing you can buy: it is the BOUNDARY, the answer to „which machines are on my side of the router?\". Ethernet and WLAN are the two ways of being on it",
