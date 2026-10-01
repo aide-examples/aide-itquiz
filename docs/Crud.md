@@ -2,6 +2,16 @@
 
 Which entities the selector offers, in which order.
 
+The **grouping** is not here. An entity's area — the coloured heading it stands under — comes from
+[DataModel.md](DataModel.md), and the selector opens a new group whenever that area changes as it
+walks this list. So the `## <Area>` headings below are structure for a reader: what decides where an
+entity appears is its **position** in this list, and `---` is a column break. Guarded by
+`area-membership-drift`.
+
+`sort:` looks like a table option and is not one — it reaches the SQL, so it governs every list of
+that entity: the API, every FK picker, the back-reference blocks, exports. Why, in
+[rap:developer/areas-source.md](rap:developer/areas-source.md).
+
 Views live beside this, one file per view under [views/](views/), the folder naming the
 group the selector shows them under.
 
