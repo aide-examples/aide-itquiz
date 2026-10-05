@@ -906,17 +906,17 @@ module.exports = function registerSystemRoutes(app, deps) {
     if (template.key === 'part_of') {
       const t = any(f.types.filter((x) => x.part_of_id && f.types.some((y) => y.id === x.part_of_id)));
       if (!t) return null;
-      const ganz = f.types.find((y) => y.id === t.part_of_id);
-      const wrong = sample(f.types.filter((x) => x.id !== ganz.id && x.id !== t.id), 3);
+      const parent = f.types.find((y) => y.id === t.part_of_id);
+      const wrong = sample(f.types.filter((x) => x.id !== parent.id && x.id !== t.id), 3);
       if (wrong.length < 2) return null;
       return {
         template: template.key, language: lang,
         subject: { kind: 'ProductType', id: t.id },
         object: null,
         text: fill(phrase.text, { subject: typed(t) }, lang),
-        options: [ganz, ...wrong].map((x) => word(f, 'ProductType', x, lang, 'name')),
-        _correct: word(f, 'ProductType', ganz, lang, 'name'),
-        _explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(ganz) }, lang),
+        options: [parent, ...wrong].map((x) => word(f, 'ProductType', x, lang, 'name')),
+        _correct: word(f, 'ProductType', parent, lang, 'name'),
+        _explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(parent) }, lang),
       };
     }
 
@@ -1670,12 +1670,12 @@ module.exports = function registerSystemRoutes(app, deps) {
     }
     if (template.key === 'purpose') {
       const t = type(subject && subject.id); if (!t) return null;
-      const beispiel = f.products.find((x) => x.product_type_id === t.id);
+      const sampleProduct = f.products.find((x) => x.product_type_id === t.id);
       return {
         correct: word(f, 'ProductType', t, lang, 'name'),
-        ...context([['ProductType', t], ['Product', beispiel]], lang),
+        ...context([['ProductType', t], ['Product', sampleProduct]], lang),
         explanation: fill(phrase.explanation,
-          { answer: typed(t), example: { label: (beispiel && beispiel.name) || '' } }, lang),
+          { answer: typed(t), example: { label: (sampleProduct && sampleProduct.name) || '' } }, lang),
       };
     }
     // `what_kind` and `what_is_it` deliberately carry NO image: there the picture IS the
@@ -1712,11 +1712,11 @@ module.exports = function registerSystemRoutes(app, deps) {
     }
     if (template.key === 'part_of') {
       const t = type(subject && subject.id); if (!t) return null;
-      const ganz = f.types.find((y) => y.id === t.part_of_id); if (!ganz) return null;
+      const parent = f.types.find((y) => y.id === t.part_of_id); if (!parent) return null;
       return {
-        correct: word(f, 'ProductType', ganz, lang, 'name'),
-        ...context([['ProductType', ganz], ['ProductType', t]], lang),
-        explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(ganz) }, lang),
+        correct: word(f, 'ProductType', parent, lang, 'name'),
+        ...context([['ProductType', parent], ['ProductType', t]], lang),
+        explanation: fill(phrase.explanation, { subject: typed(t), answer: typed(parent) }, lang),
       };
     }
     if (template.key === 'is_a') {
