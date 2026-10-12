@@ -34,3 +34,8 @@ data/media/
 data/extern/
 data/backup/
 data/snapshot/
+
+# A throwaway data root (`--data-dir`, aide-rap#474) carries a full database and a media copy —
+# left untracked it is a test database within reach of the next `git add`. Same rule as the
+# framework's and aide-irma's (aide-rap#580).
+data-*/
