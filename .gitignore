@@ -36,3 +36,10 @@ data/*
 # left untracked it is a test database within reach of the next `git add`. Same rule as the
 # framework's and aide-irma's (aide-rap#580).
 data-*/
+
+# Precompressed siblings of this system's own static files — build output, like dist/. Written
+# by `pack.sh` into the deploy ZIP and removed from the checkout again (aide-rap#573); this line
+# is for a DEV run of `app/tools/precompress.js`, so trying the mechanism out leaves no untracked
+# files. Tracking them would mean binary churn on every edit, for bytes nobody reads from git.
+static/**/*.br
+static/**/*.gz
