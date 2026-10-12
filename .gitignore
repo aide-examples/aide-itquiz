@@ -21,19 +21,16 @@ docs/layout/EntityCards.*
 docs/layout/*.drawio
 
 # The database and everything the server rebuilds from the seed and the manifests
-data/rap.sqlite
-data/rap.sqlite-wal
-data/rap.sqlite-shm
-data/server.lock
+# DENY BY DEFAULT, then re-admit by name. An enumeration of what to exclude is right about
+# what it names and silent about what arrives later: rapsmgr recorded its own case —
+# "the icon import added data/media/ — uncovered by the old enumeration". The directions are
+# not equally dangerous: a forgotten exclusion leaks data SILENTLY, a forgotten re-admission
+# hides a file that belongs in the repo and is loud at the next checkout (aide-rap#580).
+data/*
+!data/seed/
 # Laufzeit-Protokolle, die der Server neben die Datenbank legt. Einzeln benannt statt
 # `data/*.log`, damit sichtbar bleibt, WAS dort entsteht — eine Positivliste schützt hier
 # nichts, eine benannte Ausnahme erklärt sich.
-data/impersonation.log
-data/login-failures.log
-data/media/
-data/extern/
-data/backup/
-data/snapshot/
 
 # A throwaway data root (`--data-dir`, aide-rap#474) carries a full database and a media copy —
 # left untracked it is a test database within reach of the next `git add`. Same rule as the
