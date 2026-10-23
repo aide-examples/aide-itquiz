@@ -31,15 +31,21 @@ for domain data and the same doc calls `[POLY_FK=…]` an anti-pattern for it, s
 settled.
 
 It was measured instead, and the measurement decided it. **A second seed load took the table from
-64 rows to 128.** One wording per record per language could not be DECLARED in that shape:
+64 rows to 128.** One wording per record per language could not be held in that shape, for two
+reasons that have since had different fates:
 
-- `uk` takes one group number per attribute, so `language` could belong to one composite key and
-  not to seven;
-- and `_uniqueProbes` builds no probe at all when a key part is null — with seven optional FKs,
-  six are null in every row.
+- **The database could not enforce it, and still cannot.** A partial unique index over nullable
+  columns is inert, because SQL holds two NULLs to be distinct — and with seven optional FKs, six
+  are null in every row. *This half stands unchanged.*
+- **The loader could not recognise a row it had already written.** `_uniqueProbes` built no probe
+  at all when a key part was null, so every load appended rather than matching. *This half was
+  repaired on 2026-09-30, three hours after the sentence above was written* — composite probes are
+  null-aware now (`IS NULL` for the null parts, `ImportValidator.js` → `_uniqueProbes`), and the
+  duplicate-on-every-load symptom would not recur today.
 
-So the loader had no way to recognise a row it had already written, and every load appended. A
-detector could report the duplicates afterwards; nothing could prevent them. 🇩🇪 *„Wir stellen auf
+So at the time there was no way to prevent the duplicates — a detector could only report them
+afterwards. The decision stands on the first bullet alone, which is enough: a convention the
+database does not check is a convention somebody eventually writes past. 🇩🇪 *„Wir stellen auf
 PolyFK um."*
 
 Here both columns are always set, `uk:1` over `(subject_entity, subject_id, language)` is a key
