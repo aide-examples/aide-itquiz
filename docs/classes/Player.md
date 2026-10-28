@@ -42,6 +42,34 @@ one question beats two (§17).
 ]
 ```
 
+## Actions
+
+```json
+[
+{"id":"quiz","label":"Play","target":"sys/quiz/quiz.html","scope":"list","role":"user","description":"Opens the quiz for WHOEVER IS LOGGED IN — the same page the player role lands on after signing in, reachable from the action selector without taking anybody's seat."}
+]
+```
+
+**Why the quiz needs a second entry at all.** It is the `player` role's login action: that role
+signs in and is in the quiz, with no shell behind it. An operator has no such door. Until this
+binding existed the only way to see the questions as an admin was to **impersonate a player** —
+which works (the judging path is a GET precisely so it does, see `server/routes.js`) but takes
+somebody's seat and refuses to record, so it answers *„what does anna see"* and not *„what does
+the quiz do"*.
+
+**It plays as YOU, not as anybody else.** `playerOf()` takes the person from the session, so an
+operator meets their own level and their own history — and a `Player` row they never created is
+not an error, it means the defaults. Nothing about impersonation changes; this is the other
+question.
+
+**`scope: "list"` and not a row action**, although it hangs on `Player`: the quiz has no operand.
+Opening it on anna's row would promise to play *as* anna, which is the one thing it does not do.
+The entity is its home because the quiz is what a player does, not because a record is needed.
+
+**The id is `quiz` and not `play`.** The handler directory is `static/quiz/`, and the convention
+is dir = capability = id (`aide-rap/CLAUDE.md`). Nothing is lost: the id is never shown — the
+selector, the context menu and the modal title all render the **label**.
+
 ## Error Messages
 
 | Code | en | de |

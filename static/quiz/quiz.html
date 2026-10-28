@@ -9,18 +9,15 @@
      here because this page never loads `rap.css` — without it the card renders as unstyled body
      text at the foot of the document, which is how it first shipped. -->
 <link rel="stylesheet" href="../../static/rap/lib/wikipedia-card.css">
+<!-- The shared ACTION header. This page is a `fullPage` login action, so it replaces the app
+     shell and with it the only logout there was — the component is what puts one back, and
+     since aide-rap#617 it does so unconditionally rather than on request. It also carries the
+     brand, the title, the language switch and the score, which this page used to build itself
+     as `q-head`. A kiosk with its own chrome is the special solution the component exists to
+     end, so there is none here any more. -->
+<link rel="stylesheet" href="../../static/rap/lib/action-header.css">
 </head>
 <body>
-<header class="q-head">
-  <span class="q-mark" aria-hidden="true">🧩</span>
-  <span class="q-title">itquiz</span>
-  <div class="q-lang" role="group" aria-label="Language">
-    <button type="button" class="q-lang-btn" data-lang="de">DE</button>
-    <button type="button" class="q-lang-btn" data-lang="en">EN</button>
-  </div>
-  <span class="q-score" id="q-score" aria-live="polite"></span>
-</header>
-
 <main class="q-main">
   <img class="q-image" id="q-image" alt="" hidden>
   <p class="q-text" id="q-text">…</p>
@@ -55,6 +52,7 @@
      answer names, with nothing pressed — the subscriber filters on its own `window.name` and
      never asks who published (aide-rap#504). -->
 <script src="../../static/rap/lib/selection-bus.js"></script>
+<script src="../../static/rap/lib/action-header.js"></script>
 <script src="quiz.js"></script>
 </body>
 </html>

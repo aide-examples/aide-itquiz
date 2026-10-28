@@ -19,6 +19,7 @@
   const CHROME = {
     de: {
       next: 'Weiter', right: 'Richtig', wrong: 'Falsch',
+      logout: 'Abmelden', language: 'Sprache',
       look: '🔎 Im Katalog ansehen',
       lookWindow: 'Öffnet den Katalog in einem eigenen Fenster, bei diesem Eintrag. '
         + 'Das Fenster bleibt offen und springt bei der nächsten Frage weiter.',
@@ -35,6 +36,7 @@
     },
     en: {
       next: 'Next', right: 'Correct', wrong: 'Wrong',
+      logout: 'Log out', language: 'Language',
       look: '🔎 Look it up',
       lookWindow: 'Opens the catalogue in a window of its own, at this entry. The window '
         + 'stays open and moves on with the next question.',
@@ -376,7 +378,7 @@
 
       state.asked += 1;
       if (verdict.quality === 'correct') state.right += 1;
-      $('q-score').textContent = words().score(state.right, state.asked);
+      theHeader.setStatus(words().score(state.right, state.asked));
 
       if (verdict.claims) {
         // A set-answer question marks every statement rather than one button, and puts the
@@ -477,23 +479,23 @@
     });
   }
 
-  /** Paint the language buttons from the state, so the two cannot disagree. */
+  /**
+   * Carry the language into the page itself. The SELECTOR is not painted here any more —
+   * it belongs to the shared header, which holds its own value and is the only thing that
+   * can change it, so the two cannot disagree by construction rather than by repainting.
+   */
   function paintLang() {
-    document.querySelectorAll('.q-lang-btn').forEach((b) => {
-      b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === state.lang));
-    });
     $('q-next').textContent = words().next;
     document.documentElement.lang = state.lang;
   }
 
-  document.querySelectorAll('.q-lang-btn').forEach((b) => {
-    b.addEventListener('click', () => {
-      state.lang = b.getAttribute('data-lang');
-      try { localStorage.setItem('itquiz-lang', state.lang); } catch (_) { /* private window */ }
-      paintLang();
-      next();
-    });
-  });
+  /** The language changed in the header: remember it, repaint, fetch a fresh question. */
+  function switchLang(code) {
+    state.lang = code === 'de' ? 'de' : 'en';
+    try { localStorage.setItem('itquiz-lang', state.lang); } catch (_) { /* private window */ }
+    paintLang();
+    next();
+  }
 
   $('q-next').addEventListener('click', next);
   $('q-look').addEventListener('click', () => { if (state.focus) openCatalogue(state.focus); });
@@ -518,6 +520,40 @@
   // because the file is loaded by URL from the framework tree: on a deployment that ever
   // stopped shipping it, the quiz must lose a hover card and not its next question.
   if (typeof WikipediaCard !== 'undefined') WikipediaCard.init({ basePath: '../../' });
+
+  // The shared fullpage ACTION header, built AFTER the stored language has been restored so
+  // its selector opens on the value that is actually in play. The logout is not passed as a
+  // choice — since aide-rap#617 a fullpage header always carries one, because this page is a
+  // `fullPage` login action and therefore the only way out of the session.
+  // GERAHMT ODER NICHT — dieselbe Seite, zwei Auftritte.
+  //
+  // Als Login-Action der Rolle `player` ersetzt sie die Anwendung: eigener Titel, eigene
+  // Marke, und das Abmelden ist der einzige Ausgang. Aus dem Action-Selektor heraus (die
+  // Bindung `quiz` an `Player`) erscheint sie im Modal, und dort trägt der Rahmen Titel,
+  // Hilfe und × bereits — ein zweiter Titel wäre der Duplikat-Fehler, gegen den die
+  // Komponente geschrieben ist. Beides sind ihre zwei Modi; die Seite wählt nur.
+  //
+  // Der Sprachwähler bleibt in BEIDEN: er schaltet die Sprache der FRAGEN, nicht die der
+  // Anwendung, und die Kopfzeile der Anwendung kann ihn deshalb nicht ersetzen.
+  const framed = window.self !== window.top;
+  const brand = document.createElement('span');
+  brand.textContent = '🧩';
+  const theHeader = new RapActionHeader({
+    mode: framed ? 'modal' : 'fullpage',
+    brand,
+    title: 'itquiz',
+    status: words().score(0, 0),
+    utility: {
+      language: {
+        current: state.lang,
+        label: words().language,
+        options: [{ code: 'de', label: 'DE' }, { code: 'en', label: 'EN' }],
+        onChange: switchLang,
+      },
+    },
+    logout: { label: words().logout },
+  });
+  theHeader.mount(document.body);
 
   paintLang();
   next();

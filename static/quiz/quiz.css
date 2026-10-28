@@ -44,36 +44,9 @@ body {
   flex-direction: column;
 }
 
-.q-head {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.7rem 1rem;
-  padding-top: max(0.7rem, env(safe-area-inset-top));
-  background: var(--brand);
-  color: var(--brand-ink);
-}
-
-.q-mark { font-size: 1.3rem; }
-.q-title { font-weight: 700; letter-spacing: 0.02em; }
-.q-lang { margin-left: auto; display: flex; gap: 0.25rem; }
-
-.q-lang-btn {
-  font: inherit;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0.25rem 0.55rem;
-  border-radius: 999px;
-  border: 1px solid currentColor;
-  background: transparent;
-  color: var(--brand-ink);
-  cursor: pointer;
-}
-.q-lang-btn:hover { background: rgba(255, 255, 255, 0.18); color: var(--brand-ink); }
-.q-lang-btn[aria-pressed="true"] { background: var(--brand-ink); color: var(--brand); }
-.q-lang-btn:focus-visible { outline: 2px solid var(--brand-ink); outline-offset: 2px; }
-
-.q-score { font-variant-numeric: tabular-nums; font-size: 0.85rem; opacity: 0.9; }
+/* The page's own header is gone (aide-rap#617). Brand, title, language and score now sit in
+   the shared `RapActionHeader`, which also carries the logout a fullPage login action must
+   have. Its look comes from the --rah-* tokens, not from rules here. */
 
 .q-main {
   flex: 1;
