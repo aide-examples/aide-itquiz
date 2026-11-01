@@ -20,7 +20,6 @@
 
     "auth": {
         "enabled": true,
-        "mode": "users",
 
         // Per-user history is the point of the system, so there is a real account
         // per learner from the start — a role trias would make every learner the
