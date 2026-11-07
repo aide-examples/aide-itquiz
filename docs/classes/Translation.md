@@ -89,7 +89,7 @@ does not move it anywhere else.
 `uk:1` over `(subject_entity, subject_id, language)`. All three are always set, so the index is
 real and the seed loader can recognise a row it has already written.
 
-`tools/test-translation.js` stays, narrowed to what the key does not say: that a row names an
+`tools/gates/test-translation.js` stays, narrowed to what the key does not say: that a row names an
 entity the model knows, and that the name in the seed resolves to a record. A unique key cannot
 check either — it only knows that two rows differ.
 

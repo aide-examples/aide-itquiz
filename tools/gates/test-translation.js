@@ -15,7 +15,7 @@
  * against the live database when one is present — the two can disagree, and a row added by hand
  * in the UI is exactly the case a seed-only check would miss.
  *
- *   node tools/test-translation.js
+ *   node tools/gates/test-translation.js
  *
  * Exit 1 on any finding.
  */
@@ -23,7 +23,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(__dirname, '..', '..');
 const SEED = path.join(ROOT, 'data', 'seed', 'Translation.json');
 
 /**

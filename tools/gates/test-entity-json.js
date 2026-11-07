@@ -25,7 +25,7 @@
  * anywhere seeing it, which is exactly how the first two reached a commit. The framework-level
  * version of this belongs in aide-rap and is filed there; this one runs on every commit here, now.
  *
- *   node tools/test-entity-json.js
+ *   node tools/gates/test-entity-json.js
  *
  * Exit 1 on any finding.
  */
@@ -33,7 +33,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(__dirname, '..', '..');
 const DIR = path.join(ROOT, 'docs', 'classes');
 
 /** @type {string[]} */
