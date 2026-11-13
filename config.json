@@ -14,6 +14,8 @@
 
     // Next free port after gametracker (18393). `--aitest` overrides to 18349.
     "port": 18394,
+    // System Owner — named in the header (aide-rap#671): the installation's operator.
+    "owner": "Gero Scholz",
     "log_level": "INFO",
 
     "titleHtml": "<span style='color:#9ca3af; font-size:0.9em'>🧩 <b>ITQUIZ</b> — Begriffe der IT, sortiert</span>",
