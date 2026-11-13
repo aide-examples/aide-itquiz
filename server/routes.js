@@ -2085,7 +2085,7 @@ module.exports = function registerSystemRoutes(app, deps) {
           // version [object Object]"), while the context it was supposed to carry never arrived,
           // so the audit entry would have had no actor either. `null` is the deliberate value
           // here: the player's own settings have one writer and nothing to lose a race with.
-          await theGenericService.updateEntity('Player', existing[0].id, patch, null, context);
+          await theGenericService.updateEntity('Player', existing[0].id, patch, context);
         } else {
           await theGenericService.createEntity('Player', { user, ...patch }, context);
         }
