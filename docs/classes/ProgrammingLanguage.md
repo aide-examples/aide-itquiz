@@ -2,6 +2,7 @@
 
 [LABEL=name]
 [PLURAL=de:Programmiersprachen en:Programming languages]
+[CAPTION=de:Programmiersprache en:Programming language]
 
 The notation a program is written in — and the thing a layperson hears named daily without ever being told what one is.
 
@@ -42,12 +43,12 @@ saying that is worth more than the classification it breaks.
 ```json
 [
 {"name":"name","type":"string","unique":true,"label":true,"description":"What the language is called, as a person would write it — including its own capitalisation, which is part of the name („awk\", not „AWK\")","example":"Python"},
-{"name":"long_name","type":"string","optional":true,"unique":true,"description":"What the abbreviation stands for, where the name IS one. Absent for a name that abbreviates nothing — and it must differ from the name, or the question „what does it stand for?\" answers itself, which is a mistake this system has already made once","example":"Cascading Style Sheets"},
-{"name":"purpose","type":"longString","description":"What one writes in it, in one sentence a layperson understands. A PREDICATE and lower-case, like every other `purpose` here — it is substituted into several frames and only a predicate fits them all","example":"reads almost like English, and is used for everything from a school lesson to analysing data"},
-{"name":"wikipedia_de","type":"wikipedia","optional":true,"description":"The German article title, exactly as the API resolves it","example":"Python (Programmiersprache)"},
-{"name":"wikipedia_en","type":"wikipedia","optional":true,"description":"The English article title","example":"Python (programming language)"},
-{"name":"level","type":"Level","default":"basic","description":"How far into the subject this language sits. Only two are `basic` — the two whose NAMES a layperson has certainly heard","example":"expert"},
-{"name":"note","type":"longString","optional":true,"description":"A true remark worth showing after an answer — typically what this language is commonly mixed up with, or what else the thing is besides a language","example":"Java and JavaScript are not related; the name was a marketing decision in 1995 and has confused people ever since"}
+{"name":"long_name","caption":"de:Langform","type":"string","optional":true,"unique":true,"description":"What the abbreviation stands for, where the name IS one. Absent for a name that abbreviates nothing — and it must differ from the name, or the question „what does it stand for?\" answers itself, which is a mistake this system has already made once","example":"Cascading Style Sheets"},
+{"name":"purpose","caption":"de:Zweck","type":"longString","description":"What one writes in it, in one sentence a layperson understands. A PREDICATE and lower-case, like every other `purpose` here — it is substituted into several frames and only a predicate fits them all","example":"reads almost like English, and is used for everything from a school lesson to analysing data"},
+{"name":"wikipedia_de","caption":"de:Wikipedia (de)","type":"wikipedia","optional":true,"description":"The German article title, exactly as the API resolves it","example":"Python (Programmiersprache)"},
+{"name":"wikipedia_en","caption":"de:Wikipedia (en)","type":"wikipedia","optional":true,"description":"The English article title","example":"Python (programming language)"},
+{"name":"level","caption":"de:Stufe","type":"Level","default":"basic","description":"How far into the subject this language sits. Only two are `basic` — the two whose NAMES a layperson has certainly heard","example":"expert"},
+{"name":"note","caption":"de:Notiz","type":"longString","optional":true,"description":"A true remark worth showing after an answer — typically what this language is commonly mixed up with, or what else the thing is besides a language","example":"Java and JavaScript are not related; the name was a marketing decision in 1995 and has confused people ever since"}
 ]
 ```
 

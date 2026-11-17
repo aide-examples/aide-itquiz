@@ -2,6 +2,7 @@
 
 [LABEL=user]
 [PLURAL=de:Spieler en:Players]
+[CAPTION=de:Spieler en:Player]
 
 One person's settings — which level of question they want, and in which language.
 
@@ -35,10 +36,10 @@ one question beats two (§17).
 
 ```json
 [
-{"name":"user","type":"string","unique":true,"label":true,"description":"The username, as RAP's login supplies it. Unique, because a person has one set of settings","example":"anna"},
-{"name":"level","type":"Level","default":"basic","description":"The hardest questions this player wants to be asked. It is a CEILING and not a band: somebody who picks `expert` still meets Browser and DVD, because a quiz that only asked hard questions would teach nothing about how the easy and the hard connect","example":"advanced"},
-{"name":"language","type":"Language","optional":true,"description":"The language they last played in, so it does not have to be picked again. Optional: absent means the page decides, which is what it did before this entity existed","example":"de"},
-{"name":"note","type":"longString","optional":true,"description":"An operator's remark about this player — why their level was set by hand, for instance","example":"Schulungsteilnehmerin, Woche 2 — auf Aufbaustufe gesetzt"}
+{"name":"user","caption":"de:Benutzer","type":"string","unique":true,"label":true,"description":"The username, as RAP's login supplies it. Unique, because a person has one set of settings","example":"anna"},
+{"name":"level","caption":"de:Stufe","type":"Level","default":"basic","description":"The hardest questions this player wants to be asked. It is a CEILING and not a band: somebody who picks `expert` still meets Browser and DVD, because a quiz that only asked hard questions would teach nothing about how the easy and the hard connect","example":"advanced"},
+{"name":"language","caption":"de:Sprache","type":"Language","optional":true,"description":"The language they last played in, so it does not have to be picked again. Optional: absent means the page decides, which is what it did before this entity existed","example":"de"},
+{"name":"note","caption":"de:Notiz","type":"longString","optional":true,"description":"An operator's remark about this player — why their level was set by hand, for instance","example":"Schulungsteilnehmerin, Woche 2 — auf Aufbaustufe gesetzt"}
 ]
 ```
 

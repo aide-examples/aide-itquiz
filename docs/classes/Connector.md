@@ -2,6 +2,7 @@
 
 [LABEL=name]
 [PLURAL=de:Anschlüsse en:Connectors]
+[CAPTION=de:Anschluss en:Connector]
 
 The shape of a plug and the socket it fits — the one standard in this system a person can hold in their hand and still not be able to name.
 
@@ -38,14 +39,14 @@ question that exists today is answered without it. When one needs it, it is a co
 ```json
 [
 {"name":"name","type":"string","unique":true,"label":true,"description":"What the connector is called, as it is written on a box or said in a shop","example":"HDMI"},
-{"name":"long_name","type":"string","optional":true,"unique":true,"description":"What the abbreviation stands for, written out — the answer to „wofür steht das?\", and what somebody searches for who knows the words but not the letters. `unique` rather than `search`, because the global search covers the label and every unique string field","example":"High-Definition Multimedia Interface"},
-{"name":"purpose","type":"longString","description":"What travels through it, in one sentence a layperson understands. A PREDICATE and lower-case, like every other purpose in this model","example":"carries picture and sound over a single cable"},
-{"name":"looks_like","type":"longString","optional":true,"description":"How to recognise it by eye, for the reader who is holding the cable and has no word for it. The one attribute in this system written for somebody looking at a thing rather than reading about it","example":"a flat, slightly tapered plug about two centimetres wide"},
-{"name":"icon","type":"media","optional":true,"mime":"img","description":"The connector's own mark or a picture of the plug — the fastest way to recognise one","example":"hdmi.svg"},
-{"name":"wikipedia_de","type":"wikipedia","optional":true,"description":"The German Wikipedia article — a TITLE, verified against the API rather than guessed","example":"High Definition Multimedia Interface"},
-{"name":"wikipedia_en","type":"wikipedia","optional":true,"description":"The English article. Separate from the German one because an article title is an identifier in another system, not a translation","example":"HDMI"},
-{"name":"level","type":"Level","default":"basic","description":"How far into the subject this record sits. `default` and therefore OPTIONAL on purpose: the seed then marks only what is NOT everyday, which keeps the classification of ~140 records readable as a diff and makes the safe direction the free one — a new record counts as basic and a beginner meets it","example":"expert"},
-{"name":"note","type":"longString","optional":true,"description":"A true remark worth showing after an answer — including what people commonly mix this up with, stated as an observation about people and never as a fact about the thing","example":"The one everybody recognises and few can name: „das flache breite\" is HDMI in most households"}
+{"name":"long_name","caption":"de:Langform","type":"string","optional":true,"unique":true,"description":"What the abbreviation stands for, written out — the answer to „wofür steht das?\", and what somebody searches for who knows the words but not the letters. `unique` rather than `search`, because the global search covers the label and every unique string field","example":"High-Definition Multimedia Interface"},
+{"name":"purpose","caption":"de:Zweck","type":"longString","description":"What travels through it, in one sentence a layperson understands. A PREDICATE and lower-case, like every other purpose in this model","example":"carries picture and sound over a single cable"},
+{"name":"looks_like","caption":"de:Aussehen","type":"longString","optional":true,"description":"How to recognise it by eye, for the reader who is holding the cable and has no word for it. The one attribute in this system written for somebody looking at a thing rather than reading about it","example":"a flat, slightly tapered plug about two centimetres wide"},
+{"name":"icon","caption":"de:Symbol","type":"media","optional":true,"mime":"img","description":"The connector's own mark or a picture of the plug — the fastest way to recognise one","example":"hdmi.svg"},
+{"name":"wikipedia_de","caption":"de:Wikipedia (de)","type":"wikipedia","optional":true,"description":"The German Wikipedia article — a TITLE, verified against the API rather than guessed","example":"High Definition Multimedia Interface"},
+{"name":"wikipedia_en","caption":"de:Wikipedia (en)","type":"wikipedia","optional":true,"description":"The English article. Separate from the German one because an article title is an identifier in another system, not a translation","example":"HDMI"},
+{"name":"level","caption":"de:Stufe","type":"Level","default":"basic","description":"How far into the subject this record sits. `default` and therefore OPTIONAL on purpose: the seed then marks only what is NOT everyday, which keeps the classification of ~140 records readable as a diff and makes the safe direction the free one — a new record counts as basic and a beginner meets it","example":"expert"},
+{"name":"note","caption":"de:Notiz","type":"longString","optional":true,"description":"A true remark worth showing after an answer — including what people commonly mix this up with, stated as an observation about people and never as a fact about the thing","example":"The one everybody recognises and few can name: „das flache breite\" is HDMI in most households"}
 ]
 ```
 

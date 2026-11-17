@@ -2,6 +2,7 @@
 
 [LABEL=name]
 [PLURAL=de:Dateiformate en:File formats]
+[CAPTION=de:Dateiformat en:File format]
 
 A KIND of file, known to a layperson by the letters after the dot — and the second half of the confusion this system is about: what a thing IS versus what it can OPEN.
 
@@ -31,15 +32,15 @@ do with the file.
 ```json
 [
 {"name":"name","type":"string","unique":true,"label":true,"description":"What the format is called, as a person would say it","example":"PDF"},
-{"name":"extension","type":"string","unique":true,"description":"The letters after the dot, WITH the dot and lower-case — this is the handle a layperson actually has, and the one a question is asked with. Stored with the dot because that is how it is read aloud and written: „eine Datei, die auf .pdf endet\"","example":".pdf"},
-{"name":"long_name","type":"string","optional":true,"unique":true,"description":"What the abbreviation stands for, written out. Almost every format IS an abbreviation, and the long form is both the answer to „wofür steht das?\" and the thing somebody types into the search when they do not know the short one — hence `unique` and not `search`: the global search covers the label and every UNIQUE string field, while `search` feeds a different index (measured in `UISearchLoader`, 2026-09-28). And it says something true anyway — two formats do not share a long form","example":"Portable Document Format"},
-{"name":"group","type":"FormatGroup","optional":true,"description":"What KIND of format this is — picture, audio, compression. The group carries the sentence worth remembering, so ten formats become one idea plus examples","example":"Image format"},
-{"name":"purpose","type":"longString","description":"What a file of this format HOLDS, in one sentence a layperson understands. A PREDICATE and lower-case, like ProductType.purpose and for the same reason: it is substituted into several frames and only a predicate fits them all","example":"holds a document that looks the same everywhere it is opened"},
-{"name":"icon","type":"media","optional":true,"mime":"img","description":"The format's mark, where it has one people would recognise","example":"pdf.svg"},
-{"name":"wikipedia_de","type":"wikipedia","optional":true,"description":"The German Wikipedia article — a TITLE, verified against the API rather than guessed","example":"Portable Document Format"},
-{"name":"wikipedia_en","type":"wikipedia","optional":true,"description":"The English article. Separate from the German one because an article title is an identifier in another system, not a translation","example":"PDF"},
-{"name":"level","type":"Level","default":"basic","description":"How far into the subject this record sits. `default` and therefore OPTIONAL on purpose: the seed then marks only what is NOT everyday, which keeps the classification of ~140 records readable as a diff and makes the safe direction the free one — a new record counts as basic and a beginner meets it","example":"expert"},
-{"name":"note","type":"longString","optional":true,"description":"A true remark worth showing after an answer — including how this format is commonly misunderstood, stated as an observation about people and never as a fact about the thing","example":"People say „ein PDF\" for any document they cannot change, which is most of what the format is known for"}
+{"name":"extension","caption":"de:Endung","type":"string","unique":true,"description":"The letters after the dot, WITH the dot and lower-case — this is the handle a layperson actually has, and the one a question is asked with. Stored with the dot because that is how it is read aloud and written: „eine Datei, die auf .pdf endet\"","example":".pdf"},
+{"name":"long_name","caption":"de:Langform","type":"string","optional":true,"unique":true,"description":"What the abbreviation stands for, written out. Almost every format IS an abbreviation, and the long form is both the answer to „wofür steht das?\" and the thing somebody types into the search when they do not know the short one — hence `unique` and not `search`: the global search covers the label and every UNIQUE string field, while `search` feeds a different index (measured in `UISearchLoader`, 2026-09-28). And it says something true anyway — two formats do not share a long form","example":"Portable Document Format"},
+{"name":"group","caption":"de:Gruppe","type":"FormatGroup","optional":true,"description":"What KIND of format this is — picture, audio, compression. The group carries the sentence worth remembering, so ten formats become one idea plus examples","example":"Image format"},
+{"name":"purpose","caption":"de:Zweck","type":"longString","description":"What a file of this format HOLDS, in one sentence a layperson understands. A PREDICATE and lower-case, like ProductType.purpose and for the same reason: it is substituted into several frames and only a predicate fits them all","example":"holds a document that looks the same everywhere it is opened"},
+{"name":"icon","caption":"de:Symbol","type":"media","optional":true,"mime":"img","description":"The format's mark, where it has one people would recognise","example":"pdf.svg"},
+{"name":"wikipedia_de","caption":"de:Wikipedia (de)","type":"wikipedia","optional":true,"description":"The German Wikipedia article — a TITLE, verified against the API rather than guessed","example":"Portable Document Format"},
+{"name":"wikipedia_en","caption":"de:Wikipedia (en)","type":"wikipedia","optional":true,"description":"The English article. Separate from the German one because an article title is an identifier in another system, not a translation","example":"PDF"},
+{"name":"level","caption":"de:Stufe","type":"Level","default":"basic","description":"How far into the subject this record sits. `default` and therefore OPTIONAL on purpose: the seed then marks only what is NOT everyday, which keeps the classification of ~140 records readable as a diff and makes the safe direction the free one — a new record counts as basic and a beginner meets it","example":"expert"},
+{"name":"note","caption":"de:Notiz","type":"longString","optional":true,"description":"A true remark worth showing after an answer — including how this format is commonly misunderstood, stated as an observation about people and never as a fact about the thing","example":"People say „ein PDF\" for any document they cannot change, which is most of what the format is known for"}
 ]
 ```
 

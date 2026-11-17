@@ -2,6 +2,7 @@
 
 [LABEL=concat(product, ' ', support, ' ', format)]
 [PLURAL=de:Dateiunterstützungen en:Format support]
+[CAPTION=de:Dateiunterstützung en:Format support]
 
 What one program can do with one kind of file — the fact behind „womit kann man eine .pdf ansehen?", and the reason that question has several right answers.
 
@@ -32,10 +33,10 @@ instead of the generator having to.
 
 ```json
 [
-{"name":"product","type":"Product","uk":1,"description":"The program","example":"Chrome"},
-{"name":"format","type":"FileFormat","uk":1,"description":"The kind of file","example":"PDF"},
-{"name":"support","type":"FileSupport","description":"What it can do with it. `edit` includes `view` — see Types.md, the order of the enum is the strength","example":"view"},
-{"name":"note","type":"longString","optional":true,"description":"A true remark about THIS pairing, where there is one worth showing","example":"Every browser shows a PDF today, which is why nobody installs a reader any more"}
+{"name":"product","caption":"de:Produkt","type":"Product","uk":1,"description":"The program","example":"Chrome"},
+{"name":"format","caption":"de:Dateiformat","type":"FileFormat","uk":1,"description":"The kind of file","example":"PDF"},
+{"name":"support","caption":"de:Unterstützung","type":"FileSupport","description":"What it can do with it. `edit` includes `view` — see Types.md, the order of the enum is the strength","example":"view"},
+{"name":"note","caption":"de:Notiz","type":"longString","optional":true,"description":"A true remark about THIS pairing, where there is one worth showing","example":"Every browser shows a PDF today, which is why nobody installs a reader any more"}
 ]
 ```
 

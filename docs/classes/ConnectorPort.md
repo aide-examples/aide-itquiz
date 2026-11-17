@@ -2,6 +2,7 @@
 
 [ASSOCIATION]
 [PLURAL=de:Anschlussstellen en:Connector ports]
+[CAPTION=de:Anschlussstelle en:Connector port]
 
 One kind of device has one kind of socket — „ein Laptop hat HDMI".
 
@@ -39,8 +40,8 @@ facts compound, which is why it is worth stating here rather than only in the fr
 
 ```json
 [
-{"name":"product_type","type":"ProductType","uk":1,"description":"The kind of thing that has the socket","example":"Device"},
-{"name":"connector","type":"Connector","uk":1,"description":"The kind of socket it has","example":"HDMI"}
+{"name":"product_type","caption":"de:Produktart","type":"ProductType","uk":1,"description":"The kind of thing that has the socket","example":"Device"},
+{"name":"connector","caption":"de:Anschluss","type":"Connector","uk":1,"description":"The kind of socket it has","example":"HDMI"}
 ]
 ```
 

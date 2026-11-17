@@ -2,6 +2,7 @@
 
 [LABEL=name]
 [PLURAL=de:Frameworks en:Frameworks]
+[CAPTION=de:Framework en:Framework]
 
 A ready-made scaffold somebody writes their own program inside — and it belongs to exactly one language.
 
@@ -39,12 +40,12 @@ be one they already know — which is the direction a question should run.
 ```json
 [
 {"name":"name","type":"string","unique":true,"label":true,"description":"What the framework is called, with its own capitalisation („jQuery\")","example":"Vue"},
-{"name":"language","type":"ProgrammingLanguage","description":"Which language one writes in when using it. REQUIRED, because it is the fact this entity exists to state — a framework belongs to exactly one language, and that is what a learner takes away","example":"JavaScript"},
-{"name":"purpose","type":"longString","description":"What it saves you writing yourself, in one sentence a layperson understands. A PREDICATE and lower-case, like every other `purpose` here","example":"keeps a page and the data behind it in step, so a change in one shows up in the other without being copied across by hand"},
-{"name":"wikipedia_de","type":"wikipedia","optional":true,"description":"The German article title, exactly as the API resolves it","example":"Vue.js"},
-{"name":"wikipedia_en","type":"wikipedia","optional":true,"description":"The English article title","example":"Vue.js"},
-{"name":"level","type":"Level","default":"basic","description":"How far into the subject this framework sits — its own level and not its language's: a name a layperson has seen is `advanced`, one only a developer meets is `expert`","example":"expert"},
-{"name":"note","type":"longString","optional":true,"description":"A true remark worth showing after an answer — typically which framework it is confused with, or what it was the first of","example":"Struts was the framework a great many Java web applications were built on around 2005, and a fair number of them are still running"}
+{"name":"language","caption":"de:Sprache","type":"ProgrammingLanguage","description":"Which language one writes in when using it. REQUIRED, because it is the fact this entity exists to state — a framework belongs to exactly one language, and that is what a learner takes away","example":"JavaScript"},
+{"name":"purpose","caption":"de:Zweck","type":"longString","description":"What it saves you writing yourself, in one sentence a layperson understands. A PREDICATE and lower-case, like every other `purpose` here","example":"keeps a page and the data behind it in step, so a change in one shows up in the other without being copied across by hand"},
+{"name":"wikipedia_de","caption":"de:Wikipedia (de)","type":"wikipedia","optional":true,"description":"The German article title, exactly as the API resolves it","example":"Vue.js"},
+{"name":"wikipedia_en","caption":"de:Wikipedia (en)","type":"wikipedia","optional":true,"description":"The English article title","example":"Vue.js"},
+{"name":"level","caption":"de:Stufe","type":"Level","default":"basic","description":"How far into the subject this framework sits — its own level and not its language's: a name a layperson has seen is `advanced`, one only a developer meets is `expert`","example":"expert"},
+{"name":"note","caption":"de:Notiz","type":"longString","optional":true,"description":"A true remark worth showing after an answer — typically which framework it is confused with, or what it was the first of","example":"Struts was the framework a great many Java web applications were built on around 2005, and a fair number of them are still running"}
 ]
 ```
 

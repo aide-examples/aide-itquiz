@@ -3,6 +3,7 @@
 [LABEL=name]
 [LABEL2=purpose]
 [PLURAL=de:Produktgruppen en:Product groups]
+[CAPTION=de:Produktgruppe en:Product group]
 
 What a kind of thing is a KIND of — a web service, a document program, a hardware component.
 
@@ -66,11 +67,11 @@ one nobody sees: a media player and a barcode scanner do the same thing to diffe
 ```json
 [
 {"name":"name","type":"string","unique":true,"label":true,"description":"What the family is called, as a person would say it. ENGLISH, like every other model name — the German lives in `Translation` with its gender","example":"Web service"},
-{"name":"purpose","type":"longString","label2":true,"description":"What every member of this family has in common, in one sentence a layperson understands. A PREDICATE and lower-case, like `ProductType.purpose` and for the same reason: it is substituted into several frames and only a predicate fits them all","example":"runs on somebody else's computer; you reach it instead of installing it"},
-{"name":"wikipedia_de","type":"wikipedia","optional":true,"description":"The German article title, where one exists for the family itself. Often absent: a family is a teaching device and not always an established term","example":"Webservice"},
-{"name":"wikipedia_en","type":"wikipedia","optional":true,"description":"The English article title, where one exists","example":"Web service"},
-{"name":"level","type":"Level","default":"basic","description":"How far into the subject the FAMILY sits, independently of its members. `Decoder` is advanced even though a media player is everyday — the word is the hard part, not the thing","example":"advanced"},
-{"name":"note","type":"longString","optional":true,"description":"A true remark worth showing after an answer — typically what this family is commonly mixed up with","example":"A web service and a web client are easy to swap: the search engine is the service, the browser is the client that reaches it"}
+{"name":"purpose","caption":"de:Zweck","type":"longString","label2":true,"description":"What every member of this family has in common, in one sentence a layperson understands. A PREDICATE and lower-case, like `ProductType.purpose` and for the same reason: it is substituted into several frames and only a predicate fits them all","example":"runs on somebody else's computer; you reach it instead of installing it"},
+{"name":"wikipedia_de","caption":"de:Wikipedia (de)","type":"wikipedia","optional":true,"description":"The German article title, where one exists for the family itself. Often absent: a family is a teaching device and not always an established term","example":"Webservice"},
+{"name":"wikipedia_en","caption":"de:Wikipedia (en)","type":"wikipedia","optional":true,"description":"The English article title, where one exists","example":"Web service"},
+{"name":"level","caption":"de:Stufe","type":"Level","default":"basic","description":"How far into the subject the FAMILY sits, independently of its members. `Decoder` is advanced even though a media player is everyday — the word is the hard part, not the thing","example":"advanced"},
+{"name":"note","caption":"de:Notiz","type":"longString","optional":true,"description":"A true remark worth showing after an answer — typically what this family is commonly mixed up with","example":"A web service and a web client are easy to swap: the search engine is the service, the browser is the client that reaches it"}
 ]
 ```
 

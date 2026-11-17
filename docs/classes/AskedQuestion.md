@@ -2,6 +2,7 @@
 
 [LABEL=concat(user, ' · ', template_id)]
 [PLURAL=de:Gestellte Fragen en:Asked questions]
+[CAPTION=de:Gestellte Frage en:Asked question]
 
 What one learner was asked, and how it went. One row per question shown — the whole memory of the app.
 
@@ -41,16 +42,16 @@ already holds — so the obstacle does not apply. It goes first, and proves the 
 
 ```json
 [
-{"name":"user","type":"user","description":"Who was asked — checked against an active login at write time","example":"anna"},
-{"name":"template","type":"QuestionTemplate","description":"Which kind of question was asked","example":"manufacturer"},
-{"name":"language","type":"Language","description":"Which wording was shown","example":"de"},
-{"name":"subject_entity","type":"EntityKind","optional":true,"description":"WHICH KIND of record the question was about. Half of a polymorphic reference — the other half is `subject_id`, and the two are declared together in the H1 line so the CRUD table renders them as one navigable cell","example":"StorageMedium"},
-{"name":"subject_id","type":"int","optional":true,"description":"Its id, in the table `subject_entity` names. An `int` although nobody computes with it: it JOINS, which is the one exception the numbers-are-for-computing rule makes","example":7},
-{"name":"object_entity","type":"EntityKind","optional":true,"description":"The second record's kind, where the question needs one — the product a format can be opened with, the runner-up in a capacity comparison","example":"Product"},
-{"name":"object_id","type":"int","optional":true,"description":"Its id, in the table `object_entity` names","example":12},
-{"name":"asked_at","type":"timestamp","description":"When it was shown","example":"2026-09-27 08:15:00"},
-{"name":"quality","type":"AnswerQuality","description":"How it turned out","example":"correct"},
-{"name":"given_answer","type":"string","optional":true,"description":"What the learner picked, as it was shown to them — so a wrong answer can be read back without recomputing the options","example":"Google"}
+{"name":"user","caption":"de:Benutzer","type":"user","description":"Who was asked — checked against an active login at write time","example":"anna"},
+{"name":"template","caption":"de:Fragetyp","type":"QuestionTemplate","description":"Which kind of question was asked","example":"manufacturer"},
+{"name":"language","caption":"de:Sprache","type":"Language","description":"Which wording was shown","example":"de"},
+{"name":"subject_entity","caption":"de:Gegenstand (Art)","type":"EntityKind","optional":true,"description":"WHICH KIND of record the question was about. Half of a polymorphic reference — the other half is `subject_id`, and the two are declared together in the H1 line so the CRUD table renders them as one navigable cell","example":"StorageMedium"},
+{"name":"subject_id","caption":"de:Gegenstand (ID)","type":"int","optional":true,"description":"Its id, in the table `subject_entity` names. An `int` although nobody computes with it: it JOINS, which is the one exception the numbers-are-for-computing rule makes","example":7},
+{"name":"object_entity","caption":"de:Objekt (Art)","type":"EntityKind","optional":true,"description":"The second record's kind, where the question needs one — the product a format can be opened with, the runner-up in a capacity comparison","example":"Product"},
+{"name":"object_id","caption":"de:Objekt (ID)","type":"int","optional":true,"description":"Its id, in the table `object_entity` names","example":12},
+{"name":"asked_at","caption":"de:gefragt am","type":"timestamp","description":"When it was shown","example":"2026-09-27 08:15:00"},
+{"name":"quality","caption":"de:Ergebnis","type":"AnswerQuality","description":"How it turned out","example":"correct"},
+{"name":"given_answer","caption":"de:gegebene Antwort","type":"string","optional":true,"description":"What the learner picked, as it was shown to them — so a wrong answer can be read back without recomputing the options","example":"Google"}
 ]
 ```
 

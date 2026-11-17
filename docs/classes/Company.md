@@ -2,6 +2,7 @@
 
 [LABEL=name]
 [PLURAL=de:Hersteller en:Companies]
+[CAPTION=de:Hersteller en:Company]
 
 Whoever makes a product — its own record, never a string on the product, because a layperson confuses the maker with the thing it makes.
 
@@ -15,9 +16,9 @@ Whoever makes a product. A layperson confuses the maker with the thing it makes 
 [
 {"name":"name","type":"string","unique":true,"label":true,"description":"How the company is known","example":"Mozilla"},
 {"name":"logo","type":"media","optional":true,"mime":"img","description":"The company's mark — a layperson recognises the picture before the name","example":"mozilla.svg"},
-{"name":"wikipedia_de","type":"wikipedia","optional":true,"description":"The title of the German Wikipedia article, exactly as the API resolves it. Stored and VERIFIED rather than derived from the name: „Safari\" is a disambiguation page, „Bing\" has no German article at all, and a guessed title that happens to resolve to the wrong article is the one kind of error this system must not make","example":"Webbrowser"},
-{"name":"wikipedia_en","type":"wikipedia","optional":true,"description":"The English article title. A separate attribute rather than a translation child, because an article title is an IDENTIFIER in another system and not a translation of a name — the two wikis disagree about which is the article and which the redirect","example":"Web browser"},
-{"name":"level","type":"Level","default":"basic","description":"How far into the subject this record sits. `default` and therefore OPTIONAL on purpose: the seed then marks only what is NOT everyday, which keeps the classification of ~140 records readable as a diff and makes the safe direction the free one — a new record counts as basic and a beginner meets it","example":"expert"},
-{"name":"note","type":"longString","optional":true,"description":"One sentence of context, shown after an answer","example":"A non-profit foundation, not a company in the usual sense"}
+{"name":"wikipedia_de","caption":"de:Wikipedia (de)","type":"wikipedia","optional":true,"description":"The title of the German Wikipedia article, exactly as the API resolves it. Stored and VERIFIED rather than derived from the name: „Safari\" is a disambiguation page, „Bing\" has no German article at all, and a guessed title that happens to resolve to the wrong article is the one kind of error this system must not make","example":"Webbrowser"},
+{"name":"wikipedia_en","caption":"de:Wikipedia (en)","type":"wikipedia","optional":true,"description":"The English article title. A separate attribute rather than a translation child, because an article title is an IDENTIFIER in another system and not a translation of a name — the two wikis disagree about which is the article and which the redirect","example":"Web browser"},
+{"name":"level","caption":"de:Stufe","type":"Level","default":"basic","description":"How far into the subject this record sits. `default` and therefore OPTIONAL on purpose: the seed then marks only what is NOT everyday, which keeps the classification of ~140 records readable as a diff and makes the safe direction the free one — a new record counts as basic and a beginner meets it","example":"expert"},
+{"name":"note","caption":"de:Notiz","type":"longString","optional":true,"description":"One sentence of context, shown after an answer","example":"A non-profit foundation, not a company in the usual sense"}
 ]
 ```
