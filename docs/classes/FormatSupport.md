@@ -29,6 +29,24 @@ first, and a player would be told their correct answer is wrong. That has happen
 system already (`product_of_company` had to learn to check), so the model prevents it here
 instead of the generator having to.
 
+## Types
+
+### FileSupport
+
+What a program can do with a file of a given format. Two values, and the order between them is a
+FACT the questions rely on: **`edit` implies `view`.** Nothing edits a file it cannot open, so a
+program declared as an editor answers „womit kann man das ansehen?" as well — and one row per
+product-and-format is therefore enough. Storing both would be storing the same fact twice, and
+the copy is what drifts (global CLAUDE.md §17).
+
+The order of the rows below is the order everywhere (aide-rap#288), and here it is also the
+strength: the later value contains the earlier one.
+
+| Internal | External | Description |
+|----------|----------|-------------|
+| view | View | Opens it and shows it. A PDF reader, a picture viewer, a media player |
+| edit | Edit | Opens it, changes it and writes it back — and therefore also shows it |
+
 ## Attributes
 
 ```json
@@ -39,7 +57,6 @@ instead of the generator having to.
 {"name":"note","caption":"de:Notiz","type":"longString","optional":true,"description":"A true remark about THIS pairing, where there is one worth showing","example":"Every browser shows a PDF today, which is why nobody installs a reader any more"}
 ]
 ```
-
 
 ## Error Messages
 

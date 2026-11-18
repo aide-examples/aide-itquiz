@@ -25,22 +25,6 @@ about the subject matter.
 | ProgrammingLanguage | Programming language | The notation a program is written in — Python, PHP, awk |
 | Framework | Framework | A ready-made scaffold a program is written inside, belonging to one language — Vue, Hibernate |
 
-### FileSupport
-
-What a program can do with a file of a given format. Two values, and the order between them is a
-FACT the questions rely on: **`edit` implies `view`.** Nothing edits a file it cannot open, so a
-program declared as an editor answers „womit kann man das ansehen?" as well — and one row per
-product-and-format is therefore enough. Storing both would be storing the same fact twice, and
-the copy is what drifts (global CLAUDE.md §17).
-
-The order of the rows below is the order everywhere (aide-rap#288), and here it is also the
-strength: the later value contains the earlier one.
-
-| Internal | External | Description |
-|----------|----------|-------------|
-| view | View | Opens it and shows it. A PDF reader, a picture viewer, a media player |
-| edit | Edit | Opens it, changes it and writes it back — and therefore also shows it |
-
 ### Language
 
 The languages a question can be asked in. The model itself is English; only the question texts
@@ -50,34 +34,6 @@ are multilingual, because they are what a learner reads.
 |----------|----------|-------------|
 | de | Deutsch | German |
 | en | English | English |
-
-### AnswerQuality
-
-How an answer turned out. Three values and not two: a question that was shown and skipped is a
-different fact from one answered wrongly, and an app that cannot tell them apart will ask the
-skipped one as if it had been failed.
-
-| Internal | External | Color | Description |
-|----------|----------|-------|-------------|
-| correct | Correct | #16a34a | Answered correctly |
-| wrong | Wrong | #dc2626 | Answered incorrectly |
-| skipped | Skipped | #9ca3af | Shown, not answered |
-
-### TemplateKind
-
-What a row in [QuestionTemplate](classes/QuestionTemplate.md) IS — a question the quiz can ask,
-or a sentence shape another question is built from.
-
-**It exists because the distinction was a naming convention first.** A template whose key began
-with `claim_` was a sentence shape, and the question route filtered on that prefix. It worked and
-it was invisible: nothing in the model said so, a row renamed without the prefix would silently
-have become drawable, and a reader of the table had to know the rule to make sense of it. The
-architect asked the question that ended it — *is that an attribute?* — and the answer was no.
-
-| Internal | External | Description |
-|----------|----------|-------------|
-| question | Frage | A question the quiz draws and asks. The default, and what every row was before 2026-09-29 |
-| claim | Behauptung | A sentence shape used INSIDE another question — the four statements of `four_claims`. Never drawn on its own |
 
 ### Level
 
@@ -100,17 +56,3 @@ filter that mentions one — so it goes at the end, or the change is a deliberat
 | advanced | Aufbaustufe | Met by anybody who looks slightly closer: Zigbee, EPUB, RJ45, Domain |
 | expert | Fortgeschritten | Met on purpose: SIP, JSON, Socket, BLE, Thread — the terms that make this a quiz for people who already know what a browser is |
 
-### Gender
-
-Grammatical gender of a common noun, for the languages that have one. English rows leave it
-empty; a German question needs it, because „ein Suchmaschine" is wrong in a way that teaches
-carelessness in the middle of teaching a distinction.
-
-Both articles are DERIVED from it rather than stored: definite der/die/das and indefinite
-ein/eine/ein. Storing the two separately would let them disagree about one noun.
-
-| Internal | External | Description |
-|----------|----------|-------------|
-| m | maskulin | der Browser, ein Browser |
-| f | feminin | die Suchmaschine, eine Suchmaschine |
-| n | neutrum | das Gerät, ein Gerät |

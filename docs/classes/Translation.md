@@ -94,6 +94,23 @@ real and the seed loader can recognise a row it has already written.
 entity the model knows, and that the name in the seed resolves to a record. A unique key cannot
 check either — it only knows that two rows differ.
 
+## Types
+
+### Gender
+
+Grammatical gender of a common noun, for the languages that have one. English rows leave it
+empty; a German question needs it, because „ein Suchmaschine" is wrong in a way that teaches
+carelessness in the middle of teaching a distinction.
+
+Both articles are DERIVED from it rather than stored: definite der/die/das and indefinite
+ein/eine/ein. Storing the two separately would let them disagree about one noun.
+
+| Internal | External | Description |
+|----------|----------|-------------|
+| m | maskulin | der Browser, ein Browser |
+| f | feminin | die Suchmaschine, eine Suchmaschine |
+| n | neutrum | das Gerät, ein Gerät |
+
 ## Attributes
 
 ```json
@@ -111,8 +128,6 @@ check either — it only knows that two rows differ.
 {"name":"note","caption":"de:Notiz","type":"longString","optional":true,"description":"A true remark in that language, shown after an answer","example":"Viele stellen eine Suchmaschine als Startseite des Browsers ein — daher wirken die beiden wie ein Ding"}
 ]
 ```
-
-
 
 ## Actions
 

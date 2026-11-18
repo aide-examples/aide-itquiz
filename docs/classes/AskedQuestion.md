@@ -38,6 +38,20 @@ because a seed row must be able to name its target and the loader cannot resolve
 polymorphic id. This entity is never seeded — it is written at runtime from ids the application
 already holds — so the obstacle does not apply. It goes first, and proves the pattern (#2).
 
+## Types
+
+### AnswerQuality
+
+How an answer turned out. Three values and not two: a question that was shown and skipped is a
+different fact from one answered wrongly, and an app that cannot tell them apart will ask the
+skipped one as if it had been failed.
+
+| Internal | External | Color | Description |
+|----------|----------|-------|-------------|
+| correct | Correct | #16a34a | Answered correctly |
+| wrong | Wrong | #dc2626 | Answered incorrectly |
+| skipped | Skipped | #9ca3af | Shown, not answered |
+
 ## Attributes
 
 ```json
